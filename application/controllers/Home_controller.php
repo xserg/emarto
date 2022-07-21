@@ -578,15 +578,15 @@ class Home_controller extends Home_Core_Controller
         }
         
         $this->form_validation->set_rules('phone_number', trans("phone_number"), 
-        'required|max_length[17]',
-        array('numeric' => trans('form_validation_numeric'))
-        );
+        'required|max_length[17]|callback_phone_unique');
         $this->form_validation->set_rules('shop_name', trans("shop_name"), 'required');
         $this->form_validation->set_rules('country_id', trans("location"), 'required');
         $this->form_validation->set_rules('first_name', trans("first_name"), 'required');        
         $this->form_validation->set_rules('first_name', trans("first_name"), 'min_length[3]|callback_name_format');
         $this->form_validation->set_rules('last_name', trans("last_name"),
           'required|min_length[3]|callback_name_format');
+  
+  
   
         if ($this->form_validation->run() === false) {
             $this->session->set_flashdata('errors', validation_errors());
@@ -1044,5 +1044,20 @@ class Home_controller extends Home_Core_Controller
        $this->form_validation->set_message('name_format', trans('form_validation_regex_match'));
        return FALSE;
     }
+    
+    public function phone_unique($str)
+    {
+       if (empty($str)) {
+        $this->form_validation->set_message('phone_unique', trans('form_validation_required'));
+         return FALSE; 
+       }
+       
+       if ( $this->auth_model->is_unique_phone($str, $this->auth_user->id) ) {
+         return TRUE;
+       }
+       $this->form_validation->set_message('phone_unique', trans('msg_phone_unique_error'));
+       return FALSE;
+    }
+    
 
 }

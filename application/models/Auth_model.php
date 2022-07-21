@@ -754,5 +754,35 @@ class Auth_model extends CI_Model
 
         return false;
     }
+    
+    //get user by email
+    public function get_user_by_phone($phone)
+    {
+        return $this->db->select('users.*, (SELECT permissions FROM roles_permissions WHERE roles_permissions.id = users.role_id LIMIT 1) AS permissions')->where('users.phone_number', $phone)->get('users')->row();
+    }
+    
+    //check if username is unique
+    public function is_unique_phone($phone, $user_id = 0)
+    {
+        $user = $this->get_user_by_phone($phone);
+        
+        //if id doesnt exists
+        if ($user_id == 0) {
+            if (empty($user)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if ($user_id != 0) {
+            if (!empty($user) && $user->id != $user_id) {
+                //username taken
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
 
 }

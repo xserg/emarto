@@ -287,6 +287,13 @@ class Profile_controller extends Home_Core_Controller
                 exit();
             }
 
+            //is phone unique
+            if (!$this->auth_model->is_unique_phone($data["phone_number"], $user_id)) {
+                $this->session->set_flashdata('error', trans("msg_phone_unique_error"));
+                redirect($this->agent->referrer());
+                exit();
+            }
+
             if ($this->profile_model->update_profile($data, $user_id)) {
                 $this->session->set_flashdata('success', trans("msg_updated"));
                 //check email changed
