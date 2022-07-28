@@ -211,7 +211,8 @@ function ban_remove_ban_user(id) {
 //get countries by continent
 function get_countries_by_continent(key, first_option = null) {
     var data = {
-        "key": key
+        "key": key,
+        "lang": sys_lang_id
     };
     data[csfr_token_name] = $.cookie(csfr_cookie_name);
     $.ajax({
@@ -231,7 +232,8 @@ function get_countries_by_continent(key, first_option = null) {
 //get states by country
 function get_states_by_country(val, first_option = null) {
     var data = {
-        "country_id": val
+        "country_id": val,
+        "lang": sys_lang_id
     };
     data[csfr_token_name] = $.cookie(csfr_cookie_name);
     $.ajax({
