@@ -891,10 +891,13 @@ class Dashboard_controller extends Home_Core_Controller
         $data['keywords'] = trans("add_coupon") . "," . $this->app_name;
 
         $data['parent_categories'] = $this->category_model->get_parent_categories();
-        $vendor_categories = $this->category_model->get_vendor_categories(null, $this->auth_user->id, true, false);
-
-        $data['category_ids'] = $vendor_categories['category_ids'];
-        $data['categories'] = $vendor_categories['categories'];
+        $data['categories'] = $this->category_model->get_vendor_categories(null, $this->auth_user->id, true, false);
+        $data['category_ids'] = array();
+        if (!empty($data['categories']) && !empty($data['categories'][0])) {
+            foreach ($data['categories'] as $item) {
+                array_push($data['category_ids'], $item->id);
+            }
+        }
 
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/coupon/add_coupon', $data);
@@ -958,18 +961,25 @@ class Dashboard_controller extends Home_Core_Controller
         }
 
         $data['parent_categories'] = $this->category_model->get_parent_categories();
-        $vendor_categories = $this->category_model->get_vendor_categories(null, $this->auth_user->id, true, false);
+        $data['categories'] = $this->category_model->get_vendor_categories(null, $this->auth_user->id, true, false);
+        $data['category_ids'] = array();
+        if (!empty($data['categories']) && !empty($data['categories'][0])) {
+            foreach ($data['categories'] as $item) {
+                array_push($data['category_ids'], $item->id);
+            }
+        }
 
-        $data['category_ids'] = $vendor_categories['category_ids'];
-        $data['categories'] = $vendor_categories['categories'];
         $data['selected_categories'] = explode(',', $data['coupon']->category_ids);
-
+        if (empty($data['selected_categories'])) {
+            $data['selected_categories'] = array();
+        }
         $data['selected_products'] = array();
         $selected_products = $this->coupon_model->get_coupon_products($data['coupon']->id);
-        foreach ($selected_products as $item) {
-            array_push($selected_products, $item->product_id);
+        if (!empty($selected_products)) {
+            foreach ($selected_products as $item) {
+                array_push($data['selected_products'], $item->product_id);
+            }
         }
-        $data['selected_products'] = $selected_products;
 
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/coupon/edit_coupon', $data);

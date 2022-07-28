@@ -156,6 +156,7 @@ function print_sub_categories($categories, $category_ids, $selected_categories, 
                     <div class="form-group text-right">
                         <button type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("add_coupon") ?></button>
                     </div>
+                    <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                     <?php echo form_close(); ?>
                 </div>
             </div>
