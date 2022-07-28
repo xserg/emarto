@@ -161,6 +161,7 @@ function delete_item(url, id, message) {
         if (willDelete) {
             var data = {
                 'id': id,
+                'sys_lang_id': sys_lang_id
             };
             data[csfr_token_name] = $.cookie(csfr_cookie_name);
             $.ajax({

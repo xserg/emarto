@@ -1037,6 +1037,8 @@ class Dashboard_controller extends Home_Core_Controller
         $this->check_vendor_permission();
         $this->load->model('coupon_model');
         $id = $this->input->post('id', true);
+        $sys_lang_id = $this->input->post('sys_lang_id', true);
+        
         $coupon = $this->coupon_model->get_coupon($id);
         if (empty($coupon)) {
             exit();
