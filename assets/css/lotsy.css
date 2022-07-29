@@ -4983,6 +4983,8 @@ img {
 }
 
 .profile-details .description {
+    width: 450px;
+    overflow-wrap: anywhere;
     line-height: 24px;
     color: #555;
     margin-bottom: 8px;
