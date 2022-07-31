@@ -171,6 +171,12 @@ class Home_Core_Controller extends Core_Controller
                     $this->lang_base_url = base_url() . $this->selected_lang->short_form . "/";
                 }
             }
+            if (!empty($this->session->userdata('mds_control_panel_lang'))) {
+                $this->control_panel_lang = $this->session->userdata('mds_control_panel_lang');
+                $this->selected_lang = $this->language_model->get_language($this->control_panel_lang);
+                //language translations
+                $this->language_translations = $this->get_translation_array($this->control_panel_lang->id);
+            }
         }
 
         //set selected currency
