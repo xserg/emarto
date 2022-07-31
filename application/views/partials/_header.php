@@ -128,7 +128,8 @@ foreach ($this->languages as $language): ?>
                                     <?php if ($this->auth_check): ?>
                                         <li class="nav-item li-main-nav-right">
                                             <a href="<?php echo generate_url("wishlist") . "/" . $this->auth_user->slug; ?>">
-                                                <i class="icon-heart-o"></i>
+                                                <img src="/assets/img/heart.svg">
+                                                <!--i class="icon-heart-o"></i-->
                                                 <span class="label-nav-icon"><?php echo trans("wishlist"); ?></span>
                                             </a>
                                         </li>

@@ -114,7 +114,7 @@
                                                     <?php endif; ?>
                                                     <div class="form-group">
                                                         <label class="control-label"><?php echo trans("shop_description"); ?></label>
-                                                        <textarea name="about_me" class="form-control form-textarea" placeholder="<?php echo trans("shop_description"); ?>"><?= $this->auth_user->about_me; ?></textarea>
+                                                        <textarea name="about_me" class="form-control form-textarea" placeholder="<?php echo trans("shop_description"); ?>" maxlength="150"><?= $this->auth_user->about_me; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
