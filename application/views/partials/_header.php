@@ -118,7 +118,7 @@ foreach ($this->languages as $language): ?>
                                     <?php if ($this->is_sale_active): ?>
                                         <li class="nav-item nav-item-cart li-main-nav-right">
                                             <a href="<?php echo generate_url("cart"); ?>">
-                                                <img src="/assets/img/cart.svg">
+                                                <i class="icon-cart"></i>
                                                 <span class="label-nav-icon"><?php echo trans("cart"); ?></span>
                                                 <?php $cart_product_count = get_cart_product_count(); ?>
                                                 <span class="notification span_cart_product_count <?= $cart_product_count <= 0 ? 'visibility-hidden' : ''; ?>"><?php echo $cart_product_count; ?></span>
@@ -128,8 +128,7 @@ foreach ($this->languages as $language): ?>
                                     <?php if ($this->auth_check): ?>
                                         <li class="nav-item li-main-nav-right">
                                             <a href="<?php echo generate_url("wishlist") . "/" . $this->auth_user->slug; ?>">
-                                                <img src="/assets/img/heart.svg">
-                                                <!--i class="icon-heart-o"></i-->
+                                                <i class="icon-heart-o"></i>
                                                 <span class="label-nav-icon"><?php echo trans("wishlist"); ?></span>
                                             </a>
                                         </li>
