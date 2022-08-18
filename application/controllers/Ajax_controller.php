@@ -14,27 +14,6 @@ class Ajax_controller extends Home_Core_Controller
     }
 
     /**
-     * Run Internal Cron
-     */
-    public function run_internal_cron()
-    {
-        if ($this->payment_settings->auto_update_exchange_rates == 1) {
-            $this->currency_model->update_currency_rates();
-            //check promoted products
-            $this->product_model->check_promoted_products();
-        }
-        $this->db->where('id', 1)->update('general_settings', ['last_cron_update' => date('Y-m-d H:i:s')]);
-        if (check_cron_time_long() == true) {
-            //check users membership plans
-            $this->membership_model->check_membership_plans_expired();
-            //delete old sessions
-            $this->settings_model->delete_old_sessions();
-            //add last update
-            $this->db->where('id', 1)->update('general_settings', ['last_cron_update_long' => date('Y-m-d H:i:s')]);
-        }
-    }
-
-    /**
      * Remove Cart Discount Coupon
      */
     public function remove_cart_discount_coupon()
@@ -100,7 +79,6 @@ class Ajax_controller extends Home_Core_Controller
         $content = '';
         if (!empty($states)) {
             $status = 1;
-            $content = '<option value="">' . trans("state") . '</option>';
             foreach ($states as $item) {
                 $content .= '<option value="' . $item->id . '">' . html_escape($item->name) . '</option>';
             }
@@ -203,6 +181,24 @@ class Ajax_controller extends Home_Core_Controller
         $data = array(
             'result' => 1,
             'content' => $content
+        );
+        echo json_encode($data);
+    }
+
+    //get subcategories
+    public function get_subcategories()
+    {
+        $parent_id = $this->input->post('parent_id', true);
+        $html_content = '';
+        if (!empty($parent_id)) {
+            $subcategories = $this->category_model->get_subcategories_by_parent_id($parent_id);
+            foreach ($subcategories as $item) {
+                $html_content .= "<option value='" . $item->id . "'>" . $item->name . "</option>";
+            }
+        }
+        $data = array(
+            'result' => 1,
+            'html_content' => $html_content,
         );
         echo json_encode($data);
     }
