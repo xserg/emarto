@@ -129,7 +129,7 @@ class Dashboard_controller extends Home_Core_Controller
         $data['category'] = $this->category_model->get_category($data["product"]->category_id);
         $data['parent_categories_array'] = $this->category_model->get_parent_categories_tree($data['category']);
         $data['modesy_images'] = $this->file_model->get_product_images($data["product"]->id);
-        $data['all_categories'] = $this->category_model->get_categories_ordered_by_name();
+        //$data['all_categories'] = $this->category_model->get_categories_ordered_by_name();
         $data["file_manager_images"] = $this->file_model->get_user_file_manager_images($this->auth_user->id);
         $data["active_product_system_array"] = $this->get_activated_product_system();
         $data['admin_settings'] = $this->product_admin_model->get_admin_settings();
