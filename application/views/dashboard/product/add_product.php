@@ -23,7 +23,6 @@
                 <div class="alert-message-lg">
                     <?php $this->load->view('dashboard/includes/_messages'); ?>
                 </div>
-  
                 <?php echo form_open('add-product-post', ['id' => 'form_validate', 'onkeypress' => "return event.keyCode != 13;"]); ?>
 
                 <div class="row">
@@ -32,7 +31,7 @@
                         <?php $this->load->view("dashboard/product/_image_upload_box"); ?>
                     </div>
                 </div>
-                    <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
+                <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                 <?php if ($this->general_settings->physical_products_system == 1 && $this->general_settings->digital_products_system == 0): ?>
                     <input type="hidden" name="product_type" value="physical">
                 <?php elseif ($this->general_settings->physical_products_system == 0 && $this->general_settings->digital_products_system == 1): ?>
@@ -241,42 +240,7 @@
     </div>
 </div>
 
-<script>
-    function get_subcategories(category_id, data_select_id) {
-        var subcategories = get_subcategories_array(category_id);
-        var date = new Date();
-        //reset subcategories
-        $('#category_select_container select').each(function () {
-            if (parseInt($(this).attr('data-select-id')) > parseInt(data_select_id)) {
-                $(this).remove();
-            }
-        });
-        if (category_id == 0) {
-            return false;
-        }
-        if (subcategories.length > 0) {
-            var new_data_select_id = date.getTime();
-            var select_tag = '<select class="form-control custom-select" name="category_id[]" data-select-id="' + new_data_select_id + '" onchange="get_subcategories(this.value,' + new_data_select_id + ');">' +
-                '<option value=""><?php echo trans("select_category"); ?></option>';
-            for (i = 0; i < subcategories.length; i++) {
-                select_tag += '<option value="' + subcategories[i].id + '">' + subcategories[i].name + '</option>';
-            }
-            select_tag += '</select>';
-            $('#category_select_container').append(select_tag);
-        }
-    }
-
-    function get_subcategories_array(category_id) {
-        var categories_array = <?php echo get_categories_json($this->selected_lang->id); ?>;
-        var subcategories_array = [];
-        for (i = 0; i < categories_array.length; i++) {
-            if (categories_array[i].parent_id == category_id) {
-                subcategories_array.push(categories_array[i]);
-            }
-        }
-        return subcategories_array;
-    }
-</script>
+<?php $this->load->view('admin/category/_select_category', ['input_name' => 'category_id[]']); ?>
 
 <script type="text/html" id="files-template-file-manager">
     <li class="media">
