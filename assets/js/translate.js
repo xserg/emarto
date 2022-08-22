@@ -35,7 +35,7 @@ const panelTranslate = (from_id, panel_id) => {
 
 const translate = (text, from, to) => {
   if(!text) return;
-  let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${from}|${to}`;
+  let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${from}|${to}&de=admin@emarto.ru`;
   let tr = fetch(apiUrl).then(res => res.json()).then(data => {
       return data.responseData.translatedText;
           
