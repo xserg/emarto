@@ -156,7 +156,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 m-b-5">
                                             <button type="button" id="btn_add_image_editor" class="btn btn-sm btn-info" data-editor-id="editor_<?= $language->id; ?>" data-toggle="modal" data-target="#fileManagerModal"><i class="icon-image"></i>&nbsp;&nbsp;<?php echo trans("add_image"); ?></button>
-                                            <?= $this->selected_lang->id == $language->id ? '<input type=button value='.trans("translation").' id="translate" class="btn btn-sm btn-info">' : '' ?>
+                                            <?= $this->selected_lang->id == $language->id ? '<img src="/assets/img/translate.svg" alt="'.trans("translation").'" id="translate" style="cursor: pointer;">' : '' ?>
                                             
                                         </div>
                                     </div>
