@@ -25,6 +25,7 @@ const panelTranslate = (from_id, panel_id) => {
     .then(tr2 => { toText.value = tr2 });
   
     const desc = tinymce.get(fromDesc.id).getContent();
+    //console.log(desc);
     
     if(desc) translate (desc, fromDesc.dataset.lang, toDesc.dataset.lang)
     .then(tr2 => tinymce.get(toDesc.id).setContent(tr2));
@@ -35,18 +36,11 @@ const panelTranslate = (from_id, panel_id) => {
 
 const translate = (text, from, to) => {
   if(!text) return;
+  text = encodeURIComponent(text); 
   let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${from}|${to}&de=admin@emarto.ru`;
   let tr = fetch(apiUrl).then(res => res.json()).then(data => {
       return data.responseData.translatedText;
           
-      /*
-      data.matches.forEach(data => {
-          if(data.id === 0) {
-              toText.value = data.translation;
-          }
-      });
-      */
-      //toText.setAttribute("placeholder", "Translation");
   });
   return tr;
 }
