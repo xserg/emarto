@@ -149,8 +149,7 @@ if (!function_exists('get_product_form_data')) {
         $data = new stdClass();
         $data->add_to_cart_url = "";
         $data->button = "";
-
-        if (!empty($product)) {
+        if (!empty($product) && $ci->session->userdata('mds_sess_user_id') != $product->user_id) {
             $disabled = "";
             if (!check_product_stock($product)) {
                 $disabled = " disabled";

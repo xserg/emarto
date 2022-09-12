@@ -17,7 +17,9 @@
                         <img src="<?php echo base_url() . IMG_BG_PRODUCT_SMALL; ?>" data-src="<?php echo get_product_item_image($product, true); ?>" alt="<?php echo get_product_title($product); ?>" class="lazyload img-fluid img-product img-second">
                     <?php endif; ?>
                 </a>
-            <?php endif; ?>
+            <?php endif; 
+            $buttton = get_product_form_data($product)->button;
+            if (!empty($buttton)):?>
             <div class="product-item-options">
                 <a href="javascript:void(0)" class="item-option btn-add-remove-wishlist" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-type="list" title="<?php echo trans("wishlist"); ?>">
                     <?php if (is_product_in_wishlist($product) == 1): ?>
@@ -41,6 +43,7 @@
                     endif;
                 endif; ?>
             </div>
+            <?php endif; ?>
             <?php if (!empty($product->discount_rate) && !empty($discount_label)): ?>
                 <span class="badge badge-discount">-<?= $product->discount_rate; ?>%</span>
             <?php endif; ?>
