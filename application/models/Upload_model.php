@@ -511,4 +511,43 @@ class Upload_model extends CI_Model
 
         return $directory . "/";
     }
+    
+    
+    
+    /// Message image
+    //blog content image upload
+    public function message_content_image_upload($path)
+    {
+        $directory = $this->create_upload_directory('message');
+        $new_name = 'img_' . generate_unique_id() . '.jpg';
+        $new_path = "uploads/message/" . $directory . $new_name;
+        $img = Image::make($path)->orientate();
+        $img->resize(1280, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $img->save(FCPATH . $new_path, $this->quality);
+        //add watermark
+        if ($this->general_settings->watermark_blog_images == 1) {
+            $this->add_watermark(FCPATH . $new_path, 'mid');
+        }
+        return $new_path;
+    }
+
+    //blog image default upload
+    public function message_image_small_upload($path)
+    {
+        $directory = $this->create_upload_directory('message');
+        $new_name = 'img_thumb_' . generate_unique_id() . '.jpg';
+        $new_path = "uploads/message/" . $directory . $new_name;
+        $img = Image::make($path)->orientate();
+        $img->fit(500, 332);
+        $img->save(FCPATH . $new_path, $this->quality);
+        //add watermark
+        if ($this->general_settings->watermark_blog_images == 1 && $this->general_settings->watermark_thumbnail_images == 1) {
+            $this->add_watermark(FCPATH . $new_path, 'mid');
+        }
+        return $new_path;
+    }
+
 }

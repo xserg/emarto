@@ -128,6 +128,9 @@
 													<div class="message-text">
 														<?php echo html_escape($item->message); ?>
 													</div>
+													<?php if ($item->image_path_thumb) 
+													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
+													?>
 													<span class="time"><?php echo time_ago($item->created_at); ?></span>
 												</div>
 											</div>
@@ -139,6 +142,9 @@
 													<div class="message-text">
 														<?php echo html_escape($item->message); ?>
 													</div>
+													<?php if ($item->image_path_thumb) 
+													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
+													?>
 													<span class="time"><?php echo time_ago($item->created_at); ?></span>
 												</div>
 												<div class="user-avatar">
@@ -155,7 +161,7 @@
 
 						<div class="message-reply">
 							<!-- form start -->
-							<?php echo form_open('send-message-post', ['id' => 'form_validate']); ?>
+							<?php echo form_open_multipart('send-message-post', ['id' => 'form_validate']); ?>
 							<input type="hidden" name="conversation_id" value="<?php echo $conversation->id; ?>">
 							<?php if ($this->auth_user->id == $conversation->sender_id): ?>
 								<input type="hidden" name="receiver_id" value="<?php echo $conversation->receiver_id; ?>">
@@ -165,6 +171,16 @@
 							<div class="form-group m-b-10">
 								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" required></textarea>
 							</div>
+							
+							<div class="row">
+									<div class="col-sm-12 m-b-30">
+										
+												<input type="file" name="file" id="file" size="40"  />
+										
+											<?php //$this->load->view("dashboard/product/_image_upload_box", ['modesy_images' => [1]]); ?>
+									</div>
+							</div>
+							
 							<div class="form-group">
 								<button type="submit" class="btn btn-md btn-custom float-right"><i class="icon-send"></i> <?php echo trans("send"); ?></button>
 							</div>

@@ -70,7 +70,13 @@ class Message_controller extends Home_Core_Controller
     public function send_message()
     {
         $conversation_id = $this->input->post('conversation_id', true);
+        $this->load->model('file_model');
+              
         if ($this->message_model->add_message($conversation_id)) {
+          
+            $message_id = $this->db->insert_id();
+            $this->file_model->upload_message_image($message_id);
+          
             $conversation = $this->message_model->get_conversation($conversation_id);
             if (!empty($conversation)) {
                 //send email

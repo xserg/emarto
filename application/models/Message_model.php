@@ -110,7 +110,9 @@ class Message_model extends CI_Model
     public function get_messages($conversation_id)
     {
         $conversation_id = clean_number($conversation_id);
+        $this->db->join('message_images', 'conversation_messages.id=message_images.message_id', 'left');
         $this->db->where('conversation_id', $conversation_id);
+        $this->db->order_by('conversation_messages.id');
         $query = $this->db->get('conversation_messages');
         return $query->result();
     }
