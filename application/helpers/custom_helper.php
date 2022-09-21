@@ -1975,6 +1975,11 @@ if (!function_exists('remove_forbidden_characters')) {
     }
 }
 
+function declensionByNumber($number, array $titles) {
+    $cases = array(2, 0, 1, 1, 1, 2);
+    return $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[($number % 10 < 5) ? $number % 10 : 5]];
+}
+
 if (!function_exists('time_ago')) {
     function time_ago($timestamp)
     {
@@ -1991,29 +1996,22 @@ if (!function_exists('time_ago')) {
         if ($seconds <= 60) {
             return trans("just_now");
         } else if ($minutes <= 60) {
-            if ($minutes == 1) {
-                return "1 " . trans("minute_ago");
-            } else {
-                return "$minutes " . trans("minutes_ago");
-            }
+          return  "$minutes " . declensionByNumber($minutes, [
+            trans('minute_ago'), trans('minutes_ago2'), trans('minutes_ago')
+          ]);
         } else if ($hours <= 24) {
-            if ($hours == 1) {
-                return "1 " . trans("hour_ago");
-            } else {
-                return "$hours " . trans("hours_ago");
-            }
+            return  "$hours " . declensionByNumber($hours, [
+              trans('hour_ago'), trans('hours_ago2'), trans('hours_ago')
+            ]);
         } else if ($days <= 30) {
-            if ($days == 1) {
-                return "1 " . trans("day_ago");
-            } else {
-                return "$days " . trans("days_ago");
-            }
+          return  "$days " . declensionByNumber($days, [
+            trans('day_ago'), trans('days_ago2'), trans('days_ago')
+          ]);
+          
         } else if ($months <= 12) {
-            if ($months == 1) {
-                return "1 " . trans("month_ago");
-            } else {
-                return "$months " . trans("months_ago");
-            }
+          return  "$months " . declensionByNumber($months, [
+            trans('month_ago'), trans('months_ago2'), trans('months_ago')
+          ]);
         } else {
             if ($years == 1) {
                 return "1 " . trans("year_ago");
