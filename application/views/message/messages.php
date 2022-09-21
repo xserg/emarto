@@ -127,14 +127,11 @@
 												<div class="user-message">
 													<div class="message-text">
 														<?php echo html_escape($item->message); ?>
-													
+													</div>
 													<?php if ($item->image_path_thumb) 
 													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
 													?>
-													</div>
 													<span class="time"><?php echo time_ago($item->created_at); ?></span>
-													
-													
 												</div>
 											</div>
 										</div>
@@ -144,15 +141,11 @@
 												<div class="user-message">
 													<div class="message-text">
 														<?php echo html_escape($item->message); ?>
-													
+													</div>
 													<?php if ($item->image_path_thumb) 
 													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
 													?>
-													</div>
 													<span class="time"><?php echo time_ago($item->created_at); ?></span>
-													
-													
-													
 												</div>
 												<div class="user-avatar">
 													<div class="message-user">
