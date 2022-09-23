@@ -1934,7 +1934,10 @@ $("#form_request_quote").validate();
 $("#form_validate_checkout").validate();
 
 $("#form_add_cart").submit(function (event) {
-    event.preventDefault();
+    event.preventDefault(); 
+    let submitter_btn = $(event.originalEvent.submitter);
+      //console.log(submitter_btn.attr("value"));
+    
     if (validate_variations('form_add_cart')) {
         $('#form_add_cart .btn-product-cart').prop('disabled', true);
         $('#form_add_cart .btn-product-cart .btn-cart-icon').html('<span class="spinner-border spinner-border-add-cart"></span>');
@@ -1964,6 +1967,8 @@ $("#form_add_cart").submit(function (event) {
             }
         });
     }
+  if (submitter_btn.attr("value") == 'bye-now')
+      window.location.replace("/cart");
 });
 
 $("#form_request_quote").submit(function (event) {
