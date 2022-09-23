@@ -158,7 +158,7 @@ if (!function_exists('get_product_form_data')) {
                 if ($product->is_free_product != 1) {
                     $data->add_to_cart_url = base_url() . 'add-to-cart';
                     $data->button = '<button class="btn btn-md btn-block btn-product-cart"' . $disabled . '><span class="btn-cart-icon"><i class="icon-cart-solid"></i></span>' . trans("add_to_cart") . '</button>';
-                    $data->button .= '<button name="bye-now" class="btn btn-md btn-block btn-product-bye-now"' . $disabled . ' value="bye-now"><span class="btn-cart-icon"><i class="icon-cart-solid"></i></span>Bye now</button>';
+                    $data->button .= '<button name="bye-now" class="btn btn-md btn-block btn-product-bye-now"' . $disabled . ' value="bye-now"><span class="btn-cart-icon"><i class="icon-cart-solid"></i></span>' . trans("buy-now").'</button>';
 
                 }
             } elseif ($product->listing_type == 'bidding') {
