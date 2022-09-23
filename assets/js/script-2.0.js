@@ -1968,7 +1968,7 @@ $("#form_add_cart").submit(function (event) {
         });
     }
   if (submitter_btn.attr("value") == 'bye-now')
-      window.location.replace("/cart");
+      window.location.replace("/cart/shipping");
 });
 
 $("#form_request_quote").submit(function (event) {
