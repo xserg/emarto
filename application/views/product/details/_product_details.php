@@ -169,8 +169,8 @@ endif; ?>
                     <?php echo $buttton; ?>
                 </div>
             
-            <div class="button-container button-container-wishlist">
-                <?php if ($this->product_model->is_product_in_wishlist($product->id) == 1): ?>
+            <div class=" button-container-wishlist">
+                <?php if ($this->product_model->is_product_in_wishlist($product->id) == 1): ?>                  
                     <a href="javascript:void(0)" class="btn-wishlist btn-add-remove-wishlist" data-product-id="<?php echo $product->id; ?>" data-type="details"><i class="icon-heart"></i><span><?php echo trans("remove_from_wishlist"); ?></span></a>
                 <?php else: ?>
                     <a href="javascript:void(0)" class="btn-wishlist btn-add-remove-wishlist" data-product-id="<?php echo $product->id; ?>" data-type="details"><i class="icon-heart-o"></i><span><?php echo trans("add_to_wishlist"); ?></span></a>
