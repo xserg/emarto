@@ -1940,7 +1940,7 @@ $("#form_add_cart").submit(function (event) {
     
     if (validate_variations('form_add_cart')) {
         $('#form_add_cart .btn-product-cart').prop('disabled', true);
-        $('#form_add_cart .btn-product-cart .btn-cart-icon').html('<span class="spinner-border spinner-border-add-cart"></span>');
+        ////$('#form_add_cart .btn-product-cart .btn-cart-icon').html('<span class="spinner-border spinner-border-add-cart"></span>');
         var form = $(this);
         var serializedData = form.serializeArray();
         serializedData.push({name: mds_config.csfr_token_name, value: $.cookie(mds_config.csfr_cookie_name)});
@@ -1960,15 +1960,19 @@ $("#form_add_cart").submit(function (event) {
                         $('.span_cart_product_count').addClass('visibility-visible');
                     }, 400);
                     setTimeout(function () {
-                        $('#form_add_cart .btn-product-cart').html('<span class="btn-cart-icon"><i class="icon-cart-solid"></i></span>' + mds_config.txt_add_to_cart);
+                        //$('#form_add_cart .btn-product-cart').html('<span class="btn-cart-icon"><i class="icon-cart-solid"></i></span>' + mds_config.txt_add_to_cart);
                         $('#form_add_cart .btn-product-cart').prop('disabled', false);
                     }, 1000);
                 }
             }
         });
     }
-  if (submitter_btn.attr("value") == 'bye-now')
+    if (submitter_btn.attr("value") == 'bye-now') {
       window.location.replace("/cart/shipping");
+    } else {
+      window.location.replace("/cart");
+    }
+  
 });
 
 $("#form_request_quote").submit(function (event) {
