@@ -4474,6 +4474,14 @@ img {
     min-width: 0 !important;
 }
 
+
+.button-container-wishlist {
+  
+  margin-right: 260px;
+  float: right;
+  
+}
+
 .btn-wishlist {
   min-width: 230px;
   padding: 0rem 1rem;
@@ -4481,10 +4489,10 @@ img {
   background-color: transparent !important;
   
     display: inline-block;
-    text-align: left;
+    text-align: center;
     color: #4e4e4e;
     border-radius: 0.1875rem;
-    line-height: 44px !important;
+    
 }
 
 .btn-wishlist i {
