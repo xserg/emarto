@@ -266,6 +266,9 @@ class Profile_controller extends Home_Core_Controller
                 'show_location' => $this->input->post('show_location', true),
                 'about_me' => $this->input->post('about_me', true),
                 'show_follow' => $this->input->post('show_follow', true),
+                
+                'vacation_text' => $this->input->post('vacation_text', true),
+                'vacation_status' => $this->input->post('vacation_status', true),
             );
 
             //is email unique
@@ -531,5 +534,26 @@ class Profile_controller extends Home_Core_Controller
 
         $this->profile_model->follow_unfollow_user();
         redirect($this->agent->referrer());
+    }
+    
+    public function send_otp()
+    {
+      //check user
+      if (!$this->auth_check) {
+          redirect(lang_base_url());
+      }
+      echo 'send-otp';
+      require_once APPPATH . "third_party/guzzlehttp/vendor/autoload.php";
+      $client = new \GuzzleHttp\Client();
+    }
+    
+    public function verify_otp()
+    {
+      //check user
+      if (!$this->auth_check) {
+          redirect(lang_base_url());
+      }
+      echo json_encode(['ok']);
+      exit;
     }
 }
