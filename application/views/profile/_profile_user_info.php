@@ -1,7 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!--user profile info-->
 <div class="row-custom">
-    <div class="profile-details">
+  <?php if ($user->vacation_status) : ?>
+  <div class="vacation"><img src="/assets/img/flag.png" width=30px> <?= $user->vacation_text ?></div>
+  <br>
+  <?php endif; ?>
+    <div class="profile-details">    
         <div class="left">
             <img src="<?php echo get_user_avatar($user); ?>" alt="<?php echo get_shop_name($user); ?>" class="img-profile">
         </div>

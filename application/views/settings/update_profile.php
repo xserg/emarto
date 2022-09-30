@@ -136,6 +136,29 @@
                                 <label for="checkbox_show_follow" class="custom-control-label"><?php echo trans("show_follow"); ?></label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label"><?php echo trans("vacation_mode"); ?></label>
+                            <input type="text" name="vacation_text" class="form-control form-input" value="<?php echo html_escape($this->auth_user->vacation_text); ?>" placeholder="<?php echo trans("vacation_text"); ?>" maxlength="150">
+                        </div>
+                        <div class="form-group m-t-10">
+                            <div class="row">
+
+                                <div class="col-md-3 col-sm-4 col-12 col-option">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" name="vacation_status" value="1" id="vacation_status_1" class="custom-control-input" <?php echo ($user->vacation_status == 1) ? 'checked' : ''; ?>>
+                                        <label for="vacation_status_1" class="custom-control-label"><?php echo trans("yes"); ?></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-12 col-option">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" name="vacation_status" value="0" id="vacation_status_2" class="custom-control-input" <?php echo ($user->vacation_status != 1) ? 'checked' : ''; ?>>
+                                        <label for="vacation_status_2" class="custom-control-label"><?php echo trans("no"); ?></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
                         <button type="submit" name="submit" value="update" class="btn btn-md btn-custom"><?php echo trans("save_changes") ?></button>
                         <?php echo form_close(); ?>
 

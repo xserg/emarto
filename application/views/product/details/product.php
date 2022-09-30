@@ -18,6 +18,10 @@
                 </div>
 
                 <div class="col-12">
+                  <?php if ($user->vacation_status) : ?>
+                  <div class="vacation"><img src="/assets/img/flag.png" width=30px> <?= $user->vacation_text ?></div>
+                  <br>
+                  <?php endif; ?>
                     <div class="product-details-container <?php echo ((!empty($video) || !empty($audio)) && item_count($product_images) < 2) ? "product-details-container-digital" : ""; ?>">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-6">

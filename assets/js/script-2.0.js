@@ -1968,7 +1968,8 @@ $("#form_add_cart").submit(function (event) {
         });
     }
     if (submitter_btn.attr("value") == 'bye-now') {
-      window.location.replace("/cart/shipping");
+      //window.location.replace("/cart/shipping");
+      window.location.replace("/cart");
     } else {
       window.location.replace("/cart");
     }

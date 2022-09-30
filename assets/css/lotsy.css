@@ -10483,3 +10483,12 @@ form select.error {
 .os-theme-dark > .os-scrollbar-vertical, .os-theme-light > .os-scrollbar-vertical {
     width: 8px !important;
 }
+
+.vacation {
+   font-size: 1.275rem;
+   font-weight: bold;
+   padding: 5px 20px;
+   border: 1px solid orange;
+   background-color: transparent !important;
+   
+}
