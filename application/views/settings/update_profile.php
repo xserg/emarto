@@ -146,13 +146,13 @@
                                 <div class="col-md-3 col-sm-4 col-12 col-option">
                                     <div class="custom-control custom-radio">
                                         <input type="radio" name="vacation_status" value="1" id="vacation_status_1" class="custom-control-input" <?php echo ($user->vacation_status == 1) ? 'checked' : ''; ?>>
-                                        <label for="vacation_status_1" class="custom-control-label"><?php echo trans("yes"); ?></label>
+                                        <label for="vacation_status_1" class="custom-control-label"><?php echo trans("enable"); ?></label>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-4 col-12 col-option">
                                     <div class="custom-control custom-radio">
                                         <input type="radio" name="vacation_status" value="0" id="vacation_status_2" class="custom-control-input" <?php echo ($user->vacation_status != 1) ? 'checked' : ''; ?>>
-                                        <label for="vacation_status_2" class="custom-control-label"><?php echo trans("no"); ?></label>
+                                        <label for="vacation_status_2" class="custom-control-label"><?php echo trans("disable"); ?></label>
                                     </div>
                                 </div>
                             </div>
