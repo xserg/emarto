@@ -2,7 +2,7 @@
 <!--user profile info-->
 <div class="row-custom">
   <?php if ($user->vacation_status) : ?>
-  <div class="vacation"><img src="/assets/img/flag.png" width=30px> <?= $user->vacation_text ?></div>
+  <div class="vacation"><img src="/assets/img/flag.png" width=25px> <?= $user->vacation_text ?></div>
   <br>
   <?php endif; ?>
     <div class="profile-details">    

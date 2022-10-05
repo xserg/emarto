@@ -21,7 +21,7 @@
             $buttton = get_product_form_data($product)->button;
             if (!empty($buttton)):?>
             <div class="product-item-options">
-                <a href="javascript:void(0)" class="item-option btn-add-remove-wishlist" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-type="list" title="<?php echo trans("wishlist"); ?>">
+                <a href="javascript:void(0)" class="item-option btn-add-remove-wishlist" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-type="list" title="<?php //echo trans("wishlist"); ?>">
                     <?php if (is_product_in_wishlist($product) == 1): ?>
                         <i class="icon-heart"></i>
                     <?php else: ?>
