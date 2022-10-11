@@ -50,9 +50,14 @@
                                 <div class="custom-control custom-checkbox custom-control-validate-input">
                                     <input type="checkbox" class="custom-control-input" name="terms" id="checkbox_terms" required>
                                     <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>&nbsp;
-                                        <?php $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
+                                        <?php 
+                                        $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
+                                        
+                                        $ci =& get_instance();
+                                        $page_policy = $ci->page_model->get_page("policy", $this->selected_lang->id);
                                         if (!empty($page_terms)): ?>
                                             <a href="<?= generate_url($page_terms->page_default_name); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_terms->title); ?></strong></a>
+                                            & <a href="<?= generate_url($page_policy->slug); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_policy->title); ?></strong></a>
                                         <?php endif; ?>
                                     </label>
                                 </div>
