@@ -1971,7 +1971,7 @@ $("#form_add_cart").submit(function (event) {
       //window.location.replace("/cart/shipping");
       window.location.replace("/cart");
     } else {
-      window.location.replace("/cart");
+      //window.location.replace("/cart");
     }
   
 });
