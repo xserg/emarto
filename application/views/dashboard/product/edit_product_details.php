@@ -295,21 +295,9 @@
     </div>
 
     <div class="col-sm-12 text-left m-t-15 m-b-15">
-        <div class="form-group">
-            <div class="custom-control custom-checkbox custom-control-validate-input">
-                <?php if ($product->is_draft == 1): ?>
-                    <input type="checkbox" class="custom-control-input" name="terms_conditions" id="terms_conditions" value="1" required>
-                <?php else: ?>
-                    <input type="checkbox" class="custom-control-input" name="terms_conditions" id="terms_conditions" value="1" checked>
-                <?php endif; ?>
-                <label for="terms_conditions" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>&nbsp;
-                    <?php $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
-                    if (!empty($page_terms)): ?>
-                        <a href="<?= generate_url($page_terms->page_default_name); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_terms->title); ?></strong></a>
-                    <?php endif; ?>
+                <label>
+                  <?php echo trans("terms_new"); ?>                
                 </label>
-            </div>
-        </div>
     </div>
     <div class="col-sm-12">
         <div class="form-group m-t-15">
