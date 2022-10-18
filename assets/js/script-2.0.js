@@ -1969,7 +1969,7 @@ $("#form_add_cart").submit(function (event) {
     }
     if (submitter_btn.attr("value") == 'bye-now') {
       //window.location.replace("/cart/shipping");
-      window.location.replace("/cart");
+      setTimeout(function () { window.location.replace("/cart"), 1500 });
     } else {
       //window.location.replace("/cart");
     }
