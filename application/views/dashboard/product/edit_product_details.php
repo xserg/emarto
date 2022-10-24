@@ -303,10 +303,10 @@
         <div class="form-group m-t-15">
             <a href="<?php echo generate_dash_url("edit_product") . "/" . $product->id; ?>" class="btn btn-lg btn-dark pull-left"><?php echo trans("back"); ?></a>
             <?php if ($product->is_draft == 1): ?>
-                <button type="submit" name="submit" value="submit" class="btn btn-lg btn-success btn-form-product-details pull-right"><?php echo trans("submit"); ?></button>
+                <button type="submit" name="submit" value="submit" class="btn btn-lg btn-success btn-form-product-details pull-right"><?php echo trans("list_item"); ?></button>
                 <button type="submit" name="submit" value="save_as_draft" class="btn btn-lg btn-secondary btn-form-product-details m-r-10 pull-right"><?php echo trans("save_as_draft"); ?></button>
             <?php else: ?>
-                <button type="submit" name="submit" value="save_changes" class="btn btn-lg btn-success btn-form-product-details pull-right"><?php echo trans("save_changes"); ?></button>
+                <button type="submit" name="submit" value="save_changes" class="btn btn-lg btn-success btn-form-product-details pull-right"><?php echo trans("list_item"); ?></button>
             <?php endif; ?>
         </div>
     </div>
