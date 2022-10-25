@@ -119,7 +119,7 @@ foreach ($this->languages as $language): ?>
                                         <li class="nav-item nav-item-cart li-main-nav-right">
                                             <a href="<?php echo generate_url("cart"); ?>">
                                                 
-                                                <img src="/assets/img/cart.svg">
+                                                <img src="/assets/img/cart1.svg" width=30px>
                                                 <?php $cart_product_count = get_cart_product_count(); ?>
                                                 <span class="notification span_cart_product_count <?= $cart_product_count <= 0 ? 'visibility-hidden' : ''; ?>"><?php echo $cart_product_count; ?></span>
                                             </a>
