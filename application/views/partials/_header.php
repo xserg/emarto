@@ -118,8 +118,8 @@ foreach ($this->languages as $language): ?>
                                     <?php if ($this->is_sale_active): ?>
                                         <li class="nav-item nav-item-cart li-main-nav-right">
                                             <a href="<?php echo generate_url("cart"); ?>">
-                                                <i class="icon-cart"></i>
-                                                <span class="label-nav-icon"><?php echo trans("cart"); ?></span>
+                                                
+                                                <img src="/assets/img/cart.svg">
                                                 <?php $cart_product_count = get_cart_product_count(); ?>
                                                 <span class="notification span_cart_product_count <?= $cart_product_count <= 0 ? 'visibility-hidden' : ''; ?>"><?php echo $cart_product_count; ?></span>
                                             </a>
@@ -128,15 +128,15 @@ foreach ($this->languages as $language): ?>
                                     <?php if ($this->auth_check): ?>
                                         <li class="nav-item li-main-nav-right">
                                             <a href="<?php echo generate_url("wishlist") . "/" . $this->auth_user->slug; ?>">
-                                                <i class="icon-heart-o"></i>
-                                                <span class="label-nav-icon"><?php echo trans("wishlist"); ?></span>
+                                                <!--i class="icon-heart-o"></i-->
+                                                <img src="/assets/img/heart.svg" width=30px>
                                             </a>
                                         </li>
                                     <?php else: ?>
                                         <li class="nav-item li-main-nav-right">
                                             <a href="<?php echo generate_url("wishlist"); ?>">
-                                                <i class="icon-heart-o"></i>
-                                                <span class="label-nav-icon"><?php echo trans("wishlist"); ?></span>
+                                                
+                                                  <img src="/assets/img/heart.svg" width=30px>
                                             </a>
                                         </li>
                                     <?php endif; ?>

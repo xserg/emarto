@@ -1037,16 +1037,16 @@ img {
 
 .nav-top .nav-top-left {
     padding-right: 5px;
-    -ms-flex: 0 0 70%;
-    flex: 0 0 70%;
-    max-width: 70%;
+    -ms-flex: 0 0 80%;
+    flex: 0 0 80%;
+    max-width: 80%;
 }
 
 .nav-top .nav-top-right {
     padding-left: 0 !important;
-    -ms-flex: 0 0 30%;
-    flex: 0 0 30%;
-    max-width: 30%;
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
 }
 
 .nav-top .nav-top-left .logo {
@@ -1328,11 +1328,12 @@ img {
 }
 
 .nav-top .nav-top-right .nav > li > .btn-sell-now {
-    padding: .42rem .9rem !important;
+    
     border-radius: 0.1875rem !important;
     line-height: 1.5 !important;
     margin: 0 8px;
     color: #fff !important;
+    width: 120px;
 }
 
 .nav-top .nav-top-right .nav > li > .btn-sell-now:hover {
