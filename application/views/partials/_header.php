@@ -119,7 +119,7 @@ foreach ($this->languages as $language): ?>
                                         <li class="nav-item nav-item-cart li-main-nav-right">
                                             <a href="<?php echo generate_url("cart"); ?>">
                                                 
-                                                <img src="/assets/img/cart1.svg" width=30px>
+                                                <img src="/assets/img/cart2.svg" width=30px>
                                                 <?php $cart_product_count = get_cart_product_count(); ?>
                                                 <span class="notification span_cart_product_count <?= $cart_product_count <= 0 ? 'visibility-hidden' : ''; ?>"><?php echo $cart_product_count; ?></span>
                                             </a>
@@ -129,14 +129,14 @@ foreach ($this->languages as $language): ?>
                                         <li class="nav-item li-main-nav-right">
                                             <a href="<?php echo generate_url("wishlist") . "/" . $this->auth_user->slug; ?>">
                                                 <!--i class="icon-heart-o"></i-->
-                                                <img src="/assets/img/heart.svg" width=30px>
+                                                <img src="/assets/img/heart4.svg" width=27px>
                                             </a>
                                         </li>
                                     <?php else: ?>
                                         <li class="nav-item li-main-nav-right">
                                             <a href="<?php echo generate_url("wishlist"); ?>">
                                                 
-                                                  <img src="/assets/img/heart.svg" width=30px>
+                                                  <img src="/assets/img/heart4.svg" width=27px>
                                             </a>
                                         </li>
                                     <?php endif; ?>
