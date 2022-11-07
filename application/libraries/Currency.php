@@ -50,7 +50,8 @@ class Currency
      */
     private function fixerIoExchangeRates($base, $serviceKey)
     {
-        $ch = curl_init('http://data.fixer.io/api/latest?access_key=' . $serviceKey . '');
+        //$ch = curl_init('http://data.fixer.io/api/latest?access_key=' . $serviceKey . '');
+        $ch = curl_init('https://www.cbr-xml-daily.ru/latest.js');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
@@ -97,6 +98,9 @@ class Currency
             $responseObject = json_decode($response);
             if (!empty($responseObject) && isset($responseObject->rates)) {
                 $rates = $responseObject->rates;
+                
+                $rates->RUB = 1;
+                
                 if (isset($rates->$base)) {
                     $baseRate = $rates->$base;
                     foreach ($rates as $key => $value) {
