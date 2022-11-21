@@ -68,7 +68,7 @@
             <div class="col-sm-12">
                 <?php if (!empty($comments)): ?>
                     <div class="number-of-entries">
-                        <span><?= trans("number_of_entries"); ?>:</span>&nbsp;&nbsp;<strong><?= $num_rows; ?></strong>
+                        <span></span>&nbsp;&nbsp;<strong><?= $num_rows; ?></strong>
                     </div>
                 <?php endif; ?>
                 <div class="table-pagination">
