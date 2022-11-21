@@ -268,6 +268,12 @@
                                 </a>
                             </li>
                         <?php endif; ?>
+                        <li class="nav-reviews">
+                            <a href="<?= generate_dash_url("black_list"); ?>">
+                                <i class="fa fa-comments"></i>
+                                <span><?php echo trans("black_list"); ?></span>
+                            </a>
+                        </li>
                     </ul>
                 <?php endif; ?>
             </div>

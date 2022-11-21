@@ -69,6 +69,14 @@ class Message_controller extends Home_Core_Controller
      */
     public function send_message()
     {
+      $ban = $this->black_list_model->check_ban($this->input->post('receiver_id', true), $this->auth_user->id);
+      
+      if ($ban) {
+        $this->session->set_flashdata('error', trans("msg_error"));
+        redirect($this->agent->referrer());
+        return; 
+      }
+      
         $conversation_id = $this->input->post('conversation_id', true);
         $this->load->model('file_model');
               
@@ -110,6 +118,18 @@ class Message_controller extends Home_Core_Controller
             'sender_id' => 0,
             'html_content' => ""
         );
+        $ban = $this->black_list_model->check_ban($this->input->post('receiver_id', true), $this->auth_user->id);
+        
+        if ($ban) {
+          $this->session->set_flashdata('error', trans("msg_error"));
+          $data["result"] = 1;
+          $data["html_content"] = $this->load->view('partials/_messages', null, true);
+          reset_flash_data();
+          echo json_encode($data);
+          return; 
+        }
+        
+        
         if ($this->auth_user->id == $this->input->post('receiver_id', true)) {
             $this->session->set_flashdata('error', trans("msg_message_sent_error"));
             $data["result"] = 1;

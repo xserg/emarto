@@ -61,9 +61,10 @@
             <div class="row-custom profile-buttons">
                 <div class="buttons">
                     <?php if ($this->auth_check): ?>
-                        <?php if ($this->auth_user->id != $user->id): ?>
+                        <?php if ($this->auth_user->id != $user->id): 
+                          if (!$ban): ?>
                             <button class="btn btn-md btn-outline-gray" data-toggle="modal" data-target="#messageModal"><i class="icon-envelope"></i><?php echo trans("ask_question") ?></button>
-
+                          <?php endif; ?>
                             <!--form follow-->
                             <?php echo form_open('follow-unfollow-user-post', ['class' => 'form-inline']); ?>
                             <input type="hidden" name="following_id" value="<?php echo $user->id; ?>">

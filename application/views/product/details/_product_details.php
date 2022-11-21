@@ -162,9 +162,10 @@ endif; ?>
                         </span>
                     </div>
                 </div>
-            <?php endif; ?>
-            <?php $buttton = get_product_form_data($product)->button;
-            if ($product->is_sold != 1 && !empty($buttton)):?>
+            <?php endif; 
+          
+            $buttton = get_product_form_data($product)->button;
+            if ($product->is_sold != 1 && !empty($buttton) && !$ban):?>
                 <div class="button-container">
                     <?php echo $buttton; ?>
                 </div>

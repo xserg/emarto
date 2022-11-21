@@ -61,6 +61,8 @@ class Profile_controller extends Home_Core_Controller
         $pagination = $this->paginate(generate_profile_url($data["user"]->slug), $data['num_rows'], $this->product_per_page);
         $data['products'] = $this->product_model->get_paginated_profile_products($data["user"]->id, $data["subcategory_ids"], $pagination['per_page'], $pagination['offset']);
 
+        $data['ban'] = $this->black_list_model->check_ban($data["user"]->id, $this->auth_user->id);
+
         $this->load->view('partials/_header', $data);
         $this->load->view('profile/profile', $data);
         $this->load->view('partials/_footer');

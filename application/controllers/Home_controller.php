@@ -346,7 +346,9 @@ class Home_controller extends Home_Core_Controller
             }
             $data['og_published_time'] = $data['product']->created_at;
             $data['og_modified_time'] = $data['product']->created_at;
-
+            
+            $data['ban'] = $this->black_list_model->check_ban($data["product"]->user_id, $this->auth_user->id);
+            
             $this->load->view('partials/_header', $data);
             $this->load->view('product/details/product', $data);
             $this->load->view('partials/_footer');

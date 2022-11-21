@@ -1843,4 +1843,73 @@ class Dashboard_controller extends Home_Core_Controller
             exit();
         }
     }
+    
+    /**
+     * Black list
+     */
+    public function black_list()
+    {
+        $this->check_vendor_permission();
+        if ($this->general_settings->product_comments != 1) {
+            redirect(dashboard_url());
+            exit();
+        }
+        $data['title'] = trans("black_list");
+        $data['description'] = trans("black_list") . " - " . $this->app_name;
+        $data['keywords'] = trans("black_list") . "," . $this->app_name;
+        $data['lang_settings'] = lang_settings();
+        
+        //$this->load_model('black_list_model');
+        
+        //$data['num_rows'] = $this->comment_model->get_vendor_comments_count($this->auth_user->id);
+        //$pagination = $this->paginate(generate_dash_url("comments"), $data['num_rows'], $this->per_page);
+        $data['comments'] = $this->black_list_model->get_black_list($this->auth_user->id);
+
+        $this->load->view('dashboard/includes/_header', $data);
+        $this->load->view('dashboard/black_list', $data);
+        $this->load->view('dashboard/includes/_footer');
+    }
+    
+    /**
+     * Add Shipping Zone
+     */
+    public function add_black_list()
+    {
+        $this->check_vendor_permission();
+        $data['title'] = trans("add_black_list");
+        $data['description'] = trans("add_shipping_zone") . " - " . $this->app_name;
+        $data['keywords'] = trans("add_shipping_zone") . "," . $this->app_name;
+        $data['continents'] = get_continents($this->selected_lang->id);
+        $data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+
+        $this->load->view('dashboard/includes/_header', $data);
+        $this->load->view('dashboard/add_black_list', $data);
+        $this->load->view('dashboard/includes/_footer');
+    }
+    
+    /**
+     * Add Shipping Class Post
+     */
+    public function add_black_list_post()
+    {
+
+        $this->check_vendor_permission();
+        if ($this->black_list_model->add_black_list()) {
+            $this->session->set_flashdata('success', trans("msg_added"));
+        } else {
+            $this->session->set_flashdata('error', trans("msg_error"));
+        }
+        $this->session->set_flashdata('black_list', 1);
+        redirect($this->agent->referrer());
+    }
+    
+    public function delete_ban_post()
+    {
+      
+        $this->check_vendor_permission();
+        $id = $this->input->post('id', true);
+        //echo $id;
+        //exit;
+        $this->black_list_model->delete_ban($id);
+    }
 }

@@ -133,3 +133,7 @@ $route['set-selected-currency-post']['POST'] = 'home_controller/set_selected_cur
 $route['add-review-post']['POST'] = 'home_controller/add_review_post';
 $route['submit-request-post']['POST'] = 'support_controller/submit_request_post';
 $route['close-ticket-post']['POST'] = 'support_controller/close_ticket_post';
+
+$route['verify-otp']['POST'] = 'profile_controller/verify_otp';
+$route['send-otp']['GET'] = 'profile_controller/send_otp';
+$route['add-black-list-post']['POST'] = 'dashboard_controller/add_black_list_post';

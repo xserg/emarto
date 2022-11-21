@@ -182,6 +182,8 @@ foreach ($languages as $language) {
 
         $route[$key . getr('dashboard', $rts) . '/' . getr('refund_requests', $rts)]['GET'] = 'dashboard_controller/refund_requests';
         $route[$key . getr('dashboard', $rts) . '/' . getr('refund_requests', $rts) . '/(:num)']['GET'] = 'dashboard_controller/refund/$1';
+        $route[$key . getr('dashboard', $rts) . '/' . getr('black_list', $rts)]['GET'] = 'dashboard_controller/black_list';
+        $route[$key . getr('dashboard', $rts) . '/' . getr('add_black_list', $rts)]['GET'] = 'dashboard_controller/add_black_list';
         //support
         $route[$key . getr('help_center', $rts)]['GET'] = 'support_controller/help_center';
         $route[$key . getr('help_center', $rts) . '/' . getr('tickets', $rts)]['GET'] = 'support_controller/tickets';
