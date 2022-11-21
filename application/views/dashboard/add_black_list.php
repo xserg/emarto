@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label class="control-label"><?php echo trans("zone_name"); ?></label>
                         
-                            <input type="text" name="username" class="form-control form-input m-b-5" placeholder="username" maxlength="6" required>
+                            <input type="text" name="username" class="form-control form-input m-b-5" placeholder="username" maxlength="60" required>
                         
                     </div>
                     
