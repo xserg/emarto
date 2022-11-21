@@ -26,7 +26,7 @@
                         <tr role="row">
                             <th scope="col"><?php echo trans("id"); ?></th>
                             <th scope="col"><?php echo trans("username"); ?></th>
-                            <th scope="col"><?php echo trans("comment"); ?></th>
+                            <th scope="col"> </th>
                             <th scope="col"><?php echo trans("date"); ?></th>
                             <th class="max-width-120"><?= trans('options'); ?></th>
                         </tr>
