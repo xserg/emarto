@@ -72,7 +72,7 @@ class Message_controller extends Home_Core_Controller
       $ban = $this->black_list_model->check_ban($this->input->post('receiver_id', true), $this->auth_user->id);
       
       if ($ban) {
-        $this->session->set_flashdata('error', trans("msg_error"));
+        $this->session->set_flashdata('error', trans("ban_message"));
         redirect($this->agent->referrer());
         return; 
       }
@@ -121,7 +121,7 @@ class Message_controller extends Home_Core_Controller
         $ban = $this->black_list_model->check_ban($this->input->post('receiver_id', true), $this->auth_user->id);
         
         if ($ban) {
-          $this->session->set_flashdata('error', trans("msg_error"));
+          $this->session->set_flashdata('error', trans("ban_message"));
           $data["result"] = 1;
           $data["html_content"] = $this->load->view('partials/_messages', null, true);
           reset_flash_data();
