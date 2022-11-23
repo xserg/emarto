@@ -165,11 +165,13 @@ endif; ?>
             <?php endif; 
           
             $buttton = get_product_form_data($product)->button;
-            if ($product->is_sold != 1 && !empty($buttton) && !$ban):?>
+            if ($product->is_sold != 1 && !empty($buttton) && !$ban):
+              if (!$user->vacation_status) :
+              ?>
                 <div class="button-container">
                     <?php echo $buttton; ?>
                 </div>
-            
+                <?php endif; ?>
             <div class=" button-container-wishlist">
                 <?php if ($this->product_model->is_product_in_wishlist($product->id) == 1): ?>                  
                     <a href="javascript:void(0)" class="btn-wishlist btn-add-remove-wishlist" data-product-id="<?php echo $product->id; ?>" data-type="details"><i class="icon-heart"></i><span><?php echo trans("remove_from_wishlist"); ?></span></a>
