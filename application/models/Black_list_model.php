@@ -13,7 +13,7 @@ class Black_list_model extends CI_Model
     //add black list
     public function add_black_list()
     {
-        $username = $this->input->post('username', true);            
+        $username = $this->input->post('ban', true);            
         $user = $this->db->where("username", $username)->get('users')->row();
         
         if ($this->auth_check && $user) {

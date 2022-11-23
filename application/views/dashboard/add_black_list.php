@@ -11,11 +11,11 @@
                     <?php $this->load->view('dashboard/includes/_messages'); ?>
                     <?php echo form_open("add-black-list-post"); ?>
                     <div class="form-group">
-                        <label class="control-label"><?php echo trans("username"); ?></label>    
-                            <input type="text" name="username" class="form-control form-input m-b-5" placeholder="<?php echo trans("username"); ?>" maxlength="60" autocomplete="off" required>
+                        <label class="control-label"><?php echo trans("user"); ?></label>    
+                            <input type="text" name="ban" class="form-control form-input m-b-5" placeholder="<?php echo trans("user"); ?>" maxlength="60" autocomplete="off" required>
                     </div>
                     <div class="form-group text-right">
-                        <button type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("submit") ?></button>
+                        <button type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("add") ?></button>
                     </div>
                     <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                     <?php echo form_close(); ?>
