@@ -106,7 +106,7 @@
 <div class="modal fade" id="modalRefundRequest" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content modal-custom modal-refund">
-            <?php echo form_open('order_controller/submit_refund_request'); ?>
+            <?php echo form_open_multipart('order_controller/submit_refund_request'); ?>
             <div class="modal-header">
                 <h5 class="modal-title"><?php echo trans("submit_refund_request"); ?></h5>
                 <button type="button" class="close" data-dismiss="modal">
@@ -142,6 +142,9 @@
                 <div class="form-group">
                     <label class="control-label"><?= trans("refund_reason_explain"); ?></label>
                     <textarea name="message" class="form-control" aria-hidden="true" required><?= old('message'); ?></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="file" id="file" size="40"  />
                 </div>
                 <div class="form-group text-right m-0">
                     <button type="submit" class="btn btn-md btn-custom"><?= trans("submit"); ?></button>

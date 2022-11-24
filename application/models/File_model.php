@@ -775,8 +775,25 @@ class File_model extends CI_Model
         }
     }
 
-
-    
+    //// REFUND images  
+    //upload image
+    public function upload_refund_image($message_id)
+    {
+        $temp_path = $this->upload_model->upload_temp_image('file');
+        if (!empty($temp_path)) {
+            $data = array(
+                'image_path' => $this->upload_model->message_content_image_upload($temp_path),
+                'image_path_thumb' => $this->upload_model->message_image_small_upload($temp_path),
+                'storage' => "local",
+                'user_id' => $this->auth_user->id,
+                'message_id' => $message_id
+            );
+            @$this->db->close();
+            @$this->db->initialize();
+            $this->db->insert('refund_images', $data);
+            $this->upload_model->delete_temp_image($temp_path);
+        }
+    }
     
     
 }

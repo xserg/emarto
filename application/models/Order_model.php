@@ -1006,6 +1006,8 @@ class Order_model extends CI_Model
         );
         $data['message'] = str_replace("\n", '<br/>', $data['message']);
         if ($this->db->insert('refund_requests_messages', $data)) {
+            $message_id = $this->db->insert_id();
+            $this->file_model->upload_refund_image($message_id);
             $this->db->where('id', clean_number($request_id))->update('refund_requests', ['updated_at' => date('Y-m-d H:i:s')]);
         }
     }
@@ -1054,7 +1056,8 @@ class Order_model extends CI_Model
     //get refund messages
     public function get_refund_messages($id)
     {
-        return $this->db->where('request_id', clean_number($id))->order_by('id')->get('refund_requests_messages')->result();
+        $this->db->join('refund_images', 'refund_requests_messages.id=refund_images.message_id', 'left');
+        return $this->db->where('request_id', clean_number($id))->order_by('refund_requests_messages.id')->get('refund_requests_messages')->result();
     }
 
     //approve or decline refund request
