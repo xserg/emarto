@@ -77,6 +77,9 @@
                                                                 <div class="message">
                                                                     <?= $message->message; ?>
                                                                 </div>
+                                                                <?php if ($message->image_path_thumb) 
+                                                                echo '<a href="/'.$message->image_path.'" target=_blank ><img src="/' . $message->image_path_thumb .'" /></a>';
+                                                                ?>
                                                             </div>
                                                         </div>
                                                     </li>
