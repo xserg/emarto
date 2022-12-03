@@ -72,6 +72,7 @@ foreach ($this->languages as $language): ?>
     <?php endif; ?>
     <?= $this->general_settings->custom_css_codes; ?>
     <?= $this->general_settings->google_adsense_code; ?>
+    <script src="<?= base_url(); ?>assets/js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <header id="header">

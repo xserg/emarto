@@ -142,10 +142,8 @@
                 <div class="form-group">
                     <label class="control-label"><?= trans("refund_reason_explain"); ?></label>
                     <textarea name="message" class="form-control" aria-hidden="true" required><?= old('message'); ?></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="file" name="file" id="file" size="40"  />
-                </div>
+                </div>                
+                <?php $this->load->view("refund/_image_upload_box"); ?>
                 <div class="form-group text-right m-0">
                     <button type="submit" class="btn btn-md btn-custom"><?= trans("submit"); ?></button>
                 </div>
@@ -154,4 +152,3 @@
         </div>
     </div>
 </div>
-

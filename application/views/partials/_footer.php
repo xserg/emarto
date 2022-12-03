@@ -130,7 +130,7 @@
     </div>
 <?php endif; ?>
 <a href="javascript:void(0)" class="scrollup"><i class="icon-arrow-up"></i></a>
-<script src="<?= base_url(); ?>assets/js/jquery-3.5.1.min.js"></script>
+
 <script src="<?= base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/plugins-2.1.js"></script>
 <script src="<?= base_url(); ?>assets/js/script-2.0.js"></script>

@@ -77,8 +77,10 @@
                                                                 <div class="message">
                                                                     <?= $message->message; ?>
                                                                 </div>
-                                                                <?php if ($message->image_path_thumb) 
-                                                                echo '<a href="/'.$message->image_path.'" target=_blank ><img src="/' . $message->image_path_thumb .'" /></a>';
+                                                                <?php if ($message->images) {
+                                                                    foreach ($message->images as $k => $image)
+                                                                      echo '<br><a href="/uploads/refund/'.$image->image_path.'" target=_blank ><img src="/uploads/refund/' . $image->image_path_thumb .'" /></a><br>';
+                                                                }
                                                                 ?>
                                                             </div>
                                                         </div>

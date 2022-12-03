@@ -1056,8 +1056,11 @@ class Order_model extends CI_Model
     //get refund messages
     public function get_refund_messages($id)
     {
-        $this->db->join('refund_images', 'refund_requests_messages.id=refund_images.message_id', 'left');
-        return $this->db->where('request_id', clean_number($id))->order_by('refund_requests_messages.id')->get('refund_requests_messages')->result();
+        $messages = $this->db->where('request_id', clean_number($id))->order_by('refund_requests_messages.id')->get('refund_requests_messages')->result();
+        foreach ($messages as $k => $message) {
+            $message->images = $this->file_model->get_refund_images($message->id);
+        }
+        return $messages;
     }
 
     //approve or decline refund request
