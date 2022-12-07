@@ -46,6 +46,26 @@ class File_controller extends Home_Core_Controller
         }
     }
 
+
+    /**
+     * Get Uploaded Image Session
+     */
+    public function get_image()
+    {
+        $file_id = $this->input->post('file_id', true);
+        $modesy_images = $this->file_model->get_sess_product_images_array();
+        if (!empty($modesy_images)) {
+            foreach ($modesy_images as $modesy_image) {
+                if ($modesy_image->file_id == $file_id) {
+                    echo '<img src="' . base_url() . "uploads/temp/" . $modesy_image->img_small . '" alt="">' .
+                        '<a href="javascript:void(0)" class="btn-img-delete btn-delete-product-img-session" data-file-id="' . $modesy_image->file_id . '"><i class="icon-close"></i></a>';
+                                            break;
+                }
+            }
+        }
+    }
+
+
     /**
      * Get Uploaded Image
      */

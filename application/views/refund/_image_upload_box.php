@@ -15,95 +15,22 @@
         </p>
         <p class="dm-upload-text"><?php echo trans("drag_drop_images_here"); ?>&nbsp;<span style="text-decoration: underline"><?php echo trans('browse_files'); ?></span></p>
         <a class='btn btn-md dm-btn-select-files'>
-            <input type="file" name="file" id="file" size="40" multiple="multiple" 
-            <?php if (empty($modesy_images))
-                    echo "required"; ?>
-            />
+            <input type="file" name="file" id="file" size="40" multiple="multiple" />
         </a>
         <ul class="dm-uploaded-files" id="files-image">
             <?php if (!empty($modesy_images)):
                 foreach ($modesy_images as $modesy_image):?>
                     <li class="media" id="uploaderFile<?php echo $modesy_image->file_id; ?>">
+                      
                         <img src="<?php echo base_url(); ?>uploads/temp/<?php echo $modesy_image->img_small; ?>" alt="">
                         <a href="javascript:void(0)" class="btn-img-delete btn-delete-product-img-session" data-file-id="<?php echo $modesy_image->file_id; ?>">
                             <i class="icon-close"></i>
-                        </a>xc
-                        <?php if ($modesy_image->is_main == 1): ?>
-                            <a href="javascript:void(0)" class="btn btn-xs btn-success btn-is-image-main btn-set-image-main-session"><?php echo trans("main"); ?></a>
-                        <?php else: ?>
-                            <a href="javascript:void(0)" class="btn btn-xs btn-secondary btn-is-image-main btn-set-image-main-session" data-file-id="<?php echo $modesy_image->file_id; ?>"><?php echo trans("main"); ?></a>
-                        <?php endif; ?>
+                        </a>xc                      
                     </li>
                 <?php endforeach;
             endif; ?>
         </ul>
         <div class="error-message-img-upload"></div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="fileManagerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-file-manager" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><?php echo trans("images"); ?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="icon-close"></i></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="file-manager">
-                    <div class="file-manager-left">
-                        <div class="dm-uploader-container">
-                            <div id="drag-and-drop-zone-file-manager" class="dm-uploader text-center">
-                                <p class="file-manager-file-types">
-                                    <span>JPG</span>
-                                    <span>JPEG</span>
-                                    <span>PNG</span>
-                                </p>
-                                <p class="dm-upload-icon">
-                                    <i class="icon-upload"></i>
-                                </p>
-                                <p class="dm-upload-text"><?php echo trans("drag_drop_images_here"); ?></p>
-                                <p class="text-center">
-                                    <button class="btn btn-default btn-browse-files"><?php echo trans('browse_files'); ?></button>
-                                </p>
-                                <a class='btn btn-md dm-btn-select-files'>
-                                    <input type="file" name="file" size="40" multiple="multiple">
-                                </a>
-                                <ul class="dm-uploaded-files" id="files-file-manager"></ul>
-                                <button type="button" id="btn_reset_upload_image" class="btn btn-reset-upload"><?php echo trans("reset"); ?></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-manager-right">
-                        <div class="file-manager-content">
-                            <div id="ckimage_file_upload_response">
-                                <?php foreach ($file_manager_images as $image): ?>
-                                    <div class="col-file-manager" id="ckimg_col_id_<?php echo $image->id; ?>">
-                                        <div class="file-box" data-file-id="<?php echo $image->id; ?>" data-file-path="<?php echo get_file_manager_image($image); ?>">
-                                            <div class="image-container">
-                                                <img src="<?php echo get_file_manager_image($image); ?>" alt="" class="img-responsive">
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" id="selected_ckimg_file_id">
-                    <input type="hidden" id="selected_ckimg_file_path">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="file-manager-footer">
-                    <button type="button" id="btn_ckimg_delete" class="btn btn-sm btn-danger color-white pull-left btn-file-delete m-r-3"><i class="icon-trash"></i>&nbsp;&nbsp;<?php echo trans('delete'); ?></button>
-                    <button type="button" id="btn_ckimg_select" class="btn btn-sm btn-info color-white btn-file-select"><i class="icon-check"></i>&nbsp;&nbsp;<?php echo trans('select_image'); ?></button>
-                    <button type="button" class="btn btn-sm btn-secondary color-white" data-dismiss="modal"><?php echo trans('close'); ?></button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -174,7 +101,7 @@ var csfr_cookie_name = "<?= $this->config->item('csrf_cookie_name'); ?>";
                 data[csfr_token_name] = $.cookie(csfr_cookie_name);
                 $.ajax({
                     type: "POST",
-                    url: base_url + "get-sess-uploaded-image-post",
+                    url: base_url + "File_controller/get_image",
                     data: data,
                     success: function (response) {
                         document.getElementById("uploaderFile" + id).innerHTML = response;
@@ -182,10 +109,6 @@ var csfr_cookie_name = "<?= $this->config->item('csrf_cookie_name'); ?>";
                 });
                 ui_multi_update_file_status(id, 'success', 'Upload Complete');
                 ui_multi_update_file_progress(id, 100, 'success', false);
-              
-                file = $("#file");
-                file.value = id;
-                file.removeAttr("required");
             },
             onFileSizeError: function (file) {
                 $(".error-message-img-upload").html("<?php echo trans('file_too_large') . ' ' . formatSizeUnits($this->general_settings->max_file_size_image); ?>");
