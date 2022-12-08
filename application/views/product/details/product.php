@@ -32,7 +32,12 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div id="response_product_details" class="product-content-details">
                                     <?php $this->load->view("product/details/_product_details"); ?>
+                                    <div>
+                                      <br><br><br><br>
+                                      <a href="/shipping_return_policy"><?= trans("shipping_return_policy"); ?></a>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
