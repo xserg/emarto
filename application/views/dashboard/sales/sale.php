@@ -350,7 +350,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-md btn-default" data-dismiss="modal"><?php echo trans("close"); ?></button>
-                        <button type="submit" class="btn btn-md btn-success"><?php echo trans("submit"); ?></button>
+                        <button type="submit" class="btn btn-md btn-success"><?php echo trans("confirm"); ?></button>
                     </div>
                     <?php echo form_close(); ?><!-- form end -->
                 </div>
