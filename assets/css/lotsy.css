@@ -4484,22 +4484,24 @@ img {
 }
 
 .btn-wishlist {
+  height: 40px;
   min-width: 230px;
   padding: 0rem 1rem;
   border: 1px solid #e4e4e4;
   background-color: transparent !important;
   
     display: inline-block;
-    text-align: center;
+    text-align: center; 
     color: #4e4e4e;
     border-radius: 0.1875rem;
-    
 }
 
 .btn-wishlist i {
+    position: relative;
+    top: 5px;
     color: #4e4e4e;
-    font-size: 23px;
-    margin-right: 8px;
+    font-size: 17px;
+    margin-right: 8px;    
 }
 
 .btn-bye-now {
@@ -4508,8 +4510,9 @@ img {
 
 .btn-wishlist span {
     position: relative;
+    top: 5px;
     display: inline-block;
-    top: -5px;
+    
 }
 
 .product-add-to-cart-container .button-container:last-child {
