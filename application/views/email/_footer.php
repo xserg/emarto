@@ -48,7 +48,21 @@
         <tr>
             <td class="content-block powered-by">
                 <span class="apple-link"><?php echo html_escape($this->settings->contact_address); ?></span><br>
-                <?php echo html_escape($this->settings->copyright); ?>
+                <?php echo trans('You_are_receiving_this_email'); ?><br>
+                <?php echo trans('automated_message'); ?><br><br>
+                <?php echo html_escape($this->settings->copyright); ?><br><br>
+                    
+                <?php 
+                $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
+                $page_help = get_page_by_default_name("contact", $this->selected_lang->id);
+                $ci =& get_instance();
+                $page_policy = $ci->page_model->get_page("policy", $this->selected_lang->id);
+                ?>
+                    <a href="<?= generate_url($page_terms->page_default_name); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_terms->title); ?></strong></a>
+                    | <a href="<?= generate_url($page_policy->slug); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_policy->title); ?></strong></a>
+                    | <a href="<?= generate_url($page_help->page_default_name); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_help->title); ?></strong></a>
+                
+                
             </td>
         </tr>
     </table>
