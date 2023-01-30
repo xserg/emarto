@@ -110,7 +110,7 @@ class Page_model extends CI_Model
         $slug = remove_special_characters($slug);
         $this->db->where('slug', $slug);
         $this->db->where('visibility', 1);
-        $this->db->where('pages.lang_id', $this->selected_lang->id);
+        $this->db->where('pages.lang_id', $this->selected_lang->id ?? 1);
         $query = $this->db->get('pages');
         return $query->row();
     }
