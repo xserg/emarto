@@ -90,7 +90,7 @@ class Page_model extends CI_Model
     //get pages
     public function get_pages()
     {
-        $this->db->where('pages.lang_id', $this->selected_lang->id);
+        $this->db->where('pages.lang_id', $this->selected_lang->id ?? 1);
         $this->db->order_by('page_order');
         $query = $this->db->get('pages');
         return $query->result();
