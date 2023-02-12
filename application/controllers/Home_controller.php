@@ -200,7 +200,6 @@ class Home_controller extends Home_Core_Controller
         $data['title'] = !empty($category->title_meta_tag) ? $category->title_meta_tag : category_name($category);
         $data['description'] = $category->description;
         $data['keywords'] = $category->keywords;
-
         //og tags
         $data['show_og_tags'] = true;
         $data['og_title'] = category_name($category);
@@ -212,24 +211,20 @@ class Home_controller extends Home_Core_Controller
         $data['og_height'] = "420";
         $data['og_creator'] = $this->general_settings->application_name;
 
-        $data["category"] = $category;
-        $data["parent_category"] = null;
+        $data['category'] = $category;
+        $data['parent_category'] = null;
         if ($category->parent_id != 0) {
-            $data["parent_category"] = $this->category_model->get_category($category->parent_id);
+            $data['parent_category'] = $this->category_model->get_category($category->parent_id);
         }
-
-        $product_categories = $this->category_model->get_vendor_categories($category, null, false, true);
-        $data["categories"] = !empty($product_categories['categories']) ? $product_categories['categories'] : array();
-        $data["category_ids"] = !empty($product_categories['category_ids']) ? $product_categories['category_ids'] : array();
-        $data["subcategory_ids"] = !empty($product_categories['subcategory_ids']) ? $product_categories['subcategory_ids'] : array();
-        $data["parent_categories"] = $this->category_model->get_parent_categories_tree($category);
+        $data['parent_categories'] = $this->category_model->get_parent_categories_tree($category);
+        $data['categories'] = $this->category_model->get_subcategories_by_parent_id($category->id);
         $data['custom_filters'] = $this->field_model->get_custom_filters($category->id, $data["parent_categories"]);
-        $data["query_string_array"] = get_query_string_array($data['custom_filters']);
-        $data["query_string_object_array"] = convert_query_string_to_object_array($data["query_string_array"]);
+        $data['query_string_array'] = get_query_string_array($data['custom_filters']);
+        $data['query_string_object_array'] = convert_query_string_to_object_array($data["query_string_array"]);
 
         //get paginated posts
-        $pagination = $this->paginate(generate_category_url($data["category"]), $this->product_model->get_paginated_filtered_products_count($data["query_string_array"], $data["subcategory_ids"], $data['custom_filters']), $this->product_per_page);
-        $data['products'] = $this->product_model->get_paginated_filtered_products($data["query_string_array"], $data["subcategory_ids"], $data['custom_filters'], $pagination['per_page'], $pagination['offset']);
+        $pagination = $this->paginate(generate_category_url($data["category"]), $this->product_model->get_paginated_filtered_products_count($data['query_string_array'], $category, $data['custom_filters']), $this->product_per_page);
+        $data['products'] = $this->product_model->get_paginated_filtered_products($data['query_string_array'], $category, $data['custom_filters'], $pagination['per_page'], $pagination['offset']);
 
         $this->load->view('partials/_header', $data);
         $this->load->view('product/products', $data);
