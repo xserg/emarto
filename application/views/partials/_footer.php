@@ -5,12 +5,7 @@
             <div class="col-12">
                 <div class="footer-top">
                     <div class="row">
-                        <div class="col-12 col-md-3 footer-widget">
-                            <div class="row-custom">
-                                <div class="footer-logo">
-                                    <a href="<?php echo lang_base_url(); ?>"><img src="<?php echo get_logo($this->general_settings); ?>" alt="logo"></a>
-                                </div>
-                            </div>
+                        <div class="col-12 col-md-3 footer-widget">                            
                             <div class="row-custom">
                                 <div class="footer-about">
                                     <?= $this->settings->about_footer; ?>
@@ -24,7 +19,7 @@
                                 </div>
                                 <div class="row-custom">
                                     <ul>
-                                        <li><a href="<?php echo lang_base_url(); ?>"><?php echo trans("home"); ?></a></li>
+                                        
                                         <?php if (!empty($this->menu_links)):
                                             foreach ($this->menu_links as $menu_link):
                                                 if ($menu_link->location == 'quick_links'):
@@ -73,10 +68,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <h4 class="footer-title"><?php echo trans("follow_us"); ?></h4>
-                                    <div class="footer-social-links">
-                                        <!--include social links-->
-                                        <?php $this->load->view('partials/_social_links', ['show_rss' => true]); ?>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <?php if ($this->general_settings->newsletter_status == 1): ?>
@@ -111,12 +103,25 @@
                     <div class="copyright">
                         <?php echo html_escape($this->settings->copyright); ?>
                     </div>
-                    <div class="footer-payment-icons">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<?php echo base_url(); ?>assets/img/payment/visa.svg" alt="visa" class="lazyload">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<?php echo base_url(); ?>assets/img/payment/mastercard.svg" alt="mastercard" class="lazyload">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<?php echo base_url(); ?>assets/img/payment/maestro.svg" alt="maestro" class="lazyload">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<?php echo base_url(); ?>assets/img/payment/amex.svg" alt="amex" class="lazyload">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<?php echo base_url(); ?>assets/img/payment/discover.svg" alt="discover" class="lazyload">
+                    
+                    <div class="footer-info">
+                      <ul>
+                    <?php if (!empty($this->menu_links)):
+                        foreach ($this->menu_links as $menu_link):
+                            if ($menu_link->location == 'information'):
+                                $item_link = generate_menu_item_url($menu_link);
+                                if (!empty($menu_link->page_default_name)):
+                                    $item_link = generate_url($menu_link->page_default_name);
+                                endif; ?>
+                                <li><a href="<?= $item_link; ?>"><?php echo html_escape($menu_link->title); ?></a></li>
+                            <?php endif;
+                        endforeach;
+                    endif; ?>
+                  </ul>
+                  </div>
+                  
+                    <div class="footer-social-links">
+                      <?php $this->load->view('partials/_social_links', ['show_rss' => true]); ?>
                     </div>
                 </div>
             </div>

@@ -8459,6 +8459,7 @@ img {
 #footer .footer-bottom .copyright {
     float: left;
     text-align: left;
+      margin-right: 100px;
 }
 
 #footer .footer-bottom .footer-payment-icons {
@@ -8498,29 +8499,52 @@ img {
     margin-bottom: 20px;
 }
 
-#footer .footer-social-links {
-    width: 100%;
+#footer .footer-bottom .footer-social-links {
     display: block;
     position: relative;
-    float: left;
+    float: right;
 }
 
-#footer .footer-social-links ul {
+#footer .footer-bottom .footer-social-links ul {
     padding: 0;
     margin: 0;
 }
 
-#footer .footer-social-links ul li {
-    float: left;
+#footer .footer-bottom .footer-social-links ul li {
+    float: right;
     margin-right: 10px;
-    margin-bottom: 10px;
+    
     list-style: none;
 }
 
-#footer .footer-social-links ul li a {
+#footer .footer-bottom .footer-social-links ul li a {
     color: #888;
     font-size: 18px;
     padding: 5px;
+}
+
+#footer .footer-bottom .footer-info {
+    float:left;
+    text-align: center;
+}
+
+#footer .footer-info ul {
+    padding: 0;
+    margin: 0;
+}
+
+#footer .footer-info  li {
+    display: inline;
+    margin-right: 50px;
+    list-style: none;
+}
+
+#footer .footer-info  a {
+    color: #888;
+    padding: 5px 0;
+  
+    text-decoration: underline;
+  
 }
 
 #footer .footer-title {
