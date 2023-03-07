@@ -5,14 +5,77 @@
             <div class="col-12">
                 <div class="footer-top">
                     <div class="row">
-                        <div class="col-12 col-md-3 footer-widget">                            
-                            <div class="row-custom">
-                                <div class="footer-about">
-                                    <?= $this->settings->about_footer; ?>
+                        
+                        <div class="col-12 col-md-2 footer-widget">
+                            <div class="nav-footer">
+                                <div class="row-custom">
+                                    <h4 class="footer-title"><?php echo trans("about"); ?></h4>
+                                </div>
+                                <div class="row-custom">
+                                    <ul>
+                                        
+                                        <?php if (!empty($this->menu_links)):
+                                            foreach ($this->menu_links as $menu_link):
+                                                if ($menu_link->location == 'about'):
+                                                    $item_link = generate_menu_item_url($menu_link);
+                                                    if (!empty($menu_link->page_default_name)):
+                                                        $item_link = generate_url($menu_link->page_default_name);
+                                                    endif; ?>
+                                                    <li><a href="<?= $item_link; ?>"><?php echo html_escape($menu_link->title); ?></a></li>
+                                                <?php endif;
+                                            endforeach;
+                                        endif; ?>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 footer-widget">
+                        <div class="col-12 col-md-2 footer-widget">
+                            <div class="nav-footer">
+                                <div class="row-custom">
+                                    <h4 class="footer-title"><?php echo trans("buy"); ?></h4>
+                                </div>
+                                <div class="row-custom">
+                                    <ul>
+                                        
+                                        <?php if (!empty($this->menu_links)):
+                                            foreach ($this->menu_links as $menu_link):
+                                                if ($menu_link->location == 'buy'):
+                                                    $item_link = generate_menu_item_url($menu_link);
+                                                    if (!empty($menu_link->page_default_name)):
+                                                        $item_link = generate_url($menu_link->page_default_name);
+                                                    endif; ?>
+                                                    <li><a href="<?= $item_link; ?>"><?php echo html_escape($menu_link->title); ?></a></li>
+                                                <?php endif;
+                                            endforeach;
+                                        endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2 footer-widget">
+                            <div class="nav-footer">
+                                <div class="row-custom">
+                                    <h4 class="footer-title"><?php echo trans("sell"); ?></h4>
+                                </div>
+                                <div class="row-custom">
+                                    <ul>
+                                        
+                                        <?php if (!empty($this->menu_links)):
+                                            foreach ($this->menu_links as $menu_link):
+                                                if ($menu_link->location == 'sell'):
+                                                    $item_link = generate_menu_item_url($menu_link);
+                                                    if (!empty($menu_link->page_default_name)):
+                                                        $item_link = generate_url($menu_link->page_default_name);
+                                                    endif; ?>
+                                                    <li><a href="<?= $item_link; ?>"><?php echo html_escape($menu_link->title); ?></a></li>
+                                                <?php endif;
+                                            endforeach;
+                                        endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2 footer-widget">
                             <div class="nav-footer">
                                 <div class="row-custom">
                                     <h4 class="footer-title"><?php echo trans("footer_quick_links"); ?></h4>
@@ -35,38 +98,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 footer-widget">
-                            <div class="nav-footer">
-                                <div class="row-custom">
-                                    <h4 class="footer-title"><?php echo trans("footer_information"); ?></h4>
-                                </div>
-                                <div class="row-custom">
-                                    <ul>
-                                        <?php if (!empty($this->menu_links)):
-                                            foreach ($this->menu_links as $menu_link):
-                                                if ($menu_link->location == 'information'):
-                                                    $item_link = generate_menu_item_url($menu_link);
-                                                    if (!empty($menu_link->page_default_name)):
-                                                        $item_link = generate_url($menu_link->page_default_name);
-                                                    endif; ?>
-                                                    <li><a href="<?= $item_link; ?>"><?php echo html_escape($menu_link->title); ?></a></li>
-                                                <?php endif;
-                                            endforeach;
-                                        endif; ?>
-
-                                        <?php if (!empty($this->menu_links)):
-                                            foreach ($this->menu_links as $menu_link):
-                                                if ($menu_link->location == 'information'):?>
-                                                <?php endif;
-                                            endforeach;
-                                        endif; ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 footer-widget">
+                        
+                        <div class="col-12 col-md-4 footer-widget">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12" style="text-align: center;">
                                     <h4 class="footer-title"><?php echo trans("follow_us"); ?></h4>
                                     
                                 </div>

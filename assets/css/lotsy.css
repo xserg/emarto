@@ -8594,12 +8594,12 @@ img {
     margin-top: 5px;
     font-size: 13px;
     position: relative;
-    display: flex;
+    
     align-items: center;
 }
 
 .newsletter input {
-    width: 100%;
+    width: 75%;
     font-size: 13px;
     line-height: 18px;
     border: 1px solid #e0e0e2;
@@ -8609,6 +8609,7 @@ img {
     padding: 10px 20px;
     box-shadow: none;
     border-radius: 3px 0 0 3px;
+    float:left;
 }
 
 .newsletter .newsletter-button {
@@ -8624,6 +8625,7 @@ img {
     -webkit-transition: .2s;
     transition: .2s;
     white-space: nowrap;
+    float:left;
 }
 
 .newsletter .newsletter-button:hover {

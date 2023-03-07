@@ -62,17 +62,33 @@
                             <div class="col-sm-3 col-xs-12">
                                 <label><?php echo trans('location'); ?></label>
                             </div>
-                            <div class="col-md-2 col-sm-4 col-xs-12 col-option">
+                            <div class="col-md-1 col-sm-4 col-xs-12 col-option">
                                 <input type="radio" name="location" value="top_menu" id="menu_top_menu" class="square-purple" <?php echo ($page->location == "top_menu") ? 'checked' : ''; ?>>
                                 <label for="menu_top_menu" class="option-label"><?php echo trans('top_menu'); ?></label>
                             </div>
-                            <div class="col-md-2 col-sm-4 col-xs-12 col-option">
+                            <div class="col-md-1 col-sm-4 col-xs-12 col-option">
                                 <input type="radio" name="location" value="quick_links" id="menu_quick_links" class="square-purple" <?php echo ($page->location == "quick_links") ? 'checked' : ''; ?>>
                                 <label for="menu_quick_links" class="option-label"><?php echo trans('footer_quick_links'); ?></label>
                             </div>
-                            <div class="col-md-2 col-sm-4 col-xs-12 col-option">
+                            <div class="col-md-1 col-sm-4 col-xs-12 col-option">
                                 <input type="radio" name="location" value="information" id="menu_information" class="square-purple" <?php echo ($page->location == "information") ? 'checked' : ''; ?>>
                                 <label for="menu_information" class="option-label"><?php echo trans('footer_information'); ?></label>
+                            </div>
+                            
+                            <div class="col-md-1 col-sm-4 col-xs-12 col-option">
+                                <input type="radio" name="location" value="about" id="about" class="square-purple" 
+                                <?php echo ($page->location == "about") ? 'checked' : ''; ?>>
+                                <label for="about" class="option-label"><?php echo trans('about'); ?></label>
+                            </div>
+                            <div class="col-md-1 col-sm-4 col-xs-12 col-option">
+                                <input type="radio" name="location" value="buy" id="buy" class="square-purple" 
+                                <?php echo ($page->location == "buy") ? 'checked' : ''; ?>>
+                                <label for="buy" class="option-label"><?php echo trans('buy'); ?></label>
+                            </div>
+                            <div class="col-md-1 col-sm-4 col-xs-12 col-option">
+                                <input type="radio" name="location" value="sell" id="sell" class="square-purple" 
+                                <?php echo ($page->location == "sell") ? 'checked' : ''; ?>>
+                                <label for="sell" class="option-label"><?php echo trans('sell'); ?></label>
                             </div>
                         </div>
                     </div>
