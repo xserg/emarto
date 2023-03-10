@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="row-custom">
                                     <ul>
-                                        <li class="nav-item"><a href="<?= generate_url('help_center'); ?>" class="nav-link"><?= trans("help_center"); ?></a></li>
+                                        <li><a href="<?= generate_url('help_center'); ?>"><?= trans("help_center"); ?></a></li>
                                         <?php if (!empty($this->menu_links)):
                                             foreach ($this->menu_links as $menu_link):
                                                 if ($menu_link->location == 'quick_links'):
