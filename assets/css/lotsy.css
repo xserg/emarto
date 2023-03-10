@@ -8547,6 +8547,11 @@ img {
   
 }
 
+.footer-news {
+    color: #222;
+    font-weight: 600;
+}
+
 #footer .footer-title {
     color: #222;
     font-size: 18px;
