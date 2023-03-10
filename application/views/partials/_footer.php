@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="row-custom">
                                     <ul>
-                                        
+                                        <li class="nav-item"><a href="<?= generate_url('help_center'); ?>" class="nav-link"><?= trans("help_center"); ?></a></li>
                                         <?php if (!empty($this->menu_links)):
                                             foreach ($this->menu_links as $menu_link):
                                                 if ($menu_link->location == 'quick_links'):
@@ -102,7 +102,7 @@
                         <div class="col-12 col-md-4 footer-widget">
                             <div class="row">
                                 <div class="col-12" style="text-align: center;">
-                                    <h4 class="footer-title"><?php echo trans("follow_us"); ?></h4>
+                                    <h4 class="footer-title"><?php echo trans("newsletter-footer1"); ?></h4>
                                     
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                     <div class="col-12">
                                         <div class="newsletter">
                                             <div class="widget-newsletter">
-                                                <h4 class="footer-title"><?= trans("newsletter"); ?></h4>
+                                                <div class="footer-news"><b><?= trans("newsletter-footer"); ?></b></div><br><br>
                                                 <form id="form_newsletter_footer" class="form-newsletter">
                                                     <div class="newsletter">
                                                         <input type="email" name="email" class="newsletter-input" maxlength="199" placeholder="<?php echo trans("enter_email"); ?>" required>
