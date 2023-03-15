@@ -118,7 +118,7 @@ class Page_model extends CI_Model
     //get page by default name
     public function get_page_by_default_name($default_name, $lang_id = 1)
     {
-        $this->db->where('page_default_name', clean_str($default_name))->where('visibility', 1)->where('lang_id', clean_number($lang_id));
+        $this->db->where('page_default_name', clean_str($default_name))->where('visibility', 1)->where('lang_id', clean_number($lang_id ?? 1));
         return $this->db->get('pages')->row();
     }
 
