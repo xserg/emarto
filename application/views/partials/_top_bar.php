@@ -53,14 +53,14 @@
                     <?php if ($this->general_settings->multilingual_system == 1 && count($this->languages) > 1): ?>
                         <li class="nav-item dropdown top-menu-dropdown">
                             <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?php echo base_url($this->selected_lang->flag_path); ?>" class="flag"><?php echo html_escape($this->selected_lang->name); ?>&nbsp;<i class="icon-arrow-down"></i>
+                                <i class="fa fa-globe"></i>&nbsp;&nbsp;<?php echo html_escape($this->selected_lang->name); ?>&nbsp;<i class="icon-arrow-down"></i>
                             </a>
                             <?php echo form_open('set-selected-currency-post'); ?>
                             <ul class="dropdown-menu dropdown-menu-lang">
                                 <?php foreach ($this->languages as $language): ?>
                                     <li>
                                         <a href="<?php echo convert_url_by_language($language); ?>" class="dropdown-item <?php echo ($language->id == $this->selected_lang->id) ? 'selected' : ''; ?>">
-                                            <img src="<?php echo base_url($language->flag_path); ?>" class="flag"><?php echo $language->name; ?>
+                                            <?php echo $language->name; ?>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
