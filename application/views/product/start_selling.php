@@ -106,7 +106,7 @@
                                                             <div class="m-b-15">
                                                                 <a class='btn btn-md btn-info btn-file-upload'>
                                                                     <?php echo trans('select_file'); ?>
-                                                                    <input type="file" name="file[]" size="40" id="input_vendor_files" multiple required>
+                                                                    <input type="file" name="file[]" size="40" id="input_vendor_files" multiple>
                                                                 </a>
                                                                 <div id="container_vendor_files"></div>
                                                             </div>
@@ -114,7 +114,7 @@
                                                     <?php endif; ?>
                                                     <div class="form-group">
                                                         <label class="control-label"><?php echo trans("shop_description"); ?></label>
-                                                        <textarea name="about_me" class="form-control form-textarea" placeholder="<?php echo trans("shop_description"); ?>" maxlength="150" required><?= $this->auth_user->about_me; ?></textarea>
+                                                        <textarea name="about_me" class="form-control form-textarea" placeholder="<?php echo trans("shop_description"); ?>" maxlength="150"><?= $this->auth_user->about_me; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
