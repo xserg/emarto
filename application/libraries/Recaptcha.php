@@ -31,11 +31,10 @@ class Recaptcha
     public function __construct()
     {
         $this->_ci = &get_instance();
-
         $settings = get_general_settings();
         $this->_siteKey = $settings->recaptcha_site_key;
         $this->_secretKey = $settings->recaptcha_secret_key;
-        $this->_language = $settings->recaptcha_lang;
+        $this->_language = $this->_ci->selected_lang->short_form ?? $settings->recaptcha_lang;
     }
 
     /**
