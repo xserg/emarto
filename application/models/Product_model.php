@@ -1049,9 +1049,9 @@ class Product_model extends CI_Model
     public function increase_product_pageviews($product)
     {
         if (!empty($product)) {
-            if (!isset($_COOKIE['modesy_product_' . $product->id])) {
+            if (!isset($_COOKIE['emarto_product_' . $product->id])) {
                 //increase hit
-                setcookie("modesy_product_" . $product->id, '1', time() + (86400 * 300), "/");
+                setcookie("emarto_product_" . $product->id, '1', time() + (86400 * 300), "/");
                 $data = array(
                     'pageviews' => $product->pageviews + 1
                 );

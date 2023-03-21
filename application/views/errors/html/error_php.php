@@ -18,7 +18,7 @@ $install_path = $root . "install";
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Modesy</title>
+        <title>Emarto.com</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">
         <style>
             b, br {
@@ -109,7 +109,7 @@ $install_path = $root . "install";
 
     <div class="wrapper">
         <div class="center">
-            <h1 class="title">Modesy</h1>
+            <h1 class="title">Emarto</h1>
             <p class="version">Version 2.1</p>
             <a href="<?php echo $install_path; ?>" class="button">Install</a>
         </div>
