@@ -582,7 +582,8 @@ class Home_controller extends Home_Core_Controller
         $this->form_validation->set_rules('first_name', trans("first_name"), 'min_length[3]|callback_name_format');
         $this->form_validation->set_rules('last_name', trans("last_name"),
           'required|min_length[3]|callback_name_format');
-  
+        
+        $this->form_validation->set_rules('about_me', trans("shop_description"), 'required');
   
   
         if ($this->form_validation->run() === false) {
