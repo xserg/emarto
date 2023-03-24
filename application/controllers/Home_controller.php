@@ -1002,7 +1002,7 @@ class Home_controller extends Home_Core_Controller
 
     public function cookies_warning()
     {
-        setcookie('modesy_cookies_warning', '1', time() + (86400 * 10), "/"); //10 days
+        setcookie('emarto_cookies_warning', '1', time() + (86400 * 10), "/"); //10 days
     }
 
     public function set_default_location()

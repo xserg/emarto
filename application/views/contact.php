@@ -85,8 +85,10 @@
 
                             <?php if ($this->settings->contact_email): ?>
                                 <div class="col-12 contact-item">
+                                    <a href="mailto:<?php echo $this->settings->contact_email; ?>">
                                     <i class="icon-envelope" aria-hidden="true"></i>
-                                    <?php echo html_escape($this->settings->contact_email); ?>
+                                      <?php echo html_escape($this->settings->contact_email); ?>
+                                    </a>
                                 </div>
                             <?php endif; ?>
 
