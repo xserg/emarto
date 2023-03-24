@@ -3575,6 +3575,26 @@ img {
     margin-bottom: 0;
 }
 
+/* purshase protection */
+.product-links {      
+  position: relative;
+  margin-top: 15px;
+}
+
+.purchase-protection-icon {
+  float: left;
+  margin-right: 15px;
+}
+
+.purchase-protection {
+  
+}
+
+.shipping_return_policy {
+    margin-top: 15px;
+    margin-left: 45px;
+}
+
 /*product variation front end*/
 .product-variations {
     margin-bottom: 15px;
@@ -3597,6 +3617,8 @@ img {
     border-radius: 0.125rem;
     border-color: #e4e4e4;
 }
+
+
 
 .custom-control-variation {
     display: inline-block;
