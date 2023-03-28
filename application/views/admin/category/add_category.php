@@ -145,40 +145,5 @@
     </div>
 </div>
 
-<script>
-    function get_subcategories(category_id, data_select_id) {
-        var subcategories = get_subcategories_array(category_id);
-        var date = new Date();
-        //reset subcategories
-        $('.subcategory-select').each(function () {
-            if (parseInt($(this).attr('data-select-id')) > parseInt(data_select_id)) {
-                $(this).remove();
-            }
-        });
-        if (category_id == 0) {
-            return false;
-        }
-        if (subcategories.length > 0) {
-            var new_data_select_id = date.getTime();
-            var select_tag = '<select class="form-control subcategory-select" data-select-id="' + new_data_select_id + '" name="parent_id[]" onchange="get_subcategories(this.value,' + new_data_select_id + ');">' +
-                '<option value=""><?php echo trans('none'); ?></option>';
-            for (i = 0; i < subcategories.length; i++) {
-                select_tag += '<option value="' + subcategories[i].id + '">' + subcategories[i].name + '</option>';
-            }
-            select_tag += '</select>';
-            $('#category_select_container').append(select_tag);
-        }
-    }
-
-    function get_subcategories_array(category_id) {
-        var categories_array = <?php echo get_categories_json($this->selected_lang->id); ?>;
-        var subcategories_array = [];
-        for (i = 0; i < categories_array.length; i++) {
-            if (categories_array[i].parent_id == category_id) {
-                subcategories_array.push(categories_array[i]);
-            }
-        }
-        return subcategories_array;
-    }
-</script>
+<?php $this->load->view('admin/category/_select_category', ['input_name' => 'parent_id[]']); ?>
 
