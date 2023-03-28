@@ -39,11 +39,12 @@
   <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
 </svg>
                                       </div>
+
                                       <div class="purchase-protection">
-                                      <a href="/purchase-protection"><b><?= trans("purchase-protection"); ?></b></a><br>
+                                      <a href="<?php echo generate_url("purchase-protection");?>"><b><?= trans("purchase-protection"); ?></b></a><br>
                                       <?= trans("shop_with_confidence"); ?>
                                       </div>
-                                      <div class="shipping_return_policy"><a class="link-underlined" href="/shipping_return_policy"><?= trans("shipping_return_policy"); ?></a></div>                                    
+                                      <div class="shipping_return_policy"><a class="link-underlined" href="<?php echo generate_url("shipping_return_policy");?>"><?= trans("shipping_return_policy"); ?></a></div>                                    
                                     </div>
                                 </div>
                                 
