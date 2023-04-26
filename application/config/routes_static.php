@@ -137,3 +137,6 @@ $route['close-ticket-post']['POST'] = 'support_controller/close_ticket_post';
 $route['verify-otp']['POST'] = 'profile_controller/verify_otp';
 $route['send-otp']['GET'] = 'profile_controller/send_otp';
 $route['add-black-list-post']['POST'] = 'dashboard_controller/add_black_list_post';
+
+$route['buy_requests']['GET'] = 'buy_controller/buy_requests';
+$route['buy_requests' . '/(:num)']['GET'] = 'buy_controller/refund/$1';

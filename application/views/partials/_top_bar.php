@@ -108,6 +108,11 @@
                                             <?php echo trans("orders"); ?>
                                         </a>
                                     </li>
+                                    <?php if (!is_vendor()): ?>
+                                    <li>
+                                        <a href="<?php echo generate_url("buy_requests"); ?>"><i class="icon-price-tag-o"></i><?php echo trans("buy_requests"); ?></a>
+                                    </li>
+                                    <?php endif; ?>
                                     <?php if (is_bidding_system_active()): ?>
                                         <li>
                                             <a href="<?php echo generate_url("quote_requests"); ?>">

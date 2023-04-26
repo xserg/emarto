@@ -826,5 +826,72 @@ class File_model extends CI_Model
         return $query->result();
     }
     
+    //// BUY images  
+    //upload image
+    public function upload_buy_image($message_id)
+    {
+        //$temp_path = $this->upload_model->upload_temp_image('file');
+        $modesy_images = $this->get_sess_product_images_array();
+        
+        if (!empty($modesy_images)) {
+            foreach ($modesy_images as $modesy_image) {
+                if (!empty($modesy_image)) {
+                    $image_storage = "local";
+                    $directory = $this->upload_model->create_upload_directory('buy');
+                    
+                        //move default image
+                        copy(FCPATH . "uploads/temp/" . $modesy_image->img_default, FCPATH . "uploads/buy/" . $directory . $modesy_image->img_default);
+                        delete_file_from_server("uploads/temp/" . $modesy_image->img_default);
+                        //move big image
+                        copy(FCPATH . "uploads/temp/" . $modesy_image->img_big, FCPATH . "uploads/buy/" . $directory . $modesy_image->img_big);
+                        delete_file_from_server("uploads/temp/" . $modesy_image->img_big);
+                        //move small image
+                        copy(FCPATH . "uploads/temp/" . $modesy_image->img_small, FCPATH . "uploads/buy/" . $directory . $modesy_image->img_small);
+                        delete_file_from_server("uploads/temp/" . $modesy_image->img_small);
+                    
+                        
+                        $data = array(
+                            'image_path' => $directory . $modesy_image->img_default,
+                            'image_path_thumb' => $directory . $modesy_image->img_small,
+                            'storage' => "local",
+                            'user_id' => $this->auth_user->id,
+                            'message_id' => $message_id
+                        );
+                        @$this->db->close();
+                        @$this->db->initialize();
+                        $this->db->insert('buy_images', $data);
+                        $this->upload_model->delete_temp_image($temp_path);
+        
+        
+                }
+            }
+          }
+          $this->unset_sess_product_images_array();
+    }
     
+    //get buy images
+    public function get_buy_images($message_id)
+    {
+        $this->db->where('message_id', $message_id)->order_by('id', 'DESC');
+        $query = $this->db->get('buy_images');
+        return $query->result();
+    }
+    
+    //delete buy image
+    public function delete_buy_images($file_id)
+    {
+        $images = $this->get_buy_images($file_id);
+        
+        foreach ($images as $k => $image) {
+        
+        if (!empty($image)) {
+            
+                delete_file_from_server($image->image_path);
+                delete_file_from_server($image->image_path_thumb);
+          
+            $this->db->where('id', $image->id);
+            $this->db->delete('buy_images');
+        }
+      }
+    }
 }
