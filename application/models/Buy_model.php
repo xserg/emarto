@@ -62,6 +62,7 @@ class Buy_model extends CI_Model
     //get paginated orders
     public function get_buy_requests_paginated($user_id, $per_page, $offset)
     {
+        $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
         $this->db->select('buy_request.*, buy_images.image_path_thumb');
         $this->db->where('buy_request.user_id', clean_number($user_id));
         $this->db->join('buy_images', 'buy_request.id=buy_images.message_id', 'left');
