@@ -8,6 +8,7 @@ class Buy_model extends CI_Model
             'description' => remove_special_characters($this->input->post('description', true)),
             'price' => $this->input->post('price', true),
             'title' => $this->input->post('title', true),
+            'currency' => $this->input->post('currency', true),
             //'category_id' => $this->input->post('category_id', true),,
             
         );
@@ -64,7 +65,9 @@ class Buy_model extends CI_Model
     {
         $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
         $this->db->select('buy_request.*, buy_images.image_path_thumb');
-        $this->db->where('buy_request.user_id', clean_number($user_id));
+        if ($user_id) {
+            $this->db->where('buy_request.user_id', clean_number($user_id));
+        }
         $this->db->join('buy_images', 'buy_request.id=buy_images.message_id', 'left');
         $this->db->group_by('buy_request.id');
         return $this->db->order_by('created_at', 'DESC')->limit($per_page, $offset)->get('buy_request')->result();

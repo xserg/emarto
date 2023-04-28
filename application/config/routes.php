@@ -143,6 +143,11 @@ foreach ($languages as $language) {
         /*refund*/
         $route[$key . getr('refund_requests', $rts)]['GET'] = 'order_controller/refund_requests';
         $route[$key . getr('refund_requests', $rts) . '/(:num)']['GET'] = 'order_controller/refund/$1';
+        //BUY
+        $route[$key . getr('buy_requests', $rts)]['GET'] = 'buy_controller/buy_requests';
+        $route[$key . getr('buy_requests', $rts) . '/(:num)']['GET'] = 'buy_controller/refund/$1';
+
+        
         /*bidding*/
         $route[$key . getr('quote_requests', $rts)]['GET'] = 'bidding_controller/quote_requests';
         /*terms-conditions*/
@@ -335,6 +340,9 @@ $route[getr('admin', $rts) . '/support-ticket/(:num)'] = 'support_admin_controll
 /*refund*/
 $route[getr('admin', $rts) . '/refund-requests'] = 'order_admin_controller/refund_requests';
 $route[getr('admin', $rts) . '/refund-requests/(:num)'] = 'order_admin_controller/refund/$1';
+//BUY
+$route[getr('admin', $rts) . '/buy-requests'] = 'order_admin_controller/buy_requests';
+$route[getr('admin', $rts) . '/buy-requests/(:num)'] = 'order_admin_controller/buy/$1';
 
 /*languages routes*/
 $route[getr('admin', $rts) . '/languages'] = 'language_controller/languages';

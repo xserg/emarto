@@ -356,4 +356,24 @@ class Order_admin_controller extends Admin_Core_Controller
         $this->order_model->approve_decline_refund();
         redirect($this->agent->referrer());
     }
+    
+    //////////////////////// BUY
+    /**
+     * buy Requests
+     */
+    public function buy_requests()
+    {
+        $data['title'] = trans("buy_requests");
+        $data['description'] = trans("buy_requests") . " - " . $this->app_name;
+        $data['keywords'] = trans("buy_requests") . "," . $this->app_name;
+        $data['parent_categories'] = $this->category_model->get_all_parent_categories();
+        
+        $num_rows = $this->buy_model->get_buy_requests_count($this->auth_user->id);
+        $pagination = $this->paginate(generate_url("buy_requests"), $num_rows, 10);
+        $data['refund_requests'] = $this->buy_model->get_buy_requests_paginated(null, $pagination['per_page'], $pagination['offset']);
+        
+        $this->load->view('admin/includes/_header', $data);
+        $this->load->view('admin/buy/buy_requests', $data);
+        $this->load->view('admin/includes/_footer');
+    }
 }

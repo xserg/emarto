@@ -9,7 +9,7 @@ class Buy_controller extends Home_Core_Controller
     }
 
     /**
-     * Refund Requests
+     * buy Requests
      */
     public function buy_requests()
     {
@@ -45,6 +45,7 @@ class Buy_controller extends Home_Core_Controller
         $data['title'] = $data['product']->title;
         $data['description'] = $data['product']->description;
         $data['price'] = $data['product']->price;
+        $data['currency'] = $data['product']->currency;
         //echo '<pre>'; print_r($data);
         //exit;
         
@@ -82,6 +83,7 @@ class Buy_controller extends Home_Core_Controller
         $category_id  = $this->input->post('category_id', true);
         $description  = $this->input->post('description', true);
         $price  = $this->input->post('price', true);
+        $currency = $this->input->post('currency');
         
         $buy_request_id = $this->buy_model->add_buy_request();
         

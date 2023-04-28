@@ -20,12 +20,7 @@
                         <h1 class="page-title m-b-5"><?= trans("buy_requests"); ?></h1>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <button type="button" class="btn btn-info color-white float-right m-b-5" data-toggle="modal" data-target="#modalRefundRequest">
-                            <svg width="18" height="18" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="#fff" class="mds-svg-icon">
-                                <path d="M1600 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"/>
-                            </svg>
-                            <?= trans("submit_buy_request"); ?>
-                        </button>
+                        
                     </div>
                 </div>
             </div>
@@ -104,66 +99,6 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="modalRefundRequest" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content modal-custom modal-refund">
-            <?php echo form_open_multipart('buy_controller/submit_buy_request'); ?>
-            <div class="modal-header">
-                <h5 class="modal-title"><?php echo trans("submit_buy_request"); ?></h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true"><i class="icon-close"></i> </span>
-                </button>
-            </div>
-            <div class="modal-body">
-              <?= trans('buy_message'); ?>
-              <br><br>
-              <div class="form-group">
-                  <label><?php echo trans('category'); ?></label>
-                  <select class="form-control" name="category_id[]" onchange="get_subcategories(this.value, 0);" required>
-                      <option value="0"><?php echo trans('none'); ?></option>
-                      <?php foreach ($parent_categories as $parent_category): ?>
-                          <option value="<?php echo $parent_category->id; ?>"><?php echo category_name($parent_category); ?></option>
-                      <?php endforeach; ?>
-                  </select>
-                  <div id="category_select_container"></div>
-              </div>
-              
-                <?php $this->load->view("buy/_image_upload_box"); ?>
-                <div class="form-group">
-                    <label class="control-label"><?= trans("title"); ?></label>
-                    <input type=text name="title" class="form-control"  >
-                </div>  
-                <div class="form-group">
-                    <label class="control-label"><?= trans("description"); ?></label>
-                    <textarea name="description" class="form-control" aria-hidden="true" ><?= trans('i_am_looking_for'); ?></textarea>
-                </div>                
-                <div class="form-group">
-                    <label class="control-label"><?= trans("price"); ?></label>
-                    <input type=text name="price" class="form-control"  >
-                </div>
-                
-                <div class="form-group">
-                    <label class="control-label"><?= trans("currency"); ?></label>
-                    <select name="currency" class="form-control">
-                      <?php foreach ($this->currencies as $currency):
-                        if ($currency->status == 1):?>
-                            <option  value="<?= $currency->code; ?>"><?= $currency->code; ?>&nbsp;(<?= $currency->symbol; ?>)</option>
-                        <?php endif;
-                      endforeach; ?>
-                    </select>
-                    
-                </div>        
-                        
-                <div class="form-group text-right m-0">
-                    <button type="submit" class="btn btn-md btn-custom"><?= trans("submit"); ?></button>
-                </div>
-            </div>
-            <?php echo form_close(); ?>
-        </div>
-    </div>
-</div>
-<?php $this->load->view('admin/category/_select_category', ['input_name' => 'category_id[]']); ?>
 
 <script>
     var base_url = "<?= base_url(); ?>";

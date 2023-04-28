@@ -205,6 +205,14 @@
                         </a>
                     </li>
                 <?php endif;
+                if (has_permission('refund_requests')):?>
+                    <li class="nav-refund-requests">
+                        <a href="<?= admin_url(); ?>buy-requests">
+                            <i class="fa fa-binoculars"></i>
+                            <span><?php echo trans("buy_requests"); ?></span>
+                        </a>
+                    </li>
+                <?php endif;
                 if (has_permission('products')):?>
                     <li class="header"><?php echo trans("products"); ?></li>
                     <li class="treeview<?php is_admin_nav_active(['products', 'special-offers', 'pending-products', 'hidden-products', 'expired-products', 'drafts', 'deleted-products', 'product-details', 'sold-products']); ?>">
