@@ -119,7 +119,7 @@
               <?= trans('buy_message'); ?>
               <br><br>
               <div class="form-group">
-                  <label><?php echo trans('category'); ?></label>
+                  <label class="control-label"><?php echo trans('category'); ?></label>
                   <select class="form-control" name="category_id[]" onchange="get_subcategories(this.value, 0);" required>
                       <option value="0"><?php echo trans('none'); ?></option>
                       <?php foreach ($parent_categories as $parent_category): ?>
@@ -131,19 +131,36 @@
               
                 <?php $this->load->view("buy/_image_upload_box"); ?>
                 <div class="form-group">
-                    <label class="control-label"><?= trans("title"); ?></label>
+                    <label class="control-label"><?= trans("buy_title"); ?></label>
                     <input type=text name="title" class="form-control"  >
                 </div>  
                 <div class="form-group">
-                    <label class="control-label"><?= trans("description"); ?></label>
-                    <textarea name="description" class="form-control" aria-hidden="true" ><?= trans('i_am_looking_for'); ?></textarea>
-                </div>                
+                    <label class="control-label"><?= trans("buy_description"); ?></label>
+                    <textarea name="description" class="form-control" aria-hidden="true" placeholder="<?= trans('i_am_looking_for'); ?>"></textarea>
+                </div> 
                 <div class="form-group">
-                    <label class="control-label"><?= trans("price"); ?></label>
+                <div class="row">
+                  
+                  <div class="col-sm-4">
+                      <label class="control-label"><?php echo trans('buy_location'); ?></label>
+                      <select id="select_countries" name="country_id" class="select form-control" onchange="get_states(this.value, '<?php echo $map; ?>');">
+                          <option value=""><?php echo trans('country'); ?></option>
+                          <?php foreach ($this->countries as $item):
+                              if (!empty($country_id)): ?>
+                                  <option value="<?php echo $item->id; ?>" <?php echo ($item->id == $country_id) ? 'selected' : ''; ?>><?php echo html_escape($item->name); ?></option>
+                              <?php else: ?>
+                                  <option value="<?php echo $item->id; ?>"><?php echo html_escape($item->name); ?></option>
+                              <?php endif;
+                          endforeach; ?>
+                      </select>
+                  </div>
+                                 
+                <div class="col-sm-4">
+                    <label class="control-label"><?= trans("buy_price"); ?></label>
                     <input type=text name="price" class="form-control"  >
                 </div>
                 
-                <div class="form-group">
+                <div class="col-sm-4 col-custom-field">
                     <label class="control-label"><?= trans("currency"); ?></label>
                     <select name="currency" class="form-control">
                       <?php foreach ($this->currencies as $currency):
@@ -154,7 +171,8 @@
                     </select>
                     
                 </div>        
-                        
+              </div>
+                </div>   
                 <div class="form-group text-right m-0">
                     <button type="submit" class="btn btn-md btn-custom"><?= trans("submit"); ?></button>
                 </div>

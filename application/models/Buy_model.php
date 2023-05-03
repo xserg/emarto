@@ -9,6 +9,7 @@ class Buy_model extends CI_Model
             'price' => $this->input->post('price', true),
             'title' => $this->input->post('title', true),
             'currency' => $this->input->post('currency', true),
+            'country_id' => $this->input->post('country_id', true),
             //'category_id' => $this->input->post('category_id', true),,
             
         );
