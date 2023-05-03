@@ -70,7 +70,7 @@
                                                 <td><?php echo $request->title; ?></td>
                                                 <td><?php echo $request->description; ?></td>
 
-                                                <td><?php echo $request->price ? price_formatted($request->price, $request->currency) : ''; ?></td>
+                                                <td><?php echo $request->price ? $request->price . ' ' . $request->currency : ''; ?></td>
                                                 <td><?php echo formatted_date($request->created_at); ?></td>
                                                 <td>
                                                     <a href="<?php echo generate_url("buy_requests") . "/" . $request->id; ?>" class="btn btn-sm btn-table-info"><?php echo trans("details"); ?></a>
