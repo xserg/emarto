@@ -40,17 +40,23 @@
             <div class="row-custom price">
                 <div id="product_details_price_container" class="d-inline-block">
                     <?php 
-                    //echo $product->price.'<br>';
-                    
-                      echo $product->description;
+                      echo '<b>' . trans("i_am_looking_for") . '</b><br>' . $product->description;
                     //$this->load->view("product/details/_price", ['product' => $product, 'price' => $product->price, 'discount_rate' => $product->discount_rate]); 
-                      
                     ?>
                     <br>
                     
                   <div class="row-custom product-links"> 
                     <div class="shipping_return_policy"> 
-                  <?php echo $product->price ? trans("pay_ammount").': '.price_formatted($product->price, $product->currency) : ''; ?>
+                  <?php 
+                  echo $product->price ? '<b>' . trans("pay_ammount") 
+                  . ': ' . $product->price . ' ' . $product->currency . '<br>' : ''; 
+                  echo trans("buy_location") . ': ';
+                  foreach ($this->countries as $item) {
+                      if (!empty($product->country_id) && $item->id == $product->country_id)
+                            echo html_escape($item->name); 
+                  }
+                  ?>
+                  </b>
                   </div>  
                   </div>  
                     
@@ -59,6 +65,9 @@
                 if ($product->listing_type == 'ordinary_listing' && empty($product->external_link)):
                     $show_ask = false;
                 endif;
+                
+                if ($product->user_id == $user->id)
+                  $show_ask = false;
                 if ($show_ask == true):?>
                     <?php if ($this->auth_check): ?>
                         <button class="btn btn-contact-seller" data-toggle="modal" data-target="#messageModal"><i class="icon-envelope"></i> <?php echo trans("ask_question") ?></button>
