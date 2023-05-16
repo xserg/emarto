@@ -139,40 +139,41 @@
                     <textarea name="description" class="form-control" aria-hidden="true" placeholder="<?= trans('i_am_looking_for'); ?>"></textarea>
                 </div> 
                 <div class="form-group">
-                <div class="row">
-                  
+                  <div class="row">                  
+                    <div class="col-sm-4">
+                        <label class="control-label"><?php echo trans('buy_location'); ?></label>
+                        <select id="select_countries" name="country_id" class="select form-control" onchange="get_states(this.value, '<?php echo $map; ?>');">
+                            <option value=""><?php echo trans('country'); ?></option>
+                            <?php foreach ($this->countries as $item):
+                                if (!empty($country_id)): ?>
+                                    <option value="<?php echo $item->id; ?>" <?php echo ($item->id == $country_id) ? 'selected' : ''; ?>><?php echo html_escape($item->name); ?></option>
+                                <?php else: ?>
+                                    <option value="<?php echo $item->id; ?>"><?php echo html_escape($item->name); ?></option>
+                                <?php endif;
+                            endforeach; ?>
+                        </select>
+                    </div>           
                   <div class="col-sm-4">
-                      <label class="control-label"><?php echo trans('buy_location'); ?></label>
-                      <select id="select_countries" name="country_id" class="select form-control" onchange="get_states(this.value, '<?php echo $map; ?>');">
-                          <option value=""><?php echo trans('country'); ?></option>
-                          <?php foreach ($this->countries as $item):
-                              if (!empty($country_id)): ?>
-                                  <option value="<?php echo $item->id; ?>" <?php echo ($item->id == $country_id) ? 'selected' : ''; ?>><?php echo html_escape($item->name); ?></option>
-                              <?php else: ?>
-                                  <option value="<?php echo $item->id; ?>"><?php echo html_escape($item->name); ?></option>
-                              <?php endif;
-                          endforeach; ?>
-                      </select>
+                      <label class="control-label"><?= trans("buy_price"); ?></label>
+                      <input type=text name="price" class="form-control"  >
                   </div>
-                                 
-                <div class="col-sm-4">
-                    <label class="control-label"><?= trans("buy_price"); ?></label>
-                    <input type=text name="price" class="form-control"  >
+                  <div class="col-sm-4 col-custom-field">
+                      <label class="control-label"><?= trans("currency"); ?></label>
+                      <select name="currency" class="form-control">
+                        <?php foreach ($this->currencies as $currency):
+                          if ($currency->status == 1):?>
+                              <option  value="<?= $currency->code; ?>"><?= $currency->code; ?>&nbsp;(<?= $currency->symbol; ?>)</option>
+                          <?php endif;
+                        endforeach; ?>
+                      </select>                      
+                  </div>        
+                 </div>
+                </div>                
+                <div class="col-sm-12 text-left m-t-15 m-b-15">
+                            <label class="control-label">
+                              <b><?php echo trans("terms_new"); ?></b>                
+                            </label>
                 </div>
-                
-                <div class="col-sm-4 col-custom-field">
-                    <label class="control-label"><?= trans("currency"); ?></label>
-                    <select name="currency" class="form-control">
-                      <?php foreach ($this->currencies as $currency):
-                        if ($currency->status == 1):?>
-                            <option  value="<?= $currency->code; ?>"><?= $currency->code; ?>&nbsp;(<?= $currency->symbol; ?>)</option>
-                        <?php endif;
-                      endforeach; ?>
-                    </select>
-                    
-                </div>        
-              </div>
-                </div>   
                 <div class="form-group text-right m-0">
                     <button type="submit" class="btn btn-md btn-custom"><?= trans("submit"); ?></button>
                 </div>
