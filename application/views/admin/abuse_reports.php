@@ -151,6 +151,24 @@
                                             <a href="javascript:void(0)" class="btn btn-sm btn-default btn-delete" onclick="delete_item('admin_controller/delete_abuse_report_post','<?php echo $item->id; ?>','<?php echo trans("confirm_delete"); ?>');"><i class="fa fa-trash-o"></i></a>
                                         </div>
                                     </td>
+                                  <?php elseif ($item->item_type == "buy_request"):
+                                        $product = get_product($item->item_id); ?>
+                                        <td><?= trans("buy_request"); ?></td>
+                                        <td><?php $user = get_user($item->report_user_id);
+                                            if (!empty($user)):?>
+                                                <a href="<?= generate_profile_url($user->slug); ?>" target="_blank" class="link-black font-600">
+                                                    <?= html_escape($user->username); ?>
+                                                </a>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td style="width: 50%"><?= html_escape($item->description); ?></td>
+                                        <td><?= formatted_date($item->created_at); ?></td>
+                                        <td style="width: 130px;">
+                                            <div class="btn-group btn-group-option">
+                                                <a href="<?= '/buy_requests/'.$item->item_id ?>" class="btn btn-sm btn-default btn-edit" target="_blank"><i class="fa fa-file-text"></i>&nbsp;&nbsp;<?php echo trans("view_content"); ?></a>
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-default btn-delete" onclick="delete_item('admin_controller/delete_abuse_report_post','<?php echo $item->id; ?>','<?php echo trans("confirm_delete"); ?>');"><i class="fa fa-trash-o"></i></a>
+                                            </div>
+                                        </td>    
                                 <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>

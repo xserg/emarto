@@ -35,7 +35,19 @@
                                     
                   
                                 </div>
-                                
+                                <div class="row-custom text-right m-b-10">
+                                    <?php if ($this->auth_check):
+                                        if ($product->user_id != $this->auth_user->id):?>
+                                            <a href="javascript:void(0)" class="text-muted link-abuse-report" data-toggle="modal" data-target="#reportProductModal">
+                                                <?= trans("report_this_ad"); ?>
+                                            </a>
+                                        <?php endif;
+                                    else: ?>
+                                        <a href="javascript:void(0)" class="text-muted link-abuse-report" data-toggle="modal" data-target="#loginModal">
+                                            <?= trans("report_this_ad"); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,12 +117,14 @@
 
 <?php $this->load->view("partials/_modal_send_message", ['subject' => html_escape($title), 'product_id' => $product->id]); ?>
 
-<?php if ($this->auth_check && $product->user_id != $this->auth_user->id): ?>
+<?php //if ($this->auth_check && $product->user_id != $this->auth_user->id): ?>
+<?php if ($this->auth_check ): ?>  
     <div class="modal fade" id="reportProductModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-custom modal-report-abuse">
-                <form id="form_report_product" method="post">
+                <form id="form_report_buy" method="post">
                     <input type="hidden" name="id" value="<?= $product->id; ?>">
+                    <input type="hidden" name="item_type" value="buy_request">
                     <div class="modal-header">
                         <h5 class="modal-title"><?php echo trans("report_this_product"); ?></h5>
                         <button type="button" class="close" data-dismiss="modal">
@@ -119,7 +133,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div id="response_form_report_product" class="col-12"></div>
+                            <div id="response_form_report_buy" class="col-12"></div>
                             <div class="col-12">
                                 <div class="form-group m-0">
                                     <label><?= trans("description"); ?></label>
@@ -140,3 +154,10 @@
 <?php if ($this->general_settings->facebook_comment_status == 1):
     echo $this->general_settings->facebook_comment;
 endif; ?>
+
+<script>
+$("#form_report_buy").submit(function (event) {
+    event.preventDefault();
+    report_abuse("form_report_buy", "buy_request");
+});
+</script>
