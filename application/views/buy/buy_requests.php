@@ -169,13 +169,11 @@
                   </div>        
                  </div>
                 </div>                
-                <div class="col-sm-12 text-left m-t-15 m-b-15">
-                            <label class="control-label">
-                              <b><?php echo trans("terms_new"); ?></b>                
-                            </label>
+                <div>
+                  <b><?php echo trans("terms_buy"); ?></b>                          
                 </div>
                 <div class="form-group text-right m-0">
-                    <button type="submit" class="btn btn-md btn-custom"><?= trans("submit"); ?></button>
+                    <button type="submit" class="btn btn-md btn-custom"><?= trans("submit_buy"); ?></button>
                 </div>
             </div>
             <?php echo form_close(); ?>
