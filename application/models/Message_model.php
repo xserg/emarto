@@ -11,6 +11,7 @@ class Message_model extends CI_Model
             'receiver_id' => $this->input->post('receiver_id', true),
             'subject' => $this->input->post('subject', true),
             'product_id' => $this->input->post('product_id', true),
+            'type' => $this->input->post('type', true),
             'created_at' => date("Y-m-d H:i:s")
         );
         if (empty($data['product_id'])) {

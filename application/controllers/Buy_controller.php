@@ -46,7 +46,9 @@ class Buy_controller extends Home_Core_Controller
         $data['description'] = $data['product']->description;
         $data['price'] = $data['product']->price;
         $data['currency'] = $data['product']->currency;
+        
         $data["user"] = $this->auth_model->get_user_by_slug($data['product']->user_slug);
+        $data['type'] = 'buy';
         //echo '<pre>'; print_r($data);
         //exit;
         

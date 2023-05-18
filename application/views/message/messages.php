@@ -101,9 +101,16 @@
 										<span class="last-seen <?php echo (is_user_online($profile->last_seen)) ? 'last-seen-online' : ''; ?>"> <i class="icon-circle"></i> <?php echo trans("last_seen"); ?>&nbsp;<?php echo time_ago($profile->last_seen); ?></span>
 									</p>
 									<?php if (!empty($conversation->product_id)):
-											$product = get_product($conversation->product_id);
+											if ($conversation->type == 'buy') {
+													$buy = $this->buy_model->get_buy_request($conversation->product_id);
+													//print_r($product);
+													echo '<p class="subject m-0 font-600"><a href="/buy_requests/' . $conversation->product_id 
+													. '" class="link-black link-underlined">' . html_escape($conversation->subject) . '</a></p>';
+											} else {
+													$product = get_product($conversation->product_id);
+											}
 											if (!empty($product)):?>
-													<p class="subject m-0 font-600"><a href="<?= generate_product_url($product); ?>" class="link-black link-underlined"><?= html_escape($conversation->subject); ?></a></p>
+													<p class="subject m-0 font-600"><a href="<?= generate_product_url($product); ?>" class="link-black link-underlined"><?= html_escape($conversation->subject); ?></a></p>							
 											<?php endif;
 									else: ?>
 											<p class="subject m-0 font-600"><?= html_escape($conversation->subject); ?></p>
