@@ -72,11 +72,13 @@
 													<p class="subject"><?php echo html_escape(character_limiter($item->subject, 28, '...')); ?></p>
 												</div>
 											</div>
-										</a>
+										</a>										
+										<!--a href="javascript:void(0)" class="ban-user" onclick='ban_user("<?php //echo $user->username; ?>","<?php //echo trans("add_ban") . '?'; ?>");'><i class="fa fa-user-times"></i></a-->
 										<a href="javascript:void(0)" class="delete-conversation-link" onclick='delete_conversation(<?php echo $item->id; ?>,"<?php echo trans("confirm_message"); ?>");'><i class="icon-trash"></i></a>
 									</div>
 								<?php endif;
 							endforeach; ?>
+						<a href="/dashboard/black_list"><b><?php echo trans("black_list"); ?></b></a>
 						</div>
 					</div>
 				</div>

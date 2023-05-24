@@ -1849,7 +1849,11 @@ class Dashboard_controller extends Home_Core_Controller
      */
     public function black_list()
     {
-        $this->check_vendor_permission();
+        if (!$this->auth_user->id) {
+          redirect('/');
+          exit();
+        }
+        //$this->check_vendor_permission();
         if ($this->general_settings->product_comments != 1) {
             redirect(dashboard_url());
             exit();
@@ -1875,7 +1879,7 @@ class Dashboard_controller extends Home_Core_Controller
      */
     public function add_black_list()
     {
-        $this->check_vendor_permission();
+        //$this->check_vendor_permission();
         $data['title'] = trans("add_black_list");
         $data['description'] = trans("add_shipping_zone") . " - " . $this->app_name;
         $data['keywords'] = trans("add_shipping_zone") . "," . $this->app_name;
@@ -1892,8 +1896,11 @@ class Dashboard_controller extends Home_Core_Controller
      */
     public function add_black_list_post()
     {
-
-        $this->check_vendor_permission();
+      if (!$this->auth_user->id) {
+        redirect('/');
+        exit();
+      }
+        //$this->check_vendor_permission();
         if ($this->black_list_model->add_black_list()) {
             $this->session->set_flashdata('success', trans("msg_added"));
         } else {
@@ -1905,8 +1912,11 @@ class Dashboard_controller extends Home_Core_Controller
     
     public function delete_ban_post()
     {
-      
-        $this->check_vendor_permission();
+      if (!$this->auth_user->id) {
+        redirect('/');
+        exit();
+      }
+        //$this->check_vendor_permission();
         $id = $this->input->post('id', true);
         //echo $id;
         //exit;
