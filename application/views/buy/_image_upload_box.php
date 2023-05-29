@@ -75,7 +75,7 @@ var csfr_cookie_name = "<?= $this->config->item('csrf_cookie_name'); ?>";
             },
             onNewFile: function (id, file) {
               count = $("#files-image li").length;
-              if (count > 3) {
+              if (count > 2) {
                 console.log('error count');
                   $(".error-message-img-upload").html("<?php echo trans('max_file_count'); ?>");
                   return false;
