@@ -52,7 +52,21 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                            <label><?php echo trans('seller'); ?></label>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 col-option">
+                            <input type="radio" name="seller" value="1" id="status_1" class="square-purple" <?php echo ($country->seller == 1) ? 'checked' : ''; ?>>
+                            <label for="status_1" class="option-label"><?php echo trans('active'); ?></label>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 col-option">
+                            <input type="radio" name="seller" value="0" id="status_2" class="square-purple" <?php echo ($country->seller != 1) ? 'checked' : ''; ?>>
+                            <label for="status_2" class="option-label"><?php echo trans('inactive'); ?></label>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 

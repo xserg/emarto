@@ -22,7 +22,8 @@ class Location_model extends CI_Model
             'name' => $this->input->post('name', true),
             'name_rus' => $this->input->post('name_rus', true),
             'continent_code' => $this->input->post('continent_code', true),
-            'status' => $this->input->post('status', true)
+            'status' => $this->input->post('status', true),
+            'seller' => $this->input->post('seller', true)
         );
 
         $this->db->where('id', $id);

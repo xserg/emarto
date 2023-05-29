@@ -78,13 +78,18 @@
 
                                                     <div class="form-group">
                                                         <label class="control-label"><?php echo trans('location'); ?></label>
-                                                        <?php 
+                                                        <?php
+                                                        $countries_f = []; 
+                                                        $onlyCountries = '';
                                                         foreach ($this->countries as $country) {
-                                                           if ($country->id == 181) {
-                                                              $this->countries = [$country];
-                                                              break;
+                                                           if ($country->seller == 1) {
+                                                              $countries_f[] = $country;
+                                                              $onlyCountries .= ($onlyCountries ? '","' : '"').$country->iso;
                                                            }
-                                                        }                              
+                                                        }
+                                                        $onlyCountries .= '"';
+                                                        echo $onlyCountries;
+                                                        $this->countries = $countries_f;                              
                                                         $this->load->view(
                                                           "partials/_location", 
                                                           ['countries' => $this->countries, 
@@ -160,7 +165,7 @@
   var iti = window.intlTelInput(input, {
     //autoHideDialCode: true,
     nationalMode: true,
-    onlyCountries: ['ru'],
+    onlyCountries: [<?php echo $onlyCountries; ?>],
     placeholderNumberType: "MOBILE",
     // preferredCountries: ['cn', 'jp'],
     initialCountry: "ru",

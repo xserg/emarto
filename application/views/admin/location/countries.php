@@ -56,6 +56,7 @@
                             <th><?php echo trans('name'); ?></th>
                             <th><?php echo trans('name'); ?></th>
                             <th><?php echo trans('status'); ?></th>
+                              <th><?php echo trans('seller'); ?></th>
                             <th class="max-width-120"><?php echo trans('options'); ?></th>
                         </tr>
                         </thead>
@@ -68,6 +69,13 @@
                                 <td><?php echo html_escape($item->name_rus); ?></td>
                                 <td>
                                     <?php if ($item->status == 1): ?>
+                                        <label class="label label-success"><?php echo trans("active"); ?></label>
+                                    <?php else: ?>
+                                        <label class="label label-danger"><?php echo trans("inactive"); ?></label>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if ($item->seller == 1): ?>
                                         <label class="label label-success"><?php echo trans("active"); ?></label>
                                     <?php else: ?>
                                         <label class="label label-danger"><?php echo trans("inactive"); ?></label>
