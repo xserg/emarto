@@ -1902,7 +1902,7 @@ class Dashboard_controller extends Home_Core_Controller
       }
         //$this->check_vendor_permission();
         if ($this->black_list_model->add_black_list()) {
-            $this->session->set_flashdata('success', trans("msg_added"));
+            $this->session->set_flashdata('success', trans("blacklist_added"));
         } else {
             $this->session->set_flashdata('error', trans("msg_error"));
         }
