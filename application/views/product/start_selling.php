@@ -88,7 +88,6 @@
                                                            }
                                                         }
                                                         $onlyCountries .= '"';
-                                                        echo $onlyCountries;
                                                         $this->countries = $countries_f;                              
                                                         $this->load->view(
                                                           "partials/_location", 
