@@ -23,6 +23,8 @@
                             <th width="20"><?php echo trans("id"); ?></th>
                             <th><?php echo trans("user"); ?></th>
                             <th><?php echo trans("email"); ?></th>
+                            <th><?php echo trans("phone"); ?></th>
+                            <th><?php echo trans("location"); ?></th>
                             <th><?php echo trans("status"); ?></th>
                             <th><?php echo str_replace(":", "", trans("last_seen")); ?></th>
                             <th><?php echo trans("date"); ?></th>
@@ -48,6 +50,14 @@
                                     <?php else: ?>
                                         <small class="text-danger">(<?php echo trans("unconfirmed"); ?>)</small>
                                     <?php endif; ?>
+                                </td>
+                                <td><?php echo html_escape($user->phone_number);?></td>
+                                <td>
+                                  <?php 
+                                  if ( $user->country_id && $key = array_search($user->country_id, array_column($this->countries, 'id'))) {
+                                      echo $this->countries[$key]->name;
+                                  }
+                                  ?>
                                 </td>
                                 <td>
                                     <?php if ($user->banned == 0): ?>
