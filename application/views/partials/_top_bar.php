@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-6 col-left">
                 <?php if (!empty($this->menu_links)): ?>
+                    <img src="/assets/img/shop.svg" style="float: left; margin-right: 7px; margin-top: 7px;">
                     <ul class="navbar-nav">
                         <?php if (!empty($this->menu_links)):
                             foreach ($this->menu_links as $menu_link):
@@ -28,7 +29,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16" fill="#888888" class="mds-svg-icon">
                                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                                 </svg>
-                                <?= !empty($this->default_location_input) ? $this->default_location_input : trans("location"); ?>
+                                <?= !empty($this->default_location_input) ? $this->default_location_input : trans("deliver_to"); ?>
                             </a>
                         </li>
                     <?php endif; ?>
