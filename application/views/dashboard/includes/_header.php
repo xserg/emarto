@@ -119,8 +119,9 @@
                         <p><?= trans("hi") . ", " . get_shop_name($this->auth_user); ?></p>
                     </div>
                 </div>
+                <ul class="sidebar-menu" data-widget="tree">
                 <?php if (is_vendor()): ?>
-                    <ul class="sidebar-menu" data-widget="tree">
+                    
                         <li class="header"><?php echo trans("navigation"); ?></li>
                         <li class="nav-home">
                             <a href="<?php echo dashboard_url(); ?>">
@@ -268,6 +269,7 @@
                                 </a>
                             </li>
                         <?php endif; ?>
+                        <?php endif; ?>  
                         <li class="nav-reviews">
                             <a href="<?= generate_dash_url("black_list"); ?>">
                                 <i class="fa fa-user-times"></i>
@@ -276,7 +278,7 @@
                             </a>
                         </li>
                     </ul>
-                <?php endif; ?>
+              
             </div>
         </section>
     </aside>
