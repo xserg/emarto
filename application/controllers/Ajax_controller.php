@@ -522,9 +522,16 @@ class Ajax_controller extends Home_Core_Controller
         $data = array(
             'message' => "<p class='text-danger'>" . trans("msg_error") . "</p>"
         );
-        if ($this->review_model->report_abuse()) {
+        $ret = $this->review_model->report_abuse();
+        
+        if ($ret == 'error_duplicate') {
+            $data['message'] = "<p class='text-danger'>" . trans("msg_error_duplicate") . "</p>";
+        } 
+        
+        if ($ret == 'success') {
             $data['message'] = "<p class='text-success'>" . trans("abuse_report_msg") . "</p>";
         }
+        
         echo json_encode($data);
     }
 

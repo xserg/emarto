@@ -237,7 +237,17 @@ class Review_model extends CI_Model
         if (empty($data['item_id'])) {
             $data['item_id'] = 0;
         }
-        return $this->db->insert('abuse_reports', $data);
+        
+        $this->db->where('item_type', $data['item_type']);
+        $this->db->where('item_id', $data['item_id']);
+        $this->db->where('report_user_id', $data['report_user_id']);
+        $query = $this->db->get('abuse_reports');
+        if (!empty($query->row()) ) {
+            return 'error_duplicate';
+        }
+        
+        $this->db->insert('abuse_reports', $data);
+        return 'success';
     }
 
     //get paginated abuse reports
