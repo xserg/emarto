@@ -39,6 +39,8 @@
                                             <a href="<?= generate_profile_url($user->slug); ?>" target="_blank" class="link-black font-600">
                                                 <?= html_escape($user->username); ?>
                                             </a>
+                                            
+                                            <?= html_escape($user->email); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td style="width: 50%"><?= html_escape($item->description); ?></td>
@@ -57,6 +59,7 @@
                                             <a href="<?= generate_profile_url($user->slug); ?>" target="_blank" class="link-black font-600">
                                                 <?= html_escape($user->username); ?>
                                             </a>
+                                            <?= html_escape($user->email); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td style="width: 50%"><?= html_escape($item->description); ?></td>
@@ -159,6 +162,8 @@
                                                 <a href="<?= generate_profile_url($user->slug); ?>" target="_blank" class="link-black font-600">
                                                     <?= html_escape($user->username); ?>
                                                 </a>
+                                                
+                                                <?= html_escape($user->email); ?>
                                             <?php endif; ?>
                                         </td>
                                         <td style="width: 50%"><?= html_escape($item->description); ?></td>
