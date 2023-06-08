@@ -3,8 +3,10 @@
     <div class="container">
         <div class="row">
             <div class="col-6 col-left">
-                <?php if (!empty($this->menu_links)): ?>
-                    <img src="/assets/img/shop.svg" style="float: left; margin-right: 7px; margin-top: 7px;">
+                <?php 
+                $shop_link = generate_url('shops');
+                if (!empty($this->menu_links)): ?>
+                    <a href="<?= $shop_link; ?>"><img src="/assets/img/shop.svg" style="float: left; margin-right: 7px; margin-top: 7px;"></a>
                     <ul class="navbar-nav">
                         <?php if (!empty($this->menu_links)):
                             foreach ($this->menu_links as $menu_link):
@@ -111,7 +113,9 @@
                                     </li>
                                     <?php if (!is_vendor()): ?>
                                     <li>
-                                        <a href="<?php echo generate_url("buy_requests"); ?>"><i class="fa fa-binoculars"></i><?php echo trans("buy_requests"); ?></a>
+                                        <a href="<?php echo generate_url("buy_requests"); ?>">
+                                          <i class="fa fa-binoculars"></i>
+                                          <?php echo trans("buy_requests"); ?></a>
                                     </li>
                                     <?php endif; ?>
                                     <?php if (is_bidding_system_active()): ?>
