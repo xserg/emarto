@@ -31,5 +31,10 @@
         <li class="nav-item">
             <a class="nav-link <?php echo ($active_tab == 'reviews') ? 'active' : ''; ?>" href="<?php echo generate_url("reviews") . "/" . $user->slug; ?>"><?php echo trans("reviews"); ?><span class="count">(<?php echo $user_rating->count; ?>)</span></a>
         </li>
-    <?php endif; ?>
+    <?php endif; 
+    if ( !is_vendor($user) ): ?>
+    <li class="nav-item">
+        <a class="nav-link <?php echo ($active_tab == 'buy_requests') ? 'active' : ''; ?>" href="<?php echo generate_url("buy_requests"); ?>"><?php echo trans("buy_requests"); ?></a>
+    </li>
+  <?php endif; ?>
 </ul>
