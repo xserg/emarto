@@ -81,4 +81,11 @@ class Buy_model extends CI_Model
             $this->db->delete('buy_request');
   
     }
+    
+    //get user count
+    public function get_user_buy_count($user_id)
+    {
+        $this->db->where('user_id', clean_number($user_id));
+        return $this->db->count_all_results('buy_request');
+    }
 }

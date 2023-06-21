@@ -34,7 +34,7 @@
     <?php endif; 
     if ( !is_vendor($user) ): ?>
     <li class="nav-item">
-        <a class="nav-link <?php echo ($active_tab == 'buy_requests') ? 'active' : ''; ?>" href="<?php echo generate_url("buy_requests"); ?>"><?php echo trans("buy_requests"); ?></a>
+        <a class="nav-link <?php echo ($active_tab == 'buy_requests') ? 'active' : ''; ?>" href="<?php echo generate_url("buy_requests"); ?>"><?php echo trans("buy_requests"); ?><span class="count">(<?php $ci =& get_instance(); echo $ci->buy_model->get_user_buy_count($user->id); ?>)</span></a>
     </li>
   <?php endif; ?>
 </ul>
