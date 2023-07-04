@@ -24,5 +24,11 @@
                 <span><?php echo trans("change_password"); ?></span>
             </a>
         </li>
+        
+        <li class="nav-item <?php echo ($active_tab == 'cancel_account') ? 'active' : ''; ?>">
+            <a class="nav-link" href="<?php echo generate_url("settings", "cancel_account"); ?>">
+                <span><?php echo trans("cancel_account"); ?></span>
+            </a>
+        </li>        
     </ul>
 </div>

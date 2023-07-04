@@ -569,4 +569,29 @@ class Membership_controller extends Admin_Core_Controller
         }
         $this->session->set_flashdata('error', trans("msg_error"));
     }
+    
+    public function cancel_account()
+    {
+        $data['title'] = trans("cancel_account");
+        $data['page_url'] = admin_url() . "cancel_account";
+
+        $pagination = $this->paginate($data['page_url'], $this->auth_model->get_users_count_by_role('member'));
+        
+        $this->db->select('users.*, cancel_account.status cancel_status, message');
+        $this->db->join('users', 'users.id = cancel_account.user_id');
+        $this->db->order_by('cancel_account.created_at', 'DESC')
+        ->limit(clean_number($pagination['per_page']), clean_number($pagination['offset']));
+        
+        $data['users'] = $this->db->get('cancel_account')->result();
+          
+        //echo $this->db->last_query();
+        //print_r($data);
+        //$data['users'] = $this->auth_model->get_paginated_filtered_users('member', $pagination['per_page'], $pagination['offset']);
+        $data['roles'] = $this->membership_model->get_roles();
+
+        $this->load->view('admin/includes/_header', $data);
+        $this->load->view('admin/membership/cancel-account');
+        $this->load->view('admin/includes/_footer');
+
+    }
 }

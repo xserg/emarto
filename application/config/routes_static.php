@@ -100,6 +100,9 @@ $route['get-sub-variation-options']['POST'] = 'ajax_controller/get_sub_variation
 //profile
 $route['follow-unfollow-user-post']['POST'] = 'profile_controller/follow_unfollow_user';
 $route['change-password-post']['POST'] = 'profile_controller/change_password_post';
+
+$route['cancel-account-post']['POST'] = 'profile_controller/cancel_account_post';
+
 $route['add-shipping-address-post']['POST'] = 'profile_controller/add_shipping_address_post';
 $route['edit-shipping-address-post']['POST'] = 'profile_controller/edit_shipping_address_post';
 

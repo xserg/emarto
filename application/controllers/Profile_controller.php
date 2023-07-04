@@ -558,4 +558,55 @@ class Profile_controller extends Home_Core_Controller
       echo json_encode(['ok']);
       exit;
     }
+    
+    public function cancel_account()
+    {
+        //check user
+        if (!$this->auth_check) {
+            redirect(lang_base_url());
+        }
+
+        $data['title'] = trans("cancel_account");
+        $data['description'] = trans("cancel_account") . " - " . $this->app_name;
+        $data['keywords'] = trans("cancel_account") . "," . $this->app_name;
+        $data["user"] = $this->auth_user;
+        $data['user_session'] = get_usession();
+        if (empty($data["user"])) {
+            redirect(lang_base_url());
+        }
+        $data["active_tab"] = "cancel_account";
+
+        $this->load->view('partials/_header', $data);
+        $this->load->view('settings/cancel_account', $data);
+        $this->load->view('partials/_footer');
+    }
+    
+    public function cancel_account_post()
+    {
+        //check user
+        if (!$this->auth_check) {
+            redirect(lang_base_url());
+        }
+
+        //echo "cancel_account_post11155";
+        
+        
+        $data['user_id'] = $this->auth_user->id;  
+        $data['message'] = $_POST['message'];
+        $data["created_at"] = date('Y-m-d H:i:s');
+        
+        //print_r($data);
+        //echo $this->db->insert('cancel_account', $data);
+        //return;
+        
+            if ($this->db->insert('cancel_account', $data)) {
+                $this->session->set_flashdata('success', trans("msg_success"));
+                redirect($this->agent->referrer());
+            } else {
+                $this->session->set_flashdata('error', trans("msg_error"));
+                redirect($this->agent->referrer());
+            }
+            
+    }
+
 }

@@ -361,6 +361,7 @@
                             <li class="nav-administrators"><a href="<?php echo admin_url(); ?>administrators"> <?php echo trans("administrators"); ?></a></li>
                             <li class="nav-vendors"><a href="<?php echo admin_url(); ?>vendors"> <?php echo trans("vendors"); ?></a></li>
                             <li class="nav-members"><a href="<?php echo admin_url(); ?>members"> <?php echo trans("members"); ?></a></li>
+                            <li class="nav-members"><a href="<?php echo admin_url(); ?>cancel-account"> <?php echo trans("cancel_account"); ?></a></li>
                         </ul>
                     </li>
                     <li class="nav-roles-permissions">

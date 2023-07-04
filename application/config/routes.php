@@ -98,6 +98,8 @@ foreach ($languages as $language) {
         $route[$key . getr('settings', $rts) . '/' . getr('social_media', $rts)]['GET'] = 'profile_controller/social_media';
         $route[$key . getr('settings', $rts) . '/' . getr('change_password', $rts)]['GET'] = 'profile_controller/change_password';
         $route[$key . getr('settings', $rts) . '/' . getr('shipping_address', $rts)]['GET'] = 'profile_controller/shipping_address';
+        
+        $route[$key . getr('settings', $rts) . '/' . getr('cancel_account', $rts)]['GET'] = 'profile_controller/cancel_account';
         $route[$key . getr('members', $rts)]['GET'] = 'home_controller/members';
         /*product*/
         $route[$key . getr('select_membership_plan', $rts)]['GET'] = 'home_controller/renew_membership_plan';
@@ -312,6 +314,8 @@ $route[getr('admin', $rts) . '/update-city/(:num)'] = 'admin_controller/update_c
 /*users routes*/
 $route[getr('admin', $rts) . '/members'] = 'membership_controller/members';
 $route[getr('admin', $rts) . '/vendors'] = 'membership_controller/vendors';
+$route[getr('admin', $rts) . '/cancel-account'] = 'membership_controller/cancel_account';
+
 $route[getr('admin', $rts) . '/administrators'] = 'membership_controller/administrators';
 $route[getr('admin', $rts) . '/shop-opening-requests'] = 'membership_controller/shop_opening_requests';
 $route[getr('admin', $rts) . '/add-user'] = 'membership_controller/add_user';
