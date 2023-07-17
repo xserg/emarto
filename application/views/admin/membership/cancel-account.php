@@ -83,7 +83,11 @@
                                             <li>      
                                                <a href="javascript:void(0)" onclick="cancel_approve_user(<?php echo $user->cancel_id; ?>, 1);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('pending'); ?></a>
                                             </li>
+
                                             <?php endif; ?>
+                                            <li>      
+                                               <a href="javascript:void(0)" onclick="cancel_approve_user(<?php echo $user->cancel_id; ?>, 3);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('delete'); ?></a>
+                                            </li>
                                             <li>
                                                 <a href="<?php echo admin_url(); ?>edit-user/<?php echo $user->id; ?>"><i class="fa fa-edit option-icon"></i><?php echo trans('edit_user'); ?></a>
                                             </li>
