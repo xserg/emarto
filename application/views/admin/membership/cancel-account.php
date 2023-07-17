@@ -60,10 +60,12 @@
                                   ?>
                                 </td>
                                 <td>
-                                    <?php if ($user->banned == 0): ?>
+                                    <?php if ($user->cancel_status == 0): ?>
                                         <label class="label label-success"><?php echo trans('active'); ?></label>
-                                    <?php else: ?>
-                                        <label class="label label-danger"><?php echo trans('banned'); ?></label>
+                                    <?php elseif ($user->cancel_status == 1): ?>
+                                        <label class="label label-danger"><?php echo trans('pending'); ?></label>
+                                    <?php elseif ($user->cancel_status == 2): ?>
+                                        <label class="label label-danger"><?php echo trans('approved'); ?></label>    
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo $user->message; //echo time_ago($user->last_seen); ?></td>
@@ -74,13 +76,18 @@
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu options-dropdown">
-                                        
+                                            <li>
+                                                <a href="javascript:void(0)" onclick="delete_item('membership_controller/delete_user_post','<?php echo $user->id; ?>','<?php echo trans("confirm_user"); ?>');"><i class="fa fa-trash option-icon"></i><?php echo trans('approve'); ?></a>
+                                            </li>
+                                            <?php if ($user->status == 0): ?>
+                                            <li>      
+                                               <a href="javascript:void(0)" onclick="cancel_approve_user(<?php echo $user->cancel_id; ?>, 1);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('pending'); ?></a>
+                                            </li>
+                                            <?php endif; ?>
                                             <li>
                                                 <a href="<?php echo admin_url(); ?>edit-user/<?php echo $user->id; ?>"><i class="fa fa-edit option-icon"></i><?php echo trans('edit_user'); ?></a>
                                             </li>
-                                            <!--li>
-                                                <a href="javascript:void(0)" onclick="delete_item('membership_controller/delete_user_post','<?php echo $user->id; ?>','<?php echo trans("confirm_user"); ?>');"><i class="fa fa-trash option-icon"></i><?php echo trans('delete'); ?></a>
-                                            </li-->
+                                          
                                         </ul>
                                     </div>
                                 </td>
@@ -136,3 +143,22 @@
         </div>
     <?php endforeach;
 endif; ?>
+
+<script>
+//cancel account remove user ban
+function cancel_approve_user(id, status) {
+    var data = {
+        'id': id,
+        'status': status
+    };
+    data[csfr_token_name] = $.cookie(csfr_cookie_name);
+    $.ajax({
+        type: "POST",
+        url: base_url + "membership_controller/cancel_approve_user",
+        data: data,
+        success: function (response) {
+            location.reload();
+        }
+    });
+};
+</script>

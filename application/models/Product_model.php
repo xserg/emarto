@@ -303,7 +303,8 @@ class Product_model extends CI_Model
         } else {
             $select .= ", 0 AS is_in_wishlist";
         }
-
+        //$select .= ",cancel_account.status as cancel_status";
+        
         $status = ($type == 'draft' || $type == 'pending') ? 0 : 1;
         $visibility = ($type == 'hidden') ? 0 : 1;
         $is_sold = ($type == 'sold') ? 1 : 0;
@@ -326,6 +327,17 @@ class Product_model extends CI_Model
         if ($type == 'wishlist') {
             $this->db->join('wishlist', 'products.id = wishlist.product_id');
         }
+          
+        if ($this->auth_user->id) {
+            //$this->db->where('products.user_id != '.$this->auth_user->id);
+            $this->db->join('cancel_account', 'products.user_id = cancel_account.user_id AND cancel_account.user_id != '.$this->auth_user->id, 'left');
+            
+        } else {
+            $this->db->join('cancel_account', 'products.user_id = cancel_account.user_id', 'left');
+        }
+        
+        $this->db->where('cancel_account.status', null);
+        
         $this->db->where('users.banned', 0);
         $this->db->where('products.status', $status);
         $this->db->where('products.visibility', $visibility);

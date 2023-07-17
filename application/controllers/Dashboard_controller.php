@@ -52,6 +52,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function add_product()
     {
         $this->check_vendor_permission();
+        $this->is_cancel_account();
         $data['title'] = trans("add_product");
         $data['description'] = trans("add_product") . " - " . $this->app_name;
         $data['keywords'] = trans("add_product") . "," . $this->app_name;
@@ -73,6 +74,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function add_product_post()
     {
         $this->check_vendor_permission();
+        $this->is_cancel_account();
         if (!$this->membership_model->is_allowed_adding_product()) {
             $this->session->set_flashdata('error', trans("msg_plan_expired"));
             redirect($this->agent->referrer());
@@ -107,6 +109,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function edit_product($id)
     {
         $this->check_vendor_permission(true);
+        $this->is_cancel_account();
         $data["product"] = $this->product_admin_model->get_product($id);
         if (empty($data["product"])) {
             redirect($this->agent->referrer());
@@ -144,6 +147,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function edit_product_post()
     {
         $this->check_vendor_permission(true);
+        $this->is_cancel_account();
         //product id
         $product_id = $this->input->post('id', true);
         //user id
@@ -195,6 +199,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function edit_product_details($id)
     {
         $this->check_vendor_permission(true);
+        $this->is_cancel_account();
         $data['product'] = $this->product_admin_model->get_product($id);
         if (empty($data['product'])) {
             redirect($this->agent->referrer());
@@ -248,6 +253,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function edit_product_details_post()
     {
         $this->check_vendor_permission(true);
+        $this->is_cancel_account();
         $product_id = $this->input->post('id', true);
         $product = $this->product_admin_model->get_product($product_id);
         if (empty($product)) {
@@ -458,6 +464,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function delete_product()
     {
         $this->check_vendor_permission();
+        $this->is_cancel_account();
         $id = $this->input->post('id', true);
         //user id
         $user_id = 0;
@@ -563,6 +570,7 @@ class Dashboard_controller extends Home_Core_Controller
     public function bulk_product_upload()
     {
         $this->check_vendor_permission();
+        $this->is_cancel_account();
         $data['title'] = trans("bulk_product_upload");
         $view = !$this->membership_model->is_allowed_adding_product() ? 'plan_expired' : 'bulk_product_upload';
         $data['admin_settings'] = $this->product_admin_model->get_admin_settings();
@@ -1921,5 +1929,18 @@ class Dashboard_controller extends Home_Core_Controller
         //echo $id;
         //exit;
         $this->black_list_model->delete_ban($id);
+    }
+    
+    public function is_cancel_account ()
+    {
+        $this->db->where('user_id', $this->auth_user->id);
+        $res = $this->db->get('cancel_account')->row();
+        if ($res) {
+            $this->session->set_flashdata('error', trans("cancel_alert"));
+            redirect($this->agent->referrer());
+            exit();
+            redirect('/dashboard');
+        }
+        return;
     }
 }

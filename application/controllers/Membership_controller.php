@@ -577,7 +577,7 @@ class Membership_controller extends Admin_Core_Controller
 
         $pagination = $this->paginate($data['page_url'], $this->auth_model->get_users_count_by_role('member'));
         
-        $this->db->select('users.*, cancel_account.status cancel_status, message');
+        $this->db->select('users.*, cancel_account.id cancel_id, cancel_account.status cancel_status, message');
         $this->db->join('users', 'users.id = cancel_account.user_id');
         $this->db->order_by('cancel_account.created_at', 'DESC')
         ->limit(clean_number($pagination['per_page']), clean_number($pagination['offset']));
@@ -593,5 +593,23 @@ class Membership_controller extends Admin_Core_Controller
         $this->load->view('admin/membership/cancel-account');
         $this->load->view('admin/includes/_footer');
 
+    }
+    
+    /**
+     * Ban or Remove User Ban
+     */
+    public function cancel_approve_user()
+    {
+        $id = $this->input->post('id', true);
+        $status = $this->input->post('status', true);
+        //$cancel_account = $this->db->select('*')->where('id', $id)->get('cancel_account')->row();
+        //$cancel_account->status = $status;
+        //$res = $cancel_account->update();
+        $this->db->where('id', $id);
+        if ($this->db->update('cancel_account', ['status' => $status])) {
+            $this->session->set_flashdata('success', trans("msg_updated"));
+        } else {
+            $this->session->set_flashdata('error', trans("msg_error"));
+        }
     }
 }

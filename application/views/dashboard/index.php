@@ -2,7 +2,7 @@
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/chart.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/analyser.js"></script>
-
+<?php $this->load->view('dashboard/includes/_messages'); ?>
 <div class="row m-b-30">
     <div class="col-sm-12">
         <div class="small-boxes-dashboard">
