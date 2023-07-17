@@ -607,7 +607,7 @@ class Profile_controller extends Home_Core_Controller
                 //$this->email_model->send_email_activation($user_id);
                 if (!empty($user->email)) {
                     $data = array(
-                        'subject' => trans('cancel_request'),
+                        'subject' => trans('cancel_account'),
                         'message' => trans('cancel_request_post') . '<br>' . $data['message'],
                         'to' => $user->email,
                         'template_path' => "email/email_newsletter",
