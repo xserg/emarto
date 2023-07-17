@@ -595,12 +595,26 @@ class Profile_controller extends Home_Core_Controller
         $data['message'] = $_POST['message'];
         $data["created_at"] = date('Y-m-d H:i:s');
         
+        $user = $this->auth_model->get_user($this->auth_user->id);
         //print_r($data);
-        //echo $this->db->insert('cancel_account', $data);
+        //echo $user->email;
         //return;
         
             if ($this->db->insert('cancel_account', $data)) {
-                $this->session->set_flashdata('success', trans("msg_success"));
+                $this->session->set_flashdata('success', trans("msg_contact_success"));
+                
+                $this->load->model("email_model");
+                //$this->email_model->send_email_activation($user_id);
+                if (!empty($user->email)) {
+                    $data = array(
+                        'subject' => trans('cancel_request'),
+                        'message' => trans('cancel_request_post') . '<br>' . $data['message'],
+                        'to' => $user->email,
+                        'template_path' => "email/email_newsletter",
+                    );
+                    $this->email_model->send_email($data);
+                }
+                
                 redirect($this->agent->referrer());
             } else {
                 $this->session->set_flashdata('error', trans("msg_error"));
