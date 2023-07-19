@@ -148,7 +148,7 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label class="control-label"><?php echo trans("title"); ?></label>
-                                    <input type="text" name="title_<?= $language->id; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?>" 
+                                    <input type="text" name="title_<?= $language->id; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (80 max)" 
                                     <?= $this->selected_lang->id == $language->id ? 'required id="from-text" ' : 'id="to-text_'.$language->id.'"'; ?> maxlength="80" data-lang=<?= $language->short_form ?>>
                                 </div>
                                 <div class="form-group">
