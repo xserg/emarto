@@ -95,7 +95,7 @@ $this->session->unset_userdata('mds_send_email_data'); ?>
                 "searchreplace visualblocks code codesample fullscreen",
                 "insertdatetime media table paste imagetools"
             ],
-            toolbar: 'fullscreen code preview | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | numlist bullist | forecolor backcolor removeformat | table image media link | outdent indent superscript subscript',
+            toolbar: 'fullscreen code preview | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | numlist bullist | forecolor backcolor removeformat | table image media | outdent indent superscript subscript',
             content_css: ['<?php echo base_url(); ?>assets/vendor/tinymce/editor_content.css'],
         });
         tinymce.DOM.loadCSS('<?php echo base_url(); ?>assets/vendor/tinymce/editor_ui.css');
