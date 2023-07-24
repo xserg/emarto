@@ -743,15 +743,25 @@ class Auth_model extends CI_Model
             $data = array();
             if ($user->banned == 0) {
                 $data['banned'] = 1;
+                $email_data['subject'] = trans('ban_account');
+                $email_data['message'] = trans('ban_account');
             }
             if ($user->banned == 1) {
                 $data['banned'] = 0;
+                $email_data['subject'] = trans('unban_account');
+                $email_data['message'] = trans('unban_account');
             }
-
             $this->db->where('id', $id);
-            return $this->db->update('users', $data);
+            $res = $this->db->update('users', $data);            
+            if ($res) {
+            // Email
+              $this->load->model("email_model");
+              $email_data['to'] = $user->email;
+              $email_data['template_path'] = "email/email_newsletter";  
+              $this->email_model->send_email($email_data);
+            }
+            return $res;
         }
-
         return false;
     }
     
