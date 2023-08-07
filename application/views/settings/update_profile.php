@@ -68,11 +68,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label"><?php echo trans("slug"); ?></label>
-                            <input type="text" name="slug" class="form-control form-input" value="<?php echo html_escape($user->slug); ?>" placeholder="<?php echo trans("slug"); ?>" maxlength="200" required>
-                        </div>
-
-                        <div class="form-group">
                             <label class="control-label"><?php echo trans("first_name"); ?></label>
                             <input type="text" name="first_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->first_name); ?>" placeholder="<?php echo trans("first_name"); ?>" maxlength="250" required>
                         </div>

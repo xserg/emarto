@@ -257,7 +257,7 @@ class Profile_controller extends Home_Core_Controller
 
             $data = array(
                 'username' => $this->input->post('username', true),
-                'slug' => str_slug($this->input->post('slug', true)),
+                //'slug' => str_slug($this->input->post('slug', true)),
                 'email' => $this->input->post('email', true),
                 'first_name' => $this->input->post('first_name', true),
                 'last_name' => $this->input->post('last_name', true),
