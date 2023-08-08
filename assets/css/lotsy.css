@@ -10550,3 +10550,25 @@ form select.error {
    background-color: transparent !important;
    
 }
+
+.img-table {
+    float: left;
+    width: 90px;
+    height: 90px;
+    margin-right: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.color-ico {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: baseline;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  margin-bottom: -4px;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  background-color: transparent;
+}
