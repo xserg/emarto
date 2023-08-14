@@ -163,7 +163,7 @@
         </div>
     </div>
 </footer>
-<?php if (!isset($_COOKIE["modesy_cookies_warning"]) && $this->settings->cookies_warning): ?>
+<?php if (!isset($_COOKIE["emarto_cookies_warning"]) && $this->settings->cookies_warning): ?>
     <div class="cookies-warning">
         <div class="text"><?php echo $this->settings->cookies_warning_text; ?></div>
         <a href="javascript:void(0)" onclick="hide_cookies_warning();" class="icon-cl"> <i class="icon-close"></i></a>
