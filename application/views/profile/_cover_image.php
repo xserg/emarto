@@ -4,14 +4,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="lazyload profile-cover-image" data-bg-cover="<?= base_url() . $user->cover_image; ?>"></div>
+                    <div class="lazyload profile-cover-image" data-bg-cover="<?= base_url() . $user->cover_image; ?>" style="background-image: url(<?= base_url() . $user->cover_image; ?>);"></div>
                 </div>
             </div>
         </div>
     <?php else: ?>
         <div class="container-fluid">
             <div class="row">
-                <div class="lazyload profile-cover-image" data-bg-cover="<?= base_url() . $user->cover_image; ?>"></div>
+                <div class="lazyload profile-cover-image" data-bg-cover="<?= base_url() . $user->cover_image; ?>" style="background-image: url(<?= base_url() . $user->cover_image; ?>);"></div>
             </div>
         </div>
     <?php endif; ?>
