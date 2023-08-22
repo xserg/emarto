@@ -10576,3 +10576,17 @@ form select.error {
 .do_not_use {
   color: gray;
 }
+
+.color-ico-multi {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: baseline;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  margin-bottom: -4px;
+  border: 1px solid #eee;
+
+  background-image: url(/assets/img/multi.png);
+  background-size: contain;
+}

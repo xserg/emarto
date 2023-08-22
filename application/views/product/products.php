@@ -97,7 +97,22 @@
                                             <input type="text" class="form-control filter-search-input" placeholder="<?= trans("search") . " " . $filter_name; ?>" data-filter-id="product_filter_<?= $custom_filter->id; ?>">
                                         <?php endif; ?>
                                         <ul id="product_filter_<?= $custom_filter->id; ?>" class="filter-list filter-custom-scrollbar">
-                                            <?php foreach ($options as $option):
+                                            <?php 
+                                                $colors = [23 => 'beige', 11 => 'black', 10 => 'blue', 24 => 'brown',   
+                                                29 => 'Gold',
+                                                21  => 'Gray',
+                                                12  => 'Green',
+                                                26  => 'Blue',
+                                                30  => 'Multicolor',
+                                                27  => 'Orange',
+                                                20  => 'Pink',
+                                                25  => 'Purple',
+                                                7   => 'Red',
+                                                28  => 'SIlver',
+                                                9   => 'White',
+                                                19  => 'Yellow'];
+                                                
+                                                foreach ($options as $option):  
                                                 $option_name = get_custom_field_option_name($option);
                                                 @$array_option_names[$custom_filter->product_filter_key . "_" . $option->option_key] = $option_name; ?>
                                                 <li>
@@ -107,7 +122,11 @@
                                                             <label class="custom-control-label">
                                                             <?php 
                                                             if ($custom_filter->id == 1) {
-                                                                echo '<span class="color-ico" style="background-color: ' . $option_name . ';"></span>';
+                                                                if ($option->id == 30) {
+                                                                    echo '<span class="color-ico-multi"></span>';
+                                                                } else {
+                                                                    echo '<span class="color-ico" style="background-color: ' . $colors[$option->id] . ';"></span>';
+                                                                }
                                                             }?>
                                                               <?= $option_name; ?>
                                                             </label>
