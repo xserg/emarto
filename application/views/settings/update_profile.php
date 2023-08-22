@@ -83,8 +83,10 @@
                             <br><span id="error-msg" class="text-danger hide"></span>
                         </div>                        
                         <div class="form-group">
-                            <label class="control-label"><?php echo trans("about_me"); ?></label>
-                            <input type="text" name="about_me" class="form-control form-input" value="<?php echo html_escape($this->auth_user->about_me); ?>" placeholder="<?php echo trans("about_me"); ?>" maxlength="150">
+                            <label class="control-label"><?php echo trans("about_me"); ?> <span class="do_not_use">(<?php echo trans("please_do_not_use"); ?>)</span></label>
+                                                      
+                            <textarea name="about_me" class="form-control form-textarea" placeholder="<?php echo trans("about_me"); ?>" maxlength="150"><?= html_escape($this->auth_user->about_me); ?></textarea>
+                            
                         </div>
                         <div class="form-group m-t-10">
                             <div class="row">

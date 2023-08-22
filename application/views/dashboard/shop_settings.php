@@ -62,13 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div id="map-result">
-                        <div class="map-container">
-                            <iframe src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=<?= get_location($this->auth_user); ?>&ie=UTF8&t=&z=8&iwloc=B&output=embed&disableDefaultUI=true" id="IframeMap" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                        </div>
-                    </div>
-                </div>
+          
                   <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                 <div class="form-group text-right">
                     <button type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("save_changes") ?></button>
