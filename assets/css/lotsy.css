@@ -10585,8 +10585,8 @@ form select.error {
   height: 20px;
   margin-right: 6px;
   margin-bottom: -4px;
-  border: 1px solid #eee;
-
+  
+  border-radius: 50%;
   background-image: url(/assets/img/multi.png);
   background-size: contain;
 }
