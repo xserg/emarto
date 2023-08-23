@@ -246,7 +246,7 @@ class Profile_controller extends Home_Core_Controller
             $this->session->set_flashdata('success', trans("msg_send_confirmation_email"));
             redirect($this->agent->referrer());
         }
-
+        /*
         //validate inputs
         $this->form_validation->set_rules('username', trans("username"), 'required|max_length[255]');
         $this->form_validation->set_rules('email', trans("email"), 'required');
@@ -254,13 +254,13 @@ class Profile_controller extends Home_Core_Controller
             $this->session->set_flashdata('errors', validation_errors());
             redirect($this->agent->referrer());
         } else {
-
+        */
             $data = array(
-                'username' => $this->input->post('username', true),
+                //'username' => $this->input->post('username', true),
                 //'slug' => str_slug($this->input->post('slug', true)),
-                'email' => $this->input->post('email', true),
-                'first_name' => $this->input->post('first_name', true),
-                'last_name' => $this->input->post('last_name', true),
+                //'email' => $this->input->post('email', true),
+                //'first_name' => $this->input->post('first_name', true),
+                //'last_name' => $this->input->post('last_name', true),
                 'phone_number' => $this->input->post('phone_number', true),
                 'send_email_new_message' => $this->input->post('send_email_new_message', true),
                 'show_email' => $this->input->post('show_email', true),
@@ -310,7 +310,7 @@ class Profile_controller extends Home_Core_Controller
                 $this->session->set_flashdata('error', trans("msg_error"));
                 redirect($this->agent->referrer());
             }
-        }
+        //}
     }
 
     /**

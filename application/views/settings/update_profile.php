@@ -59,22 +59,22 @@
                                 <?php endif; ?>
                             <?php endif; ?>
 
-                            <input type="email" name="email" class="form-control form-input" value="<?php echo html_escape($user->email); ?>" placeholder="<?php echo trans("email_address"); ?>" required>
+                            <input type="email" name="email" class="form-control form-input" value="<?php echo html_escape($user->email); ?>" placeholder="<?php echo trans("email_address"); ?>" required disabled>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("username"); ?></label>
-                            <input type="text" name="username" class="form-control form-input" value="<?php echo html_escape($user->username); ?>" placeholder="<?php echo trans("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" required>
+                            <input type="text" name="username" class="form-control form-input" value="<?php echo html_escape($user->username); ?>" placeholder="<?php echo trans("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" required  disabled>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("first_name"); ?></label>
-                            <input type="text" name="first_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->first_name); ?>" placeholder="<?php echo trans("first_name"); ?>" maxlength="250" required>
+                            <input type="text" name="first_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->first_name); ?>" placeholder="<?php echo trans("first_name"); ?>" maxlength="250" required disabled>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("last_name"); ?></label>
-                            <input type="text" name="last_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->last_name); ?>" placeholder="<?php echo trans("last_name"); ?>" maxlength="250" required>
+                            <input type="text" name="last_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->last_name); ?>" placeholder="<?php echo trans("last_name"); ?>" maxlength="250" required disabled>
                         </div>
 
                         <div class="form-group">
