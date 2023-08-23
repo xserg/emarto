@@ -110,7 +110,11 @@
                                                 7   => 'Red',
                                                 28  => 'SIlver',
                                                 9   => 'White',
-                                                19  => 'Yellow'];
+                                                19  => 'Yellow',
+                                                296 => '#FF7F50', //'Coral',
+                                                297 => '#40E0D0', //Turquoise',
+                                                298 => '#C4B289', //'khaki'
+                                              ];
                                                 
                                                 foreach ($options as $option):  
                                                 $option_name = get_custom_field_option_name($option);
