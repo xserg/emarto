@@ -18,6 +18,7 @@
 
                 <?php echo form_open("edit-shipping-zone-post"); ?>
                 <input type="hidden" name="zone_id" value="<?= $shipping_zone->id; ?>">
+                <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                 <div class="form-group">
                     <label class="control-label"><?php echo trans("zone_name"); ?></label>
                     <?php foreach ($this->languages as $language): ?>
