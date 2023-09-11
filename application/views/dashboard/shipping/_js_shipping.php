@@ -75,6 +75,8 @@
             "selected_option": $('#select_shipping_methods').val()
         };
         data[csfr_token_name] = $.cookie(csfr_cookie_name);
+        data["sys_lang_id"] = sys_lang_id;
+        
         $.ajax({
             type: "POST",
             url: base_url + "dashboard_controller/select_shipping_method",

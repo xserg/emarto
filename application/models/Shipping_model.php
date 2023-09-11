@@ -538,9 +538,9 @@ class Shipping_model extends CI_Model
 
     //get shipping locations by zone
     public function get_shipping_locations_by_zone($zone_id)
-    {
-        $this->db->select("shipping_zone_locations.*, (SELECT name FROM location_countries WHERE location_countries.id = shipping_zone_locations.country_id LIMIT 1) As country_name, 
-        (SELECT name FROM location_states WHERE location_states.id = shipping_zone_locations.state_id LIMIT 1) As state_name");
+    {    
+        $this->db->select("shipping_zone_locations.*, (SELECT name" . ($this->selected_lang->id == 2 ? '_rus' : '') . " FROM location_countries WHERE location_countries.id = shipping_zone_locations.country_id LIMIT 1) As country_name, 
+        (SELECT name" . ($this->selected_lang->id == 2 ? '_rus' : '') . " FROM location_states WHERE location_states.id = shipping_zone_locations.state_id LIMIT 1) As state_name");
         $this->db->where('zone_id', clean_number($zone_id));
         return $this->db->get('shipping_zone_locations')->result();
     }
