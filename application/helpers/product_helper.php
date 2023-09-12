@@ -630,6 +630,8 @@ if (!function_exists('get_query_string_array')) {
         array_push($array_filter_keys, "sort");
         array_push($array_filter_keys, "search");
         array_push($array_filter_keys, "p_cat");
+        
+        array_push($array_filter_keys, "buy_request");
 
         $queries = array();
         $array_queries = array();
@@ -832,7 +834,8 @@ if (!function_exists('get_continent_name_by_key')) {
 if (!function_exists('get_shipping_methods')) {
     function get_shipping_methods()
     {
-        return array('flat_rate', 'local_pickup', 'free_shipping');
+        //return array('flat_rate', 'local_pickup', 'free_shipping');
+        return array('flat_rate', 'free_shipping');
     }
 }
 
