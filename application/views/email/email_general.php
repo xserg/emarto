@@ -6,7 +6,7 @@
 			<table role="presentation" border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						<h1 style="text-decoration: none; font-size: 24px;line-height: 28px;font-weight: bold"><?php echo html_escape($subject); ?></h1>
+						<h1 style="text-decoration: none; font-size: 20px;line-height: 20px;font-weight: bold"><?php echo html_escape($subject); ?></h1>
 						<div class="mailcontent" style="line-height: 26px;font-size: 14px;">
 							<p style='text-align: center'>
 								<?php echo $email_content; ?><br>
