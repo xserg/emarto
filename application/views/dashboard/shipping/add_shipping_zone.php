@@ -17,11 +17,20 @@
                     <?php $this->load->view('dashboard/includes/_messages'); ?>
 
                     <?php echo form_open("add-shipping-zone-post"); ?>
-
+                    <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                     <div class="form-group">
-                        <label class="control-label"><?php echo trans("zone_name"); ?></label>
+                      <label class="control-label"><?php echo trans("zone_name"); ?></label>  
+                      <select id="zone_name" class="form-control" name="zone_name" data-placeholder="<?= trans("zone_name"); ?>">
+                          <option value="">&nbsp;</option>
+                          <option value="domestic"><?php echo trans("domestic"); ?></option>
+                          <option value="international"><?php echo trans("international"); ?></option>
+                      </select>
+                      <br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#custom_name">Select custom name</a>
+                    </div>
+                    <div class="form-group collapse" id="custom_name" >
+                        
                         <?php foreach ($this->languages as $language): ?>
-                            <input type="text" name="zone_name_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?= $language->name; ?>" maxlength="255" required>
+                            <input type="text" name="zone_name_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?= $language->name; ?>" maxlength="255">
                         <?php endforeach; ?>
                     </div>
                     <div class="form-group">

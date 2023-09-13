@@ -282,12 +282,29 @@ class Shipping_model extends CI_Model
     public function add_shipping_zone()
     {
         $name_array = array();
-        foreach ($this->languages as $language) {
-            $item = array(
-                'lang_id' => $language->id,
-                'name' => $this->input->post('zone_name_lang_' . $language->id, true)
-            );
-            array_push($name_array, $item);
+        if ($this->input->post('zone_name')) {
+          $item = array(
+              'lang_id' => 1,
+              'name' => $this->input->post('zone_name', true)
+          );
+          array_push($name_array, $item);
+          
+          if ($this->selected_lang->id != 1) {
+              $item = array(
+                  'lang_id' => $this->selected_lang->id,
+                  'name' => trans($this->input->post('zone_name', true))
+              );
+              array_push($name_array, $item);
+          }
+          
+        } else {        
+          foreach ($this->languages as $language) {
+              $item = array(
+                  'lang_id' => $language->id,
+                  'name' => $this->input->post('zone_name_lang_' . $language->id, true)
+              );
+              array_push($name_array, $item);
+          }
         }
         $data = array(
             'name_array' => serialize($name_array),
