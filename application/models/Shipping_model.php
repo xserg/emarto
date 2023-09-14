@@ -283,18 +283,18 @@ class Shipping_model extends CI_Model
     {
         $name_array = array();
         if ($this->input->post('zone_name')) {
-          $item = array(
-              'lang_id' => 1,
-              'name' => $this->input->post('zone_name', true)
-          );
-          array_push($name_array, $item);
           
-          if ($this->selected_lang->id != 1) {
-              $item = array(
-                  'lang_id' => $this->selected_lang->id,
-                  'name' => trans($this->input->post('zone_name', true))
-              );
-              array_push($name_array, $item);
+          foreach ($this->languages as $language) {
+              $row = $this->db->where('lang_id', $language->id)
+              ->where('label', $this->input->post('zone_name'))
+              ->get('language_translations')->row();
+              if ($row) {
+                $item = [
+                    'lang_id' => $language->id,
+                    'name' => $row->translation,
+                ];
+                array_push($name_array, $item);
+              }
           }
           
         } else {        
@@ -396,11 +396,21 @@ class Shipping_model extends CI_Model
             foreach ($option_unique_ids as $option_unique_id) {
                 $name_array = array();
                 foreach ($this->languages as $language) {
+                  $row = $this->db->where('lang_id', $language->id)
+                  ->where('label', $this->input->post('method_name_' . $option_unique_id . '_lang_1', true))
+                  ->get('language_translations')->row();
+                  if ($row) {
+                    $item = [
+                        'lang_id' => $language->id,
+                        'name' => $row->translation,
+                    ];
+                    /*
                     $item = array(
                         'lang_id' => $language->id,
                         'name' => $this->input->post('method_name_' . $option_unique_id . '_lang_' . $language->id, true)
-                    );
+                    );*/
                     array_push($name_array, $item);
+                  }
                 }
                 $data = array(
                     'name_array' => serialize($name_array),
@@ -476,11 +486,21 @@ class Shipping_model extends CI_Model
             foreach ($option_unique_ids as $option_unique_id) {
                 $name_array = array();
                 foreach ($this->languages as $language) {
+                  $row = $this->db->where('lang_id', $language->id)
+                  ->where('label', $this->input->post('method_name_' . $option_unique_id . '_lang_1', true))
+                  ->get('language_translations')->row();
+                  if ($row) {
+                    $item = [
+                        'lang_id' => $language->id,
+                        'name' => $row->translation,
+                    ];
+                    /*
                     $item = array(
                         'lang_id' => $language->id,
                         'name' => $this->input->post('method_name_' . $option_unique_id . '_lang_' . $language->id, true)
-                    );
+                    );*/
                     array_push($name_array, $item);
+                  }
                 }
                 $data = array(
                     'name_array' => serialize($name_array),
@@ -622,6 +642,36 @@ class Shipping_model extends CI_Model
         return $this->db->where('user_id', clean_number($user_id))->order_by('id', 'DESC')->get('shipping_classes')->result();
     }
 
+    public function get_default_shipping_classes()
+    {
+        $default = [
+          1 => 'econony_shipping', //=> trans('econony_shipping'),
+          2 => 'standartd_shipping', //=> trans('standartd_shipping'),
+          3 => 'express_shipping' //=> trans('express_shipping'),
+        ];
+        $data = [];
+        foreach ($default as $k => $v) {
+          $ret = new stdClass();
+          $name_array = [];
+            foreach ($this->languages as $language) {
+                $row = $this->db->where('lang_id', $language->id)->where('label', $v)
+                ->get('language_translations')->row();
+                if ($row) {
+                  $item = [
+                      'lang_id' => $language->id,
+                      'name' => $row->translation,
+                  ];
+                  array_push($name_array, $item);
+                }
+            }
+            $ret->name_array = serialize($name_array);
+            $ret->id = $k;
+            $ret->status = 1;        
+            $data[] = $ret;
+        }
+        return $data;
+    }
+    
     //get active shipping classes
     public function get_active_shipping_classes($user_id)
     {

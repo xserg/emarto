@@ -22,7 +22,7 @@
                                     <div class="form-group m-b-10">
                                         <label class="control-label"><?= trans("method_name"); ?></label>
                                         <?php foreach ($this->languages as $language): ?>
-                                            <input type="text" name="method_name_<?= $option_unique_id; ?>_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" value="<?= @parse_serialized_name_array($method->name_array, $language->id); ?>" placeholder="<?= $language->name; ?>" maxlength="255">
+                                            <input type="text" name="method_name_<?= $option_unique_id; ?>_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" value="flat_rate" placeholder="<?= $language->name; ?>" maxlength="255">
                                         <?php endforeach; ?>
                                     </div>
                                     <div class="form-group">
@@ -155,9 +155,9 @@
                                 <div class="modal-body">
                                     <div class="form-group m-b-10">
                                         <label class="control-label"><?= trans("method_name"); ?></label>
-                                        <?php foreach ($this->languages as $language): ?>
-                                            <input type="text" name="method_name_<?= $option_unique_id; ?>_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" value="<?= @parse_serialized_name_array($method->name_array, $language->id); ?>" placeholder="<?= $language->name; ?>" maxlength="255">
-                                        <?php endforeach; ?>
+                                        <?php //foreach ($this->languages as $language): ?>
+                                            <input type="text" name="method_name_<?= $option_unique_id; ?>_lang_1" class="form-control form-input m-b-5" value="free_shipping" placeholder="<?= $language->name; ?>" maxlength="255">
+                                        <?php //endforeach; ?>
                                     </div>
                                     <div class="form-group m-b-10">
                                         <label class="control-label"><?= trans("minimum_order_amount"); ?></label>
