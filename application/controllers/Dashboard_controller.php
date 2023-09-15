@@ -1617,7 +1617,8 @@ class Dashboard_controller extends Home_Core_Controller
         $data['keywords'] = trans("shipping_settings") . "," . $this->app_name;
         $data['lang_settings'] = lang_settings();
         $data['shipping_zones'] = $this->shipping_model->get_shipping_zones($this->auth_user->id);
-        $data['shipping_classes'] = $this->shipping_model->get_shipping_classes($this->auth_user->id);
+        //$data['shipping_classes'] = $this->shipping_model->get_shipping_classes($this->auth_user->id);
+        $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id, 'DESC');
 
         $this->load->view('dashboard/includes/_header', $data);
@@ -1672,8 +1673,8 @@ class Dashboard_controller extends Home_Core_Controller
             exit();
         }
         $data['continents'] = get_continents();
-        $data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
-
+        //$data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+        $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/shipping/edit_shipping_zone', $data);
         $this->load->view('dashboard/includes/_footer');

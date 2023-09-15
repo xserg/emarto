@@ -92,11 +92,11 @@
                 <div class="left">
                     <h3 class="box-title"><?= trans("shipping_classes"); ?></h3>
                 </div>
-                <div class="right">
+                <!--div class="right">
                     <a href="javascript:void(0)" class="btn btn-success btn-add-new" data-toggle="modal" data-target="#modalAddShippingClass">
                         <i class="fa fa-plus"></i>&nbsp;&nbsp;<?= trans("add_shipping_class"); ?>
                     </a>
-                </div>
+                </div-->
             </div>
             <div class="box-body">
                 <div class="row">
@@ -110,7 +110,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="table-responsive table-delivery-times">
-                            <table class="table table-bordered table-striped dataTableNoSort" role="grid">
+                            <table class="table table-bordered table-striped" role="grid">
                                 <thead>
                                 <tr role="row">
                                     <th scope="col"><?= trans("option"); ?></th>
@@ -131,10 +131,10 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td style="width: 120px;">
-                                                <div class="btn-group btn-group-option">
+                                                <!--div class="btn-group btn-group-option">
                                                     <a href="javascript:void(0)" class="btn btn-sm btn-default btn-edit" data-toggle="modal" data-target="#modalEditShippingClass<?= $shipping_class->id; ?>"><span data-toggle="tooltip" title="<?= trans('edit'); ?>"><i class="fa fa-edit"></i></span></a>
                                                     <a href="javascript:void(0)" class="btn btn-sm btn-default btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_item('dashboard_controller/delete_shipping_class_post','<?= $shipping_class->id; ?>','<?= trans("confirm_delete"); ?>');"><i class="fa fa-trash-o"></i></a>
-                                                </div>
+                                                </div-->
                                             </td>
                                         </tr>
                                         <div id="modalEditShippingClass<?= $shipping_class->id; ?>" class="modal fade" role="dialog">
@@ -189,9 +189,9 @@
                 </div>
             </div><!-- /.box-body -->
         </div>
-        <div class="alert alert-info alert-large">
-            <?php echo trans("shipping_classes_exp"); ?>
-        </div>
+        <!--div class="alert alert-info alert-large">
+            <?php //echo trans("shipping_classes_exp"); ?>
+        </div-->
     </div>
     <div class="col-md-6 col-sm-12">
         <div class="box box-sm">
