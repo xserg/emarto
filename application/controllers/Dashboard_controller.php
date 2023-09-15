@@ -233,7 +233,8 @@ class Dashboard_controller extends Home_Core_Controller
             $data['shipping_status'] = 0;
         }
 
-        $data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+        //$data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+        $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id);
         $shipping_zones = $this->shipping_model->get_shipping_zones($this->auth_user->id);
 
@@ -1636,8 +1637,8 @@ class Dashboard_controller extends Home_Core_Controller
         $data['description'] = trans("add_shipping_zone") . " - " . $this->app_name;
         $data['keywords'] = trans("add_shipping_zone") . "," . $this->app_name;
         $data['continents'] = get_continents($this->selected_lang->id);
-        $data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
-
+        //$data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+        $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/shipping/add_shipping_zone', $data);
         $this->load->view('dashboard/includes/_footer');
@@ -1716,7 +1717,8 @@ class Dashboard_controller extends Home_Core_Controller
     {
         $this->check_vendor_permission();
         $selected_option = $this->input->post('selected_option', true);
-        $shipping_classes = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+        //$shipping_classes = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+        $shipping_classes = $this->shipping_model->get_default_shipping_classes();;
         $vars = array('selected_option' => $selected_option, 'option_unique_id' => uniqid(), 'shipping_classes' => $shipping_classes);
         $html_content = $this->load->view("dashboard/shipping/_response_shipping_method", $vars, true);
         $data = array(

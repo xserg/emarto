@@ -525,7 +525,7 @@ class Shipping_model extends CI_Model
                 //shipping classes
                 $class_array = array();
                 //$shipping_classes = $this->shipping_model->get_shipping_classes($this->auth_user->id);
-                $shipping_classes = $this->shipping_model->get_default_shipping_classes();
+                $shipping_classes = $this->get_default_shipping_classes();
                 if (!empty($shipping_classes)) {
                     foreach ($shipping_classes as $shipping_class) {
                         $item = array(
