@@ -891,8 +891,8 @@ if (!function_exists('get_shipping_class_cost_by_method')) {
     {
         $ci =& get_instance();
         if (!empty($cost_array) && !empty($class_id)) {
-            $shipping_class = $ci->shipping_model->get_shipping_class($class_id);
-            if (!empty($shipping_class) && $shipping_class->status == 1) {
+            //$shipping_class = $ci->shipping_model->get_shipping_class($class_id);
+            //if (!empty($shipping_class) && $shipping_class->status == 1) {
                 $cost_array = unserialize_data($cost_array);
                 if (!empty($cost_array)) {
                     foreach ($cost_array as $item) {
@@ -901,7 +901,7 @@ if (!function_exists('get_shipping_class_cost_by_method')) {
                         }
                     }
                 }
-            }
+            //}
         }
     }
 }
