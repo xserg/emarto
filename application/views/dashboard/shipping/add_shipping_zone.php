@@ -16,7 +16,7 @@
                 <div class="box-body">
                     <?php $this->load->view('dashboard/includes/_messages'); ?>
 
-                    <?php echo form_open("add-shipping-zone-post"); ?>
+                    <?php echo form_open("add-shipping-zone-post", "id=add-shipping-zone"); ?>
                     <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                     <div class="form-group">
                       <label class="control-label"><?php echo trans("zone_name"); ?></label>  
@@ -25,7 +25,7 @@
                           <option value="domestic"><?php echo trans("domestic"); ?></option>
                           <option value="international"><?php echo trans("international"); ?></option>
                       </select>
-                      <br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#custom_name">Select custom name</a>
+                      <br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#custom_name"><?= trans("select_zone_name"); ?></a>
                     </div>
                     <div class="form-group collapse" id="custom_name" >
                         
@@ -82,7 +82,10 @@
                     </div>
 
                     <div class="form-group text-right">
-                        <button type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("submit") ?></button>
+                      <a href="<?php echo generate_dash_url("shipping_settings"); ?>" class="btn btn-success">
+                        <?= trans('cancel'); ?>
+                      </a>
+                        <button id="zone_submit" type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("submit") ?></button>
                     </div>
                     <?php echo form_close(); ?>
                 </div>

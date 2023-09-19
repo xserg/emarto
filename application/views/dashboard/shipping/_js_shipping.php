@@ -121,4 +121,16 @@
             }
         });
     }
+    
+    $(document).ready(function () {
+        $('#add-shipping-zone').submit(function (e) {       
+            if (!$('#zone_name').val() && !$('[name=zone_name_lang_1]').val()) { 
+            //|| !$("#selected_regions_container").text()) {
+              alert('Please fill name!');
+              e.preventDefault();
+            }
+    
+        });
+    });
+
 </script>
