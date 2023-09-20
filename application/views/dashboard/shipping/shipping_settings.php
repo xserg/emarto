@@ -113,7 +113,7 @@
                             <table class="table table-bordered table-striped" role="grid">
                                 <thead>
                                 <tr role="row">
-                                    <th scope="col"><?= trans("option"); ?></th>
+                                    <th scope="col"><?= trans("shipping_type"); ?></th>
                                     <th scope="col"><?= trans("status"); ?></th>
                                     <th scope="col"><?= trans("options"); ?></th>
                                 </tr>
