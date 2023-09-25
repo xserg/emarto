@@ -42,6 +42,10 @@ class Auth_model extends CI_Model
                 $this->session->set_flashdata('error', trans("msg_ban_error"));
                 return false;
             }
+            if ($user->banned == 2) {
+                $this->session->set_flashdata('error', trans("msg_ban_permanent"));
+                return false;
+            }
             //set user data
             $user_data = array(
                 'mds_sess_user_id' => $user->id,
@@ -735,30 +739,54 @@ class Auth_model extends CI_Model
     }
 
     //ban or remove user ban
-    public function ban_remove_ban_user($id)
+    public function ban_remove_ban_user($id, $type)
     {
         $id = clean_number($id);
+        $type = clean_number($type);
         $user = $this->get_user($id);
 
         if (!empty($user)) {
             $data = array();
             if ($user->banned == 0) {
+              
+              if ($type == 1) {
                 $data['banned'] = 1;
-                $email_data['subject'] = trans('ban_account');
-                $email_data['message'] = trans('ban_account');
+                $email_data['subject'] = trans('ban_account_subject');
+                $email_data['email_content'] = nl2br(trans('ban_account_message'));
+              }
+              if ($type == 2) {
+                $data['banned'] = 2;
+                $email_data['subject'] = trans('ban_permanent_subject');
+                $email_data['email_content'] = nl2br(trans('ban_permanent_message'));
+              } 
+              $email_data['email_link'] = lang_base_url() . "help-center/submit-request";
+              $email_data['email_button_text'] = trans("contact_support");
             }
-            if ($user->banned == 1) {
+            if ($user->banned == 1 || $user->banned == 2) {
                 $data['banned'] = 0;
-                $email_data['subject'] = trans('unban_account');
-                $email_data['message'] = trans('unban_account');
+                $email_data['subject'] = trans('unban_account_subject');
+                $email_data['email_content'] = nl2br(trans('unban_account_message'));
             }
             $this->db->where('id', $id);
             $res = $this->db->update('users', $data);            
             if ($res) {
+              /*
+              $email_data = array(
+                  'email_type' => 'email_general',
+                  'to' => $user->email,
+                  'subject' => trans("confirm_your_account"),
+                  'email_content' =>  trans("hello") . ' ' . $user->first_name . ' ' . $user->last_name . ',<br><br>' 
+                  . trans("msg_confirmation_email"),
+                  'email_link' => lang_base_url() . "confirm?token=" . $data['token'],
+                  'email_button_text' => trans("confirm_your_account")
+              );
+              */
             // Email
               $this->load->model("email_model");
               $email_data['to'] = $user->email;
-              $email_data['template_path'] = "email/email_newsletter";  
+              //$email_data['template_path'] = "email/email_newsletter";
+              $email_data['template_path'] = "email/email_general";
+ 
               $this->email_model->send_email($email_data);
             }
             return $res;

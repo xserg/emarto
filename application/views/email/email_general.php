@@ -11,11 +11,13 @@
 							<p style='text-align: center'>
 								<?php echo $email_content; ?><br>
 							</p>
+							<?php if ($email_link) : ?>
 							<p style='text-align: center;margin-top: 30px;'>
 								<a href="<?php echo $email_link; ?>" style='font-size: 14px;text-decoration: none;padding: 14px 40px;background-color: #09b1ba;color: #ffffff !important; border-radius: 3px;'>
 									<?php echo html_escape($email_button_text); ?>
 								</a>
 							</p>
+						  <?php endif; ?>
 						</div>
 					</td>
 				</tr>

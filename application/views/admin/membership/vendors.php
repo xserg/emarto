@@ -70,11 +70,13 @@
                                     </td>
                                     <td><?= !empty($membership_plan) ? $membership_plan->plan_title : ''; ?></td>
                                     <td>
-                                        <?php if ($user->banned == 0): ?>
-                                            <label class="label label-success"><?php echo trans('active'); ?></label>
-                                        <?php else: ?>
-                                            <label class="label label-danger"><?php echo trans('banned'); ?></label>
-                                        <?php endif; ?>
+                                      <?php if ($user->banned == 0): ?>
+                                          <label class="label label-success"><?php echo trans('active'); ?></label>
+                                      <?php elseif ($user->banned == 1): ?>
+                                          <label class="label label-danger"><?php echo trans('banned'); ?></label>
+                                      <?php elseif ($user->banned == 2): ?>
+                                        <label class="label label-danger">Banned permanently</label>    
+                                      <?php endif; ?>
                                     </td>
                                     <td><?php echo time_ago($user->last_seen); ?></td>
                                     <td><?php echo formatted_date($user->created_at); ?></td>
@@ -103,7 +105,8 @@
                                                 </li>
                                                 <li>
                                                     <?php if ($user->banned == 0): ?>
-                                                        <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user'); ?></a>
+                                                        <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 1);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user'); ?></a>
+                                                        <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 2);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user_permanet'); ?></a>
                                                     <?php else: ?>
                                                         <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-circle option-icon"></i><?php echo trans('remove_user_ban'); ?></a>
                                                     <?php endif; ?>

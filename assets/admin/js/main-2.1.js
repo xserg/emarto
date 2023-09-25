@@ -192,9 +192,10 @@ function confirm_user_email(id) {
 };
 
 //ban remove user ban
-function ban_remove_ban_user(id) {
+function ban_remove_ban_user(id, type) {
     var data = {
         'id': id,
+        'type': type
     };
     data[csfr_token_name] = $.cookie(csfr_cookie_name);
     $.ajax({

@@ -311,7 +311,8 @@ class Membership_controller extends Admin_Core_Controller
     public function ban_remove_ban_user()
     {
         $id = $this->input->post('id', true);
-        if ($this->auth_model->ban_remove_ban_user($id)) {
+        $type = $this->input->post('type', true);
+        if ($this->auth_model->ban_remove_ban_user($id, $type)) {
             $this->session->set_flashdata('success', trans("msg_updated"));
         } else {
             $this->session->set_flashdata('error', trans("msg_error"));
