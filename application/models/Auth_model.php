@@ -765,6 +765,8 @@ class Auth_model extends CI_Model
                 $data['banned'] = 0;
                 $email_data['subject'] = trans('unban_account_subject');
                 $email_data['email_content'] = nl2br(trans('unban_account_message'));
+                $email_data['email_link'] = lang_base_url();
+                $email_data['email_button_text'] = trans("login");
             }
             $this->db->where('id', $id);
             $res = $this->db->update('users', $data);            
