@@ -747,8 +747,7 @@ class Auth_model extends CI_Model
 
         if (!empty($user)) {
             $data = array();
-            if ($user->banned == 0) {
-              
+            if ($user->banned == 0 || ($user->banned == 1 && $type == 2)) {          
               if ($type == 1) {
                 $data['banned'] = 1;
                 $email_data['subject'] = trans('ban_account_subject');
@@ -761,8 +760,8 @@ class Auth_model extends CI_Model
               } 
               $email_data['email_link'] = lang_base_url() . "help-center/submit-request";
               $email_data['email_button_text'] = trans("contact_support");
-            }
-            if ($user->banned == 1 || $user->banned == 2) {
+            }       
+            if ($user->banned > 0 && !$type) {
                 $data['banned'] = 0;
                 $email_data['subject'] = trans('unban_account_subject');
                 $email_data['email_content'] = nl2br(trans('unban_account_message'));

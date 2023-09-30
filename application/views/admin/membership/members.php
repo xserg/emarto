@@ -65,7 +65,7 @@
                                     <?php elseif ($user->banned == 1): ?>
                                         <label class="label label-danger"><?php echo trans('banned'); ?></label>
                                     <?php elseif ($user->banned == 2): ?>
-                                      <label class="label label-danger">Banned permanently</label>    
+                                      <label class="label label-danger"><?php echo trans('banned_permanently'); ?></label>    
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo time_ago($user->last_seen); ?></td>
@@ -89,6 +89,9 @@
                                             <li>
                                                 <?php if ($user->banned == 0): ?>
                                                   <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 1);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user'); ?></a>
+                                                  <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 2);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user_permanet'); ?></a>
+                                                <?php elseif ($user->banned == 1): ?>
+                                                  <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-circle option-icon"></i><?php echo trans('remove_user_ban'); ?></a>
                                                   <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 2);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user_permanet'); ?></a>
                                                 <?php else: ?>
                                                     <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-circle option-icon"></i><?php echo trans('remove_user_ban'); ?></a>
