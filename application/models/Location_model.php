@@ -432,7 +432,7 @@ class Location_model extends CI_Model
                 $key .= "_" . $this->default_location->state_id;
             }
             if (!empty($this->default_location->city_id)) {
-                $select .= ",(SELECT location_cities.name FROM location_cities WHERE location_cities.id = " . clean_number($this->default_location->city_id) . ") AS city";
+                $select .= ",(SELECT location_cities.name" . ($this->selected_lang->id == 2 ? '_rus' : '') . " FROM location_cities WHERE location_cities.id = " . clean_number($this->default_location->city_id) . ") AS city";
                 $key .= "_" . $this->default_location->state_id;
             }
 
