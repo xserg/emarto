@@ -86,6 +86,41 @@ class Core_Controller extends CI_Controller
             $this->thousands_separator = ',';
             $this->input_initial_price = '0,00';
         }
+        
+        //$_SERVER['REMOTE_ADDR'] = '90.154.73.247';
+        //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
+        $geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
+        /*
+        $geo_ip['geoplugin_city'];// => Moscow;
+        $geo_ip['geoplugin_region'];// => Moscow;
+        $geo_ip['geoplugin_regionCode'];// => MOW;
+        $geo_ip['geoplugin_regionName'];// => Moscow;
+        $geo_ip['geoplugin_areaCode']; 
+        $geo_ip['geoplugin_dmaCode']; 
+        $geo_ip['geoplugin_countryCode'];// => RU;
+        $geo_ip['geoplugin_countryName'];// => Russia;
+        */
+      
+        //echo '<pre>';
+        //print_r($geo_ip);
+        
+        if ($geo_ip['geoplugin_countryName']) {
+            $country = $this->location_model->search_countries($geo_ip['geoplugin_countryName']); 
+            $city = $this->location_model->search_geo_city($geo_ip['geoplugin_city']);
+                 
+            $location = new stdClass();
+            $location->country_id = $country[0]->id;
+            if ($city) {
+                //$location->state_id = $city[0]->state_id ?? 0;
+                $location->city_id = $city[0]->id ?? 0;
+            }
+            $this->session->set_userdata('mds_default_location', serialize($location));
+            if ($location->country_id == 181) {
+              $this->session->set_userdata('mds_selected_currency', 'RUB');
+            } else {
+              $this->session->set_userdata('mds_selected_currency', 'USD');
+            }
+        }
         //default location
         $this->default_location = $this->location_model->get_default_location();
         //update last seen time

@@ -421,7 +421,11 @@ class Location_model extends CI_Model
         $str = "";
         $key = "";
         if (!empty($this->default_location->country_id)) {
-            $select = "location_countries.name AS country";
+            if($this->selected_lang->id == 2) {
+              $select = "location_countries.name_rus AS country";
+            } else {
+              $select = "location_countries.name AS country";
+            }
             $key = $this->default_location->country_id;
             if (!empty($this->default_location->state_id)) {
                 $select .= ",(SELECT location_states.name FROM location_states WHERE location_states.id = " . clean_number($this->default_location->state_id) . ") AS state";
@@ -488,6 +492,20 @@ class Location_model extends CI_Model
         $location->state_id = !empty($state_id) ? $state_id : 0;
         $location->city_id = !empty($city_id) ? $city_id : 0;
         $this->session->set_userdata('mds_default_location', serialize($location));
+    }
+    
+    public function search_geo_city($val)
+    {
+        $val = remove_special_characters($val);
+        $this->db->join('location_countries', 'location_cities.country_id = location_countries.id AND location_countries.status = 1');
+        $this->db->join('location_states', 'location_cities.state_id = location_states.id');
+        $this->db->select('location_cities.*, location_countries.id as country_id, location_countries.name as country_name, location_states.id as state_id, location_states.name as state_name');
+        //$this->db->like('location_countries.name', $val);
+        //$this->db->or_like('location_states.name', $val);
+        $this->db->where('location_cities.name', $val);
+        $this->db->limit(1);
+        $query = $this->db->get('location_cities');
+        return $query->result();
     }
 
 }
