@@ -744,10 +744,11 @@ class Auth_model extends CI_Model
         $id = clean_number($id);
         $type = clean_number($type);
         $user = $this->get_user($id);
+        $ci =& get_instance();
         if ($this->general_settings->site_lang == $this->selected_lang->id) {
-            $lang_base_url = base_url();
+            $ci->lang_base_url = base_url();
         } else {
-            $lang_base_url = base_url() . $this->selected_lang->short_form . "/";
+            $ci->lang_base_url = base_url() . $this->selected_lang->short_form . "/";
         }
         if (!empty($user)) {
             $data = array();
@@ -762,14 +763,14 @@ class Auth_model extends CI_Model
                 $email_data['subject'] = trans('ban_permanent_subject');
                 $email_data['email_content'] = nl2br(trans('ban_permanent_message'));
               } 
-              $email_data['email_link'] = $lang_base_url . "help-center/submit-request";
+              $email_data['email_link'] = lang_base_url() . "help-center/submit-request";
               $email_data['email_button_text'] = trans("contact_support");
             }       
             if ($user->banned > 0 && !$type) {
                 $data['banned'] = 0;
                 $email_data['subject'] = trans('unban_account_subject');
                 $email_data['email_content'] = nl2br(trans('unban_account_message'));
-                $email_data['email_link'] = $lang_base_url;
+                $email_data['email_link'] = lang_base_url();
                 $email_data['email_button_text'] = trans("login");
             }
             $this->db->where('id', $id);
