@@ -306,6 +306,7 @@ class Admin_Core_Controller extends Core_Controller
             $this->control_panel_lang = $this->session->userdata('mds_control_panel_lang');
             //language translations
             $this->language_translations = $this->get_translation_array($this->control_panel_lang->id);
+            $this->selected_lang = $this->control_panel_lang;
         }
 
         //check long cron
