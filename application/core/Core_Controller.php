@@ -89,7 +89,7 @@ class Core_Controller extends CI_Controller
         
         //$_SERVER['REMOTE_ADDR'] = '90.154.73.247';
         //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
-        $geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
+        //$geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
         /*
         $geo_ip['geoplugin_city'];// => Moscow;
         $geo_ip['geoplugin_region'];// => Moscow;
