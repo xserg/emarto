@@ -216,7 +216,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="table-responsive table-delivery-times">
-                            <table class="table table-bordered table-striped dataTableNoSort" role="grid">
+                            <table class="table table-bordered table-striped" role="grid">
                                 <thead>
                                 <tr role="row">
                                     <th scope="col"><?= trans("option"); ?></th>
@@ -326,10 +326,20 @@
             </div>
             <?php echo form_open("add-shipping-delivery-time-post"); ?>
             <div class="modal-body">
-                <div class="form-group">
+              <div class="form-group">
+                <label class="control-label"><?php echo trans("name"); ?></label>
+                <select name="default_option" class="form-control form-input m-b-5" required>
+                  <option></option>
+                  <?php foreach ($shipping_default_delivery_times as $k => $delivery_time): ?>
+                    <option value=<?=$k?>><?= @parse_serialized_option_array($delivery_time, $this->selected_lang->id); ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <!--br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#custom_name"><?= trans("select_zone_name", true); ?></a-->  
+              </div>  
+                <div class="form-group collapse" id="custom_name" >
                     <label class="control-label"><?php echo trans("option"); ?></label>
                     <?php foreach ($this->languages as $language): ?>
-                        <input type="text" name="option_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?= $language->name; ?>" maxlength="255" required>
+                        <input type="text" name="option_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?= $language->name; ?>" maxlength="255" required-->
                     <?php endforeach; ?>
                 </div>
             </div>

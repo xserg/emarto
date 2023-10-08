@@ -25,7 +25,7 @@
                           <option value="domestic"><?php echo trans("domestic"); ?></option>
                           <option value="international"><?php echo trans("international"); ?></option>
                       </select>
-                      <br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#custom_name"><?= trans("select_zone_name"); ?></a>
+                      <br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#custom_name"><?= trans("select_zone_name", true); ?></a>
                     </div>
                     <div class="form-group collapse" id="custom_name" >
                         

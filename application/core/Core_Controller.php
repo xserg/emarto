@@ -87,8 +87,10 @@ class Core_Controller extends CI_Controller
             $this->input_initial_price = '0,00';
         }
         
-        //$_SERVER['REMOTE_ADDR'] = '90.154.73.247';
+        $geo_ip = [];
+        //$_SERVER['REMOTE_ADDR'] = '90.154.73.201';
         //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
+    
         //$geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
         /*
         $geo_ip['geoplugin_city'];// => Moscow;
@@ -104,15 +106,15 @@ class Core_Controller extends CI_Controller
         //echo '<pre>';
         //print_r($geo_ip);
         
-        if ($geo_ip['geoplugin_countryName']) {
+        if (isset($geo_ip['geoplugin_countryName'])) {
             $country = $this->location_model->search_countries($geo_ip['geoplugin_countryName']); 
             $city = $this->location_model->search_geo_city($geo_ip['geoplugin_city']);
                  
             $location = new stdClass();
             $location->country_id = $country[0]->id;
             if ($city) {
-                //$location->state_id = $city[0]->state_id ?? 0;
-                $location->city_id = $city[0]->id ?? 0;
+                $location->state_id = 0; //$city[0]->state_id ?? 0;
+                $location->city_id = 0; //$city[0]->id ?? 0;
             }
             $this->session->set_userdata('mds_default_location', serialize($location));
             if ($location->country_id == 181) {

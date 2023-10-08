@@ -1620,8 +1620,9 @@ class Dashboard_controller extends Home_Core_Controller
         $data['shipping_zones'] = $this->shipping_model->get_shipping_zones($this->auth_user->id);
         //$data['shipping_classes'] = $this->shipping_model->get_shipping_classes($this->auth_user->id);
         $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
+        $data['shipping_default_delivery_times'] = $this->shipping_model->get_default_shipping_delivery_times();
         $data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id, 'DESC');
-
+  
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/shipping/shipping_settings', $data);
         $this->load->view('dashboard/includes/_footer');

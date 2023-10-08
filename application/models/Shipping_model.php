@@ -698,6 +698,14 @@ class Shipping_model extends CI_Model
     //add shipping delivery time
     public function add_shipping_delivery_time()
     {
+        if ($k = $this->input->post('default_option', true)) {
+            $defuult_options = $this->get_default_shipping_delivery_times();
+            $data = array(
+                'user_id' => $this->auth_user->id,
+                'option_array' => $defuult_options[$k]
+            );
+            return $this->db->insert('shipping_delivery_times', $data);
+        }
         $option_array = array();
         foreach ($this->languages as $language) {
             $item = array(
@@ -744,6 +752,64 @@ class Shipping_model extends CI_Model
             $this->db->order_by('id');
         }
         return $this->db->get('shipping_delivery_times')->result();
+    }
+    
+    private function plural($n)
+    {    
+      if($n % 10 == 1 && ($n % 100 > 19 || $n < 11 )) {
+          return 1;//"день";
+      } else if ($n % 10 > 1 && $n % 10 < 5 && ($n % 100 >19 || $n < 11 )) {
+          return 2; //"дня";
+      } else {
+          return 3; //"дней";
+      }
+    }
+    
+    private function business_days($n)
+    {
+      if ($n == 1) {
+         return trans('business') . ' ' . trans('day'); 
+      } else {
+         return trans('business2') . ' ' . trans('days' . self::plural($n)); 
+      }
+    }
+    
+    //get shipping delivery times
+    public function get_default_shipping_delivery_times()
+    {
+      foreach ($this->languages as $language) {
+        $trans[$language->id]['business'] = $this->db->where('lang_id', $language->id)
+        ->where('label', 'business')->get('language_translations')->row();
+        $trans[$language->id]['business2'] = $this->db->where('lang_id', $language->id)
+        ->where('label', 'business2')->get('language_translations')->row();
+        $trans[$language->id]['day'] = $this->db->where('lang_id', $language->id)
+        ->where('label', 'day')->get('language_translations')->row();
+        $trans[$language->id]['days2'] = $this->db->where('lang_id', $language->id)
+        ->where('label', 'days2')->get('language_translations')->row();
+        $trans[$language->id]['days3'] = $this->db->where('lang_id', $language->id)
+        ->where('label', 'days3')->get('language_translations')->row();            
+      }
+      $data = [];      
+      for ($i = 1; $i < 14; $i++) {  
+        //$ret = new stdClass();
+        $option_array = [];
+          foreach ($this->languages as $language) {
+                $item = [
+                    'lang_id' => $language->id,
+                    'option' => $i . ' ' . ($i == 1 ? 
+                    $trans[$language->id]['business']->translation . ' ' . 
+                    $trans[$language->id]['day']->translation : 
+                    $trans[$language->id]['business2']->translation . ' ' . 
+                    $trans[$language->id]['days' . self::plural($i)]->translation),
+                ];
+                array_push($option_array, $item);                
+          }
+          //$ret->option_array = serialize($option_array);
+          //$ret->id = $i;
+          //$ret->status = 1;        
+          $data[$i] = serialize($option_array);
+      }
+      return $data;        
     }
 
     //get shipping delivery time
