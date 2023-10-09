@@ -160,7 +160,7 @@
                                         <input type="input" id="price_max" value="<?= !empty($filter_p_max) ? $filter_p_max : ''; ?>" class="form-control price-filter-input" placeholder="<?php echo trans("max"); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                     </div>
                                     
-                                    <div class="filter-item">
+                                    <!--div class="filter-item">
                                     
                                         <a href="<?= current_url() . generate_filter_url($query_string_array, 'buy_request', 1); ?>" rel="nofollow">
                                             <div class="custom-control custom-checkbox">
@@ -168,7 +168,7 @@
                                                 <label class="custom-control-label">Buy request</label>
                                             </div>
                                         </a>
-                                    </div>
+                                    </div-->
                                     
                                     <div class="col-4 col-md-4 col-lg-2 col-price-inputs text-left">
                                         <button type="button" id="btn_filter_price" data-current-url="<?= current_url(); ?>" data-query-string="<?= generate_filter_url($query_string_array, 'rmv_prc', ''); ?>" data-page="products" class="btn btn-sm btn-default btn-filter-price float-left"><i class="icon-arrow-right"></i></button>
