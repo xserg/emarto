@@ -435,8 +435,8 @@ class Location_model extends CI_Model
                 $select .= ",(SELECT location_cities.name" . ($this->selected_lang->id == 2 ? '_rus' : '') . " FROM location_cities WHERE location_cities.id = " . clean_number($this->default_location->city_id) . ") AS city";
                 $key .= "_" . $this->default_location->state_id;
             }
-
-            $result_cache = get_cached_data($this, "default_location_input", "st");
+            $cache_key = "default_location_input_lang_" . $this->selected_lang->id;
+            $result_cache = get_cached_data($this, $cache_key, "st");
             if (!empty($result_cache)) {
                 if (!empty($result_cache[$key])) {
                     return $result_cache[$key];
@@ -458,7 +458,7 @@ class Location_model extends CI_Model
                 $str .= $row->country;
             }
             $result_cache[$key] = $str;
-            set_cache_data($this, "default_location_input", $result_cache, "st");
+            set_cache_data($this, $cache_key, $result_cache, "st");
         }
         return $str;
     }
@@ -476,6 +476,35 @@ class Location_model extends CI_Model
             $location->country_id = $sess_location->country_id;
             $location->state_id = $sess_location->state_id;
             $location->city_id = $sess_location->city_id;
+        }
+        
+        if (!$location->country_id) {
+          $geo_ip = [];
+          //$_SERVER['REMOTE_ADDR'] = '90.154.73.201';
+          //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
+      
+          $geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
+        
+          //echo '<pre>';
+          //print_r($geo_ip);
+          
+          if (isset($geo_ip['geoplugin_countryName'])) {
+              $country = $this->location_model->search_countries($geo_ip['geoplugin_countryName']); 
+              $city = $this->location_model->search_geo_city($geo_ip['geoplugin_city']);
+                   
+              $location = new stdClass();
+              $location->country_id = $country[0]->id;
+              if ($city) {
+                  $location->state_id = 0; //$city[0]->state_id ?? 0;
+                  $location->city_id = 0; //$city[0]->id ?? 0;
+              }
+              $this->session->set_userdata('mds_default_location', serialize($location));
+              if ($location->country_id == 181) {
+                $this->session->set_userdata('mds_selected_currency', 'RUB');
+              } else {
+                $this->session->set_userdata('mds_selected_currency', 'USD');
+              }
+          }
         }
         return $location;
     }
