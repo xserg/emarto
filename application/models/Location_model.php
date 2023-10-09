@@ -483,7 +483,7 @@ class Location_model extends CI_Model
           //$_SERVER['REMOTE_ADDR'] = '90.154.73.201';
           //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
       
-          $geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
+          //$geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
         
           //echo '<pre>';
           //print_r($geo_ip);
