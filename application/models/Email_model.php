@@ -45,7 +45,9 @@ class Email_model extends CI_Model
                 'subject' => trans("confirm_your_account"),
                 'to' => $user->email,
                 'template_path' => "email/email_activation",
-                'token' => $token
+                'token' => $token,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
             );
 
             $this->send_email($data);

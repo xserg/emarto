@@ -744,6 +744,8 @@ class Ajax_controller extends Home_Core_Controller
                 'subject' => trans("you_have_new_message"),
                 'to' => $receiver->email,
                 'template_path' => "email/email_new_message",
+                'first_name' => $receiver->first_name,
+                'last_name' => $receiver->last_name,
                 'message_sender' => "",
                 'message_subject' => $this->input->post('message_subject', true),
                 'message_text' => $this->input->post('message_text', true)
