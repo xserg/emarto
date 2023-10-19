@@ -78,6 +78,7 @@ foreach ($languages as $language) {
             $route[$key . '/error-404'] = 'home_controller/error_404';
         }
         //auth
+        $route[$key . getr('signin', $rts)]['GET'] = 'auth_controller/signin';
         $route[$key . getr('register', $rts)]['GET'] = 'auth_controller/register';
         $route[$key . getr('forgot_password', $rts)]['GET'] = 'auth_controller/forgot_password';
         $route[$key . getr('reset_password', $rts)]['GET'] = 'auth_controller/reset_password';

@@ -283,6 +283,26 @@ class Auth_controller extends Home_Core_Controller
     }
 
     /**
+     * Login
+     */
+    public function signin()
+    {
+        //check if logged in
+        if ($this->auth_check) {
+            redirect(lang_base_url());
+        }
+
+        $data['title'] = trans("login");
+        $data['description'] = trans("login") . " - " . $this->app_name;
+        $data['keywords'] = trans("login") . "," . $this->app_name;
+        $data['user_session'] = get_usession();
+
+        $this->load->view('partials/_header', $data);
+        $this->load->view('auth/signin');
+        $this->load->view('partials/_footer');
+    }
+
+    /**
      * Register
      */
     public function register()

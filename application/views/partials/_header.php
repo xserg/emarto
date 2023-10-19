@@ -218,7 +218,7 @@ foreach ($this->languages as $language): ?>
 <!--include mobile menu-->
 <?php $this->load->view("partials/_nav_mobile"); ?>
 <input type="hidden" class="search_type_input" name="search_type" value="product">
-<?php if (!$this->auth_check): ?>
+<?php if (!$this->auth_check && !preg_match("/signin/", $this->uri->rsegment(2))): ?>
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" role="dialog">
         <div class="modal-dialog modal-dialog-centered login-modal" role="document">
