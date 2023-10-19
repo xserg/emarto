@@ -269,9 +269,14 @@ class Profile_controller extends Home_Core_Controller
                 'about_me' => $this->input->post('about_me', true),
                 'show_follow' => $this->input->post('show_follow', true),
                 
-                'vacation_text' => $this->input->post('vacation_text', true),
-                'vacation_status' => $this->input->post('vacation_status', true),
+                //'vacation_text' => $this->input->post('vacation_text', true),
+                //'vacation_status' => $this->input->post('vacation_status', true),
             );
+            
+            if (is_vendor()) {
+              $data['vacation_text'] = $this->input->post('vacation_text', true);
+              $data['vacation_status'] = $this->input->post('vacation_status', true);
+            }
 
             //is email unique
             if (!$this->auth_model->is_unique_email($data["email"], $user_id)) {

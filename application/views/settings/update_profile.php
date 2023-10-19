@@ -133,6 +133,7 @@
                                 <label for="checkbox_show_follow" class="custom-control-label"><?php echo trans("show_follow"); ?></label>
                             </div>
                         </div>
+                        <?php if (is_vendor()): ?>
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("vacation_mode"); ?></label>
                             <input type="text" name="vacation_text" class="form-control form-input" value="<?php echo html_escape($this->auth_user->vacation_text); ?>" placeholder="<?php echo trans("vacation_text"); ?>" maxlength="150">
@@ -154,7 +155,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+                      <?php endif; ?>
                         
                         <button type="submit" name="submit" value="update" class="btn btn-md btn-custom"><?php echo trans("save_changes") ?></button>
                         <?php echo form_close(); ?>
