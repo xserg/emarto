@@ -9,7 +9,9 @@
                         <h1 style="text-decoration: none; font-size: 24px;line-height: 28px;font-weight: bold"><?php echo trans("reset_password"); ?></h1>
                         <div class="mailcontent" style="line-height: 26px;font-size: 14px;">
                             <p style='text-align: center'>
-                                <?php echo trans("email_reset_password"); ?><br>
+                                <?php
+                                echo trans("hello") . ' ' . $first_name . ' ' . $last_name . ',<br>';
+                                echo trans("email_reset_password"); ?><br>
                             </p>
                             <p style='text-align: center;margin-top: 30px;'>
                                 <a href="<?php echo generate_url("reset_password"); ?>?token=<?php echo $token; ?>" style='font-size: 14px;text-decoration: none;padding: 14px 40px;background-color: #09b1ba;color: #ffffff !important; border-radius: 3px;'>

@@ -75,7 +75,9 @@ class Email_model extends CI_Model
                 'subject' => trans("reset_password"),
                 'to' => $user->email,
                 'template_path' => "email/email_reset_password",
-                'token' => $token
+                'token' => $token,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
             );
 
             $this->send_email($data);
