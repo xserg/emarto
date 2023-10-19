@@ -121,12 +121,7 @@
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <div class="form-group m-b-30">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" name="show_location" value="1" id="checkbox_show_location" class="custom-control-input" <?php echo ($this->auth_user->show_location == 1) ? 'checked' : ''; ?>>
-                                <label for="checkbox_show_location" class="custom-control-label"><?php echo trans("show_my_location"); ?></label>
-                            </div>
-                        </div>
+
                         <div class="form-group m-b-30">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="show_follow" value="1" id="checkbox_show_follow" class="custom-control-input" <?php echo ($this->auth_user->show_follow == 1) ? 'checked' : ''; ?>>

@@ -30,10 +30,11 @@ class Profile_model extends CI_Model
         if (empty($data['show_phone'])) {
             $data['show_phone'] = 0;
         }
+        /*
         if (empty($data['show_location'])) {
             $data['show_location'] = 0;
         }
-
+        */
         $this->db->where('id', $user_id);
         return $this->db->update('users', $data);
     }
