@@ -646,9 +646,9 @@ class Shipping_model extends CI_Model
     public function get_default_shipping_classes()
     {
         $default = [
-          1 => 'econony_shipping', //=> trans('econony_shipping'),
-          2 => 'standartd_shipping', //=> trans('standartd_shipping'),
-          3 => 'express_shipping' //=> trans('express_shipping'),
+          1 => 'economy_shipping', 
+          2 => 'standard_shipping', 
+          3 => 'express_shipping' 
         ];
         $data = [];
         foreach ($default as $k => $v) {
