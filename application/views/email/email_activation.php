@@ -10,7 +10,7 @@
                         <div class="mailcontent" style="line-height: 26px;font-size: 14px;">
                             <p style='text-align: center'>
                                 <?php 
-                                echo trans("hello") . ' ' . $first_name . ' ' . $last_name . ',<br>';
+                                echo trans("hello") . ', ' . $first_name . ' ' . $last_name . '!<br>';
                                 echo trans("msg_confirmation_email"); 
                                 ?><br>
                             </p>
