@@ -7,7 +7,7 @@
                 <tr>
                     <td>
                         <h1 style="text-decoration: none; font-size: 20px;line-height: 28px;font-weight: bold;margin-bottom: 5px;"><?php echo $subject; ?></h1>
-                        <?php echo trans("hello") . ' ' . $first_name . ' ' . $last_name . ',<br><br>'; ?>
+                        
                         <div class="mailcontent" style="line-height: 26px;font-size: 14px;">
                             <p style='text-align: left;margin-bottom: 10px;'>
                                 <strong style="font-weight: 600;"><?php echo trans("user"); ?></strong>:<br><?php echo html_escape($message_sender); ?>
