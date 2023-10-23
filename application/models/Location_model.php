@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Location_model extends CI_Model
-{  
+{
     //add country
     public function add_country()
     {
@@ -62,7 +62,7 @@ class Location_model extends CI_Model
             return $result;
         }
         if($this->selected_lang->id == 2) {
-          $this->db->select('id, name_rus name');
+          $this->db->select('id, name_rus name, seller, iso, phone_code, continent_code');
         }
         $this->db->where('status', 1)->order_by('name');
         $result = $this->db->get('location_countries')->result();
@@ -221,8 +221,7 @@ class Location_model extends CI_Model
 
     //get states by country
     public function get_states_by_country($country_id, $lamg = null)
-    {      
-        
+    {
         if($this->selected_lang->id == 2 || $lamg == 2) {
             $this->db->select('id, country_id, name_rus name');
         }
@@ -463,15 +462,12 @@ class Location_model extends CI_Model
         return $str;
     }
 
-    private static function is_bot($user_agent) {
-     
+    private static function is_bot($user_agent)
+    {
         $botRegexPattern = "(googlebot\/|Googlebot\-Mobile|Googlebot\-Image|Google favicon|Mediapartners\-Google|bingbot|slurp|java|wget|curl|Commons\-HttpClient|Python\-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST\-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub\.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum\.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips\-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail\.RU_Bot|discobot|heritrix|findthatfile|europarchive\.org|NerdByNature\.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb\-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web\-archive\-net\.com\.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks\-robot|it2media\-domain\-crawler|ip\-web\-crawler\.com|siteexplorer\.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki\-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e\.net|GrapeshotCrawler|urlappendbot|brainobot|fr\-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf\.fr_bot|A6\-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive\.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j\-asr|Domain Re\-Animator Bot|AddThis|YisouSpider|BLEXBot|YandexBot|SurdotlyBot|AwarioRssBot|FeedlyBot|Barkrowler|Gluten Free Crawler|Cliqzbot)";
-     
-     
         return preg_match("/{$botRegexPattern}/", $user_agent);
-     
     }
-     
+
     //get default location
     public function get_default_location()
     {
@@ -486,23 +482,23 @@ class Location_model extends CI_Model
             $location->state_id = $sess_location->state_id;
             $location->city_id = $sess_location->city_id;
         }
-        
+
         if (!$location->country_id) {
           //$_SERVER['REMOTE_ADDR'] = '90.154.73.201';
           //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
           if ( !self::is_bot($_SERVER['HTTP_USER_AGENT']) ) {
             $geo_ip = json_decode(file_get_contents('https://api.iplocation.net/?ip=' . $_SERVER['REMOTE_ADDR'] ));
-          //$geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));    
+          //$geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));
           //echo '<pre>';
           //print_r($geo_ip);
             $country_name = $geo_ip->country_name ?? '';
           }
-          
+
           //if (isset($geo_ip['geoplugin_countryName'])) {
           if ($country_name && $country_name != '-') {
-              $country = $this->location_model->search_countries($country_name); 
+              $country = $this->location_model->search_countries($country_name);
               //$city = $this->location_model->search_geo_city($geo_ip['geoplugin_city']);
-                   
+
               $location = new stdClass();
               $location->country_id = $country[0]->id;
               //if ($city) {
@@ -533,7 +529,7 @@ class Location_model extends CI_Model
         $location->city_id = !empty($city_id) ? $city_id : 0;
         $this->session->set_userdata('mds_default_location', serialize($location));
     }
-    
+
     public function search_geo_city($val)
     {
         $val = remove_special_characters($val);
