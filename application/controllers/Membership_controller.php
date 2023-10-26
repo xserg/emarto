@@ -252,7 +252,7 @@ class Membership_controller extends Admin_Core_Controller
                     'email_type' => 'email_general',
                     'to' => $user->email,
                     'subject' => trans("shop_opening_request"),
-                    'email_content' => trans("hello") . ', ' . $user->first_name . ' ' . $user->last_name . '!<br><br>' . $email_content,
+                    'email_content' => Auth_model::hello_user($user->first_name, $user->last_name) . '!<br><br>' . $email_content,
                     'email_link' => base_url(),
                     'email_button_text' => $email_button_text
                 );
@@ -570,21 +570,21 @@ class Membership_controller extends Admin_Core_Controller
         }
         $this->session->set_flashdata('error', trans("msg_error"));
     }
-    
+
     public function cancel_account()
     {
         $data['title'] = trans("cancel_account");
         $data['page_url'] = admin_url() . "cancel_account";
 
         $pagination = $this->paginate($data['page_url'], $this->auth_model->get_users_count_by_role('member'));
-        
+
         $this->db->select('users.*, cancel_account.id cancel_id, cancel_account.status cancel_status, message');
         $this->db->join('users', 'users.id = cancel_account.user_id');
         $this->db->order_by('cancel_account.created_at', 'DESC')
         ->limit(clean_number($pagination['per_page']), clean_number($pagination['offset']));
-        
+
         $data['users'] = $this->db->get('cancel_account')->result();
-          
+
         //echo $this->db->last_query();
         //print_r($data);
         //$data['users'] = $this->auth_model->get_paginated_filtered_users('member', $pagination['per_page'], $pagination['offset']);
@@ -595,7 +595,7 @@ class Membership_controller extends Admin_Core_Controller
         $this->load->view('admin/includes/_footer');
 
     }
-    
+
     /**
      * Ban or Remove User Ban
      */
@@ -603,27 +603,27 @@ class Membership_controller extends Admin_Core_Controller
     {
         $id = $this->input->post('id', true);
         $status = $this->input->post('status', true);
-        
+
         if (empty($id)) {
             return;
         }
-        
+
         //$cancel_account = $this->db->select('*')->where('id', $id)->get('cancel_account')->row();
         //$cancel_account->status = $status;
         //$res = $cancel_account->update();
         $this->db->where('id', $id);
-        
+
         if ($status == 3) {
             $this->db->delete('cancel_account');
             return;
         }
-                
-        
+
+
         if ($this->db->update('cancel_account', ['status' => $status])) {
-            
+
             $cancel = $this->db->get('cancel_account')->row();
             $user = $this->auth_model->get_user($cancel->user_id);
-          
+
             $this->load->model("email_model");
             //$this->email_model->send_email_activation($user_id);
             if (!empty($user->email)) {
@@ -635,14 +635,14 @@ class Membership_controller extends Admin_Core_Controller
                 );
                 $this->email_model->send_email($data);
             }
-            
-          
-          
+
+
+
             $this->session->set_flashdata('success', trans("msg_updated"));
         } else {
             $this->session->set_flashdata('error', trans("msg_error"));
         }
-        
+
         /*
         $email_content = trans("your_shop_opening_request_approved");
         $email_button_text = trans("start_selling");

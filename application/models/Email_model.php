@@ -46,8 +46,9 @@ class Email_model extends CI_Model
                 'to' => $user->email,
                 'template_path' => "email/email_activation",
                 'token' => $token,
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
+                'hello' => Auth_model::hello_user($user->first_name, $user->last_name),
+                //'first_name' => $user->first_name,
+                //'last_name' => $user->last_name,
             );
 
             $this->send_email($data);
@@ -76,8 +77,9 @@ class Email_model extends CI_Model
                 'to' => $user->email,
                 'template_path' => "email/email_reset_password",
                 'token' => $token,
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
+                'hello' => Auth_model::hello_user($user->first_name, $user->last_name),
+                //'first_name' => $user->first_name,
+                //'last_name' => $user->last_name,
             );
 
             $this->send_email($data);

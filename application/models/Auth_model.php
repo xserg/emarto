@@ -23,7 +23,7 @@ class Auth_model extends CI_Model
 
         $data = $this->input_values();
         $user = $this->get_user_by_email($data['email']);
-        
+
         if (empty($user)) {
           $user = $this->get_user_by_username($data['email']);
         }
@@ -333,7 +333,7 @@ class Auth_model extends CI_Model
                     'template_path' => "email/email_general",
                     'to' => $user->email,
                     'subject' => trans("confirm_your_account"),
-                    'email_content' => trans("hello") . ', ' . $user->first_name . ' ' . $user->last_name . '!<br><br>'
+                    'email_content' => self::hello_user($user->first_name, $user->last_name) . '!<br><br>'
                      . trans("msg_confirmation_email"),
                     'email_link' => lang_base_url() . "confirm?token=" . $data['token'],
                     'email_button_text' => trans("confirm_your_account")
@@ -342,6 +342,12 @@ class Auth_model extends CI_Model
                 $this->email_model->send_email($email_data);
             }
         }
+    }
+
+    public static function hello_user($first_name, $last_name)
+    {
+      $str = trans("hello");
+      return str_replace(array('{first_name}', '{last_name}'), array($first_name, $last_name), $str);
     }
 
     //send email activation
@@ -366,8 +372,8 @@ class Auth_model extends CI_Model
                     'email_type' => 'email_general',
                     'to' => $user->email,
                     'subject' => trans("confirm_your_account"),
-                    'email_content' =>  trans("hello") . ', ' . $user->first_name . ' ' . $user->last_name . '!<br><br>' 
-                    . trans("msg_confirmation_email"),
+                    'email_content' =>  self::hello_user($user->first_name, $user->last_name)
+                    . '<br><br>' . trans("msg_confirmation_email"),
                     'email_link' => lang_base_url() . "confirm?token=" . $data['token'],
                     'email_button_text' => trans("confirm_your_account")
                 );
@@ -753,54 +759,54 @@ class Auth_model extends CI_Model
         }
         if (!empty($user)) {
             $data = array();
-            if ($user->banned == 0 || ($user->banned == 1 && $type == 2)) {          
+            if ($user->banned == 0 || ($user->banned == 1 && $type == 2)) {
               if ($type == 1) {
                 $data['banned'] = 1;
                 $email_data['subject'] = trans('ban_account_subject');
-                $email_data['email_content'] = trans("hello") . ', ' . $user->first_name . ' ' . $user->last_name . '!<br><br>' . nl2br(trans('ban_account_message'));
+                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('ban_account_message'));
               }
               if ($type == 2) {
                 $data['banned'] = 2;
                 $email_data['subject'] = trans('ban_permanent_subject');
-                $email_data['email_content'] = trans("hello") . ', ' . $user->first_name . ' ' . $user->last_name . '!<br><br>' . nl2br(trans('ban_permanent_message'));
-              } 
+                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('ban_permanent_message'));
+              }
               $email_data['email_link'] = lang_base_url() . "help-center/submit-request";
               $email_data['email_button_text'] = trans("contact_support");
-            }       
+            }
             if ($user->banned > 0 && !$type) {
                 $data['banned'] = 0;
                 $email_data['subject'] = trans('unban_account_subject');
-                $email_data['email_content'] = trans("hello") . ', ' . $user->first_name . ' ' . $user->last_name . '!<br><br>' . nl2br(trans('unban_account_message'));
+                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('unban_account_message'));
                 $email_data['email_link'] = lang_base_url() . 'signin';
                 $email_data['email_button_text'] = trans("login");
             }
             $this->db->where('id', $id);
-            $res = $this->db->update('users', $data);            
+            $res = $this->db->update('users', $data);
             if ($res) {
             // Email
               $this->load->model("email_model");
               $email_data['to'] = $user->email;
               //$email_data['template_path'] = "email/email_newsletter";
               $email_data['template_path'] = "email/email_general";
- 
+
               $this->email_model->send_email($email_data);
             }
             return $res;
         }
         return false;
     }
-    
+
     //get user by email
     public function get_user_by_phone($phone)
     {
         return $this->db->select('users.*, (SELECT permissions FROM roles_permissions WHERE roles_permissions.id = users.role_id LIMIT 1) AS permissions')->where('users.phone_number', $phone)->get('users')->row();
     }
-    
+
     //check if username is unique
     public function is_unique_phone($phone, $user_id = 0)
     {
         $user = $this->get_user_by_phone($phone);
-        
+
         //if id doesnt exists
         if ($user_id == 0) {
             if (empty($user)) {
