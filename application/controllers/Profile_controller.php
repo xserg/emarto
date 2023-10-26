@@ -262,17 +262,17 @@ class Profile_controller extends Home_Core_Controller
                 //'first_name' => $this->input->post('first_name', true),
                 //'last_name' => $this->input->post('last_name', true),
                 'phone_number' => $this->input->post('phone_number', true),
-                'send_email_new_message' => $this->input->post('send_email_new_message', true),
+                //'send_email_new_message' => $this->input->post('send_email_new_message', true),
                 'show_email' => $this->input->post('show_email', true),
                 'show_phone' => $this->input->post('show_phone', true),
                 'show_location' => $this->input->post('show_location', true),
                 'about_me' => $this->input->post('about_me', true),
                 'show_follow' => $this->input->post('show_follow', true),
-                
+
                 //'vacation_text' => $this->input->post('vacation_text', true),
                 //'vacation_status' => $this->input->post('vacation_status', true),
             );
-            
+
             if (is_vendor()) {
               $data['vacation_text'] = $this->input->post('vacation_text', true);
               $data['vacation_status'] = $this->input->post('vacation_status', true);
@@ -542,7 +542,7 @@ class Profile_controller extends Home_Core_Controller
         $this->profile_model->follow_unfollow_user();
         redirect($this->agent->referrer());
     }
-    
+
     public function send_otp()
     {
       //check user
@@ -553,7 +553,7 @@ class Profile_controller extends Home_Core_Controller
       require_once APPPATH . "third_party/guzzlehttp/vendor/autoload.php";
       $client = new \GuzzleHttp\Client();
     }
-    
+
     public function verify_otp()
     {
       //check user
@@ -563,7 +563,7 @@ class Profile_controller extends Home_Core_Controller
       echo json_encode(['ok']);
       exit;
     }
-    
+
     public function cancel_account()
     {
         //check user
@@ -585,7 +585,7 @@ class Profile_controller extends Home_Core_Controller
         $this->load->view('settings/cancel_account', $data);
         $this->load->view('partials/_footer');
     }
-    
+
     public function cancel_account_post()
     {
         //check user
@@ -594,20 +594,20 @@ class Profile_controller extends Home_Core_Controller
         }
 
         //echo "cancel_account_post11155";
-        
-        
-        $data['user_id'] = $this->auth_user->id;  
+
+
+        $data['user_id'] = $this->auth_user->id;
         $data['message'] = $_POST['message'];
         $data["created_at"] = date('Y-m-d H:i:s');
-        
+
         $user = $this->auth_model->get_user($this->auth_user->id);
         //print_r($data);
         //echo $user->email;
         //return;
-        
+
             if ($this->db->insert('cancel_account', $data)) {
                 $this->session->set_flashdata('success', trans("msg_contact_success"));
-                
+
                 $this->load->model("email_model");
                 //$this->email_model->send_email_activation($user_id);
                 if (!empty($user->email)) {
@@ -619,13 +619,13 @@ class Profile_controller extends Home_Core_Controller
                     );
                     $this->email_model->send_email($data);
                 }
-                
+
                 redirect($this->agent->referrer());
             } else {
                 $this->session->set_flashdata('error', trans("msg_error"));
                 redirect($this->agent->referrer());
             }
-            
+
     }
 
 }

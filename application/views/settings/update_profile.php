@@ -81,31 +81,12 @@
                             <label class="control-label"><?php echo trans("phone_number"); ?></label><br>
                             <input type="text" type="tel" id="phone"  name="phone_number" class="custom-control-validate-input" value="<?php echo html_escape($this->auth_user->phone_number); ?>">
                             <br><span id="error-msg" class="text-danger hide"></span>
-                        </div>                        
+                        </div>
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("about_me"); ?> <span class="do_not_use">(<?php echo trans("please_do_not_use"); ?>)</span></label>
-                                                      
+
                             <textarea name="about_me" class="form-control form-textarea" placeholder="<?php echo trans("about_me"); ?>" maxlength="150"><?= html_escape($this->auth_user->about_me); ?></textarea>
-                            
-                        </div>
-                        <div class="form-group m-t-10">
-                            <div class="row">
-                                <div class="col-12">
-                                    <label class="control-label"><?php echo trans('email_option_send_email_new_message'); ?></label>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-12 col-option">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" name="send_email_new_message" value="1" id="send_email_new_message_1" class="custom-control-input" <?php echo ($user->send_email_new_message == 1) ? 'checked' : ''; ?>>
-                                        <label for="send_email_new_message_1" class="custom-control-label"><?php echo trans("yes"); ?></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-4 col-12 col-option">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" name="send_email_new_message" value="0" id="send_email_new_message_2" class="custom-control-input" <?php echo ($user->send_email_new_message != 1) ? 'checked' : ''; ?>>
-                                        <label for="send_email_new_message_2" class="custom-control-label"><?php echo trans("no"); ?></label>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <?php if ($this->general_settings->hide_vendor_contact_information != 1): ?>
                             <div class="form-group m-t-15">
@@ -151,7 +132,7 @@
                             </div>
                         </div>
                       <?php endif; ?>
-                        
+
                         <button type="submit" name="submit" value="update" class="btn btn-md btn-custom"><?php echo trans("save_changes") ?></button>
                         <?php echo form_close(); ?>
 
@@ -189,6 +170,5 @@
     separateDialCode: true,
     utilsScript: "/assets/js/utils.js",
   });
-  
-</script>
 
+</script>
