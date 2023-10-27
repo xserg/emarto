@@ -314,7 +314,7 @@ class Language_model extends CI_Model
             $sql = "SELECT * FROM language_translations WHERE lang_id = ? AND (label LIKE ? OR translation LIKE ?) ORDER BY id LIMIT ?, ?";
             $query = $this->db->query($sql, array(clean_number($lang_id), $like, $like, clean_number($offset), clean_number($per_page)));
         } else {
-            $sql = "SELECT * FROM language_translations WHERE lang_id = ? ORDER BY id DESC LIMIT ?, ?";
+            $sql = "SELECT * FROM language_translations WHERE lang_id = ? ORDER BY id LIMIT ?, ?";
             $query = $this->db->query($sql, array(clean_number($lang_id), clean_number($offset), clean_number($per_page)));
         }
         return $query->result();
