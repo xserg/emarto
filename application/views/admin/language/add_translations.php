@@ -3,7 +3,7 @@
 <div class="box">
     <div class="box-header with-border">
         <div class="left">
-            <h3 class="box-title"><?php echo $title; ?> - <?php echo $language->name; ?></h3>
+            <h3 class="box-title"><?php echo $title; ?> - <a href="<?php echo admin_url(); ?>translations/<?php echo $language->id; ?>"><?php echo $language->name; ?></a></h3>
         </div>
     </div><!-- /.box-header -->
 
@@ -18,13 +18,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="table-responsive">
-                  <div class="box-footer">
-                    <a href="<?php echo admin_url(); ?>add_translations/<?php echo $language->id; ?>?show=5" class="btn btn-sm btn-info float-right">
-                        <?php echo trans('add_translation'); ?>
-                    </a>
-                  </div>
-                    <?php $this->load->view('admin/language/_filter_translations'); ?>
-                    <?php echo form_open('language_controller/update_translations_post'); ?>
+                    <?php //$this->load->view('admin/language/_filter_translations'); ?>
+                    <?php echo form_open('language_controller/add_translations_post'); ?>
                     <input type="hidden" name="lang_id" value="<?php echo $language->id; ?>">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -35,13 +30,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($translations as $item): ?>
+                        <?php for ($i = 0; $i < 3; $i++): ?>
                             <tr class="tr-phrase">
-                                <td style="width: 50px;"><?php echo $item->id; ?></td>
-                                <td style="width: 40%;"><input type="text" class="form-control" value="<?php echo $item->label; ?>" <?php echo ($language->text_direction == "rtl") ? 'dir="rtl"' : ''; ?> readonly></td>
-                                <td style="width: 60%;"><input type="text" name="<?php echo $item->id; ?>" data-label="<?php echo $item->id; ?>" data-lang="<?php echo $item->lang_id; ?>" class="form-control input_translation" value="<?php echo $item->translation; ?>" <?php echo ($language->text_direction == "rtl") ? 'dir="rtl"' : ''; ?>></td>
+                                <td style="width: 50px;"><?php echo $i; ?></td>
+                                <td style="width: 40%;"><input type="text" class="form-control" name="id[<?php echo $i; ?>]"></td>
+                                <td style="width: 60%;"><input type="text" name="value[<?php echo $i; ?>]" data-label="<?php echo $item->id; ?>" data-lang="<?php echo $item->lang_id; ?>" class="form-control"></td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endfor; ?>
                         </tbody>
                     </table>
                     <button type="submit" class="btn btn-primary pull-right">
@@ -49,11 +44,7 @@
                     </button>
                     <?php echo form_close(); ?>
                 </div>
-                <?php if (empty($translations)): ?>
-                    <p class="text-center">
-                        <?php echo trans("no_records_found"); ?>
-                    </p>
-                <?php endif; ?>
+                
 
                 <div class="col-sm-12 table-ft">
                     <div class="row">

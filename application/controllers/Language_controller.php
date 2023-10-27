@@ -133,6 +133,48 @@ class Language_controller extends Admin_Core_Controller
     }
 
     /**
+     * Add Translations
+     */
+    public function add_translations($id)
+    {
+        $data['title'] = trans('add_translation');
+
+        //get language
+        $data['language'] = $this->language_model->get_language($id);
+        if (empty($data['language'])) {
+            redirect($this->agent->referrer());
+        }
+        $data['lang_settings'] = lang_settings();
+        //get paginated translations
+        //$pagination = $this->paginate(admin_url() . 'translations/' . $data['language']->id, $this->language_model->get_translation_count($data['language']->id));
+
+        //$data['translations'] = $this->language_model->get_paginated_translations($data['language']->id, $pagination['per_page'], $pagination['offset']);
+
+        $this->load->view('admin/includes/_header', $data);
+        $this->load->view('admin/language/add_translations', $data);
+        $this->load->view('admin/includes/_footer');
+    }
+
+    /**
+     * Update Translations Post
+     */
+    public function add_translations_post()
+    {
+        $lang_id = $this->input->post("lang_id");
+        $ids = $this->input->post();
+        //echo '<pre>';
+        //print_r($ids);
+
+        foreach ($ids['id'] as $key => $value) {
+          echo "$key => $value";
+                $this->language_model->add_translation($lang_id, $value, $ids['value'][$key]);
+        }
+        reset_cache_data($this, "st");
+        $this->session->set_flashdata('success', trans("msg_updated"));
+        redirect($this->agent->referrer());
+    }
+
+    /**
      * Update Translations
      */
     public function update_translations($id)

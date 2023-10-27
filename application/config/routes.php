@@ -353,6 +353,7 @@ $route[getr('admin', $rts) . '/buy-requests/(:num)'] = 'order_admin_controller/b
 $route[getr('admin', $rts) . '/languages'] = 'language_controller/languages';
 $route[getr('admin', $rts) . '/update-language/(:num)'] = 'language_controller/update_language/$1';
 $route[getr('admin', $rts) . '/translations/(:num)'] = 'language_controller/update_translations/$1';
+$route[getr('admin', $rts) . '/add_translations/(:num)'] = 'language_controller/add_translations/$1';
 $route[getr('admin', $rts) . '/search-phrases'] = 'language_controller/search_phrases';
 /*payment routes*/
 $route[getr('admin', $rts) . '/payment-settings'] = 'settings_controller/payment_settings';
