@@ -38,7 +38,7 @@
 											</div>
 											<div class="right">
 												<div class="row-custom">
-													<a href="<?php echo generate_profile_url($user->slug); ?>"><strong class="username"><?php echo html_escape($user->username); ?></strong></a>
+													<strong class="username"><?php echo html_escape($user->username); ?></strong>
 													<label class="badge badge-success badge-new"><?php echo trans("new_message"); ?></label>
 												</div>
 												<div class="row-custom m-b-0">
@@ -72,7 +72,7 @@
 													<p class="subject"><?php echo html_escape(character_limiter($item->subject, 28, '...')); ?></p>
 												</div>
 											</div>
-										</a>										
+										</a>
 										<!--a href="javascript:void(0)" class="ban-user" onclick='ban_user("<?php //echo $user->username; ?>","<?php //echo trans("add_ban") . '?'; ?>");'><i class="fa fa-user-times"></i></a-->
 										<a href="javascript:void(0)" class="delete-conversation-link" onclick='delete_conversation(<?php echo $item->id; ?>,"<?php echo trans("confirm_message"); ?>");'><i class="icon-trash"></i></a>
 									</div>
@@ -106,13 +106,13 @@
 											if ($conversation->type == 'buy') {
 													$buy = $this->buy_model->get_buy_request($conversation->product_id);
 													//print_r($product);
-													echo '<p class="subject m-0 font-600"><a href="/buy_requests/' . $conversation->product_id 
+													echo '<p class="subject m-0 font-600"><a href="/buy_requests/' . $conversation->product_id
 													. '" class="link-black link-underlined">' . html_escape($conversation->subject) . '</a></p>';
 											} else {
 													$product = get_product($conversation->product_id);
 											}
 											if (!empty($product)):?>
-													<p class="subject m-0 font-600"><a href="<?= generate_product_url($product); ?>" class="link-black link-underlined"><?= html_escape($conversation->subject); ?></a></p>							
+													<p class="subject m-0 font-600"><a href="<?= generate_product_url($product); ?>" class="link-black link-underlined"><?= html_escape($conversation->subject); ?></a></p>
 											<?php endif;
 									else: ?>
 											<p class="subject m-0 font-600"><?= html_escape($conversation->subject); ?></p>
@@ -137,7 +137,7 @@
 													<div class="message-text">
 														<?php echo html_escape($item->message); ?>
 													</div>
-													<?php if ($item->image_path_thumb) 
+													<?php if ($item->image_path_thumb)
 													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
 													?>
 													<span class="time"><?php echo time_ago($item->created_at); ?></span>
@@ -151,7 +151,7 @@
 													<div class="message-text">
 														<?php echo html_escape($item->message); ?>
 													</div>
-													<?php if ($item->image_path_thumb) 
+													<?php if ($item->image_path_thumb)
 													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
 													?>
 													<span class="time"><?php echo time_ago($item->created_at); ?></span>
@@ -180,16 +180,16 @@
 							<div class="form-group m-b-10">
 								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" required></textarea>
 							</div>
-							
+
 							<div class="row">
 									<div class="col-sm-12 m-b-30">
-										
+
 												<input type="file" name="file" id="file" size="40"  />
-										
+
 											<?php //$this->load->view("dashboard/product/_image_upload_box", ['modesy_images' => [1]]); ?>
 									</div>
 							</div>
-							
+
 							<div class="form-group">
 								<button type="submit" class="btn btn-md btn-custom float-right"><i class="icon-send"></i> <?php echo trans("send"); ?></button>
 							</div>

@@ -111,6 +111,7 @@ class Message_model extends CI_Model
     public function get_messages($conversation_id)
     {
         $conversation_id = clean_number($conversation_id);
+        $this->db->select('conversation_messages.*, image_path, image_path_thumb');
         $this->db->join('message_images', 'conversation_messages.id=message_images.message_id', 'left');
         $this->db->where('conversation_id', $conversation_id);
         $this->db->order_by('conversation_messages.id');
@@ -211,7 +212,6 @@ class Message_model extends CI_Model
         $conversation = $this->get_conversation($id);
         if (!empty($conversation)) {
             $messages = $this->get_messages($conversation->id);
-
             if (!empty($messages)) {
                 foreach ($messages as $message) {
                     if ($message->sender_id == $this->auth_user->id || $message->receiver_id == $this->auth_user->id) {
