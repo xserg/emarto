@@ -178,7 +178,7 @@
 								<input type="hidden" name="receiver_id" value="<?php echo $conversation->sender_id; ?>">
 							<?php endif; ?>
 							<div class="form-group m-b-10">
-								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" required></textarea>
+								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" maxlength="80" required></textarea>
 							</div>
 
 							<div class="row">

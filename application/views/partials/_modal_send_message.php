@@ -7,7 +7,7 @@
             <form id="form_send_message" novalidate="novalidate">
                 <input type="hidden" name="receiver_id" id="message_receiver_id" value="<?php echo $user->id; ?>">
                 <input type="hidden" id="message_send_em" value="<?php echo $user->send_email_new_message; ?>">
-                
+
                 <input type="hidden" name=type id="message_send_em" value="<?php echo $type; ?>">
                 <?php if (!empty($product_id)): ?>
                     <input type="hidden" name="product_id" value="<?= $product_id; ?>">
@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group m-b-sm-0">
                                 <label class="control-label"><?php echo trans("message"); ?></label>
-                                <textarea name="message" id="message_text" class="form-control form-textarea" placeholder="<?php echo trans("write_a_message"); ?>" required></textarea>
+                                <textarea name="message" id="message_text" class="form-control form-textarea" placeholder="<?php echo trans("write_a_message"); ?>" maxlength="80" required></textarea>
                             </div>
                         </div>
                     </div>
