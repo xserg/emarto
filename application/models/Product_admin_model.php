@@ -354,6 +354,7 @@ class Product_admin_model extends CI_Model
         $product = $this->get_product($id);
         if (!empty($product)) {
             $data = array(
+                'status' => 0,
                 'is_rejected' => 1,
                 'reject_reason' => $this->input->post('reject_reason', true)
             );

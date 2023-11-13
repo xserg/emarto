@@ -114,6 +114,9 @@
                                                     <a href="<?= generate_dash_url("edit_product"); ?>/<?= $item->id; ?>" target="_blank"><i class="fa fa-edit option-icon"></i><?php echo trans("edit"); ?></a>
                                                 </li>
                                                 <li>
+                                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modalReject" onclick="$('#reject_product_id').val(<?= $item->id; ?>);"><i class="fa fa-ban option-icon"></i><?php echo trans("reject"); ?></a>
+                                                </li>
+                                                <li>
                                                     <a href="javascript:void(0)" onclick="delete_item('product_controller/delete_product','<?php echo $item->id; ?>','<?php echo trans("confirm_product"); ?>');"><i class="fa fa-times option-icon"></i><?php echo trans('delete'); ?></a>
                                                 </li>
                                                 <li>
@@ -182,5 +185,25 @@
             <?php echo form_close(); ?><!-- form end -->
         </div>
 
+    </div>
+</div>
+
+<div id="modalReject" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php echo form_open('product_controller/reject_product'); ?>
+            <input type="hidden" name="id" id="reject_product_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><?= trans("reject"); ?></h4>
+            </div>
+            <div class="modal-body">
+                <textarea name="reject_reason" class="form-control form-textarea" placeholder="<?= trans("reason"); ?>.." style="min-height: 150px;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success"><?= trans("submit"); ?></button>
+            </div>
+            <?php echo form_close(); ?>
+        </div>
     </div>
 </div>
