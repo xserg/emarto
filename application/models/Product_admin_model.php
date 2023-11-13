@@ -426,16 +426,38 @@ class Product_admin_model extends CI_Model
         return false;
     }
 
+    private function delete_email($user_id)
+    {
+        $this->load->model("auth_model");
+        $user = $this->auth_model->get_user($user_id);
+        $email_data['subject'] = trans('your_listing_removed');
+        $email_data['email_content'] = nl2br(trans('your_listing_removed_message'));
+        //self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('your_listing_removed_message'));
+        $this->load->model("email_model");
+        $email_data['to'] = $user->email;
+        $email_data['template_path'] = "email/email_general";
+        $this->email_model->send_email($email_data);
+        return;
+    }
+
     //delete product
     public function delete_product($product_id)
     {
         $product = $this->get_product($product_id);
+        $this->load->model("auth_model");
+        $user = $this->auth_model->get_user($product->user_id);
+        //print_r($user);
+        //return;
         if (!empty($product)) {
             $data = array(
                 'is_deleted' => 1
             );
             $this->db->where('id', $product->id);
-            return $this->db->update('products', $data);
+            $res = $this->db->update('products', $data);
+            if ($res) {
+              $this->delete_email($product->user_id);
+              return $res;
+            }
         }
         return false;
     }
@@ -471,7 +493,11 @@ class Product_admin_model extends CI_Model
                     $this->db->where('id', $variation->id)->delete('variations');
                 }
             }
-            return $this->db->where('id', $product->id)->delete('products');
+            $res = $this->db->where('id', $product->id)->delete('products');
+            if ($res) {
+              $this->delete_email($product->user_id);
+              return $res;
+            }
         }
         return false;
     }
