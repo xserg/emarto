@@ -601,12 +601,17 @@ class Profile_controller extends Home_Core_Controller
         $data["created_at"] = date('Y-m-d H:i:s');
 
         $user = $this->auth_model->get_user($this->auth_user->id);
-        //print_r($data);
-        //echo $user->email;
-        //return;
+
+        $check_exist = $this->db->where('user_id', $this->auth_user->id)->get('cancel_account')->row();
+        if ($check_exist) {
+          $this->session->set_flashdata('error', trans("msg_cancel_under_review"));
+          redirect($this->agent->referrer());
+          return;
+        }
+
 
             if ($this->db->insert('cancel_account', $data)) {
-                $this->session->set_flashdata('success', trans("msg_contact_success"));
+                $this->session->set_flashdata('success', trans("msg_cancel_success"));
 
                 $this->load->model("email_model");
                 //$this->email_model->send_email_activation($user_id);

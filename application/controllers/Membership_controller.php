@@ -578,7 +578,7 @@ class Membership_controller extends Admin_Core_Controller
 
         $pagination = $this->paginate($data['page_url'], $this->auth_model->get_users_count_by_role('member'));
 
-        $this->db->select('users.*, cancel_account.id cancel_id, cancel_account.status cancel_status, message');
+        $this->db->select('users.*, cancel_account.id cancel_id, cancel_account.status cancel_status, cancel_account.created_at, message');
         $this->db->join('users', 'users.id = cancel_account.user_id');
         $this->db->order_by('cancel_account.created_at', 'DESC')
         ->limit(clean_number($pagination['per_page']), clean_number($pagination['offset']));
