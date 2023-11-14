@@ -38,13 +38,13 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-          
+
                                   <th><?php echo trans('product'); ?></th>
                                     <th><?php echo trans('category'); ?></th>
                                     <th scope="col"><?php echo trans("title"); ?></th>
                                     <th scope="col"><?php echo trans("description"); ?></th>
                                     <th scope="col"><?php echo trans("price"); ?></th>
-                                    
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -60,7 +60,7 @@
                                                     </a>
                                                 </div>
                                                 </td>
-                                                
+
                                                 <td>
                                                     <?php $category = $this->category_model->get_category($request->category_id);
                                                     if (!empty($category)) {
@@ -80,7 +80,7 @@
                                                         <a href="javascript:void(0)" class="btn btn-sm btn-default btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_product(<?php echo $request->id; ?>,'<?php echo trans("confirm_product"); ?>');"><i class="fa fa-trash-o"></i></a>
                                                     </div>
                                                 </td>
-                                                
+
                                             </tr>
                                         <?php //endif;
                                     endforeach; ?>
@@ -128,18 +128,18 @@
                   </select>
                   <div id="category_select_container"></div>
               </div>
-              
+
                 <?php $this->load->view("buy/_image_upload_box"); ?>
                 <div class="form-group">
-                    <label class="control-label"><?= trans("buy_title"); ?></label>
-                    <input type=text name="title" class="form-control"  >
-                </div>  
+                    <label class="control-label"><?= trans("buy_title"); ?> (<?php echo trans("max_chars"); ?>)</label>
+                    <input type=text name="title" class="form-control"  placeholder="<?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)" maxlength="80">
+                </div>
                 <div class="form-group">
                     <label class="control-label"><?= trans("buy_description"); ?></label>
                     <textarea name="description" class="form-control" aria-hidden="true" placeholder="<?= trans('i_am_looking_for'); ?>"></textarea>
-                </div> 
+                </div>
                 <div class="form-group">
-                  <div class="row">                  
+                  <div class="row">
                     <div class="col-sm-4">
                         <label class="control-label"><?php echo trans('buy_location'); ?></label>
                         <select id="select_countries" name="country_id" class="select form-control" onchange="get_states(this.value, '<?php echo $map; ?>');">
@@ -152,7 +152,7 @@
                                 <?php endif;
                             endforeach; ?>
                         </select>
-                    </div>           
+                    </div>
                   <div class="col-sm-4">
                       <label class="control-label"><?= trans("buy_price"); ?></label>
                       <input type=text name="price" class="form-control"  >
@@ -165,12 +165,12 @@
                               <option  value="<?= $currency->code; ?>"><?= $currency->code; ?>&nbsp;(<?= $currency->symbol; ?>)</option>
                           <?php endif;
                         endforeach; ?>
-                      </select>                      
-                  </div>        
+                      </select>
+                  </div>
                  </div>
-                </div>                
+                </div>
                 <div>
-                  <b><?php echo trans("terms_buy"); ?></b>                          
+                  <b><?php echo trans("terms_buy"); ?></b>
                 </div>
                 <div class="form-group text-right m-0">
                     <button type="submit" class="btn btn-md btn-custom"><?= trans("submit_buy"); ?></button>

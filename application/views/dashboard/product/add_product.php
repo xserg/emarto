@@ -140,15 +140,15 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse_<?= $language->id; ?>"><?= trans("details"); ?><?= item_count($this->languages) > 1 ? ':&nbsp;' . $language->name : ''; ?>&nbsp;<?= $this->selected_lang->id != $language->id ? 
+                                <a data-toggle="collapse" href="#collapse_<?= $language->id; ?>"><?= trans("details"); ?><?= item_count($this->languages) > 1 ? ':&nbsp;' . $language->name : ''; ?>&nbsp;<?= $this->selected_lang->id != $language->id ?
                                 "(" . trans("optional") . ")" : ''; ?><i class="fa fa-caret-down pull-right"></i></a>
                             </h4>
                         </div>
                         <div id="collapse_<?= $language->id; ?>" class="panel-collapse collapse <?= $this->selected_lang->id == $language->id ? 'in' : ''; ?>">
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="control-label"><?php echo trans("title"); ?></label>
-                                    <input type="text" name="title_<?= $language->id; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (80 max)" 
+                                    <label class="control-label"><?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)</label>
+                                    <input type="text" name="title_<?= $language->id; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)" 
                                     <?= $this->selected_lang->id == $language->id ? 'required id="from-text" ' : 'id="to-text_'.$language->id.'"'; ?> maxlength="80" data-lang=<?= $language->short_form ?>>
                                 </div>
                                 <div class="form-group">
@@ -157,7 +157,7 @@
                                         <div class="col-sm-12 m-b-5">
                                             <button type="button" id="btn_add_image_editor" class="btn btn-sm btn-info" data-editor-id="editor_<?= $language->id; ?>" data-toggle="modal" data-target="#fileManagerModal"><i class="icon-image"></i>&nbsp;&nbsp;<?php echo trans("add_image"); ?></button>
                                             <?= $this->selected_lang->id == $language->id ? '<button type="button" id="translate" class="btn btn-sm btn-info"><img src="/assets/img/translate.svg" alt="'.trans("translation").'"  style="cursor: pointer;"> '.trans("translation").'</button>' : '' ?>
-                                            
+
                                         </div>
                                     </div>
                                     <textarea name="description_<?= $language->id; ?>" id="editor_<?= $language->id; ?>" class="tinyMCEsmall text-editor" data-lang=<?= $language->short_form ?>>

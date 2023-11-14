@@ -202,8 +202,9 @@
                         <div id="collapse_<?= $language->id; ?>" class="panel-collapse collapse <?= $this->selected_lang->id == $language->id ? 'in' : ''; ?>">
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="control-label"><?php echo trans("title"); ?></label>
-                                    <input type="text" name="title_<?= $language->id; ?>" value="<?= !empty($product_details) ? $product_details->title : ''; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?>" <?= $this->selected_lang->id == $language->id ? 'required' : ''; ?> maxlength="490">
+                                    <label class="control-label"><?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)</label>
+                                    <input type="text" name="title_<?= $language->id; ?>" value="<?= !empty($product_details) ? $product_details->title : ''; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)"
+                                    <?= $this->selected_lang->id == $language->id ? 'required' : ''; ?> maxlength="80">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"><?php echo trans("description"); ?></label>
