@@ -484,8 +484,11 @@ class Location_model extends CI_Model
         }
 
         if (!$location->country_id) {
-          //$_SERVER['REMOTE_ADDR'] = '90.154.73.201';
-          //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
+          //echo "GET LOCATION";
+          if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+            $_SERVER['REMOTE_ADDR'] = '90.154.73.201';
+            //$_SERVER['REMOTE_ADDR'] = '65.109.170.25';
+          }
           if ( !self::is_bot($_SERVER['HTTP_USER_AGENT']) ) {
             $geo_ip = json_decode(file_get_contents('https://api.iplocation.net/?ip=' . $_SERVER['REMOTE_ADDR'] ));
           //$geo_ip = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'] ));

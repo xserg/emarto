@@ -44,10 +44,10 @@
                                       <a href="<?php echo generate_url("purchase-protection");?>"><b><?= trans("purchase-protection"); ?></b></a><br>
                                       <?= trans("shop_with_confidence"); ?>
                                       </div>
-                                      <div class="shipping_return_policy"><a class="link-underlined" href="<?php echo generate_url("shipping_return_policy");?>"><?= trans("shipping_return_policy"); ?></a></div>                                    
+                                      <div class="shipping_return_policy"><a class="link-underlined" href="<?php echo generate_url("shipping_return_policy");?>"><?= trans("shipping_return_policy"); ?></a></div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -174,13 +174,19 @@
                                                                                 <select id="select_countries_product" name="country_id" class="select2 form-control" data-placeholder="<?= trans("country"); ?>" onchange="get_states(this.value,false,'product'); $('#product_shipping_cost_container').empty();">
                                                                                     <option></option>
                                                                                     <?php foreach ($this->countries as $item): ?>
-                                                                                        <option value="<?= $item->id; ?>"><?= html_escape($item->name); ?></option>
+                                                                                        <option value="<?= $item->id; ?>" <?= ($this->default_location->country_id == $item->id) ? ' selected' : ''; ?>><?= html_escape($item->name); ?></option>
                                                                                     <?php endforeach; ?>
                                                                                 </select>
                                                                             </div>
                                                                             <div id="get_states_container_product" class="col-12 col-md-4">
                                                                                 <select id="select_states_product" name="state_id" class="select2 form-control" data-placeholder="<?= trans("state"); ?>" onchange="get_product_shipping_cost(this.value, '<?= $product->id; ?>');">
                                                                                     <option></option>
+                                                                                    <?php $states = get_states_by_country($this->default_location->country_id);
+                                                                                    if (!empty($states)):
+                                                                                        foreach ($states as $item): ?>
+                                                                                            <option value="<?= $item->id; ?>" <?= $item->id == $this->default_location->state_id ? 'selected' : ''; ?>><?= html_escape($item->name); ?></option>
+                                                                                        <?php endforeach;
+                                                                                    endif; ?>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -212,7 +218,7 @@
                                                         <?php endif; ?>
                                                         </tbody>
                                                     </table>
-                                                    <?php if ($product_location_status == 1): ?>
+                                                    <?php if ($product_location_status == 11): ?>
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <div class="product-location-map">
