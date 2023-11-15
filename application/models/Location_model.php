@@ -212,7 +212,7 @@ class Location_model extends CI_Model
     {
         $id = clean_number($id);
         if($this->selected_lang->id == 2) {
-          $this->db->select('id, name_rus name');
+          $this->db->select('id, country_id, name_rus name');
         }
         $this->db->where('id', $id);
         $query = $this->db->get('location_states');
