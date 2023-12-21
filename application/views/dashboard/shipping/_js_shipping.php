@@ -76,7 +76,7 @@
         };
         data[csfr_token_name] = $.cookie(csfr_cookie_name);
         data["sys_lang_id"] = sys_lang_id;
-        
+
         $.ajax({
             type: "POST",
             url: base_url + "dashboard_controller/select_shipping_method",
@@ -121,16 +121,22 @@
             }
         });
     }
-    
+
     $(document).ready(function () {
-        $('#add-shipping-zone').submit(function (e) {       
-            if (!$('#zone_name').val() && !$('[name=zone_name_lang_1]').val()) { 
+        $('#add-shipping-zone').submit(function (e) {
+            if (!$('#zone_name').val() && !$('[name=zone_name_lang_1]').val()) {
             //|| !$("#selected_regions_container").text()) {
               alert('Please fill name!');
               e.preventDefault();
             }
-    
+
         });
+    });
+
+    //set economy 0 for free
+
+    $(document).on("click", "#status_1", function () {
+        $("#flat_rate_cost_class_1").val('0.00');
     });
 
 </script>

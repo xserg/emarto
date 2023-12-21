@@ -283,7 +283,7 @@ class Shipping_model extends CI_Model
     {
         $name_array = array();
         if ($this->input->post('zone_name')) {
-          
+
           foreach ($this->languages as $language) {
               $row = $this->db->where('lang_id', $language->id)
               ->where('label', $this->input->post('zone_name'))
@@ -296,8 +296,8 @@ class Shipping_model extends CI_Model
                 array_push($name_array, $item);
               }
           }
-          
-        } else {        
+
+        } else {
           foreach ($this->languages as $language) {
               $item = array(
                   'lang_id' => $language->id,
@@ -324,6 +324,7 @@ class Shipping_model extends CI_Model
     //add shipping zone locations
     public function add_shipping_zone_locations($zone_id)
     {
+      //echo "<pre> zone ".$zone_id;
         $continent_codes = $this->input->post('continent');
         if (!empty($continent_codes)) {
             foreach ($continent_codes as $continent_code) {
@@ -347,6 +348,7 @@ class Shipping_model extends CI_Model
         if (!empty($country_ids)) {
             foreach ($country_ids as $country_id) {
                 $country = $this->location_model->get_country($country_id);
+                //print_r($country);
                 if (!empty($country)) {
                     //check if already exists
                     $zone_country = $this->db->where('country_id', clean_number($country_id))->where('zone_id', clean_number($zone_id))->get('shipping_zone_locations')->row();
@@ -367,6 +369,7 @@ class Shipping_model extends CI_Model
         if (!empty($state_ids)) {
             foreach ($state_ids as $state_id) {
                 $state = $this->location_model->get_state($state_id);
+                //print_r($state);
                 if (!empty($state)) {
                     $country = $this->location_model->get_country($state->country_id);
                     if (!empty($country)) {
@@ -397,7 +400,8 @@ class Shipping_model extends CI_Model
                 $name_array = array();
                 foreach ($this->languages as $language) {
                   $row = $this->db->where('lang_id', $language->id)
-                  ->where('label', $this->input->post('method_name_' . $option_unique_id . '_lang_1', true))
+                  //->where('label', $this->input->post('method_name_' . $option_unique_id . '_lang_1', true))
+                  ->where('label', 'flat_rate', true)
                   ->get('language_translations')->row();
                   if ($row) {
                     $item = [
@@ -421,7 +425,8 @@ class Shipping_model extends CI_Model
                     'flat_rate_cost' => $this->input->post('flat_rate_cost_' . $option_unique_id, true),
                     'local_pickup_cost' => $this->input->post('local_pickup_cost_' . $option_unique_id, true),
                     'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount_' . $option_unique_id, true),
-                    'status' => $this->input->post('status_' . $option_unique_id, true)
+                    'status' => $this->input->post('status', true)
+                    //'status' => $this->input->post('status_' . $option_unique_id, true)
                 );
                 $data['flat_rate_cost_calculation_type'] = !empty($data['flat_rate_cost_calculation_type']) ? $data['flat_rate_cost_calculation_type'] : "";
                 $data['flat_rate_cost'] = !empty($data['flat_rate_cost']) ? $data['flat_rate_cost'] : 0;
@@ -434,7 +439,8 @@ class Shipping_model extends CI_Model
 
                 //shipping classes
                 $class_array = array();
-                $shipping_classes = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+                //$shipping_classes = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
+                $shipping_classes = $this->get_default_shipping_classes();
                 if (!empty($shipping_classes)) {
                     foreach ($shipping_classes as $shipping_class) {
                         $item = array(
@@ -457,6 +463,7 @@ class Shipping_model extends CI_Model
     //edit shipping zone
     public function edit_shipping_zone($zone_id)
     {
+        /*
         $name_array = array();
         foreach ($this->languages as $language) {
             $item = array(
@@ -468,7 +475,10 @@ class Shipping_model extends CI_Model
         $data = array(
             'name_array' => serialize($name_array)
         );
-        if ($this->db->where('id', clean_number($zone_id))->update('shipping_zones', $data)) {
+        */
+        //if ($this->db->where('id', clean_number($zone_id))->update('shipping_zones', $data)) {
+
+        if ($zone_id) {
             //add locations
             $this->add_shipping_zone_locations($zone_id);
             //edit paymenet methods
@@ -510,7 +520,8 @@ class Shipping_model extends CI_Model
                     'flat_rate_cost' => $this->input->post('flat_rate_cost_' . $option_unique_id, true),
                     'local_pickup_cost' => $this->input->post('local_pickup_cost_' . $option_unique_id, true),
                     'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount_' . $option_unique_id, true),
-                    'status' => $this->input->post('status_' . $option_unique_id, true)
+                    'status' => $this->input->post('status', true)
+                    //'status' => $this->input->post('status_' . $option_unique_id, true)
                 );
                 $data['flat_rate_cost_calculation_type'] = !empty($data['flat_rate_cost_calculation_type']) ? $data['flat_rate_cost_calculation_type'] : "";
                 $data['flat_rate_cost'] = !empty($data['flat_rate_cost']) ? $data['flat_rate_cost'] : 0;
@@ -576,8 +587,8 @@ class Shipping_model extends CI_Model
 
     //get shipping locations by zone
     public function get_shipping_locations_by_zone($zone_id)
-    {    
-        $this->db->select("shipping_zone_locations.*, (SELECT name" . ($this->selected_lang->id == 2 ? '_rus' : '') . " FROM location_countries WHERE location_countries.id = shipping_zone_locations.country_id LIMIT 1) As country_name, 
+    {
+        $this->db->select("shipping_zone_locations.*, (SELECT name" . ($this->selected_lang->id == 2 ? '_rus' : '') . " FROM location_countries WHERE location_countries.id = shipping_zone_locations.country_id LIMIT 1) As country_name,
         (SELECT name" . ($this->selected_lang->id == 2 ? '_rus' : '') . " FROM location_states WHERE location_states.id = shipping_zone_locations.state_id LIMIT 1) As state_name");
         $this->db->where('zone_id', clean_number($zone_id));
         return $this->db->get('shipping_zone_locations')->result();
@@ -646,9 +657,9 @@ class Shipping_model extends CI_Model
     public function get_default_shipping_classes()
     {
         $default = [
-          1 => 'economy_shipping', 
-          2 => 'standard_shipping', 
-          3 => 'express_shipping' 
+          1 => 'economy_shipping',
+          2 => 'standard_shipping',
+          3 => 'express_shipping'
         ];
         $data = [];
         foreach ($default as $k => $v) {
@@ -667,12 +678,12 @@ class Shipping_model extends CI_Model
             }
             $ret->name_array = serialize($name_array);
             $ret->id = $k;
-            $ret->status = 1;        
+            $ret->status = 1;
             $data[] = $ret;
         }
         return $data;
     }
-    
+
     //get active shipping classes
     public function get_active_shipping_classes($user_id)
     {
@@ -753,9 +764,9 @@ class Shipping_model extends CI_Model
         }
         return $this->db->get('shipping_delivery_times')->result();
     }
-    
+
     private function plural($n)
-    {    
+    {
       if($n % 10 == 1 && ($n % 100 > 19 || $n < 11 )) {
           return 1;//"день";
       } else if ($n % 10 > 1 && $n % 10 < 5 && ($n % 100 >19 || $n < 11 )) {
@@ -764,16 +775,16 @@ class Shipping_model extends CI_Model
           return 3; //"дней";
       }
     }
-    
+
     private function business_days($n)
     {
       if ($n == 1) {
-         return trans('business') . ' ' . trans('day'); 
+         return trans('business') . ' ' . trans('day');
       } else {
-         return trans('business2') . ' ' . trans('days' . self::plural($n)); 
+         return trans('business2') . ' ' . trans('days' . self::plural($n));
       }
     }
-    
+
     //get shipping delivery times
     public function get_default_shipping_delivery_times()
     {
@@ -787,29 +798,29 @@ class Shipping_model extends CI_Model
         $trans[$language->id]['days2'] = $this->db->where('lang_id', $language->id)
         ->where('label', 'days2')->get('language_translations')->row();
         $trans[$language->id]['days3'] = $this->db->where('lang_id', $language->id)
-        ->where('label', 'days3')->get('language_translations')->row();            
+        ->where('label', 'days3')->get('language_translations')->row();
       }
-      $data = [];      
-      for ($i = 1; $i < 14; $i++) {  
+      $data = [];
+      for ($i = 1; $i < 14; $i++) {
         //$ret = new stdClass();
         $option_array = [];
           foreach ($this->languages as $language) {
                 $item = [
                     'lang_id' => $language->id,
-                    'option' => $i . ' ' . ($i == 1 ? 
-                    $trans[$language->id]['business']->translation . ' ' . 
-                    $trans[$language->id]['day']->translation : 
-                    $trans[$language->id]['business2']->translation . ' ' . 
+                    'option' => $i . ' ' . ($i == 1 ?
+                    $trans[$language->id]['business']->translation . ' ' .
+                    $trans[$language->id]['day']->translation :
+                    $trans[$language->id]['business2']->translation . ' ' .
                     $trans[$language->id]['days' . self::plural($i)]->translation),
                 ];
-                array_push($option_array, $item);                
+                array_push($option_array, $item);
           }
           //$ret->option_array = serialize($option_array);
           //$ret->id = $i;
-          //$ret->status = 1;        
+          //$ret->status = 1;
           $data[$i] = serialize($option_array);
       }
-      return $data;        
+      return $data;
     }
 
     //get shipping delivery time

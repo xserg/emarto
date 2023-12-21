@@ -34,7 +34,7 @@ class Dashboard_controller extends Home_Core_Controller
         $data['latest_reviews'] = $this->review_model->get_paginated_vendor_reviews($this->auth_user->id, 6, 0);
         $data['admin_settings'] = $this->product_admin_model->get_admin_settings();
         $data['sales_sum'] = $this->order_admin_model->get_sales_sum_by_month($this->auth_user->id);
-        
+
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/index', $data);
         $this->load->view('dashboard/includes/_footer');
@@ -1047,7 +1047,7 @@ class Dashboard_controller extends Home_Core_Controller
         $this->load->model('coupon_model');
         $id = $this->input->post('id', true);
         $sys_lang_id = $this->input->post('sys_lang_id', true);
-        
+
         $coupon = $this->coupon_model->get_coupon($id);
         if (empty($coupon)) {
             exit();
@@ -1621,8 +1621,8 @@ class Dashboard_controller extends Home_Core_Controller
         //$data['shipping_classes'] = $this->shipping_model->get_shipping_classes($this->auth_user->id);
         $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $data['shipping_default_delivery_times'] = $this->shipping_model->get_default_shipping_delivery_times();
-        $data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id, 'DESC');
-  
+        $data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id);
+
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/shipping/shipping_settings', $data);
         $this->load->view('dashboard/includes/_footer');
@@ -1641,7 +1641,7 @@ class Dashboard_controller extends Home_Core_Controller
         //$data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
         $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $this->load->view('dashboard/includes/_header', $data);
-        $this->load->view('dashboard/shipping/add_shipping_zone', $data);
+        $this->load->view('dashboard/shipping/add_shipping_zone2', $data);
         $this->load->view('dashboard/includes/_footer');
     }
 
@@ -1656,7 +1656,8 @@ class Dashboard_controller extends Home_Core_Controller
         } else {
             $this->session->set_flashdata('error', trans("msg_error"));
         }
-        redirect($this->agent->referrer());
+        //redirect($this->agent->referrer());
+        redirect(lang_base_url() . 'dashboard/shipping-settings');
     }
 
     /**
@@ -1700,7 +1701,8 @@ class Dashboard_controller extends Home_Core_Controller
             $this->session->set_flashdata('error', trans("msg_error"));
         }
         $this->session->set_flashdata('msg_shipping_zone', 1);
-        redirect($this->agent->referrer());
+        //redirect($this->agent->referrer());
+        redirect(lang_base_url() . 'dashboard/shipping-settings');
     }
 
     /**
@@ -1855,7 +1857,7 @@ class Dashboard_controller extends Home_Core_Controller
             exit();
         }
     }
-    
+
     /**
      * Black list
      */
@@ -1874,9 +1876,9 @@ class Dashboard_controller extends Home_Core_Controller
         $data['description'] = trans("black_list") . " - " . $this->app_name;
         $data['keywords'] = trans("black_list") . "," . $this->app_name;
         $data['lang_settings'] = lang_settings();
-        
+
         //$this->load_model('black_list_model');
-        
+
         //$data['num_rows'] = $this->comment_model->get_vendor_comments_count($this->auth_user->id);
         //$pagination = $this->paginate(generate_dash_url("comments"), $data['num_rows'], $this->per_page);
         $data['comments'] = $this->black_list_model->get_black_list($this->auth_user->id);
@@ -1885,7 +1887,7 @@ class Dashboard_controller extends Home_Core_Controller
         $this->load->view('dashboard/black_list', $data);
         $this->load->view('dashboard/includes/_footer');
     }
-    
+
     /**
      * Add Shipping Zone
      */
@@ -1902,7 +1904,7 @@ class Dashboard_controller extends Home_Core_Controller
         $this->load->view('dashboard/add_black_list', $data);
         $this->load->view('dashboard/includes/_footer');
     }
-    
+
     /**
      * Add Shipping Class Post
      */
@@ -1921,7 +1923,7 @@ class Dashboard_controller extends Home_Core_Controller
         $this->session->set_flashdata('black_list', 1);
         redirect($this->agent->referrer());
     }
-    
+
     public function delete_ban_post()
     {
       if (!$this->auth_user->id) {
@@ -1934,7 +1936,7 @@ class Dashboard_controller extends Home_Core_Controller
         //exit;
         $this->black_list_model->delete_ban($id);
     }
-    
+
     public function is_cancel_account ()
     {
         $this->db->where('user_id', $this->auth_user->id);

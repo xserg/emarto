@@ -20,11 +20,21 @@
                 <input type="hidden" name="zone_id" value="<?= $shipping_zone->id; ?>">
                 <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                 <div class="form-group">
-                    <label class="control-label"><?php echo trans("zone_name"); ?></label>
-                    <?php foreach ($this->languages as $language): ?>
-                        <input type="text" name="zone_name_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" value="<?= @parse_serialized_name_array($shipping_zone->name_array, $language->id); ?>" placeholder="<?= $language->name; ?>" maxlength="255" required>
+                    <label class="control-label"><?php echo trans("zone_name"); ?>: </label>
+
+                    <?php foreach ($this->languages as $language):
+                      if ($language->id == $this->selected_lang->id) { echo @parse_serialized_name_array($shipping_zone->name_array, $language->id); }?>
+                        <!--input type="text" name="zone_name_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" value="<?= @parse_serialized_name_array($shipping_zone->name_array, $language->id); ?>" placeholder="<?= $language->name; ?>" maxlength="255" required-->
                     <?php endforeach; ?>
                 </div>
+
+                <?php $methods = get_shipping_payment_methods_by_zone($shipping_zone->id);
+                if (!empty($methods)):
+                    foreach ($methods as $method):
+                        $this->load->view('dashboard/shipping/_response_shipping_method_edit2', ['method' => $method]);
+                    endforeach;
+                endif; ?>
+
                 <div class="form-group">
                     <label class="control-label"><?php echo trans("regions"); ?></label>
                     <div class="row">
@@ -78,25 +88,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label m-b-10"><?php echo trans("shipping_methods"); ?></label>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div id="selected_shipping_methods"></div>
-                        </div>
-                    </div>
-                    <?php $methods = get_shipping_payment_methods_by_zone($shipping_zone->id);
-                    if (!empty($methods)):
-                        foreach ($methods as $method):
-                            $this->load->view('dashboard/shipping/_response_shipping_method_edit', ['method' => $method]);
-                        endforeach;
-                    endif; ?>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <a href="javascript:void(0)" id="btn_add_shipping_method" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalShippingMethod"><i class="fa fa-plus"></i>&nbsp;<?php echo trans("add_shipping_method") ?></a>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-group text-right">
                     <button type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("save_changes") ?></button>
@@ -107,29 +98,6 @@
     </div>
 </div>
 
-<div id="modalShippingMethod" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><i class="icon-close"></i></button>
-                <h4 class="modal-title"><?= trans("shipping_methods"); ?></h4>
-            </div>
-            <div class="modal-body">
-                <select id="select_shipping_methods" class="form-control custom-select">
-                    <?php $options = get_shipping_methods();
-                    if (!empty($options)):
-                        foreach ($options as $option):?>
-                            <option value="<?= $option; ?>"><?= trans($option); ?></option>
-                        <?php endforeach;
-                    endif; ?>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btn_select_shipping_method" class="btn btn-success" data-dismiss="modal"><?= trans("add_shipping_method"); ?></button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <?php $this->load->view('dashboard/shipping/_js_shipping'); ?>
 

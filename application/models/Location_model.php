@@ -75,7 +75,7 @@ class Location_model extends CI_Model
     public function get_countries()
     {
       if($this->selected_lang->id == 2) {
-        $this->db->select('id, name_rus name');
+        $this->db->select('id, name_rus name, continent_code, phone_code, iso');
       }
         $this->db->order_by('name');
         $query = $this->db->get('location_countries');
@@ -86,7 +86,7 @@ class Location_model extends CI_Model
     public function get_countries_by_continent($continent_code, $lamg = null)
     {
       if($this->selected_lang->id == 2 || $lamg == 2) {
-        $this->db->select('id, name_rus name');
+        $this->db->select('id, name_rus name, continent_code, phone_code, iso');
       }
       $this->db->where('status', 1)->order_by('name');
       return $this->db->where('continent_code', clean_str($continent_code))->order_by('name')->get('location_countries')->result();
@@ -121,7 +121,7 @@ class Location_model extends CI_Model
     {
         $id = clean_number($id);
         if($this->selected_lang->id == 2) {
-          $this->db->select('id, name_rus name');
+          $this->db->select('id, name_rus name, continent_code, phone_code, iso');
         }
         $this->db->where('id', $id);
         $query = $this->db->get('location_countries');
@@ -157,7 +157,7 @@ class Location_model extends CI_Model
     public function get_states()
     {
       if($this->selected_lang->id == 2) {
-        $this->db->select('id, country_id, name_rus name');
+        $this->db->select('id, country_id, name_rus name, seller, iso, phone_code, continent_code');
       }
         $this->db->order_by('name');
         $query = $this->db->get('location_states');
