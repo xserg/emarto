@@ -1640,6 +1640,9 @@ class Dashboard_controller extends Home_Core_Controller
         $data['continents'] = get_continents($this->selected_lang->id);
         //$data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
         $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
+        if (!empty($this->default_location->country_id)) {
+          $data['default_country'] = $this->default_location->country_id;
+        }
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/shipping/add_shipping_zone2', $data);
         $this->load->view('dashboard/includes/_footer');

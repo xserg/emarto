@@ -523,15 +523,15 @@ class Ajax_controller extends Home_Core_Controller
             'message' => "<p class='text-danger'>" . trans("msg_error") . "</p>"
         );
         $ret = $this->review_model->report_abuse();
-        
+
         if ($ret == 'error_duplicate') {
             $data['message'] = "<p class='text-danger'>" . trans("msg_error_duplicate") . "</p>";
-        } 
-        
+        }
+
         if ($ret == 'success') {
             $data['message'] = "<p class='text-success'>" . trans("abuse_report_msg") . "</p>";
         }
-        
+
         echo json_encode($data);
     }
 
@@ -802,5 +802,25 @@ class Ajax_controller extends Home_Core_Controller
         );
         $this->email_model->send_email($data);
     }
+
+    //get countries by continent
+    public function get_default_country()
+    {
+
+        $lang = $this->input->post('lang', true);
+
+        $this->selected_lang->id = $lang;
+
+        if (!empty($this->default_location->country_id)) {
+          $country = $this->location_model->get_country($this->default_location->country_id, $lang);
+          if (!empty($country)) {
+              //foreach ($countries as $country) {
+                  echo "<option value='" . $country->id . "' selected>" . html_escape($country->name) . "</option>";
+              //}
+          }
+        }
+    }
+
+
 
 }

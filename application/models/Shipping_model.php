@@ -394,14 +394,14 @@ class Shipping_model extends CI_Model
     //add shipping zone payment methods
     public function add_shipping_zone_payment_methods($zone_id)
     {
-        $option_unique_ids = $this->input->post('option_unique_id');
-        if (!empty($option_unique_ids)) {
-            foreach ($option_unique_ids as $option_unique_id) {
+        //$option_unique_ids = $this->input->post('option_unique_id');
+        //if (!empty($option_unique_ids)) {
+            //foreach ($option_unique_ids as $option_unique_id) {
                 $name_array = array();
                 foreach ($this->languages as $language) {
                   $row = $this->db->where('lang_id', $language->id)
-                  //->where('label', $this->input->post('method_name_' . $option_unique_id . '_lang_1', true))
-                  ->where('label', 'flat_rate', true)
+                  ->where('label', $this->input->post('method_type', true))
+                  //->where('label', 'flat_rate', true)
                   ->get('language_translations')->row();
                   if ($row) {
                     $item = [
@@ -420,9 +420,9 @@ class Shipping_model extends CI_Model
                     'name_array' => serialize($name_array),
                     'zone_id' => $zone_id,
                     'user_id' => $this->auth_user->id,
-                    'method_type' => $this->input->post('method_type_' . $option_unique_id, true),
-                    'flat_rate_cost_calculation_type' => $this->input->post('flat_rate_cost_calculation_type_' . $option_unique_id, true),
-                    'flat_rate_cost' => $this->input->post('flat_rate_cost_' . $option_unique_id, true),
+                    'method_type' => $this->input->post('method_type', true),
+                    'flat_rate_cost_calculation_type' => $this->input->post('flat_rate_cost_calculation_type', true),
+                    'flat_rate_cost' => $this->input->post('flat_rate_cost', true),
                     'local_pickup_cost' => $this->input->post('local_pickup_cost_' . $option_unique_id, true),
                     'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount_' . $option_unique_id, true),
                     'status' => $this->input->post('status', true)
@@ -445,7 +445,7 @@ class Shipping_model extends CI_Model
                     foreach ($shipping_classes as $shipping_class) {
                         $item = array(
                             'class_id' => $shipping_class->id,
-                            'cost' => $this->input->post("flat_rate_cost_" . $option_unique_id . "_class_" . $shipping_class->id, true)
+                            'cost' => $this->input->post("flat_rate_cost_class_" . $shipping_class->id, true)
                         );
                         $item['cost'] = get_price($item["cost"], 'database');
                         array_push($class_array, $item);
@@ -456,8 +456,8 @@ class Shipping_model extends CI_Model
                     $data['flat_rate_class_costs_array'] = serialize($class_array);
                 }
                 $this->db->insert('shipping_zone_methods', $data);
-            }
-        }
+            //}
+        //}
     }
 
     //edit shipping zone
@@ -491,13 +491,13 @@ class Shipping_model extends CI_Model
     //edit shipping zone payment methods
     public function edit_shipping_zone_payment_methods($zone_id)
     {
-        $option_unique_ids = $this->input->post('option_unique_id');
-        if (!empty($option_unique_ids)) {
-            foreach ($option_unique_ids as $option_unique_id) {
+        $option_unique_id = $this->input->post('option_unique_id');
+        //if (!empty($option_unique_ids)) {
+            //foreach ($option_unique_ids as $option_unique_id) {
                 $name_array = array();
                 foreach ($this->languages as $language) {
                   $row = $this->db->where('lang_id', $language->id)
-                  ->where('label', $this->input->post('method_name_' . $option_unique_id . '_lang_1', true))
+                  ->where('label', $this->input->post('method_type', true))
                   ->get('language_translations')->row();
                   if ($row) {
                     $item = [
@@ -515,11 +515,11 @@ class Shipping_model extends CI_Model
                 $data = array(
                     'name_array' => serialize($name_array),
                     'zone_id' => $zone_id,
-                    'method_type' => $this->input->post('method_type_' . $option_unique_id, true),
-                    'flat_rate_cost_calculation_type' => $this->input->post('flat_rate_cost_calculation_type_' . $option_unique_id, true),
-                    'flat_rate_cost' => $this->input->post('flat_rate_cost_' . $option_unique_id, true),
-                    'local_pickup_cost' => $this->input->post('local_pickup_cost_' . $option_unique_id, true),
-                    'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount_' . $option_unique_id, true),
+                    'method_type' => $this->input->post('method_type', true),
+                    'flat_rate_cost_calculation_type' => $this->input->post('flat_rate_cost_calculation_type', true),
+                    'flat_rate_cost' => $this->input->post('flat_rate_cost', true),
+                    'local_pickup_cost' => $this->input->post('local_pickup_cost', true),
+                    'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount', true),
                     'status' => $this->input->post('status', true)
                     //'status' => $this->input->post('status_' . $option_unique_id, true)
                 );
@@ -541,7 +541,7 @@ class Shipping_model extends CI_Model
                     foreach ($shipping_classes as $shipping_class) {
                         $item = array(
                             'class_id' => $shipping_class->id,
-                            'cost' => $this->input->post("flat_rate_cost_" . $option_unique_id . "_class_" . $shipping_class->id, true)
+                            'cost' => $this->input->post("flat_rate_cost_class_" . $shipping_class->id, true)
                         );
                         if (empty($item['cost'])) {
                             $item['cost'] = 0;
@@ -555,14 +555,14 @@ class Shipping_model extends CI_Model
                     $data['flat_rate_class_costs_array'] = serialize($class_array);
                 }
 
-                if ($this->input->post('method_operation_' . $option_unique_id, true) == "edit") {
+                if ($this->input->post('method_operation', true) == "edit") {
                     $this->db->where('id', clean_number($option_unique_id))->update('shipping_zone_methods', $data);
                 } else {
                     $data['user_id'] = $this->auth_user->id;
                     $this->db->insert('shipping_zone_methods', $data);
                 }
-            }
-        }
+            //}
+        //}
     }
 
     //get shipping zone
