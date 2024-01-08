@@ -177,15 +177,16 @@
 
     $(document).on("change", "#zone_name", function (e) {
         if ($('#zone_name').val() == 'domestic') {
+          $("#selected_regions_container").empty();
+          //$("#selected_regions_container").hide();
             console.log($('#zone_name').val());
             var country;
             $("#select_continents").val('EU');
-
-
             var data = {
                 "key": 'EU',
                 "lang": sys_lang_id
             };
+
             data[csfr_token_name] = $.cookie(csfr_cookie_name);
             $.ajax({
                 type: "POST",
@@ -211,6 +212,7 @@
             $("#select_countries").val(default_country);
             //$("#btn_select_region").trigger("click");
         } else {
+          $("#selected_regions_container").empty();
           $('#form_group_continents').show();
           $('#select_continents').val(null).trigger('change');
 
