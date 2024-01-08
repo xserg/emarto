@@ -46,7 +46,7 @@
                                 <div id="selected_regions_container" class="selected-regions"></div>
                             </div>
                             <div class="col-sm-12">
-                                <div id="form_group_continents" class="form-group m-b-5">
+                                <div id="form_group_continents" class="form-group m-b-5" style="display: block;">
 
                                     <select id="select_continents" class="select2 form-control" data-placeholder="<?= trans("continent"); ?>">
                                         <option value=" "><?= trans("worldwide"); ?></option>

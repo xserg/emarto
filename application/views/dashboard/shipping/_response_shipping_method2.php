@@ -61,7 +61,7 @@
                                                 <div class="input-group m-b-5">
                                                     <span class="shipping-label"><?= @parse_serialized_name_array($shipping_class->name_array, $this->selected_lang->id); ?>,  <?= $this->default_currency->symbol; ?></span>
                                                     <input type="text" name="flat_rate_cost_class_<?= $shipping_class->id; ?>" class="form-control form-input price-input" value="<?= $class_cost; ?>"
-                                                           placeholder="<?= @parse_serialized_name_array($shipping_class->name_array, $this->selected_lang->id); ?>" maxlength="19" id="flat_rate_cost_class_<?= $shipping_class->id; ?>">
+                                                           placeholder="0.00" maxlength="19" id="flat_rate_cost_class_<?= $shipping_class->id; ?>">
                                                 </div>
                                             <?php endforeach; ?>
                                         </div>

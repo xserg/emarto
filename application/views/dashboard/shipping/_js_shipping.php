@@ -2,6 +2,13 @@
 <script>
     //select continen
     $(document).on("change", "#select_continents", function () {
+        if ($(this).val() == ' ') {
+          $('#select_countries option').empty();
+          $('#select_states option').empty();
+          $('#form_group_countries').hide();
+          $('#form_group_states').hide();
+          return;
+        }
         $("#btn_select_region_container").show();
         get_countries_by_continent($(this).val(), "<?= trans("all_countries"); ?>");
         if ($(this).val() != '' && $(this).val() != 0) {
@@ -17,8 +24,17 @@
     });
     //select region
     $(document).on("click", "#btn_select_region", function () {
+
         var continent = $('#select_continents').val();
         var continent_text = $('#select_continents option:selected').text();
+
+        if (continent == ' ') {
+            region_id == ' ';
+            region_id = continent;
+            region_text = continent_text;
+            input_name = 'continent';
+        } else {
+
         var country = $('#select_countries').val();
         var country_text = $('#select_countries option:selected').text();
         var state = $('#select_states').val();
@@ -37,10 +53,19 @@
             region_text = continent_text;
             input_name = 'continent';
         }
+        }
         if (region_id) {
             if (!$('#lc-' + input_name + '-' + region_id).length) {
                 $("#selected_regions_container").append('<div id="lc-' + input_name + '-' + region_id + '" class="region">' + region_text + '<a href="javascript:void(0)"><i class="fa fa-times"></i></a><input type="hidden" value="' + region_id + '" name="' + input_name + '[]"></div>');
             }
+        }
+
+        if (region_id == ' ') {
+            //console.log('world');
+            $('#form_group_continents').hide();
+            $('#form_group_countries').hide();
+            $('#form_group_states').hide();
+            $("#btn_select_region_container").hide();
         }
         //return;
         //reset
@@ -53,6 +78,7 @@
     //delete location
     $(document).on("click", ".region a", function () {
         $(this).parent().remove();
+        $('#form_group_continents').show();
     });
 
     //delete location database
