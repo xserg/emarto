@@ -163,13 +163,13 @@
     //set economy 0 for free
 
     $(document).on("click", "#status_1", function () {
-        $("#flat_rate_cost_class_1").val('0.00');
+        $("#flat_rate_cost_class_1").val('0.00').attr('disabled', 'disabled');
         $("#flat_rate_cost_class_2").val('0.00');
         $("#flat_rate_cost_class_3").val('0.00');
         $('input[name=method_type]').val('free_shipping');
     });
     $(document).on("click", "#status_2", function () {
-        $("#flat_rate_cost_class_1").val(' ');
+        $("#flat_rate_cost_class_1").val(' ').removeAttr("disabled");
         $("#flat_rate_cost_class_2").val(' ');
         $("#flat_rate_cost_class_3").val(' ');
         $('input[name=method_type]').val('flat_rate');
@@ -217,7 +217,7 @@
           $('#select_continents').val(null).trigger('change');
 
           $('#select_countries option').empty();
-          $("#select_countries").removeAttr("disabled");;
+          $("#select_countries").removeAttr("disabled");
           $('#select_states option').empty();
           $('#select_countries').hide();
           $('#form_group_states').hide();
