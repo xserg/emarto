@@ -9,34 +9,8 @@
                     <div id="modalMethod">
                         <div >
                             <div class="modal-content">
-                              <div class="modal-header">
-                                    <h4 class="modal-title"><?= trans('free_shipping'); ?></h4>
-                              </div>
-                              <div class="modal-body">
-                                  <div class="form-group">
-                                      <div class="row">
-                                          <div class="col-sm-12 col-xs-12">
-                                              <label><?= trans("status"); ?></label>
-                                          </div>
-                                          <div class="col-md-6 col-sm-12 col-custom-option">
-                                              <div class="custom-control custom-radio">
-                                                  <input type="radio" name="status" value="1" id="status_1" class="custom-control-input" <?= $method->status == 1 ? "checked" : ""; ?>>
-                                                  <label for="status_1" class="custom-control-label"><?= trans("enable"); ?></label>
-                                              </div>
-                                          </div>
-                                          <div class="col-md-6 col-sm-12 col-custom-option">
-                                              <div class="custom-control custom-radio">
-                                                  <input type="radio" name="status" value="0" id="status_2" class="custom-control-input" <?= $method->status != 1 ? "checked" : ""; ?>>
-                                                  <label for="status_2" class="custom-control-label"><?= trans("disable"); ?></label>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><i class="icon-close"></i></button>
-                                    <h4 class="modal-title"><?= trans($selected_option); ?></h4>
-                                </div>
+
+                            
                                 <div class="modal-body">
 
                                     <?php if (empty($shipping_classes)): ?>
