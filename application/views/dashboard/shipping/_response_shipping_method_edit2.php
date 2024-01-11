@@ -25,7 +25,15 @@
                                             <input type="hidden" name="method_name_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" value="flat_rate" placeholder="<?= $language->name; ?>" maxlength="255">
                                         <?php endforeach; ?>
                                     </div>
-                                    
+                                    <div class="form-group">
+                                        <label><?= trans("cost_calculation_type"); ?></label>
+                                        <select name="flat_rate_cost_calculation_type" class="form-control custom-select">
+                                            <option value="each_product" <?= $method->flat_rate_cost_calculation_type == "each_product" ? "selected" : ""; ?>><?= trans("charge_shipping_for_each_product"); ?></option>
+                                            <option value="each_different_product" <?= $method->flat_rate_cost_calculation_type == "each_different_product" ? "selected" : ""; ?>><?= trans("charge_shipping_for_each_different_product"); ?></option>
+                                            <option value="cart_total" <?= $method->flat_rate_cost_calculation_type == "cart_total" ? "selected" : ""; ?>><?= trans("fixed_shipping_cost_for_cart_total"); ?></option>
+                                        </select>
+                                    </div>
+
                                     <?php if (!empty($shipping_classes)): ?>
                                         <div class="form-group">
                                             <label><?= trans("shipping_class_costs"); ?></label>

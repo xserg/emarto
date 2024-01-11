@@ -10,8 +10,16 @@
                         <div >
                             <div class="modal-content">
 
-                            
+
                                 <div class="modal-body">
+                                  <div class="form-group">
+                                      <label><?= trans("cost_calculation_type"); ?></label>
+                                      <select name="flat_rate_cost_calculation_type" class="form-control custom-select">
+                                          <option value="each_product" <?= $method->flat_rate_cost_calculation_type == "each_product" ? "selected" : ""; ?>><?= trans("charge_shipping_for_each_product"); ?></option>
+                                          <option value="each_different_product" <?= $method->flat_rate_cost_calculation_type == "each_different_product" ? "selected" : ""; ?>><?= trans("charge_shipping_for_each_different_product"); ?></option>
+                                          <option value="cart_total" <?= $method->flat_rate_cost_calculation_type == "cart_total" ? "selected" : ""; ?>><?= trans("fixed_shipping_cost_for_cart_total"); ?></option>
+                                      </select>
+                                  </div>  
 
                                     <?php if (empty($shipping_classes)): ?>
                                         <div class="form-group">
