@@ -425,7 +425,8 @@ class Shipping_model extends CI_Model
                     'flat_rate_cost' => $this->input->post('flat_rate_cost', true),
                     'local_pickup_cost' => $this->input->post('local_pickup_cost_' . $option_unique_id, true),
                     'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount_' . $option_unique_id, true),
-                    'status' => $this->input->post('status', true)
+                    'status' => 1
+                    //'status' => $this->input->post('status', true)
                     //'status' => $this->input->post('status_' . $option_unique_id, true)
                 );
                 $data['flat_rate_cost_calculation_type'] = !empty($data['flat_rate_cost_calculation_type']) ? $data['flat_rate_cost_calculation_type'] : "";
@@ -522,7 +523,7 @@ class Shipping_model extends CI_Model
                     'flat_rate_cost' => $this->input->post('flat_rate_cost', true),
                     'local_pickup_cost' => $this->input->post('local_pickup_cost', true),
                     'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount', true),
-                    'status' => $this->input->post('status', true)
+                    'status' => 1
                     //'status' => $this->input->post('status_' . $option_unique_id, true)
                 );
                 $data['flat_rate_cost_calculation_type'] = !empty($data['flat_rate_cost_calculation_type']) ? $data['flat_rate_cost_calculation_type'] : "";
