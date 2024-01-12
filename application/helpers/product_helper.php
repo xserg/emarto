@@ -157,8 +157,8 @@ if (!function_exists('get_product_form_data')) {
             if ($product->listing_type == 'sell_on_site' || $product->listing_type == 'license_key') {
                 if ($product->is_free_product != 1) {
                     $data->add_to_cart_url = base_url() . 'add-to-cart';
-                    $data->button = 
-                    '<button name="bye-now" class="btn  btn-block btn-bye-now"' 
+                    $data->button =
+                    '<button name="bye-now" class="btn  btn-block btn-bye-now"'
                     . $disabled . ' value="bye-now">' . trans("buy-now").'</button>'
                     . '</div><div class="button-container">'
                     . '<button class="btn btn-md btn-block btn-product-cart"'
@@ -808,7 +808,7 @@ if (!function_exists('get_continents')) {
         if ($lang == 2) {
           return array(
             'EU' => 'Европа', 'AS' => 'Азия', 'AF' => 'Африка', 'NA' => 'Северная Америка', 'SA' => 'Южная Америка', 'OC' => 'Океания', //'AN' => 'Антарктика'
-        );  
+        );
         }
         return array('EU' => 'Europe', 'AS' => 'Asia', 'AF' => 'Africa', 'NA' => 'North America', 'SA' => 'South America', 'OC' => 'Oceania', 'AN' => 'Antarctica');
     }
@@ -913,6 +913,28 @@ if (!function_exists('get_coupon_products_by_category')) {
         $ci =& get_instance();
         $ci->load->model('coupon_model');
         return $ci->coupon_model->get_coupon_products_by_category($user_id, $category_id);
+    }
+}
+
+if (!function_exists('get_shipping_class_data')) {
+    function get_shipping_class_data($cost_array)
+    {
+        $ret = [];
+        if (!empty($cost_array)) {
+                $cost_array = unserialize_data($cost_array);
+                if (!empty($cost_array)) {
+                    foreach ($cost_array as $item) {
+                        //if ($item['class_id'] == $class_id && !empty($item['cost'])) {
+                            //return html_escape($item['cost']);
+                        //}
+                        $ret[$item['class_id']]['cost'] = html_escape($item['cost']);
+                        $ret[$item['class_id']]['status'] = $item['status'];
+                        $ret[$item['class_id']]['time'] = $item['time'];
+                    }
+                }
+            //}
+            return $ret;
+        }
     }
 }
 ?>
