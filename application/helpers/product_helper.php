@@ -630,7 +630,7 @@ if (!function_exists('get_query_string_array')) {
         array_push($array_filter_keys, "sort");
         array_push($array_filter_keys, "search");
         array_push($array_filter_keys, "p_cat");
-        
+
         array_push($array_filter_keys, "buy_request");
 
         $queries = array();
@@ -930,6 +930,7 @@ if (!function_exists('get_shipping_class_data')) {
                         $ret[$item['class_id']]['cost'] = html_escape($item['cost']);
                         $ret[$item['class_id']]['status'] = $item['status'];
                         $ret[$item['class_id']]['time'] = $item['time'];
+                        $ret[$item['class_id']]['time2'] = $item['time2'];
                     }
                 }
             //}

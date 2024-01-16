@@ -448,7 +448,9 @@ class Shipping_model extends CI_Model
                             'class_id' => $shipping_class->id,
                             'cost' => $this->input->post("flat_rate_cost_class_" . $shipping_class->id, true),
                             'status' => $this->input->post("status_" . $shipping_class->id, true),
-                            'time' => $this->input->post("time_" . $shipping_class->id, true),
+                            'time' => $this->input->post("time_" . $shipping_class->id),
+                            'time2' => $this->input->post("time2_" . $shipping_class->id),
+
                         );
                         $item['cost'] = get_price($item["cost"], 'database');
                         array_push($class_array, $item);
@@ -546,7 +548,8 @@ class Shipping_model extends CI_Model
                             'class_id' => $shipping_class->id,
                             'cost' => $this->input->post("flat_rate_cost_class_" . $shipping_class->id, true),
                             'status' => $this->input->post("status_" . $shipping_class->id, true),
-                            'time' => $this->input->post("time_" . $shipping_class->id, true),
+                            'time' => $this->input->post("time_" . $shipping_class->id),
+                            'time2' => $this->input->post("time2_" . $shipping_class->id),
                         );
                         if (empty($item['cost'])) {
                             $item['cost'] = ' ';

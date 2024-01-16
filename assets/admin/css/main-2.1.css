@@ -2337,14 +2337,15 @@ table.dataTable {
 
 .shipping-label {
     display: table-cell;
-    width: 150px;
+    width: 200px;
     border: 1px solid #ccc;
     border-right: 0;
     font-size: 14px;
     font-weight: 400;
-    line-height: 1;
+    height: 40px !important;
     text-align: center;
     border-color: #d2d6de;
     background-color: #F1F3F5;
     vertical-align: middle;
+    padding-right: : 0;
 }
