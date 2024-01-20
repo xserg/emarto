@@ -162,17 +162,24 @@
 
     //set economy 0 for free
 
-    $(document).on("click", "#status_1", function () {
+    $(document).on("click", "#status_1_3", function () {
         $("#flat_rate_cost_class_1").val('0.00').attr('disabled', 'disabled');
-        $("#flat_rate_cost_class_2").val('0.00');
-        $("#flat_rate_cost_class_3").val('0.00');
-        $('input[name=method_type]').val('free_shipping');
     });
-    $(document).on("click", "#status_2", function () {
+    $(document).on("click", "#status_2_3", function () {
+        $("#flat_rate_cost_class_2").val('0.00').attr('disabled', 'disabled');
+    });
+    $(document).on("click", "#status_3_3", function () {
+        $("#flat_rate_cost_class_3").val('0.00').attr('disabled', 'disabled');
+    });
+
+    $(document).on("click", "#status_1_1", function () {
         $("#flat_rate_cost_class_1").val(' ').removeAttr("disabled");
-        $("#flat_rate_cost_class_2").val(' ');
-        $("#flat_rate_cost_class_3").val(' ');
-        $('input[name=method_type]').val('flat_rate');
+    });
+    $(document).on("click", "#status_2_1", function () {
+        $("#flat_rate_cost_class_2").val(' ').removeAttr("disabled");
+    });
+    $(document).on("click", "#status_3_1", function () {
+        $("#flat_rate_cost_class_3").val(' ').removeAttr("disabled");
     });
 
     $(document).on("change", "#zone_name", function (e) {
