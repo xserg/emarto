@@ -1621,6 +1621,7 @@ class Dashboard_controller extends Home_Core_Controller
         //$data['shipping_classes'] = $this->shipping_model->get_shipping_classes($this->auth_user->id);
         $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $data['shipping_default_delivery_times'] = $this->shipping_model->get_default_shipping_delivery_times();
+        $data['shipping_delivery_time_ranges'] = $this->shipping_model->get_shipping_delivery_time_ranges();
         $data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id);
 
         $this->load->view('dashboard/includes/_header', $data);
@@ -1641,6 +1642,7 @@ class Dashboard_controller extends Home_Core_Controller
         //$data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
         $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
         $data['shipping_default_delivery_times'] = $this->shipping_model->get_default_shipping_delivery_times();
+        $data['shipping_delivery_time_ranges'] = $this->shipping_model->get_shipping_delivery_time_ranges();
         if (!empty($this->default_location->country_id)) {
           $data['default_country'] = $this->default_location->country_id;
         }

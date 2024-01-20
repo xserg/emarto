@@ -60,37 +60,34 @@
                                               <div class="col-md-2 col-sm-2">
                                                  <select name="time_<?= $shipping_class->id; ?>" class="form-control form-input">
                                                    <option></option>
-                                                   <?php foreach ($shipping_default_delivery_times as $k => $delivery_time): ?>
-                                                     <option value=<?=$k?> <?php if($class_data[$shipping_class->id]['time'] == $k) echo ' selected'; ?>><?= @parse_serialized_option_array($delivery_time, $this->selected_lang->id); ?></option>
+                                                   <?php foreach ($shipping_delivery_time_ranges[$shipping_class->id] as $delivery_time): ?>
+                                                     <option value=<?=$delivery_time?> <?php if($class_data[$shipping_class->id]['time'] == $delivery_time) echo ' selected'; ?>><?= $delivery_time . ' ' . trans('business2') . ' ' . trans('days2') ?></option>
                                                    <?php endforeach; ?>
                                                  </select>
                                               </div>
-                                              <div class="col-md-2 col-sm-2">
-                                                 <select name="time2_<?= $shipping_class->id; ?>" class="form-control form-input">
-                                                   <option></option>
-                                                   <?php foreach ($shipping_default_delivery_times as $k => $delivery_time): ?>
-                                                     <option value=<?=$k?> <?php if($class_data[$shipping_class->id]['time2'] == $k) echo ' selected'; ?>><?= @parse_serialized_option_array($delivery_time, $this->selected_lang->id); ?></option>
-                                                   <?php endforeach; ?>
-                                                 </select>
-                                              </div>
-                                              <div class="col-md-2 col-sm-3">
+
+                                              <div class="col-md-4 col-sm-3">
                                                   <div class="row m-t-10">
-                                                       <div class="col-md-6 custom-control custom-radio">
+                                                       <div class="col-md-4 custom-control custom-radio">
                                                            <input type="radio" name="status_<?= $shipping_class->id; ?>" value="1" id="status_<?= $shipping_class->id; ?>_1" class="custom-control-input"  checked>
                                                            <label for="status_<?= $shipping_class->id; ?>_1" class="custom-control-label"><?= trans("enable"); ?></label>
                                                        </div>
 
-                                                       <div class="col-md-6 custom-control custom-radio">
+                                                       <div class="col-md-4 custom-control custom-radio">
                                                            <input type="radio" name="status_<?= $shipping_class->id; ?>" value="0" id="status_<?= $shipping_class->id; ?>_2" class="custom-control-input">
                                                            <label for="status_<?= $shipping_class->id; ?>_2" class="custom-control-label"><?= trans("disable"); ?></label>
                                                        </div>
+                                                      <div class="col-md-4 custom-control custom-radio">
+                                                          <input type="radio" name="status_<?= $shipping_class->id; ?>" value="2" id="status_<?= $shipping_class->id; ?>_3" class="custom-control-input">
+                                                          <label for="status_<?= $shipping_class->id; ?>_3" class="custom-control-label"><?= trans("free_shipping"); ?></label>
+                                                      </div>
                                                   </div>
                                               </div>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
 
-                                  
+
                                 </div>
 
                             </div>

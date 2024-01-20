@@ -831,6 +831,15 @@ class Shipping_model extends CI_Model
       return $data;
     }
 
+    public function get_shipping_delivery_time_ranges()
+    {
+        $range[1] = ['2-10', '20-45'];
+        $range[2] = ['2-10', '7-20'];
+        $range[3] = ['1-3', '2-7'];
+        //return map(($item) => $item . t('business2') . ' ' . t('days'), $range);
+        return  $range;
+    }
+
     //get shipping delivery time
     public function get_shipping_delivery_time($id)
     {
