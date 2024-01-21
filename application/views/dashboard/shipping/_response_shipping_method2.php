@@ -28,8 +28,8 @@
 
             <div class="form-group">
               <div>
-                <div class="col-md-5 col-sm-4"><label><?= trans("shipping_class_costs"); ?></label></div>
-                <div class="col-md-7 col-sm-8"><label><?= trans("shipping_time"); ?></label></div>
+                <div class="col-md-4 col-sm-4"><label><?= trans("shipping_class_costs"); ?></label></div>
+                <div class="col-md-8 col-sm-8" style="padding-left: 0;"><label><?= trans("shipping_time"); ?></label></div>
               </div>
                 <?php
                 $class_data = get_shipping_class_data($method->flat_rate_class_costs_array);
