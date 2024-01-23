@@ -449,11 +449,14 @@ class Shipping_model extends CI_Model
                             'cost' => $this->input->post("flat_rate_cost_class_" . $shipping_class->id, true),
                             'status' => $this->input->post("status_" . $shipping_class->id, true),
                             'time' => $this->input->post("time_" . $shipping_class->id),
-                            'time2' => $this->input->post("time2_" . $shipping_class->id),
+                            //'time2' => $this->input->post("time2_" . $shipping_class->id),
 
                         );
                         $item['cost'] = get_price($item["cost"], 'database');
                         array_push($class_array, $item);
+                        if ($this->input->post("status_" . $shipping_class->id, true) == 2) {
+                            $data['free_shipping'] = 1;
+                        }
                     }
                 }
                 $data['flat_rate_class_costs_array'] = "";
@@ -536,7 +539,7 @@ class Shipping_model extends CI_Model
                 $data["flat_rate_cost"] = get_price($data["flat_rate_cost"], 'database');
                 $data["local_pickup_cost"] = get_price($data["local_pickup_cost"], 'database');
                 $data["free_shipping_min_amount"] = get_price($data["free_shipping_min_amount"], 'database');
-
+                $data['free_shipping'] = null;
 
                 //shipping classes
                 $class_array = array();
@@ -556,6 +559,9 @@ class Shipping_model extends CI_Model
                         }
                         $item['cost'] = get_price($item["cost"], 'database');
                         array_push($class_array, $item);
+                        if ($this->input->post("status_" . $shipping_class->id, true) == 2) {
+                            $data['free_shipping'] = 1;
+                        }
                     }
                 }
                 $data['flat_rate_class_costs_array'] = "";

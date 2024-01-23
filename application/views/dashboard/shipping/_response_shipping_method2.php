@@ -14,18 +14,6 @@
               </select>
           </div>
 
-            <?php if (empty($shipping_classes)): ?>
-                <div class="form-group">
-                    <label><?= trans("shipping_class_costs"); ?></label>
-                    <?php foreach ($shipping_classes as $shipping_class): ?>
-                        <div class="input-group m-b-5">
-                            <span class="input-group-addon"><?= $this->default_currency->symbol; ?></span>
-                            <input type="text" name="flat_rate_cost_class_<?= $shipping_class->id; ?>" class="form-control form-input price-input" placeholder="<?= @parse_serialized_name_array($shipping_class->name_array, $this->selected_lang->id); ?>" maxlength="19">
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
             <div class="form-group">
               <div>
                 <div class="col-md-4 col-sm-4"><label><?= trans("shipping_class_costs"); ?></label></div>
