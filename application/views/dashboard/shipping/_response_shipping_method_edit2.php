@@ -11,7 +11,7 @@
     <input type="hidden" name="method_type" value="<?= $selected_option; ?>">
     <input type="hidden" name="method_operation" value="edit">
     <div class="response-shipping-method">
-        
+
         <div class="form-group m-b-10">
             <?php foreach ($this->languages as $language): ?>
                 <input type="hidden" name="method_name_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" value="flat_rate" placeholder="<?= $language->name; ?>" maxlength="255">
@@ -45,40 +45,39 @@
                     <span class="shipping-label"><?= @parse_serialized_name_array($shipping_class->name_array, $this->selected_lang->id); ?>,  <?= $this->default_currency->symbol; ?></span>
                   </div>
 
-                  <div class="col-md-3 col-sm-3" style="padding-left: 0;">
+                  <div class="col-md-2 col-sm-2" style="padding-left: 0;">
                     <input type="text" name="flat_rate_cost_class_<?= $shipping_class->id; ?>" class="form-control form-input price-input" value="<?= $class_cost; ?>"
                            placeholder="0.00" maxlength="19" id="flat_rate_cost_class_<?= $shipping_class->id; ?>">
                   </div>
 
-                  <div class="col-md-2 col-sm-2">
+
+                  <div class="col-md-3 col-sm-2" style="padding-left: 0;">
                      <select name="time_<?= $shipping_class->id; ?>" class="form-control form-input">
                        <option></option>
-                       <?php foreach ($shipping_default_delivery_times as $k => $delivery_time): ?>
-                         <option value=<?=$k?> <?php if($class_data[$shipping_class->id]['time'] == $k) echo ' selected'; ?>><?= @parse_serialized_option_array($delivery_time, $this->selected_lang->id); ?></option>
+                       <?php foreach ($shipping_delivery_time_ranges[$shipping_class->id] as $delivery_time): ?>
+                         <option value=<?=$delivery_time?> <?php if($class_data[$shipping_class->id]['time'] == $delivery_time) echo ' selected'; ?>><?= $delivery_time . ' ' . trans('business2') . ' ' . trans('days3') ?></option>
                        <?php endforeach; ?>
                      </select>
                   </div>
-                  <div class="col-md-2 col-sm-2">
-                     <select name="time2_<?= $shipping_class->id; ?>" class="form-control form-input">
-                       <option></option>
-                       <?php foreach ($shipping_default_delivery_times as $k => $delivery_time): ?>
-                         <option value=<?=$k?> <?php if($class_data[$shipping_class->id]['time2'] == $k) echo ' selected'; ?>><?= @parse_serialized_option_array($delivery_time, $this->selected_lang->id); ?></option>
-                       <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="col-md-2 col-sm-3">
+
+                  <div class="col-md-5 col-sm-3">
                       <div class="row m-t-10">
-                           <div class="col-md-6 custom-control custom-radio">
-                               <input type="radio" name="status_<?= $shipping_class->id; ?>" value="1" id="status_<?= $shipping_class->id; ?>_1" class="custom-control-input" <?php if($class_data[$shipping_class->id]['status'] == 1) echo ' checked'; ?>>
+                           <div class="col-md-4 custom-control custom-radio">
+                               <input type="radio" name="status_<?= $shipping_class->id; ?>" value="1" id="status_<?= $shipping_class->id; ?>_1" class="custom-control-input"  <?php if($class_data[$shipping_class->id]['status'] == 1) echo ' checked'; ?>>
                                <label for="status_<?= $shipping_class->id; ?>_1" class="custom-control-label"><?= trans("enable"); ?></label>
                            </div>
 
-                           <div class="col-md-6 custom-control custom-radio">
+                           <div class="col-md-4 custom-control custom-radio">
                                <input type="radio" name="status_<?= $shipping_class->id; ?>" value="0" id="status_<?= $shipping_class->id; ?>_2" class="custom-control-input" <?php if($class_data[$shipping_class->id]['status'] == 0) echo ' checked'; ?>>
                                <label for="status_<?= $shipping_class->id; ?>_2" class="custom-control-label"><?= trans("disable"); ?></label>
                            </div>
+                          <div class="col-md-4 custom-control custom-radio">
+                              <input type="radio" name="status_<?= $shipping_class->id; ?>" value="2" id="status_<?= $shipping_class->id; ?>_3" class="custom-control-input" <?php if($class_data[$shipping_class->id]['status'] == 2) echo ' checked'; ?>>
+                              <label for="status_<?= $shipping_class->id; ?>_3" class="custom-control-label"><?= trans("free_shipping"); ?></label>
+                          </div>
                       </div>
                   </div>
+
                 </div>
             <?php endforeach; ?>
         </div>
