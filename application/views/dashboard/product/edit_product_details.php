@@ -265,24 +265,29 @@
                         <div class="row">
                             <?php if (!empty($shipping_classes)): ?>
                                 <div class="col-sm-12 col-md-6">
-                                    <label><?= trans("shipping_class"); ?>&nbsp;(<?= trans("optional"); ?>)</label>
-                                    <select name="shipping_class_id" class="form-control custom-select">
-                                        <option value=""><?= trans("select"); ?></option>
-                                        <?php if (!empty($shipping_classes)): ?>
-                                            <?php foreach ($shipping_classes as $shipping_class): ?>
-                                                <option value="<?= $shipping_class->id; ?>" <?= $product->shipping_class_id == $shipping_class->id ? 'selected' : ''; ?>><?= @parse_serialized_name_array($shipping_class->name_array, $this->selected_lang->id); ?></option>
-                                            <?php endforeach;
+
+                                    <!--select name="shipping_class_id" class="form-control custom-select"-->
+                                    <label><?= trans("shipping_class_costs"); ?></label>
+                                    <?php foreach ($shipping_classes as $shipping_class):
+                                        $class_cost = get_shipping_class_cost_by_method($method->flat_rate_class_costs_array, $shipping_class->id);
+                                        if (!empty($class_cost)):
+                                            $class_cost = get_price($class_cost, "input");
                                         endif; ?>
-                                    </select>
-                                </div>
+                                        <div class="input-group m-b-5">
+                                            <span class="shipping-label"><?= @parse_serialized_name_array($shipping_class->name_array, $this->selected_lang->id); ?>,  <?= $this->default_currency->symbol; ?></span>
+                                            <input type="text" name="flat_rate_cost_<?= $option_unique_id; ?>_class_<?= $shipping_class->id; ?>" class="form-control form-input price-input" value="<?= $class_cost; ?>"
+                                                   placeholder="<?= @parse_serialized_name_array($shipping_class->name_array, $this->selected_lang->id); ?>" maxlength="19">
+                                        </div>
+                                    <?php endforeach; ?>
+                              </div>
                             <?php endif; ?>
                             <div class="col-sm-12 col-md-6">
-                                <label><?= trans('delivery_time'); ?>&nbsp;(<?= trans("optional"); ?>)</label>
+                                <label><?= trans('handling_time'); ?></label>
                                 <select name="shipping_delivery_time_id" class="form-control custom-select">
                                     <option value=""><?= trans("select"); ?></option>
                                     <?php if (!empty($shipping_delivery_times)): ?>
-                                        <?php foreach ($shipping_delivery_times as $delivery_time): ?>
-                                            <option value="<?= $delivery_time->id; ?>" <?= $product->shipping_delivery_time_id == $delivery_time->id ? 'selected' : ''; ?>><?= @parse_serialized_option_array($delivery_time->option_array, $this->selected_lang->id); ?></option>
+                                        <?php foreach ($shipping_delivery_times as $id => $delivery_time): ?>
+                                            <option value="<?= $id; ?>" <?= $product->shipping_delivery_time_id == $id ? 'selected' : ''; ?>><?= @parse_serialized_option_array($delivery_time, $this->selected_lang->id); ?></option>
                                         <?php endforeach;
                                     endif; ?>
                                 </select>
@@ -296,7 +301,7 @@
 
     <div class="col-sm-12 text-left m-t-15 m-b-15">
                 <label>
-                  <?php echo trans("terms_new"); ?>                
+                  <?php echo trans("terms_new"); ?>
                 </label>
     </div>
     <div class="col-sm-12">

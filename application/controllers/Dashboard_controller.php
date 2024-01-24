@@ -234,8 +234,13 @@ class Dashboard_controller extends Home_Core_Controller
         }
 
         //$data['shipping_classes'] = $this->shipping_model->get_active_shipping_classes($this->auth_user->id);
-        $data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
-        $data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id);
+        //$data['shipping_classes'] = $this->shipping_model->get_default_shipping_classes();
+        //$data['shipping_delivery_times'] = $this->shipping_model->get_shipping_delivery_times($this->auth_user->id);
+        $data['shipping_delivery_times'] = $this->shipping_model->get_default_shipping_delivery_times();
+
+        //echo '<pre>';
+        //print_r($data['shipping_delivery_times']);
+
         $shipping_zones = $this->shipping_model->get_shipping_zones($this->auth_user->id);
 
         $data['show_shipping_options_warning'] = false;
