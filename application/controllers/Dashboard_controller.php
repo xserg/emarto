@@ -241,10 +241,11 @@ class Dashboard_controller extends Home_Core_Controller
         //echo '<pre>';
         //print_r($data['shipping_delivery_times']);
 
-        $shipping_zones = $this->shipping_model->get_shipping_zones($this->auth_user->id);
+        //$shipping_zones = $this->shipping_model->get_shipping_zones($this->auth_user->id);
+        $data['shipping_zones'] = $this->shipping_model->get_shipping_zones($this->auth_user->id);
 
         $data['show_shipping_options_warning'] = false;
-        if ($data['shipping_status'] == 1 && empty($shipping_zones)) {
+        if ($data['shipping_status'] == 1 && empty($data['shipping_zones'])) {
             $data['show_shipping_options_warning'] = true;
         }
 
