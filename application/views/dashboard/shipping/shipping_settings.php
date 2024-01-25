@@ -30,7 +30,7 @@
                                 <tr role="row">
                                     <th scope="col"><?= trans("zone_name"); ?></th>
                                     <th scope="col"><?= trans("regions"); ?></th>
-                                
+                                    <th scope="col"><?= trans("shipping_methods"); ?></th>
                                     <th scope="col"><?= trans("options"); ?></th>
                                 </tr>
                                 </thead>
@@ -56,7 +56,24 @@
                                                     endforeach;
                                                 endif; ?>
                                             </td>
+                                            <td>
+                                                <?php $methods = get_shipping_payment_methods_by_zone($shipping_zone->id, 1);
+                                                $i = 0;
+                                                if (!empty($methods)):
+                                                    foreach ($methods as $method): ?>
+                                                        <span class="pull-left">
+                                                          <?= @parse_serialized_name_array($method->name_array, $this->selected_lang->id)
+                                                          . ' (' . $method->time . ' ' . trans('business2') . ' ' . trans('days3') . ')&nbsp;'
+                                                          . $this->default_currency->symbol . ' '
+                                                          . number_format(get_price($method->cost, "input"), 2, ".", "")
+                                                          . ($method->status == 2 ? ' ' . trans('free_shipping') : '');
+                                                          ?>
 
+                                                        </span><br>
+                                                        <?php $i++;
+                                                    endforeach;
+                                                endif; ?>
+                                            </td>
                                             <td style="width: 120px;">
                                                 <div class="btn-group btn-group-option">
                                                     <a href="<?= generate_dash_url("edit_shipping_zone"); ?>/<?= $shipping_zone->id; ?>" class="btn btn-sm btn-default btn-edit" data-toggle="tooltip" title="<?= trans('edit'); ?>"><i class="fa fa-edit"></i></a>

@@ -850,10 +850,10 @@ if (!function_exists('get_shipping_locations_by_zone')) {
 
 //get shipping payment methods by zone
 if (!function_exists('get_shipping_payment_methods_by_zone')) {
-    function get_shipping_payment_methods_by_zone($zone_id)
+    function get_shipping_payment_methods_by_zone($zone_id, $all='')
     {
         $ci =& get_instance();
-        return $ci->shipping_model->get_shipping_payment_methods_by_zone($zone_id);
+        return $ci->shipping_model->get_shipping_payment_methods_by_zone($zone_id, $all);
     }
 }
 

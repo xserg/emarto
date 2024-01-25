@@ -41,14 +41,16 @@ class Shipping_model extends CI_Model
                     $item->shop_name = get_shop_name($seller);
                     $item->methods = array();
                     $shipping_methods = $this->get_cart_shipping_methods($seller->id, $state_id);
+                  //echo '<pre>';
                     if (!empty($shipping_methods)) {
                         foreach ($shipping_methods as $shipping_method) {
                             $method = new stdClass();
                             $method->id = $shipping_method->id;
                             $method->method_type = $shipping_method->method_type;
-                            $method->name = @parse_serialized_name_array($shipping_method->name_array, $this->selected_lang->id);
+                            $method->name = @parse_serialized_name_array($shipping_method->name_array, $this->selected_lang->id)
+                            . ' (' . $shipping_method->time . ' ' . trans('business2') . ' ' . trans('days3') . ')&nbsp;';
                             $method->is_selected = 0;
-                            $method->is_free_shipping = 0;
+                            $method->is_free_shipping = $shipping_method->free_shipping;
                             $method->free_shipping_min_amount = 0;
                             $method->cost = null;
                             //calculate shipping cost
@@ -83,6 +85,8 @@ class Shipping_model extends CI_Model
                 }
             }
         }
+
+        //print_r($seller_shipping_methods);
         //set selected shipping methods
         $total_shipping_cost = 0;
         if (!empty($seller_shipping_methods)) {
@@ -146,8 +150,41 @@ class Shipping_model extends CI_Model
             }
             //get shipping methods
             if (!empty($zone_ids)) {
-                return $this->db->where_in('zone_id', $zone_ids, FALSE)->where('user_id', clean_number($seller_id))->where('status', 1)->order_by("FIELD(method_type, 'free_shipping', 'local_pickup', 'flat_rate')")->get('shipping_zone_methods')->result();
+                $methods = $this->db->where_in('zone_id', $zone_ids, FALSE)
+                ->where('user_id', clean_number($seller_id))
+                ->where('status', 1)
+                ->order_by("FIELD(method_type, 'free_shipping', 'local_pickup', 'flat_rate')")
+                ->get('shipping_zone_methods')->result();
             }
+
+            $shipping_classes = $this->get_default_shipping_classes();
+            if ($methods) {
+                foreach($methods as $method) {
+
+                    $class_data = get_shipping_class_data($method->flat_rate_class_costs_array);
+                    foreach($class_data as $id => $class) {
+                        if ($class['status'] > 0) {
+                            $user_method = new stdClass();
+                            $user_method->id = $id;
+                            $user_method->zone_id = $method->zone_id;
+                            $user_method->user_id = $method->user_id;
+                            $user_method->name_array = $shipping_classes[$id-1]->name_array;
+                            $user_method->cost = $class['cost'];
+                            $user_method->time = $class['time'];
+                            $user_method->method_type = $class['status'] == 1 ? 'flat_rate' : 'free_shipping';
+                            $user_method->flat_rate_cost_calculation_type = $method->flat_rate_cost_calculation_type;
+                            $user_method->flat_rate_cost = $class['cost'];
+                            $user_method->status = $class['status'];
+                            $user_method->free_shipping = $method->free_shipping;
+                            $user_method->free_shipping_min_amount = 0;
+                            $ret[] =  $user_method;
+                        }
+                    }
+
+                }
+                return $ret;
+            }
+
         }
         return array();
     }
@@ -609,10 +646,40 @@ class Shipping_model extends CI_Model
     }
 
     //get shipping payment methods by zone
-    public function get_shipping_payment_methods_by_zone($zone_id)
+    public function get_shipping_payment_methods_by_zone($zone_id, $all = 0)
     {
         $this->db->where('zone_id', clean_number($zone_id))->order_by('id', 'DESC');
-        return $this->db->get('shipping_zone_methods')->result();
+        $methods = $this->db->get('shipping_zone_methods')->result();
+        if (!$all) {
+            return $methods;
+        }
+        $shipping_classes = $this->get_default_shipping_classes();
+        if ($methods) {
+            foreach($methods as $method) {
+                $class_data = get_shipping_class_data($method->flat_rate_class_costs_array);
+                foreach($class_data as $id => $class) {
+                    if ($class['status'] > 0) {
+                        $user_method = new stdClass();
+                        $user_method->id = $id;
+                        $user_method->zone_id = $method->zone_id;
+                        $user_method->user_id = $method->user_id;
+                        $user_method->name_array = $shipping_classes[$id-1]->name_array;
+                        $user_method->cost = $class['cost'];
+                        $user_method->time = $class['time'];
+                        $user_method->method_type = $class['status'] == 1 ? 'flat_rate' : 'free_shipping';
+                        $user_method->flat_rate_cost_calculation_type = $method->flat_rate_cost_calculation_type;
+                        $user_method->flat_rate_cost = $class['cost'];
+                        $user_method->status = $class['status'];
+                        $user_method->free_shipping = $method->free_shipping;
+                        $user_method->free_shipping_min_amount = 0;
+                        $ret[] =  $user_method;
+                    }
+                }
+
+            }
+            return $ret;
+          }
+
     }
 
     //add shipping class

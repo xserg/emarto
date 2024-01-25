@@ -3,3 +3,12 @@ uploads/
 logs/
 application/config/database.php
 install
+index.php
+application/third_party
+vendor
+zoomer
+js-zoom
+zoom
+composer
+translator
+magnify-image-hover

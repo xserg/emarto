@@ -295,6 +295,74 @@
                         </div>
                     </div>
                 <?php endif; ?>
+        <!-- -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped " role="grid">
+                        <thead>
+                        <tr role="row">
+                            <th scope="col"><?= trans("zone_name"); ?></th>
+                            <th scope="col"><?= trans("regions"); ?></th>
+                            <th scope="col"><?= trans("shipping_methods"); ?></th>
+                            <th scope="col"><?= trans("options"); ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (!empty($shipping_zones)): ?>
+                            <?php foreach ($shipping_zones as $shipping_zone): ?>
+                                <tr>
+                                    <td><?= @parse_serialized_name_array($shipping_zone->name_array, $this->selected_lang->id); ?></td>
+                                    <td>
+                                        <?php $locations = get_shipping_locations_by_zone($shipping_zone->id);
+                                        if (!empty($locations)):
+                                            $i = 0;
+                                            foreach ($locations as $location):
+                                                if (!empty($location->country_name) && !empty($location->state_name)):?>
+                                                    <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= $location->country_name . "/" . $location->state_name; ?></span>
+                                                <?php
+                                                elseif (!empty($location->country_name) && empty($location->state_name)):?>
+                                                    <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= $location->country_name; ?></span>
+                                                <?php else: ?>
+                                                    <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= get_continent_name_by_key($location->continent_code); ?></span>
+                                                <?php endif;
+                                                $i++;
+                                            endforeach;
+                                        endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php $methods = get_shipping_payment_methods_by_zone($shipping_zone->id, 1);
+                                        $i = 0;
+                                        if (!empty($methods)):
+                                            foreach ($methods as $method): ?>
+                                                <span class="pull-left">
+                                                  <?= @parse_serialized_name_array($method->name_array, $this->selected_lang->id)
+                                                  . ' (' . $method->time . ' ' . trans('business2') . ' ' . trans('days3') . ')&nbsp;'
+                                                  . $this->default_currency->symbol . ' '
+                                                  . number_format(get_price($method->cost, "input"), 2, ".", "")
+                                                  . ($method->status == 2 ? ' ' . trans('free_shipping') : '');
+                                                  ?>
+
+                                                </span><br>
+                                                <?php $i++;
+                                            endforeach;
+                                        endif; ?>
+                                    </td>
+                                    <td style="width: 120px;">
+                                        <div class="btn-group btn-group-option">
+                                            <a href="<?= generate_dash_url("edit_shipping_zone"); ?>/<?= $shipping_zone->id; ?>" class="btn btn-sm btn-default btn-edit" data-toggle="tooltip" title="<?= trans('edit'); ?>"><i class="fa fa-edit"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_item('dashboard_controller/delete_shipping_zone_post','<?= $shipping_zone->id; ?>','<?= trans("confirm_delete"); ?>');"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- -->
             </div>
         </div>
     </div>
