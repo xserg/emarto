@@ -295,8 +295,46 @@
                         </div>
                     </div>
                 <?php endif; ?>
-        <!-- -->
+        <!-- Shipping zone-->
         <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <?php if (!empty($shipping_zones)): ?>
+              <label><?= trans("zone_name"); ?></label>
+                <select name="shipping_class_id" class="form-control form-input">
+                  <option></option>
+                  <?php foreach ($shipping_zones as $shipping_zone): ?>
+                    <option value=<?= $shipping_zone->id ?> <?php if($product->shipping_class_id == $shipping_zone->id) echo ' selected'; ?>>
+                      <?= @parse_serialized_name_array($shipping_zone->name_array, $this->selected_lang->id);  ?>,
+                      <?php $locations = get_shipping_locations_by_zone($shipping_zone->id);
+                      if (!empty($locations)):
+                          $i = 0;
+                          foreach ($locations as $location):
+                              if (!empty($location->country_name) && !empty($location->state_name)):?>
+                                  <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= $location->country_name . "/" . $location->state_name; ?></span>
+                              <?php
+                              elseif (!empty($location->country_name) && empty($location->state_name)):?>
+                                  <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= $location->country_name; ?></span>
+                              <?php else: ?>
+                                  <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= get_continent_name_by_key($location->continent_code); ?></span>
+                              <?php endif;
+                              $i++;
+                          endforeach;
+                      endif; ?>
+                    </option>
+                  <?php endforeach; ?>
+                </select>
+              <?php endif; ?>
+          </div>
+        </div>
+
+        <div class="box-header with-border">
+            <div class="left">
+                <a href="<?= generate_dash_url("shipping-settings"); ?>" class="btn btn-success btn-add-new">
+                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<?= trans("shipping_zones"); ?>
+                </a>
+            </div>
+        </div>
+        <!-- div class="row">
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped " role="grid">
@@ -361,7 +399,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div-->
         <!-- -->
             </div>
         </div>
