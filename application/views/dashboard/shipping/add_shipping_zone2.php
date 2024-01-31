@@ -49,7 +49,7 @@
                                 <div id="form_group_continents" class="form-group m-b-5" style="display: block;">
 
                                     <select id="select_continents" class="select2 form-control" data-placeholder="<?= trans("continent"); ?>">
-                                        <option value=" "><?= trans("worldwide"); ?></option>
+                                        
                                         <?php if (!empty($continents)):
                                             foreach ($continents as $key => $continent):?>
                                                 <option value="<?= $key; ?>"><?= $continent; ?></option>

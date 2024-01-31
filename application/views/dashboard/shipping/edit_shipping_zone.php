@@ -53,7 +53,7 @@
                                             <div class="region"><?= $location->country_name; ?><a href="javascript:void(0)"><i class="fa fa-times" onclick="delete_shipping_location('<?= $location->id; ?>');"></i></a><input type="hidden" value="<?= $location->country_id; ?>" name="country[]"></div>
                                         <?php else:
                                             array_push($array_regions, "continent-" . $location->continent_code); ?>
-                                            <div class="region"><?= get_continent_name_by_key($location->continent_code); ?><a href="javascript:void(0)" onclick="delete_shipping_location('<?= $location->id; ?>');"><i class="fa fa-times"></i></a><input type="hidden" value="<?= $location->continent_code; ?>" name="continent[]"></div>
+                                            <div class="region"><?= get_continent_name_by_key($location->continent_code,  $this->selected_lang->id); ?><a href="javascript:void(0)" onclick="delete_shipping_location('<?= $location->id; ?>');"><i class="fa fa-times"></i></a><input type="hidden" value="<?= $location->continent_code; ?>" name="continent[]"></div>
                                         <?php endif;
                                         $i++;
                                     endforeach;

@@ -807,18 +807,19 @@ if (!function_exists('get_continents')) {
     {
         if ($lang == 2) {
           return array(
+            'WW' => 'Весь мир',
             'EU' => 'Европа', 'AS' => 'Азия', 'AF' => 'Африка', 'NA' => 'Северная Америка', 'SA' => 'Южная Америка', 'OC' => 'Океания', //'AN' => 'Антарктика'
         );
         }
-        return array('EU' => 'Europe', 'AS' => 'Asia', 'AF' => 'Africa', 'NA' => 'North America', 'SA' => 'South America', 'OC' => 'Oceania', 'AN' => 'Antarctica');
+        return array('WW' => 'Wordwide', 'EU' => 'Europe', 'AS' => 'Asia', 'AF' => 'Africa', 'NA' => 'North America', 'SA' => 'South America', 'OC' => 'Oceania', 'AN' => 'Antarctica');
     }
 }
 
 //get continent name by key
 if (!function_exists('get_continent_name_by_key')) {
-    function get_continent_name_by_key($continent_key)
+    function get_continent_name_by_key($continent_key, $lang = null)
     {
-        $continents = get_continents();
+        $continents = get_continents($lang);
         if (!empty($continents)) {
             foreach ($continents as $key => $value) {
                 if ($key == $continent_key) {

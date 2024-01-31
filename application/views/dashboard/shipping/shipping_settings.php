@@ -50,7 +50,7 @@
                                                         elseif (!empty($location->country_name) && empty($location->state_name)):?>
                                                             <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= $location->country_name; ?></span>
                                                         <?php else: ?>
-                                                            <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= get_continent_name_by_key($location->continent_code); ?></span>
+                                                            <span class="pull-left"><?= $i != 0 ? ", " : ''; ?><?= get_continent_name_by_key($location->continent_code, $this->selected_lang->id); ?></span>
                                                         <?php endif;
                                                         $i++;
                                                     endforeach;

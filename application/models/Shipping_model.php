@@ -365,7 +365,7 @@ class Shipping_model extends CI_Model
         $continent_codes = $this->input->post('continent');
         if (!empty($continent_codes)) {
             foreach ($continent_codes as $continent_code) {
-                if (in_array($continent_code, array('EU', 'AS', 'AF', 'NA', 'SA', 'OC', 'AN'))) {
+                if (in_array($continent_code, array('WW', 'EU', 'AS', 'AF', 'NA', 'SA', 'OC', 'AN'))) {
                     //check if already exists
                     $zone_continent = $this->db->where('continent_code', clean_str($continent_code))->where('zone_id', clean_number($zone_id))->get('shipping_zone_locations')->row();
                     if (empty($zone_continent)) {
