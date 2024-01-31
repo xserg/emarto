@@ -150,13 +150,42 @@
     }
 
     $(document).ready(function () {
+      var error_message = '';
         $('#add-shipping-zone').submit(function (e) {
             if (!$('#zone_name').val() && !$('[name=zone_name_lang_1]').val() && !$('[name=zone_name_lang_2]').val()) {
             //|| !$("#selected_regions_container").text()) {
+            error_message = "Please fill name!\n";
               alert('Please fill name!');
               e.preventDefault();
             }
 
+            if (!$('#flat_rate_cost_class_1').val() && !$('#flat_rate_cost_class_2').val() && !$('#flat_rate_cost_class_3').val()) {
+              error_message = 'Please select at least one shipping method for the zone.!';
+              alert('Please select at least one shipping method for the zone.!');
+              e.preventDefault();
+            }
+
+            if ($('#flat_rate_cost_class_1').val() &&  !$('select[name="time_1"]').val()) {
+              error_message += "Please specify an expected transit time for the selected shipping method.\n";
+              alert('Please specify an expected transit time for the selected shipping method.');
+              e.preventDefault();
+            }
+            if ($('#flat_rate_cost_class_2').val() &&  !$('select[name="time_2"]').val()) {
+              error_message += "Please specify an expected transit time for the selected shipping method.\n";
+              alert('Please specify an expected transit time for the selected shipping method.');
+              e.preventDefault();
+            }
+            if ($('#flat_rate_cost_class_3').val() &&  !$('select[name="time_3"]').val()) {
+              error_message += "Please specify an expected transit time for the selected shipping method.\n";
+              alert('Please specify an expected transit time for the selected shipping method.');
+              e.preventDefault();
+            }
+
+            /*
+            if (error_message) {
+               alert(error_message);
+               e.preventDefault();
+            }*/
         });
     });
 
