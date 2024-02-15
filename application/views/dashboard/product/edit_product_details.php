@@ -299,13 +299,14 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
               <?php if (!empty($shipping_zones)): ?>
-              <label><?= trans("zone_name"); ?></label>
+              <label><?= trans("shipping_policy"); ?></label>
                 <select name="shipping_class_id" class="form-control form-input">
                   <option></option>
                   <?php foreach ($shipping_zones as $shipping_zone): ?>
                     <option value=<?= $shipping_zone->id ?> <?php if($product->shipping_class_id == $shipping_zone->id) echo ' selected'; ?>>
                       <?= @parse_serialized_name_array($shipping_zone->name_array, $this->selected_lang->id);  ?>,
                       <?php $locations = get_shipping_locations_by_zone($shipping_zone->id);
+                      /*
                       if (!empty($locations)):
                           $i = 0;
                           foreach ($locations as $location):
@@ -320,6 +321,7 @@
                               $i++;
                           endforeach;
                       endif;
+                      */
                       $methods = get_shipping_payment_methods_by_zone($shipping_zone->id, 1);
                       $i = 0;
                       if (!empty($methods)):
@@ -344,13 +346,13 @@
           </div>
         </div>
 
-        <div class="box-header with-border">
-            <div class="left">
+
+            <div class="left m-t-10">
                 <a href="<?= generate_dash_url("shipping-settings"); ?>" class="btn btn-success btn-add-new">
                     <i class="fa fa-plus"></i>&nbsp;&nbsp;<?= trans("shipping_zones"); ?>
                 </a>
             </div>
-        </div>
+
         <!-- div class="row">
             <div class="col-sm-12">
                 <div class="table-responsive">

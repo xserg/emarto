@@ -882,7 +882,9 @@ class Shipping_model extends CI_Model
         ->where('label', 'days3')->get('language_translations')->row();
       }
       $data = [];
-      for ($i = 1; $i < 14; $i++) {
+      $ranges = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20,30,40];
+      foreach ($ranges as $i) {
+      //for ($i = 1; $i < 14; $i++) {
         //$ret = new stdClass();
         $option_array = [];
           foreach ($this->languages as $language) {
@@ -907,7 +909,7 @@ class Shipping_model extends CI_Model
     public function get_shipping_delivery_time_ranges()
     {
         $range[1] = ['2-10', '20-45'];
-        $range[2] = ['2-10', '7-20'];
+        $range[2] = ['1-7', '7-20'];
         $range[3] = ['1-3', '2-7'];
         //return map(($item) => $item . t('business2') . ' ' . t('days'), $range);
         return  $range;
