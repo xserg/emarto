@@ -102,6 +102,9 @@
 <?php $this->load->view('dashboard/shipping/_js_shipping'); ?>
 
 <script>
+  var shipping_method_requiired = "<?= trans("shipping_method_requiired"); ?>";
+  var shipping_time_requiired = "<?= trans("shipping_time_requiired"); ?>";
+  var shipping_name_requiired = "<?= trans("shipping_name_requiired"); ?>";
     <?php if (!empty($array_regions)):
     foreach ($array_regions as $array_region):?>
     array_regions.push("<?= $array_region; ?>");

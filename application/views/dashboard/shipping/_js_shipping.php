@@ -152,40 +152,67 @@
     $(document).ready(function () {
       var error_message = '';
         $('#add-shipping-zone').submit(function (e) {
+
             if (!$('#zone_name').val() && !$('[name=zone_name_lang_1]').val() && !$('[name=zone_name_lang_2]').val()) {
-            //|| !$("#selected_regions_container").text()) {
-            error_message = "Please fill name!\n";
-              alert('Please fill name!');
+
+              swal({
+                  text: shipping_name_requiired,
+                  icon: "warning",
+                  buttons: sweetalert_ok,
+                  dangerMode: true,
+              });
+
+              //alert(shipping_name_requiired);
               e.preventDefault();
+              return;
             }
 
             if (!$('#flat_rate_cost_class_1').val() && !$('#flat_rate_cost_class_2').val() && !$('#flat_rate_cost_class_3').val()) {
-              error_message = 'Please select at least one shipping method for the zone.!';
-              alert('Please select at least one shipping method for the zone.!');
+              //alert(shipping_method_requiired);
+              swal({
+                  text: shipping_method_requiired,
+                  icon: "warning",
+                  buttons: sweetalert_ok,
+                  dangerMode: true,
+              });
               e.preventDefault();
+              return;
             }
 
-            if ($('#flat_rate_cost_class_1').val() &&  !$('select[name="time_1"]').val()) {
-              error_message += "Please specify an expected transit time for the selected shipping method.\n";
-              alert('Please specify an expected transit time for the selected shipping method.');
+            if (
+              ($('#flat_rate_cost_class_1').val() &&  !$('select[name="time_1"]').val()) ||
+              ($('#flat_rate_cost_class_2').val() &&  !$('select[name="time_2"]').val()) ||
+              ($('#flat_rate_cost_class_3').val() &&  !$('select[name="time_3"]').val())
+            ) {
+              swal({
+                  text: shipping_time_requiired,
+                  icon: "warning",
+                  buttons: sweetalert_ok,
+                  dangerMode: true,
+              });
               e.preventDefault();
+              return;
             }
+            /*
             if ($('#flat_rate_cost_class_2').val() &&  !$('select[name="time_2"]').val()) {
-              error_message += "Please specify an expected transit time for the selected shipping method.\n";
-              alert('Please specify an expected transit time for the selected shipping method.');
+              swal({
+                  text: shipping_time_requiired,
+                  icon: "warning",
+                  buttons: sweetalert_ok,
+                  dangerMode: true,
+              });
               e.preventDefault();
             }
             if ($('#flat_rate_cost_class_3').val() &&  !$('select[name="time_3"]').val()) {
-              error_message += "Please specify an expected transit time for the selected shipping method.\n";
-              alert('Please specify an expected transit time for the selected shipping method.');
+              swal({
+                  text: shipping_time_requiired,
+                  icon: "warning",
+                  buttons: sweetalert_ok,
+                  dangerMode: true,
+              });
               e.preventDefault();
             }
-
-            /*
-            if (error_message) {
-               alert(error_message);
-               e.preventDefault();
-            }*/
+            */
         });
     });
 

@@ -49,7 +49,7 @@
                                 <div id="form_group_continents" class="form-group m-b-5" style="display: block;">
 
                                     <select id="select_continents" class="select2 form-control" data-placeholder="<?= trans("continent"); ?>">
-                                        
+
                                         <?php if (!empty($continents)):
                                             foreach ($continents as $key => $continent):?>
                                                 <option value="<?= $key; ?>"><?= $continent; ?></option>
@@ -123,5 +123,10 @@
             </div>
         </div>
     </div>
-<script> var default_country = <?= $default_country ?>;</script>
+<script>
+  var default_country = <?= $default_country ?>;
+  var shipping_method_requiired = "<?= trans("shipping_method_requiired"); ?>";
+  var shipping_time_requiired = "<?= trans("shipping_time_requiired"); ?>";
+  var shipping_name_requiired = "<?= trans("shipping_name_requiired"); ?>";
+</script>
 <?php $this->load->view('dashboard/shipping/_js_shipping'); ?>
