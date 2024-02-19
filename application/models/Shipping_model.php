@@ -481,6 +481,7 @@ class Shipping_model extends CI_Model
                 $shipping_classes = $this->get_default_shipping_classes();
                 if (!empty($shipping_classes)) {
                     foreach ($shipping_classes as $shipping_class) {
+                      if (!empty($this->input->post("flat_rate_cost_class_" . $shipping_class->id, true))) {
                         $item = array(
                             'class_id' => $shipping_class->id,
                             'cost' => $this->input->post("flat_rate_cost_class_" . $shipping_class->id, true),
@@ -494,6 +495,7 @@ class Shipping_model extends CI_Model
                         if ($this->input->post("status_" . $shipping_class->id, true) == 2) {
                             $data['free_shipping'] = 1;
                         }
+                      }
                     }
                 }
                 $data['flat_rate_class_costs_array'] = "";
@@ -584,6 +586,7 @@ class Shipping_model extends CI_Model
                 $shipping_classes = $this->get_default_shipping_classes();
                 if (!empty($shipping_classes)) {
                     foreach ($shipping_classes as $shipping_class) {
+                        if (!empty($this->input->post("flat_rate_cost_class_" . $shipping_class->id, true))) {
                         $item = array(
                             'class_id' => $shipping_class->id,
                             'cost' => $this->input->post("flat_rate_cost_class_" . $shipping_class->id, true),
@@ -599,6 +602,7 @@ class Shipping_model extends CI_Model
                         if ($this->input->post("status_" . $shipping_class->id, true) == 2) {
                             $data['free_shipping'] = 1;
                         }
+                      }
                     }
                 }
                 $data['flat_rate_class_costs_array'] = "";

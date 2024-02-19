@@ -128,5 +128,7 @@
   var shipping_method_requiired = "<?= trans("shipping_method_requiired"); ?>";
   var shipping_time_requiired = "<?= trans("shipping_time_requiired"); ?>";
   var shipping_name_requiired = "<?= trans("shipping_name_requiired"); ?>";
+  var select_shipping_destinations = "<?= trans("select_shipping_destinations"); ?>";
+  
 </script>
 <?php $this->load->view('dashboard/shipping/_js_shipping'); ?>

@@ -149,32 +149,27 @@
         });
     }
 
+    function showError(error) {
+      swal({
+          text: error,
+          icon: "warning",
+          buttons: sweetalert_ok,
+          dangerMode: true,
+      });
+    }
+
     $(document).ready(function () {
       var error_message = '';
         $('#add-shipping-zone').submit(function (e) {
 
             if (!$('#zone_name').val() && !$('[name=zone_name_lang_1]').val() && !$('[name=zone_name_lang_2]').val()) {
-
-              swal({
-                  text: shipping_name_requiired,
-                  icon: "warning",
-                  buttons: sweetalert_ok,
-                  dangerMode: true,
-              });
-
-              //alert(shipping_name_requiired);
+              showError(shipping_name_requiired);
               e.preventDefault();
               return;
             }
 
             if (!$('#flat_rate_cost_class_1').val() && !$('#flat_rate_cost_class_2').val() && !$('#flat_rate_cost_class_3').val()) {
-              //alert(shipping_method_requiired);
-              swal({
-                  text: shipping_method_requiired,
-                  icon: "warning",
-                  buttons: sweetalert_ok,
-                  dangerMode: true,
-              });
+              showError(shipping_method_requiired);
               e.preventDefault();
               return;
             }
@@ -184,35 +179,17 @@
               ($('#flat_rate_cost_class_2').val() &&  !$('select[name="time_2"]').val()) ||
               ($('#flat_rate_cost_class_3').val() &&  !$('select[name="time_3"]').val())
             ) {
-              swal({
-                  text: shipping_time_requiired,
-                  icon: "warning",
-                  buttons: sweetalert_ok,
-                  dangerMode: true,
-              });
+              showError(shipping_time_requiired);
               e.preventDefault();
               return;
             }
-            /*
-            if ($('#flat_rate_cost_class_2').val() &&  !$('select[name="time_2"]').val()) {
-              swal({
-                  text: shipping_time_requiired,
-                  icon: "warning",
-                  buttons: sweetalert_ok,
-                  dangerMode: true,
-              });
+
+            if (!$("#selected_regions_container").text()) {
+              showError(select_shipping_destinations);
               e.preventDefault();
+              return;
             }
-            if ($('#flat_rate_cost_class_3').val() &&  !$('select[name="time_3"]').val()) {
-              swal({
-                  text: shipping_time_requiired,
-                  icon: "warning",
-                  buttons: sweetalert_ok,
-                  dangerMode: true,
-              });
-              e.preventDefault();
-            }
-            */
+
         });
     });
 

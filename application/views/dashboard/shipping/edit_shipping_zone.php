@@ -105,6 +105,8 @@
   var shipping_method_requiired = "<?= trans("shipping_method_requiired"); ?>";
   var shipping_time_requiired = "<?= trans("shipping_time_requiired"); ?>";
   var shipping_name_requiired = "<?= trans("shipping_name_requiired"); ?>";
+  var select_shipping_destinations = "<?= trans("select_shipping_destinations"); ?>";
+  
     <?php if (!empty($array_regions)):
     foreach ($array_regions as $array_region):?>
     array_regions.push("<?= $array_region; ?>");
