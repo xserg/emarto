@@ -490,6 +490,9 @@ class Shipping_model extends CI_Model
                             //'time2' => $this->input->post("time2_" . $shipping_class->id),
 
                         );
+                        if ($item['cost'] == 0) {
+                            $data['free_shipping'] = 1;
+                        }
                         $item['cost'] = get_price($item["cost"], 'database');
                         array_push($class_array, $item);
                         if ($this->input->post("status_" . $shipping_class->id, true) == 2) {

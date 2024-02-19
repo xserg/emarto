@@ -2,7 +2,7 @@
 <script>
     //select continen
     $(document).on("change", "#select_continents", function () {
-        if ($(this).val() == ' ') {
+        if ($(this).val() == 'WW') {
           $('#select_countries option').empty();
           $('#select_states option').empty();
           $('#form_group_countries').hide();
@@ -28,11 +28,13 @@
         var continent = $('#select_continents').val();
         var continent_text = $('#select_continents option:selected').text();
 
-        if (continent == ' ') {
-            region_id == ' ';
+        if (continent == 'WW') {
+            region_id == 'WW';
             region_id = continent;
             region_text = continent_text;
             input_name = 'continent';
+            //$('#select_continents').empty();
+            $('#form_group_continents').hide();
         } else {
 
         var country = $('#select_countries').val();
