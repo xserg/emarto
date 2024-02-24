@@ -1653,7 +1653,7 @@ class Dashboard_controller extends Home_Core_Controller
           $data['default_country'] = $this->default_location->country_id;
         }
         $this->load->view('dashboard/includes/_header', $data);
-        $this->load->view('dashboard/shipping/add_shipping_zone2', $data);
+        $this->load->view('dashboard/shipping/add_shipping_zone', $data);
         $this->load->view('dashboard/includes/_footer');
     }
 

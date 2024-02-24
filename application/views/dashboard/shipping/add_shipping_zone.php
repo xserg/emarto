@@ -16,23 +16,29 @@
                 <div class="box-body">
                     <?php $this->load->view('dashboard/includes/_messages'); ?>
 
-                    <?php echo form_open("add-shipping-zone-post", "id=add-shipping-zone"); ?>
+                    <?php echo form_open("add-shipping-zone-post", "id=shipping-zone"); ?>
                     <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                     <div class="form-group">
-                      <label class="control-label"><?php echo trans("zone_name"); ?></label>  
+                      <label class="control-label"><?php echo trans("zone_name"); ?></label>
                       <select id="zone_name" class="form-control" name="zone_name" data-placeholder="<?= trans("zone_name"); ?>">
                           <option value="">&nbsp;</option>
                           <option value="domestic"><?php echo trans("domestic"); ?></option>
                           <option value="international"><?php echo trans("international"); ?></option>
                       </select>
-                      <br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#custom_name"><?= trans("select_zone_name", true); ?></a>
+                      <br><br><a href="#custom_name"  id="#btn_custom_name" class="btn btn-sm btn-info" data-toggle="collapse" ><?= trans("select_zone_name", true); ?></a>
+
                     </div>
                     <div class="form-group collapse" id="custom_name" >
-                        
-                        <?php foreach ($this->languages as $language): ?>
-                            <input type="text" name="zone_name_lang_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?= $language->name; ?>" maxlength="255">
-                        <?php endforeach; ?>
+                            <input type="text" name="zone_name_lang_<?= $this->selected_lang->id; ?>" class="form-control form-input m-b-5" placeholder="<?= trans("zone_name"); ?>" maxlength="255">
                     </div>
+
+                    <?php
+                    $vars = array('selected_option' => 'flat_rate', 'option_unique_id' => uniqid(), 'shipping_classes' => $shipping_classes);
+                    $html_content = $this->load->view("dashboard/shipping/_response_shipping_method2", $vars, true);
+
+                    echo $html_content;
+                    ?>
+
                     <div class="form-group">
                         <label class="control-label"><?php echo trans("regions"); ?></label>
                         <div class="row">
@@ -40,9 +46,10 @@
                                 <div id="selected_regions_container" class="selected-regions"></div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="form-group m-b-5">
+                                <div id="form_group_continents" class="form-group m-b-5" style="display: block;">
+
                                     <select id="select_continents" class="select2 form-control" data-placeholder="<?= trans("continent"); ?>">
-                                        <option></option>
+
                                         <?php if (!empty($continents)):
                                             foreach ($continents as $key => $continent):?>
                                                 <option value="<?= $key; ?>"><?= $continent; ?></option>
@@ -61,13 +68,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="btn_select_region_container" class="col-sm-12" style="display: none;">
+                            <div id="btn_select_region_container" class="col-sm-12" style="display: block;">
                                 <a href="javascript:void(0)" id="btn_select_region" class="btn btn-sm btn-info"><i class="fa fa-check"></i>&nbsp;<?php echo trans("select_region") ?></a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <label class="control-label m-b-10"><?php echo trans("shipping_methods"); ?></label>
                         <div class="row">
                             <div class="col-sm-12">
@@ -79,7 +86,7 @@
                                 <a href="javascript:void(0)" id="btn_add_shipping_method" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalShippingMethod"><i class="fa fa-plus"></i>&nbsp;<?php echo trans("add_shipping_method") ?></a>
                             </div>
                         </div>
-                    </div>
+                    </div-->
 
                     <div class="form-group text-right">
                       <a href="<?php echo generate_dash_url("shipping_settings"); ?>" class="btn btn-success">
@@ -116,5 +123,13 @@
             </div>
         </div>
     </div>
+<script>
+  var default_country = <?= $default_country ?>;
+  var shipping_method_requiired = "<?= trans("shipping_method_requiired"); ?>";
+  var shipping_time_requiired = "<?= trans("shipping_time_requiired"); ?>";
+  var shipping_name_requiired = "<?= trans("shipping_name_requiired"); ?>";
+  var select_shipping_destinations = "<?= trans("select_shipping_destinations"); ?>";
+  var shipping_not_null = "<?= trans("select_shipping_destinations"); ?>";
 
+</script>
 <?php $this->load->view('dashboard/shipping/_js_shipping'); ?>

@@ -162,9 +162,12 @@
 
     $(document).ready(function () {
       var error_message = '';
-        $('#add-shipping-zone').submit(function (e) {
+        $('#shipping-zone').submit(function (e) {
 
-            if (!$('#zone_name').val() && !$('[name=zone_name_lang_1]').val() && !$('[name=zone_name_lang_2]').val()) {
+            if (!$('#zone_name').val()
+            && !$('[name=zone_name_lang_1]').val()
+            && !$('[name=zone_name_lang_2]').val()
+            && !$('[name=zone_id]').val()) {
               showError(shipping_name_requiired);
               e.preventDefault();
               return;

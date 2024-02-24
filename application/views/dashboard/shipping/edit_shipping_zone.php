@@ -16,7 +16,7 @@
             <div class="box-body">
                 <?php $this->load->view('dashboard/includes/_messages'); ?>
 
-                <?php echo form_open("edit-shipping-zone-post"); ?>
+                <?php echo form_open("edit-shipping-zone-post", "id=shipping-zone"); ?>
                 <input type="hidden" name="zone_id" value="<?= $shipping_zone->id; ?>">
                 <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                 <div class="form-group">
