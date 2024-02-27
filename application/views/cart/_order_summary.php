@@ -62,11 +62,21 @@
                 <strong><?php echo trans("vat"); ?><span class="float-right"><?= price_decimal($cart_total->vat, $cart_total->currency); ?></span></strong>
             </div>
         <?php endif; ?>
-        <?php if (!empty($show_shipping_cost) && !empty($cart_total->shipping_cost)): ?>
+        <?php //if (!empty($show_shipping_cost) && !empty($cart_total->shipping_cost)): ?>
             <div class="row-custom m-b-10">
-                <strong><?php echo trans("shipping"); ?><span class="float-right"><?= price_decimal($cart_total->shipping_cost, $cart_total->currency); ?></span></strong>
+                <strong><?php echo trans("shipping"); ?>
+                  <span class="float-right">
+                    <?php
+                      if (empty($cart_total->shipping_cost)) {
+                          echo trans("free_shipping");
+                      } else {
+                          echo price_decimal($cart_total->shipping_cost, $cart_total->currency);
+                      }
+                      ?>
+                  </span>
+                </strong>
             </div>
-        <?php endif; ?>
+        <?php //endif; ?>
         <?php if ($cart_total->coupon_discount > 0): ?>
             <div class="row-custom m-b-15">
                 <strong><?php echo trans("coupon"); ?>&nbsp;&nbsp;[<?= get_cart_discount_coupon(); ?>]&nbsp;&nbsp;<a href="javascript:void(0)" class="font-weight-normal" onclick="remove_cart_discount_coupon();">[<?= trans("remove"); ?>]</a><span class="float-right">-&nbsp;<?= price_decimal($cart_total->coupon_discount, $cart_total->currency); ?></span></strong>
