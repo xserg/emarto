@@ -52,6 +52,11 @@ class Order_controller extends Home_Core_Controller
         $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
         $data["last_bank_transfer"] = $this->order_admin_model->get_bank_transfer_by_order_number($data["order"]->order_number);
 
+        if ($data["order_products"][0]->shipping_id) {
+          $this->load->library('aftership');
+          $data["tracking"] = $this->aftership->getTracking($data["order_products"][0]->shipping_id);
+        }
+
         $this->load->view('partials/_header', $data);
         $this->load->view('order/order', $data);
         $this->load->view('partials/_footer');

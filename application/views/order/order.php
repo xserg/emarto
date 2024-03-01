@@ -412,8 +412,20 @@
                                                     </td>
                                                 </tr>
                                                 <tr class="tr-shipping-seperator">
-                                                    <td colspan="4"></td>
+                                                    <td colspan="4">
+
+                                                    </td>
                                                 </tr>
+
+                                                <?php foreach($tracking['data']['tracking']['checkpoints'] as $checkpoint): ?>
+                                                  <?php //print_r($checkpoint);?>
+                                                  <tr class="tr-shipping-seperator">
+                                                      <td colspan="4">
+                                                        + <?= $checkpoint['message']?>,
+                                                        <?= date('d.M.Y H:m:s', strtotime($checkpoint['checkpoint_time']))?>
+                                                      </td>
+                                                  </tr>
+                                                <?php endforeach; ?>
                                             <?php endif; ?>
 
                                             <?php endforeach; ?>

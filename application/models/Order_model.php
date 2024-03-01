@@ -579,6 +579,12 @@ class Order_model extends CI_Model
                     'updated_at' => date('Y-m-d H:i:s'),
                 );
 
+                //if (!$order_product->shipping_id && $data['shipping_tracking_number']) {
+                if ($data['shipping_tracking_number']) {  
+                    $this->load->library('aftership');
+                    $data['shipping_id'] = $this->aftership->createTracking($data['shipping_tracking_number']);
+                }
+
                 if ($order_product->product_type == 'digital' && $data["order_status"] == 'payment_received') {
                     $data['order_status'] = 'completed';
                 }
