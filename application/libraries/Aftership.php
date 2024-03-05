@@ -382,9 +382,14 @@ class Aftership
 
   public function getTracking($id, $lang=1)
   {
+    try {
       $response = $this->client->request('GET', '/v4/trackings/' . $id . '?lang=' . ($lang == 2 ? 'ru' : 'en'));
       $array = json_decode($response->getBody()->getContents(), true);
       return $array;
+    } catch(Exception $e) {
+        echo $e->getMessage();
+        return false;
+    }
   }
 
 
