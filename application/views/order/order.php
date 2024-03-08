@@ -406,7 +406,6 @@
                                                             <?php if ($item->order_status == "shipped"): ?>
                                                                 <p class="font-600 m-t-15"><?= trans("order_has_been_shipped"); ?></p>
                                                                 <p><?php echo trans("tracking_code") ?>:&nbsp;<?php echo html_escape($item->shipping_tracking_number); ?></p>
-                                                                <p class="m-0"><?php echo trans("tracking_url") ?>: <a href="<?php echo html_escape($item->shipping_tracking_url); ?>" target="_blank" class="link-underlined"><?php echo html_escape($item->shipping_tracking_url); ?></a></p>
                                                             <?php endif; ?>
                                                         </div>
                                                     </td>

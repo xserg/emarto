@@ -222,9 +222,9 @@
                                             <p class="font-600 m-t-5"><?= trans("shipping_method") ?>:&nbsp;<?= html_escape($item->shipping_method); ?></p>
                                             <?php if ($item->order_status == "shipped" || $item->order_status == "completed"): ?>
                                                 <p class="font-600 m-t-15"><?= trans("order_has_been_shipped"); ?></p>
+                                                <p class="m-b-5"><?php echo trans("shipping_slug") ?>:&nbsp;<?php echo html_escape($item->shipping_slug); ?></p>
                                                 <p><?php echo trans("tracking_code") ?>:&nbsp;<?php echo html_escape($item->shipping_tracking_number); ?></p>
-                                                <p class="m-0"><?php echo trans("tracking_url") ?>: <a href="<?php echo html_escape($item->shipping_tracking_url); ?>" target="_blank" class="link-underlined"><?php echo html_escape($item->shipping_tracking_url); ?></a></p>
-                                            <?php else: ?>
+                                                  <?php else: ?>
                                                 <p><?= trans("order_not_yet_shipped") . trans("warning_add_order_tracking_code"); ?></p>
                                             <?php endif; ?>
                                         </div>
@@ -233,6 +233,16 @@
                                 <tr class="tr-shipping-seperator">
                                     <td colspan="4"></td>
                                 </tr>
+                                <?php foreach($tracking['data']['tracking']['checkpoints'] as $checkpoint): ?>
+                                  <?php //print_r($checkpoint);?>
+                                  <tr class="tr-shipping-seperator">
+                                      <td colspan="4">
+                                        + <?= $checkpoint['message']?>,
+                                        <?= date('d.M.Y H:m:s', strtotime($checkpoint['checkpoint_time']))?>
+                                      </td>
+                                  </tr>
+                                <?php endforeach; ?>
+                                
                             <?php endif;
                             endif;
                         endforeach; ?>
@@ -336,6 +346,10 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
+                                            <label><?= trans("shipping_slug"); ?></label>
+                                            <input type="text" name="shipping_slug" class="form-control form-input" value="<?= html_escape($item->shipping_slug); ?>" placeholder="<?= trans("shipping_slug"); ?>">
+                                        </div>
+                                        <div class="form-group">
                                             <label><?= trans("tracking_code"); ?></label>
                                             <input type="text" name="shipping_tracking_number" class="form-control form-input" value="<?= html_escape($item->shipping_tracking_number); ?>" placeholder="<?= trans("tracking_code"); ?>">
                                         </div>
@@ -369,4 +383,3 @@ endforeach; ?>
         }
     });
 </script>
-

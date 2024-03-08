@@ -574,15 +574,16 @@ class Order_model extends CI_Model
                 $data = array(
                     'order_status' => $this->input->post('order_status', true),
                     'is_approved' => 0,
+                    'shipping_slug' => $this->input->post('shipping_slug', true),
                     'shipping_tracking_number' => $this->input->post('shipping_tracking_number', true),
                     'shipping_tracking_url' => $this->input->post('shipping_tracking_url', true),
                     'updated_at' => date('Y-m-d H:i:s'),
                 );
 
                 //if (!$order_product->shipping_id && $data['shipping_tracking_number']) {
-                if ($data['shipping_tracking_number']) {  
+                if ($data['shipping_tracking_number']) {
                     $this->load->library('aftership');
-                    $data['shipping_id'] = $this->aftership->createTracking($data['shipping_tracking_number']);
+                    $data['shipping_id'] = $this->aftership->createTracking($data['shipping_slug'], $data['shipping_tracking_number']);
                 }
 
                 if ($order_product->product_type == 'digital' && $data["order_status"] == 'payment_received') {

@@ -469,9 +469,9 @@
                                                 <p class="font-600 m-t-5"><?= trans("shipping_method") ?>:&nbsp;<?= html_escape($item->shipping_method); ?></p>
                                                 <?php if ($item->order_status == "shipped" || $item->order_status == "completed"): ?>
                                                     <p class="font-600 m-t-15 m-b-5"><?= trans("order_has_been_shipped"); ?></p>
+                                                    <p class="m-b-5"><?php echo trans("shipping_slug") ?>:&nbsp;<?php echo html_escape($item->shipping_slug); ?></p>
                                                     <p class="m-b-5"><?php echo trans("tracking_code") ?>:&nbsp;<?php echo html_escape($item->shipping_tracking_number); ?></p>
-                                                    <p class="m-0"><?php echo trans("tracking_url") ?>: <a href="<?php echo html_escape($item->shipping_tracking_url); ?>" target="_blank" class="link-underlined"><?php echo html_escape($item->shipping_tracking_url); ?></a></p>
-                                                <?php else: ?>
+                                                      <?php else: ?>
                                                     <p><?= trans("order_not_yet_shipped"); ?></p>
                                                 <?php endif; ?>
                                             </div>
@@ -661,5 +661,3 @@
         }
     }
 </style>
-
-

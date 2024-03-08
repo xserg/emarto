@@ -352,7 +352,7 @@ class Aftership
       );
   }
 
-  public function createTracking($code)
+  public function createTracking($slug, $code)
   {
     try {
 
@@ -360,6 +360,7 @@ class Aftership
           [
             'body' => '{
                         "tracking": {
+                          "slug": "' . $slug . '",
                           "tracking_number": "' . $code . '"
                         }
                       }'
@@ -368,15 +369,26 @@ class Aftership
 
         $statuscode = $response->getStatusCode();
         $array = json_decode($response->getBody()->getContents(), true);
+        //print_r($array);
         if ($statuscode == '201' && isset($array["data"]["tracking"]["id"])) {
-            //print_r($array);
             return $array["data"]["tracking"]["id"];
+        } else {
+            return false;
         }
-
+    } catch (GuzzleHttp\Exception\ClientException $e) {
+      $response = $e->getResponse();
+      $statuscode = $response->getStatusCode();
+      //echo $statuscode;
+      $array = json_decode($response->getBody()->getContents(), true);
+      if ($statuscode == '400' && isset($array["data"]["tracking"]["id"])) {
+        return $array["data"]["tracking"]["id"];
+      }
+    }
+    /*
     } catch(Exception $e) {
         echo $e->getMessage();
         return false;
-    }
+    }*/
 
   }
 
@@ -387,7 +399,7 @@ class Aftership
       $array = json_decode($response->getBody()->getContents(), true);
       return $array;
     } catch(Exception $e) {
-        echo $e->getMessage();
+        //echo $e->getMessage();
         return false;
     }
   }

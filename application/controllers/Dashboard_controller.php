@@ -843,6 +843,10 @@ class Dashboard_controller extends Home_Core_Controller
             redirect(dashboard_url());
         }
         $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
+        if ($data["order_products"][0]->shipping_id) {
+          $this->load->library('aftership');
+          $data["tracking"] = $this->aftership->getTracking($data["order_products"][0]->shipping_id);
+        }
         $data['lang_settings'] = lang_settings();
         $this->load->view('dashboard/includes/_header', $data);
         $this->load->view('dashboard/sales/sale', $data);
