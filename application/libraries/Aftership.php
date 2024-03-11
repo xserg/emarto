@@ -345,6 +345,7 @@ class Aftership
         [
           'base_uri' => $this->ci->config->item('aftership_uri'),
           'headers' => [
+              'Content-Type' => 'application/json',
               'Accept'     => 'application/json',
               'as-api-key'      => $this->ci->config->item('aftership_api_key')
           ]
@@ -399,11 +400,23 @@ class Aftership
       $array = json_decode($response->getBody()->getContents(), true);
       return $array;
     } catch(Exception $e) {
-        //echo $e->getMessage();
+        echo $e->getMessage();
         return false;
     }
   }
 
+
+  public function getCouriers()
+  {
+    try {
+      $response = $this->client->request('GET', '/v4/couriers');
+      $array = json_decode($response->getBody()->getContents(), true);
+      return $array['data']['couriers'];
+    } catch(Exception $e) {
+        echo $e->getMessage();
+        return false;
+    }
+  }
 
   /**
    * fixer.io Currency Converter

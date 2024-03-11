@@ -827,10 +827,13 @@ class Dashboard_controller extends Home_Core_Controller
      */
     public function sale($order_number)
     {
+
         $this->check_vendor_permission();
         if (!$this->is_sale_active) {
             redirect(dashboard_url());
         }
+
+        $this->load->library('aftership');
         $data['title'] = trans("sales");
         $data['description'] = trans("sales") . " - " . $this->app_name;
         $data['keywords'] = trans("sales") . "," . $this->app_name;
@@ -843,8 +846,9 @@ class Dashboard_controller extends Home_Core_Controller
             redirect(dashboard_url());
         }
         $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
+        $data["couriers"] = $this->aftership->getCouriers();
+        
         if ($data["order_products"][0]->shipping_id) {
-          $this->load->library('aftership');
           $data["tracking"] = $this->aftership->getTracking($data["order_products"][0]->shipping_id);
         }
         $data['lang_settings'] = lang_settings();

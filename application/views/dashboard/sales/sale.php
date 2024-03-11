@@ -242,7 +242,7 @@
                                       </td>
                                   </tr>
                                 <?php endforeach; ?>
-                                
+
                             <?php endif;
                             endif;
                         endforeach; ?>
@@ -347,15 +347,20 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label><?= trans("shipping_slug"); ?></label>
-                                            <input type="text" name="shipping_slug" class="form-control form-input" value="<?= html_escape($item->shipping_slug); ?>" placeholder="<?= trans("shipping_slug"); ?>">
+                                            <select type="text" name="shipping_slug" class="form-control form-input" value="<?= html_escape($item->shipping_slug); ?>" placeholder="<?= trans("shipping_slug"); ?>">
+                                    <?php
+                                    foreach($couriers as $courier) {
+                                        if (!preg_match("/api/", $courier['slug'])) {
+                                            echo '<option value="' . $courier['slug'] . '">' . $courier['name'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label><?= trans("tracking_code"); ?></label>
                                             <input type="text" name="shipping_tracking_number" class="form-control form-input" value="<?= html_escape($item->shipping_tracking_number); ?>" placeholder="<?= trans("tracking_code"); ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><?= trans("tracking_url"); ?></label>
-                                            <input type="text" name="shipping_tracking_url" class="form-control form-input" value="<?= html_escape($item->shipping_tracking_url); ?>" placeholder="<?= trans("tracking_url"); ?>">
                                         </div>
                                     </div>
                                 </div>
