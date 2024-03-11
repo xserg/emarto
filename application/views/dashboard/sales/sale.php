@@ -351,7 +351,8 @@
                                     <?php
                                     foreach($couriers as $courier) {
                                         if (!preg_match("/api/", $courier['slug'])) {
-                                            echo '<option value="' . $courier['slug'] . '">' . $courier['name'] . '</option>';
+                                            echo '<option value="' . $courier['slug'] . '"'
+                                            . ($item->shipping_slug == $courier['slug'] ? ' selected' : '') . '>' . $courier['name'] . '</option>';
                                         }
                                     }
                                     ?>
