@@ -68,7 +68,7 @@
                   <span class="float-right">
                     <?php
                       if (empty($cart_total->shipping_cost)) {
-                          echo trans("free_shipping");
+                          echo trans("free");
                       } else {
                           echo price_decimal($cart_total->shipping_cost, $cart_total->currency);
                       }
