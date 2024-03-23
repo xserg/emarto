@@ -347,7 +347,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label><?= trans("shipping_slug"); ?></label>
-                                            <select type="text" name="shipping_slug" class="form-control form-input" value="<?= html_escape($item->shipping_slug); ?>" placeholder="<?= trans("shipping_slug"); ?>">
+                                            <select type="text" name="shipping_slug" class="form-control form-input" value="<?= html_escape($item->shipping_slug); ?>" placeholder="<?= trans("shipping_slug"); ?>" required>
                                     <?php
                                     foreach($couriers as $courier) {
                                         if (!preg_match("/api/", $courier['slug'])) {
@@ -361,7 +361,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label><?= trans("tracking_code"); ?></label>
-                                            <input type="text" name="shipping_tracking_number" class="form-control form-input" value="<?= html_escape($item->shipping_tracking_number); ?>" placeholder="<?= trans("tracking_code"); ?>">
+                                            <input type="text" name="shipping_tracking_number" class="form-control form-input" value="<?= html_escape($item->shipping_tracking_number); ?>" placeholder="<?= trans("tracking_code"); ?>" required>
                                         </div>
                                     </div>
                                 </div>
