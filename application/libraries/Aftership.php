@@ -400,7 +400,7 @@ class Aftership
       $array = json_decode($response->getBody()->getContents(), true);
       return $array;
     } catch(Exception $e) {
-        echo $e->getMessage();
+        //echo $e->getMessage();
         return false;
     }
   }
@@ -413,7 +413,7 @@ class Aftership
       $array = json_decode($response->getBody()->getContents(), true);
       return $array['data']['couriers'];
     } catch(Exception $e) {
-        echo $e->getMessage();
+        //echo $e->getMessage();
         return false;
     }
   }

@@ -347,7 +347,9 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label><?= trans("shipping_slug"); ?></label>
-                                            <select type="text" name="shipping_slug" class="form-control form-input" value="<?= html_escape($item->shipping_slug); ?>" placeholder="<?= trans("shipping_slug"); ?>" required>
+                                            <select type="text" name="shipping_slug" class="form-control form-input" value="<?= html_escape($item->shipping_slug); ?>" placeholder="<?= trans("shipping_slug"); ?>"
+                                               required oninvalid="this.setCustomValidity('Please select a shipping carrier.')" oninput="setCustomValidity('')"
+                                              >
                                     <?php
                                     foreach($couriers as $courier) {
                                         if (!preg_match("/api/", $courier['slug'])) {
@@ -361,7 +363,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label><?= trans("tracking_code"); ?></label>
-                                            <input type="text" name="shipping_tracking_number" class="form-control form-input" value="<?= html_escape($item->shipping_tracking_number); ?>" placeholder="<?= trans("tracking_code"); ?>" required>
+                                            <input type="text" name="shipping_tracking_number" class="form-control form-input" value="<?= html_escape($item->shipping_tracking_number); ?>" placeholder="<?= trans("tracking_code"); ?>"
+                                              required oninvalid="this.setCustomValidity('Please add the tracking number.')" oninput="setCustomValidity('')"
+                                            >
                                         </div>
                                     </div>
                                 </div>
