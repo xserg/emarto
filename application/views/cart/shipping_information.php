@@ -361,4 +361,20 @@
     <?php endforeach;
 endif; ?>
 
+<script>
 
+function shipping_price(price)
+{
+  const total_before_shipping = <?=$cart_total->total_before_shipping ?>;
+  //console.log(total_before_shipping, price);
+
+  if (price == 0) {
+    $("#shipping_price").text('<?=trans("free")?>');
+    $("#order_total").text(total_before_shipping);
+  } else {
+    $("#shipping_price").text(price);
+    $("#order_total").text(total_before_shipping + price);
+  }
+}
+
+</script>

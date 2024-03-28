@@ -65,7 +65,7 @@
         <?php //if (!empty($show_shipping_cost) && !empty($cart_total->shipping_cost)): ?>
             <div class="row-custom m-b-10">
                 <strong><?php echo trans("shipping"); ?>
-                  <span class="float-right">
+                  <span class="float-right" id="shipping_price">
                     <?php
                       if (empty($cart_total->shipping_cost)) {
                           echo trans("free");
@@ -87,11 +87,11 @@
         </div>
         <?php if (!empty($show_shipping_cost) && !empty($cart_total->shipping_cost)): ?>
             <div class="row-custom">
-                <strong><?php echo trans("total"); ?><span class="float-right"><?= price_decimal($cart_total->total, $cart_total->currency); ?></span></strong>
+                <strong><?php echo trans("total"); ?><span class="float-right" id="order_total"><?= price_decimal($cart_total->total, $cart_total->currency); ?></span></strong>
             </div>
         <?php else: ?>
             <div class="row-custom">
-                <strong><?php echo trans("total"); ?><span class="float-right"><?= price_decimal($cart_total->total_before_shipping, $cart_total->currency); ?></span></strong>
+                <strong><?php echo trans("total"); ?><span class="float-right" id="order_total"><?= price_decimal($cart_total->total_before_shipping, $cart_total->currency); ?></span></strong>
             </div>
         <?php endif; ?>
     </div>

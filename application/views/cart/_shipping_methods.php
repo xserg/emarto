@@ -51,7 +51,11 @@ if ($has_methods == false):?>
                                 if ($method->is_free_shipping == 1):?>
                                     <div class="row-custom m-t-5">
                                         <div class="custom-control custom-radio cart-shipping-method">
-                                            <input type="radio" class="custom-control-input" id="shipping_method_<?= $method->id; ?>" name="shipping_method_<?= $shipping_method->shop_id; ?>" value="<?= $method->id; ?>" <?= $is_selected == 1 ? 'checked' : ''; ?> required>
+                                            <input type="radio" class="custom-control-input" id="shipping_method_<?= $method->id; ?>"
+                                            name="shipping_method_<?= $shipping_method->shop_id; ?>"
+                                            value="<?= $method->id; ?>" <?= $is_selected == 1 ? 'checked' : ''; ?>
+                                            onclick="shipping_price(0);"
+                                            required>
                                             <label class="custom-control-label" for="shipping_method_<?= $method->id; ?>">
                                                 <strong class="method-name"><?= $method->name; ?></strong>
                                             </label>
@@ -61,7 +65,11 @@ if ($has_methods == false):?>
                             else: ?>
                                 <div class="row-custom m-t-5">
                                     <div class="custom-control custom-radio cart-shipping-method">
-                                        <input type="radio" class="custom-control-input" id="shipping_method_<?= $method->id; ?>" name="shipping_method_<?= $shipping_method->shop_id; ?>" value="<?= $method->id; ?>" <?= $is_selected == 1 ? 'checked' : ''; ?> required>
+                                        <input type="radio" class="custom-control-input" id="shipping_method_<?= $method->id; ?>"
+                                        name="shipping_method_<?= $shipping_method->shop_id; ?>"
+                                        value="<?= $method->id; ?>" <?= $is_selected == 1 ? 'checked' : ''; ?>
+                                        onclick="shipping_price(<?= $method->cost ?>);"
+                                        required>
                                         <label class="custom-control-label" for="shipping_method_<?= $method->id; ?>">
                                             <strong class="method-name"><?= $method->name; ?></strong>
                                             <strong><?= price_decimal($method->cost, $this->selected_currency->code, true); ?></strong>
