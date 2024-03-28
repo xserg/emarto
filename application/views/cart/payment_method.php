@@ -95,13 +95,17 @@
                                                     <input type="checkbox" class="custom-control-input" name="terms" id="checkbox_terms" required>
                                                     <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>&nbsp;
                                                         <?php $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
+                                                        $ci =& get_instance();
+                                                        $page_policy = $ci->page_model->get_page("privacy-policy", $this->selected_lang->id);
                                                         if (!empty($page_terms)): ?>
                                                             <a href="<?= generate_url($page_terms->page_default_name); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_terms->title); ?></strong></a>
+                                                            <?php echo trans("and"); ?>
+                                                            <a href="<?= generate_url($page_policy->slug); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_policy->title); ?></strong></a>.
                                                         <?php endif; ?>
                                                     </label>
                                                 </div>
                                             </div>
-
+                                            <?php $this->load->view("product/details/_purchase_protection"); ?>
                                             <div class="form-group m-t-15">
                                                 <?php if ($mds_payment_type == "sale"): ?>
                                                     <a href="<?php echo generate_url("cart"); ?>" class="link-underlined link-return-cart"><&nbsp;<?php echo trans("return_to_cart"); ?></a>
