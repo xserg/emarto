@@ -132,6 +132,9 @@ class Home_controller extends Home_Core_Controller
             //check category
             $category = $this->category_model->get_parent_category_by_slug($slug);
             if (!empty($category)) {
+                if ($_GET['buy_request']) {
+                    redirect('/buy_requests');
+                }
                 $this->category($category);
             } else {
                 $this->product($slug);
@@ -341,9 +344,12 @@ class Home_controller extends Home_Core_Controller
             }
             $data['og_published_time'] = $data['product']->created_at;
             $data['og_modified_time'] = $data['product']->created_at;
-            
+
             $data['ban'] = $this->black_list_model->check_ban($data["product"]->user_id, $this->auth_user->id);
-            
+
+            //print_r($this->default_location);
+            $data['shipping'] = $this->shipping_model->get_shipping_cost($this->default_location->state_id, $data["product"]->id);
+
             $this->load->view('partials/_header', $data);
             $this->load->view('product/details/product', $data);
             $this->load->view('partials/_footer');
@@ -519,8 +525,8 @@ class Home_controller extends Home_Core_Controller
           $data['country_id'] = $this->auth_user->country_id;
           $data['state_id'] = $this->auth_user->state_id;
           $data['city_id'] = $this->auth_user->city_id;
-        
-        
+
+
         $this->load->view('partials/_header', $data);
         $this->load->view('product/start_selling', $data);
         $this->load->view('partials/_footer');
@@ -532,7 +538,7 @@ class Home_controller extends Home_Core_Controller
     public function start_selling()
     {
         //post_method();
-        //check auth  
+        //check auth
         if (!$this->auth_check) {
             redirect(lang_base_url());
         }
@@ -542,8 +548,8 @@ class Home_controller extends Home_Core_Controller
         if ($this->general_settings->email_verification == 1 && $this->auth_user->email_status != 1) {
             $this->session->set_flashdata('error', trans("msg_confirmed_required"));
             redirect(generate_url("settings", "update_profile"));
-        }      
-        
+        }
+
         $data = array(
             'shop_name' => remove_special_characters($this->input->post('shop_name', true)),
             'first_name' => $this->input->post('first_name', true),
@@ -556,12 +562,12 @@ class Home_controller extends Home_Core_Controller
             'vendor_documents' => "",
             'is_active_shop_request' => 1
         );
-        
+
         if (!$_POST) {
           $data['title'] = trans("start_selling");
           $data['description'] = trans("start_selling") . " - " . $this->app_name;
           $data['keywords'] = trans("start_selling") . "," . $this->app_name;
-          
+
           $data['lang_settings'] = lang_settings();
           $data["states"] = $this->location_model->get_states_by_country($this->auth_user->country_id);
           $data["cities"] = $this->location_model->get_cities_by_state($this->auth_user->state_id);
@@ -573,19 +579,19 @@ class Home_controller extends Home_Core_Controller
             $data['state_id'] = $this->auth_user->state_id;
             $data['city_id'] = $this->auth_user->city_id;
         }
-        
-        $this->form_validation->set_rules('phone_number', trans("phone_number"), 
+
+        $this->form_validation->set_rules('phone_number', trans("phone_number"),
         'required|max_length[17]|callback_phone_unique');
         $this->form_validation->set_rules('shop_name', trans("shop_name"), 'required');
         $this->form_validation->set_rules('country_id', trans("location"), 'required');
-        $this->form_validation->set_rules('first_name', trans("first_name"), 'required');        
+        $this->form_validation->set_rules('first_name', trans("first_name"), 'required');
         $this->form_validation->set_rules('first_name', trans("first_name"), 'min_length[3]|callback_name_format');
         $this->form_validation->set_rules('last_name', trans("last_name"),
           'required|min_length[3]|callback_name_format');
-        
+
         $this->form_validation->set_rules('about_me', trans("shop_description"), 'required');
-  
-  
+
+
         if ($this->form_validation->run() === false) {
             $this->session->set_flashdata('errors', validation_errors());
             //$this->session->set_flashdata('form_data', $this->auth_model->input_values());
@@ -595,7 +601,7 @@ class Home_controller extends Home_Core_Controller
             $this->load->view('product/start_selling', $data);
             $this->load->view('partials/_footer');
         } else {
-        
+
         //is shop name unique
         if (!$this->auth_model->is_unique_shop_name($data['shop_name'], $this->auth_user->id)) {
             $this->session->set_flashdata('form_data', $data);
@@ -670,7 +676,7 @@ class Home_controller extends Home_Core_Controller
                 redirect($this->agent->referrer());
             }
         }
-        
+
       }
     }
 
@@ -1029,12 +1035,12 @@ class Home_controller extends Home_Core_Controller
         $this->load->view('errors/error_404');
         $this->load->view('partials/_footer');
     }
-    
+
     public function name_format($str)
     {
        if (empty($str)) {
         $this->form_validation->set_message('name_format', trans('form_validation_required'));
-         return FALSE; 
+         return FALSE;
        }
        if ( preg_match("/^[a-zA-Zа-яА-Я-.\' ]+$/u", $str) ) {
          return TRUE;
@@ -1042,20 +1048,20 @@ class Home_controller extends Home_Core_Controller
        $this->form_validation->set_message('name_format', trans('form_validation_regex_match'));
        return FALSE;
     }
-    
+
     public function phone_unique($str)
     {
        if (empty($str)) {
         $this->form_validation->set_message('phone_unique', trans('form_validation_required'));
-         return FALSE; 
+         return FALSE;
        }
-       
+
        if ( $this->auth_model->is_unique_phone($str, $this->auth_user->id) ) {
          return TRUE;
        }
        $this->form_validation->set_message('phone_unique', trans('msg_phone_unique_error'));
        return FALSE;
     }
-    
+
 
 }

@@ -989,4 +989,63 @@ class Shipping_model extends CI_Model
             $this->db->where('id', clean_number($id))->delete('shipping_zones');
         }
     }
+
+    //get product shipping cost
+    public function get_shipping_cost($state_id, $product_id)
+    {
+        $product = $this->product_model->get_product_by_id($product_id);
+
+        if (!empty($product)) {
+            $items = array();
+            $item = new stdClass();
+            $item->product_id = $product->id;
+            $item->product_type = $product->product_type;
+            $item->quantity = 1;
+            $item->total_price = $product->price;
+            $item->seller_id = $product->user_id;
+            $item->shipping_class_id = $product->shipping_class_id;
+            array_push($items, $item);
+            //$shipping_methods = $this->get_seller_shipping_methods_array($items, $state_id, false);
+
+            $shipping_methods = $this->get_cart_shipping_methods($product->user_id, $state_id);
+
+            $has_methods = false;
+            if (!empty($shipping_methods)) {
+                foreach ($shipping_methods as $shipping_method) {
+                    if (!empty($shipping_method->methods) && item_count($shipping_method->methods) > 0) {
+                        $has_methods = true;
+                    }
+                }
+            }
+            $response = [];
+            //echo '<pre>';
+            //print_r($shipping_methods);
+            //print_r($product);
+            //echo $product->shipping_delivery_time_id;
+            if (!empty($shipping_methods)) {
+                foreach ($shipping_methods as $method) {
+                    $response['date'] = $this->deliveryDate($product->shipping_delivery_time_id, $method->time);
+                            if ($method->method_type == "free_shipping") {
+                                $response['price'] = "free_shipping";
+                                  } else {
+                                //$response .= "<p><strong class='method-name'>" . $method->name . "</strong><strong>:&nbsp;" . price_decimal($method->cost, $this->selected_currency->code, true) . "</strong></p>";
+                                $response['price'] = price_decimal(get_price($method->cost, 'decimal'), $this->selected_currency->code, true);
+                                //$response['price'] = $method->cost . ' ' . $this->selected_currency->code;
+                            }
+                    break;
+                }
+            }
+            return $response;
+        }
+    }
+
+    public function deliveryDate($days1, $days2)
+    {
+      $date = date('Y-m-d');
+      //$newdate = date('Y-m-d', strtotime($date.' + 5 days'));
+        $day_arr = explode('-', $days2);
+        $date1 = date('M-d', strtotime($date.' + ' . ($days1 + $day_arr[0]) . ' days'));
+        $date2 = date('M-d', strtotime($date.' + ' . ($days1 + $day_arr[1]) . ' days'));
+        return $date1 . ' - ' . $date2;
+    }
 }
