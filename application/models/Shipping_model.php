@@ -1041,11 +1041,18 @@ class Shipping_model extends CI_Model
 
     public function deliveryDate($days1, $days2)
     {
+      //echo $this->selected_lang->id;
       $date = date('Y-m-d');
-      //$newdate = date('Y-m-d', strtotime($date.' + 5 days'));
+      $fmt1 = datefmt_create( "en_US" ,IntlDateFormatter::FULL, IntlDateFormatter::FULL,
+        'America/Los_Angeles', IntlDateFormatter::GREGORIAN, "MMMM d");
+      $fmt2 = datefmt_create( "ru_RU" ,IntlDateFormatter::FULL, IntlDateFormatter::FULL,
+          'Europe/Moscow', IntlDateFormatter::GREGORIAN, "MMMM d");
+      $fmt = $this->selected_lang->id == 2 ? $fmt2 : $fmt1;
         $day_arr = explode('-', $days2);
-        $date1 = date('M-d', strtotime($date.' + ' . ($days1 + $day_arr[0]) . ' days'));
-        $date2 = date('M-d', strtotime($date.' + ' . ($days1 + $day_arr[1]) . ' days'));
+        $date1 = datefmt_format( $fmt, strtotime($date.' + ' . ($days1 + $day_arr[0]) . ' days'));
+        $date2 = datefmt_format( $fmt, strtotime($date.' + ' . ($days1 + $day_arr[1]) . ' days'));
+        //$date1 = date('M-d', strtotime($date.' + ' . ($days1 + $day_arr[0]) . ' days'));
+        //$date2 = date('M-d', strtotime($date.' + ' . ($days1 + $day_arr[1]) . ' days'));
         return $date1 . ' - ' . $date2;
     }
 }

@@ -333,7 +333,7 @@ if (!function_exists('price_formatted')) {
         }
 
         if (filter_var($price, FILTER_VALIDATE_INT) !== false) {
-            $price = number_format($price, 0, $dec_point, $thousands_sep);
+            $price = number_format($price, 2, $dec_point, $thousands_sep);
         } else {
             $price = number_format($price, 2, $dec_point, $thousands_sep);
         }
@@ -367,7 +367,7 @@ if (!function_exists('price_decimal')) {
             $price = str_replace('.00', '', $price);
         }
         if (filter_var($price, FILTER_VALIDATE_INT) !== false) {
-            $price = number_format($price, 0, $dec_point, $thousands_sep);
+            $price = number_format($price, 2, $dec_point, $thousands_sep);
         } else {
             $price = number_format($price, 2, $dec_point, $thousands_sep);
         }
@@ -414,7 +414,7 @@ if (!function_exists('get_price')) {
         if ($format_type == "input") {
             $price = $price / 100;
             if (filter_var($price, FILTER_VALIDATE_INT) !== false) {
-                $price = number_format($price, 0, ".", "");
+                $price = number_format($price, 2, ".", "");
             } else {
                 $price = number_format($price, 2, ".", "");
             }
@@ -425,7 +425,7 @@ if (!function_exists('get_price')) {
         } elseif ($format_type == "decimal") {
             $price = $price / 100;
             if (filter_var($price, FILTER_VALIDATE_INT) !== false) {
-                return number_format($price, 0, ".", "");
+                return number_format($price, 2, ".", "");
             } else {
                 return number_format($price, 2, ".", "");
             }
