@@ -1044,9 +1044,9 @@ class Shipping_model extends CI_Model
       //echo $this->selected_lang->id;
       $date = date('Y-m-d');
       $fmt1 = datefmt_create( "en_US" ,IntlDateFormatter::FULL, IntlDateFormatter::FULL,
-        'America/Los_Angeles', IntlDateFormatter::GREGORIAN, "MMMM d");
+        'America/Los_Angeles', IntlDateFormatter::GREGORIAN, "d MMMM");
       $fmt2 = datefmt_create( "ru_RU" ,IntlDateFormatter::FULL, IntlDateFormatter::FULL,
-          'Europe/Moscow', IntlDateFormatter::GREGORIAN, "MMMM d");
+          'Europe/Moscow', IntlDateFormatter::GREGORIAN, "d MMMM");
       $fmt = $this->selected_lang->id == 2 ? $fmt2 : $fmt1;
         $day_arr = explode('-', $days2);
         $date1 = datefmt_format( $fmt, strtotime($date.' + ' . ($days1 + $day_arr[0]) . ' days'));
