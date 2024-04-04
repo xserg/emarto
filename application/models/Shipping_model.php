@@ -1044,7 +1044,7 @@ class Shipping_model extends CI_Model
       //echo $this->selected_lang->id;
       $date = date('Y-m-d');
       $fmt1 = datefmt_create( "en_US" ,IntlDateFormatter::FULL, IntlDateFormatter::FULL,
-        'America/Los_Angeles', IntlDateFormatter::GREGORIAN, "d MMMM");
+        'Europe/Moscow', IntlDateFormatter::GREGORIAN, "MMMM d");
       $fmt2 = datefmt_create( "ru_RU" ,IntlDateFormatter::FULL, IntlDateFormatter::FULL,
           'Europe/Moscow', IntlDateFormatter::GREGORIAN, "d MMMM");
       $fmt = $this->selected_lang->id == 2 ? $fmt2 : $fmt1;
