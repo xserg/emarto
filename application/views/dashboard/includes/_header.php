@@ -115,13 +115,13 @@
                     <div class="image">
                         <img src="<?php echo get_user_avatar($this->auth_user); ?>" class="img-circle" alt="">
                     </div>
-                    <div class="username">
+                    <div class="username" style="white-space: normal;">
                         <p><?= trans("hi") . ", " . get_shop_name($this->auth_user); ?></p>
                     </div>
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
                 <?php if (is_vendor()): ?>
-                    
+
                         <li class="header"><?php echo trans("navigation"); ?></li>
                         <li class="nav-home">
                             <a href="<?php echo dashboard_url(); ?>">
@@ -269,16 +269,16 @@
                                 </a>
                             </li>
                         <?php endif; ?>
-                        <?php endif; ?>  
+                        <?php endif; ?>
                         <li class="nav-reviews">
                             <a href="<?= generate_dash_url("black_list"); ?>">
                                 <i class="fa fa-user-times"></i>
-                                
+
                                 <span><?php echo trans("black_list"); ?></span>
                             </a>
                         </li>
                     </ul>
-              
+
             </div>
         </section>
     </aside>
