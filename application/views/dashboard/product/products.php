@@ -23,6 +23,7 @@
                         <tr role="row">
                             <th width="20"><?php echo trans('id'); ?></th>
                             <th><?php echo trans('product'); ?></th>
+                            <th><?php echo trans('price'); ?></th>
                             <th><?php echo trans('sku'); ?></th>
                             <th><?php echo trans('product_type'); ?></th>
                             <th><?php echo trans('category'); ?></th>
@@ -31,6 +32,7 @@
                             <?php endif; ?>
                             <th><?= $this->general_settings->classified_ads_system == 1 ? trans("stock") . "/" . trans("status") : trans("stock"); ?></th>
                             <th><?php echo trans('page_views'); ?></th>
+                            <th><?php echo trans('wishlist'); ?></th>
                             <th><?php echo trans('date'); ?></th>
                             <th class="max-width-120"><?php echo trans('options'); ?></th>
                         </tr>
@@ -53,6 +55,7 @@
                                             <?php echo get_product_title($item); ?>
                                         </a>
                                     </td>
+                                    <td><?php echo price_formatted($item->price, $item->currency); ?></td>
                                     <td><?php echo $item->sku; ?></td>
                                     <td><?php echo trans($item->product_type); ?></td>
                                     <td>
@@ -74,6 +77,7 @@
                                     <?php endif; ?>
                                     <td class="white-space-nowrap"><?= get_product_stock_status($item); ?></td>
                                     <td><?php echo $item->pageviews; ?></td>
+                                    <td><?php echo $item->wishlist_count; ?></td>
                                     <td><?php echo formatted_date($item->created_at); ?></td>
                                     <td style="width: 120px;">
                                         <div class="btn-group btn-group-option">
@@ -110,4 +114,3 @@
 </div>
 
 <?php $this->load->view('dashboard/product/_modal_pricing'); ?>
-
