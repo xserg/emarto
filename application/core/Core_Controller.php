@@ -86,7 +86,7 @@ class Core_Controller extends CI_Controller
             $this->thousands_separator = ',';
             $this->input_initial_price = '0,00';
         }
-        
+
         //default location
         $this->default_location = $this->location_model->get_default_location();
         //update last seen time
@@ -174,7 +174,7 @@ class Home_Core_Controller extends Core_Controller
             }
             if (!empty($this->session->userdata('mds_control_panel_lang'))) {
                 $this->control_panel_lang = $this->session->userdata('mds_control_panel_lang');
-                $this->selected_lang = $this->language_model->get_language($this->control_panel_lang);
+                $this->selected_lang = $this->language_model->get_language($this->control_panel_lang->id);
                 //language translations
                 $this->language_translations = $this->get_translation_array($this->control_panel_lang->id);
             }
@@ -311,4 +311,3 @@ class Admin_Core_Controller extends Core_Controller
         return array('per_page' => $per_page, 'offset' => $page * $per_page);
     }
 }
-

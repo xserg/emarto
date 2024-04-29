@@ -4,8 +4,12 @@
         var new_level = level + 1;
         var data = {
             'parent_id': parent_id,
-            'lang': sys_lang_id
         };
+
+        if (typeof sys_lang_id !== 'undefined') {
+            data.lang = sys_lang_id;
+        }
+
         data[csfr_token_name] = $.cookie(csfr_cookie_name);
         $.ajax({
             type: "POST",

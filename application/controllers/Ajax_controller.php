@@ -189,7 +189,10 @@ class Ajax_controller extends Home_Core_Controller
     public function get_subcategories()
     {
         $parent_id = $this->input->post('parent_id', true);
-        $this->selected_lang->id = $this->input->post('lang', true);
+        $lang = $this->input->post('lang', true);
+        if ($lang) {
+            $this->selected_lang->id = $lang;
+        }
         $html_content = '';
         if (!empty($parent_id)) {
             $subcategories = $this->category_model->get_subcategories_by_parent_id($parent_id);
