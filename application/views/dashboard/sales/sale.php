@@ -62,10 +62,7 @@
                         <span><?= trans("last_name"); ?></span>
                         <?= html_escape($shipping->shipping_last_name); ?>
                     </div>
-                    <div class="line-detail line-detail-sm">
-                        <span><?= trans("email"); ?></span>
-                        <?= html_escape($shipping->shipping_email); ?>
-                    </div>
+
                     <div class="line-detail line-detail-sm">
                         <span><?= trans("phone_number"); ?></span>
                         <?= html_escape($shipping->shipping_phone_number); ?>
@@ -101,10 +98,7 @@
                         <span><?= trans("last_name"); ?></span>
                         <?= html_escape($shipping->billing_last_name); ?>
                     </div>
-                    <div class="line-detail line-detail-sm">
-                        <span><?= trans("email"); ?></span>
-                        <?= html_escape($shipping->billing_email); ?>
-                    </div>
+                    
                     <div class="line-detail line-detail-sm">
                         <span><?= trans("phone_number"); ?></span>
                         <?= html_escape($shipping->billing_phone_number); ?>
