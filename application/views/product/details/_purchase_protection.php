@@ -10,5 +10,5 @@
   <a href="<?php echo generate_url("purchase-protection");?>"><b><?= trans("purchase-protection"); ?></b></a><br>
   <?= trans("shop_with_confidence"); ?>
   </div>
-  <div class="shipping_return_policy"><a class="link-underlined"  target="_blank" href="<?php echo generate_url("shipping_return_policy");?>"><?= trans("shipping_return_policy"); ?></a></div>
+  <!-- div class="shipping_return_policy"><a class="link-underlined"  target="_blank" href="<?php echo generate_url("shipping_return_policy");?>"><?= trans("shipping_return_policy"); ?></a></div -->
 </div>
