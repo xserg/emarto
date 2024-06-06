@@ -1328,7 +1328,7 @@ img {
 }
 
 .nav-top .nav-top-right .nav > li > .btn-sell-now {
-    
+
     border-radius: 0.1875rem !important;
     line-height: 1.5 !important;
     margin: 0 8px;
@@ -3576,7 +3576,7 @@ img {
 }
 
 /* purshase protection */
-.product-links {      
+.product-links {
   position: relative;
   margin-top: 15px;
 }
@@ -3587,7 +3587,7 @@ img {
 }
 
 .purchase-protection {
-  
+
 }
 
 .shipping_return_policy {
@@ -8565,7 +8565,7 @@ img {
     color: #888;
     padding: 5px 0;
     text-decoration: underline;
-  
+
 }
 
 .footer-news {
@@ -8621,7 +8621,7 @@ img {
     margin-top: 5px;
     font-size: 13px;
     position: relative;
-    
+
     align-items: center;
 }
 
@@ -9182,7 +9182,7 @@ img {
 
 form label.error {
     color: #d43f3a;
-    display: none !important;
+    /* display: none !important;*/
 }
 
 form input.error {
@@ -10547,7 +10547,7 @@ form select.error {
    padding: 5px 20px;
    border: 1px solid orange;
    background-color: transparent !important;
-   
+
 }
 
 .img-table {

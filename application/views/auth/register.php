@@ -26,30 +26,39 @@
                             <div class="bounce2"></div>
                             <div class="bounce3"></div>
                         </div>
+
+                        <!--div id="location_id_inputs">
+
+                            <input  name="country" value="<?= $this->default_location->country_id; ?>" class="input-location-filter">
+                            <input type="hidden" name="state" value="<?= $this->default_location->state_id; ?>" class="input-location-filter">
+                            <input type="hidden" name="city" value="<?= $this->default_location->city_id; ?>" class="input-location-filter">
+
+                        </div-->
+
                         <div class="form-group">
                             <input type="text" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="first_name" class="form-control auth-form-input" placeholder="<?php echo trans("first_name"); ?>" value="<?php echo old("first_name"); ?>" maxlength="255" required>
+                            <input type="text" name="first_name" class="form-control auth-form-input" placeholder="<?php echo trans("first_name"); ?>" value="<?php echo old("first_name"); ?>" maxlength="64" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="last_name" class="form-control auth-form-input" placeholder="<?php echo trans("last_name"); ?>" value="<?php echo old("last_name"); ?>" maxlength="255" required>
+                            <input type="text" name="last_name" class="form-control auth-form-input" placeholder="<?php echo trans("last_name"); ?>" value="<?php echo old("last_name"); ?>" maxlength="64" required>
                         </div>
                         <div class="form-group">
                             <input type="email" name="email" class="form-control auth-form-input" placeholder="<?php echo trans("email_address"); ?>" value="<?php echo old("email"); ?>" maxlength="255" required>
                         </div>
                         <div class="form-group password">
                             <input type="password" id="password2" name="password" class="form-control auth-form-input" placeholder="<?php echo trans("password"); ?>" value="<?php echo old("password"); ?>" minlength="8" maxlength="255">
-                            <i class="fa fa-eye" onclick="togglePassword(this, 2)"></i>  
+                            <i class="fa fa-eye" onclick="togglePassword(this, 2)"></i>
                         </div>
                         <div class="form-group password">
                             <input type="password" id="password3" name="confirm_password" class="form-control auth-form-input" placeholder="<?php echo trans("password_confirm"); ?>" maxlength="255" required>
-                            <i class="fa fa-eye" onclick="togglePassword(this, 3)"></i>  
+                            <i class="fa fa-eye" onclick="togglePassword(this, 3)"></i>
                         </div>
                         <div class="form-group m-t-5 m-b-20">
                             <div class="custom-control custom-checkbox custom-control-validate-input">
                                 <input type="checkbox" class="custom-control-input" name="terms" id="checkbox_terms" required>
-                                <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>&nbsp;
+                                <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>
                                     <?php $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
                                     $ci =& get_instance();
                                     $page_policy = $ci->page_model->get_page("privacy-policy", $this->selected_lang->id);
