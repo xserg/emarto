@@ -49,10 +49,10 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox custom-control-validate-input">
                                     <input type="checkbox" class="custom-control-input" name="terms" id="checkbox_terms" required>
-                                    <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>&nbsp;
-                                        <?php 
+                                    <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>
+                                        <?php
                                         $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
-                                        
+
                                         $ci =& get_instance();
                                         $page_policy = $ci->page_model->get_page("privacy-policy", $this->selected_lang->id);
                                         if (!empty($page_terms)): ?>
