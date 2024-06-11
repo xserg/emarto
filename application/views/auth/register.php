@@ -36,7 +36,7 @@
                         </div-->
 
                         <div class="form-group">
-                            <input type="text" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" required>
+                            <input type="text" id="username" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>" pattern="[0-9]+" maxlength="<?php echo $this->username_maxlength; ?>"  required />
                         </div>
                         <div class="form-group">
                             <input type="text" name="first_name" class="form-control auth-form-input" placeholder="<?php echo trans("first_name"); ?>" value="<?php echo old("first_name"); ?>" maxlength="64" required>
@@ -48,7 +48,7 @@
                             <input type="email" name="email" class="form-control auth-form-input" placeholder="<?php echo trans("email_address"); ?>" value="<?php echo old("email"); ?>" maxlength="255" required>
                         </div>
                         <div class="form-group password">
-                            <input type="password" id="password2" name="password" class="form-control auth-form-input" placeholder="<?php echo trans("password"); ?>" value="<?php echo old("password"); ?>" minlength="8" maxlength="255">
+                            <input type="password" id="password2" name="password" class="form-control auth-form-input" placeholder="<?php echo trans("password"); ?>" value="<?php echo old("password"); ?>"  maxlength="255">
                             <i class="fa fa-eye" onclick="togglePassword(this, 2)"></i>
                         </div>
                         <div class="form-group password">
