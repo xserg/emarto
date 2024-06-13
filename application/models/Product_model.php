@@ -121,7 +121,8 @@ class Product_model extends CI_Model
             'shipping_delivery_time_id' => $this->input->post('shipping_delivery_time_id', true),
             'multiple_sale' => $this->input->post('multiple_sale', true),
             'is_free_product' => $this->input->post('is_free_product', true),
-            'is_draft' => 0
+            'is_draft' => 0,
+            'returns' => $this->input->post('returns', true),
         );
 
         $data["price"] = get_price($data["price"], 'database');
@@ -304,7 +305,7 @@ class Product_model extends CI_Model
             $select .= ", 0 AS is_in_wishlist";
         }
         //$select .= ",cancel_account.status as cancel_status";
-        
+
         $status = ($type == 'draft' || $type == 'pending') ? 0 : 1;
         $visibility = ($type == 'hidden') ? 0 : 1;
         $is_sold = ($type == 'sold') ? 1 : 0;
@@ -327,17 +328,17 @@ class Product_model extends CI_Model
         if ($type == 'wishlist') {
             $this->db->join('wishlist', 'products.id = wishlist.product_id');
         }
-          
+
         if ($this->auth_user->id) {
             //$this->db->where('products.user_id != '.$this->auth_user->id);
             $this->db->join('cancel_account', 'products.user_id = cancel_account.user_id AND cancel_account.user_id != '.$this->auth_user->id, 'left');
-            
+
         } else {
             $this->db->join('cancel_account', 'products.user_id = cancel_account.user_id', 'left');
         }
-        
+
         $this->db->where('cancel_account.status', null);
-        
+
         $this->db->where('users.banned', 0);
         $this->db->where('products.status', $status);
         $this->db->where('products.visibility', $visibility);
@@ -436,7 +437,7 @@ class Product_model extends CI_Model
 
         //add protuct filter options
         if (!empty($category)) {
-            $this->db->group_start()->where('products.category_id', $category->id)->or_where('products.category_id IN (SELECT id FROM (SELECT id, parent_tree FROM categories WHERE categories.visibility = 1 
+            $this->db->group_start()->where('products.category_id', $category->id)->or_where('products.category_id IN (SELECT id FROM (SELECT id, parent_tree FROM categories WHERE categories.visibility = 1
             AND categories.tree_id = ' . clean_number($category->tree_id) . ') AS cat_tbl WHERE FIND_IN_SET(' . clean_number($category->id) . ', cat_tbl.parent_tree))')->group_end();
             if (empty($sort)) {
                 $this->db->order_by('products.is_promoted', 'DESC');

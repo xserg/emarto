@@ -215,6 +215,36 @@
                                                             </div>
                                                         </div>
                                                     <?php endif; ?>
+
+                                                  <!-- returns -->
+                                                  <?php if ($product->returns): ?>
+                                                  <div class="row">
+                                                      <div class="col-12">
+                                                        <table class="table table-product-shipping">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="td-left"><?php echo trans("returns"); ?></td>
+                                                                    <td class="td-right"><span id="span_shop_location_address">
+                                                                      <?php
+                                                                      $return_arr = [
+                                                                        1 => trans("returns_accepted"),
+                                                                        2 => trans("returns_exchanges"),
+                                                                        3 => trans("returns_not_accepted"),
+                                                                      ];
+                                                                      echo $return_arr[$product->returns];
+                                                                      ?>
+                                                                    </span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <?php endif; ?>
+                                                  <!-- returns -->
+
                                                 </div>
                                             </div>
                                         </div>
