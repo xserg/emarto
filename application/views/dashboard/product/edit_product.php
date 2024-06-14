@@ -192,6 +192,7 @@
             endif;
             if (!empty($languages)):
                 foreach ($languages as $language):
+                    $lang_id .=  ($lang_id ? ',' : '').$language->id;
                     $product_details = get_product_details($product->id, $language->id, false); ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -204,16 +205,19 @@
                                 <div class="form-group">
                                     <label class="control-label"><?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)</label>
                                     <input type="text" name="title_<?= $language->id; ?>" value="<?= !empty($product_details) ? $product_details->title : ''; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)"
-                                    <?= $this->selected_lang->id == $language->id ? 'required' : ''; ?> maxlength="80">
+
+                                    <?= $this->selected_lang->id == $language->id ? 'required id="from-text" ' : 'id="to-text_'.$language->id.'"'; ?> maxlength="80" data-lang=<?= $language->short_form ?>>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"><?php echo trans("description"); ?></label>
                                     <div class="row">
                                         <div class="col-sm-12 m-b-5">
                                             <button type="button" id="btn_add_image_editor" class="btn btn-sm btn-info" data-editor-id="editor_<?= $language->id; ?>" data-toggle="modal" data-target="#fileManagerModal"><i class="icon-image"></i>&nbsp;&nbsp;<?php echo trans("add_image"); ?></button>
+                                            <?= $this->selected_lang->id == $language->id ? '<button type="button" id="translate" class="btn btn-sm btn-info"><img src="/assets/img/translate.svg" alt="'.trans("translation").'"  style="cursor: pointer;"> '.trans("translation").'</button>' : '' ?>
+
                                         </div>
                                     </div>
-                                    <textarea name="description_<?= $language->id; ?>" id="editor_<?= $language->id; ?>" class="tinyMCEsmall text-editor"><?php echo !empty($product_details) ? $product_details->description : ''; ?></textarea>
+                                    <textarea name="description_<?= $language->id; ?>" id="editor_<?= $language->id; ?>" class="tinyMCEsmall text-editor" data-lang=<?= $language->short_form ?>><?php echo !empty($product_details) ? $product_details->description : ''; ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"><?= trans("seo"); ?></label>
@@ -228,7 +232,7 @@
             endif; ?>
         </div>
     </div>
-
+    <input type="hidden" name="languages" id="languages" value="[<?= $lang_id; ?>]">
     <div class="col-sm-12">
         <?php if ($product->is_draft == 1): ?>
             <button type="submit" class="btn btn-lg btn-success pull-right"><?php echo trans("save_and_continue"); ?></button>
@@ -403,3 +407,4 @@
         $(this).hide();
     });
 </script>
+<script src="/assets/js/translate.js"></script>
