@@ -45,6 +45,7 @@ class Shipping_model extends CI_Model
                   //print_r($shipping_methods);
                     if (!empty($shipping_methods)) {
                         foreach ($shipping_methods as $shipping_method) {
+                          //print_r($shipping_method);
                             $method = new stdClass();
                             $method->id = $shipping_method->id;
                             $method->method_type = $shipping_method->method_type;
@@ -78,7 +79,9 @@ class Shipping_model extends CI_Model
                             }
                             //add shipping cost
                             $array_shipping_cost[$method->id] = $method->cost;
+                            $array_shipping_name[$method->id] = ['type' => $method->method_type, 'name_array' => $shipping_method->name_array];
                             if ($set_session == true) {
+                                $this->session->set_userdata('mds_array_shipping_name', $array_shipping_name);
                                 $this->session->set_userdata('mds_array_shipping_cost', $array_shipping_cost);
                                 $this->session->set_userdata('mds_array_cart_seller_ids', $seller_ids);
                             }

@@ -270,11 +270,14 @@ class Order_model extends CI_Model
                 if (!empty($product)) {
                     $shipping_method = "";
                     $seller_shipping_cost = 0;
+                    $shipping_name = $this->session->userdata('mds_array_shipping_name');
                     if (!empty($seller_shipping_costs[$product->user_id])) {
                         if (!empty($seller_shipping_costs[$product->user_id]->shipping_method_id)) {
-                            $method = $this->db->where('id', clean_number($seller_shipping_costs[$product->user_id]->shipping_method_id))->get('shipping_zone_methods')->row();
+                            $method = $this->session->userdata('mds_array_shipping_name')[$seller_shipping_costs[$product->user_id]->shipping_method_id];
+                            //$method = $this->db->where('id', clean_number($seller_shipping_costs[$product->user_id]->shipping_method_id))->get('shipping_zone_methods')->row();
+                            print_r($method);
                             if (!empty($method)) {
-                                $shipping_method = @parse_serialized_name_array($method->name_array, $this->selected_lang->id);
+                                $shipping_method = @parse_serialized_name_array($method['name_array'], $this->selected_lang->id);
                             }
                         }
                         if (!empty($seller_shipping_costs[$product->user_id]->cost)) {
