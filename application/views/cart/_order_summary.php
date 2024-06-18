@@ -91,7 +91,7 @@
             </div>
         <?php else: ?>
             <div class="row-custom">
-                <strong><?php echo trans("total"); ?><span class="float-right" id="order_total"><?= price_decimal($cart_total->total_before_shipping, $cart_total->currency); ?></span></strong>
+                <strong><?php echo trans("total"); ?><span class="float-right" id="order_total"><?= price_decimal($cart_total->total, $cart_total->currency); ?></span></strong>
             </div>
         <?php endif; ?>
     </div>
