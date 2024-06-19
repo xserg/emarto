@@ -342,14 +342,13 @@ class Auth_controller extends Home_Core_Controller
         }
 
         //validate inputs
-        $this->form_validation->set_rules('username', trans("username"), 'required|min_length[4]|max_length[100]');
+        $this->form_validation->set_rules('username', trans("username"), 'required|min_length[4]|max_length[40]|callback_username_format');
         $this->form_validation->set_rules('email', trans("email_address"), 'required|max_length[200]');
-            
         $this->form_validation->set_rules('first_name', trans("first_name"), 'required|min_length[3]|callback_name_format');
         $this->form_validation->set_rules('last_name', trans("last_name"), 'required|min_length[3]|callback_name_format');
         $this->form_validation->set_rules(
-          'password', 
-          trans("password"), 
+          'password',
+          trans("password"),
           'required|min_length[4]|max_length[255]|xss_clean|callback_is_password_strong'
         );
         $this->form_validation->set_rules('confirm_password', trans("password_confirm"), 'required|matches[password]');
@@ -552,7 +551,7 @@ class Auth_controller extends Home_Core_Controller
         reset_flash_data();
         $this->auth_model->send_email_activation($user_id, $token);
     }
-    
+
     public function is_password_strong($str)
     {
        if (preg_match('#^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[^a-zA-Z_\n])\S*$#', $str)) {
@@ -561,17 +560,30 @@ class Auth_controller extends Home_Core_Controller
        $this->form_validation->set_message('is_password_strong', trans('is_password_strong'));
        return FALSE;
     }
-    
+
     public function name_format($str)
     {
        if (empty($str)) {
         $this->form_validation->set_message('name_format', trans('form_validation_required'));
-         return FALSE; 
+         return FALSE;
        }
        if ( preg_match("/^[a-zA-Zа-яА-Я-.\' ]+$/u", $str) ) {
          return TRUE;
        }
        $this->form_validation->set_message('name_format', trans('form_validation_regex_match'));
+       return FALSE;
+    }
+
+    public function username_format($str)
+    {
+       if (empty($str)) {
+        $this->form_validation->set_message('username_format', trans('form_validation_required'));
+         return FALSE;
+       }
+       if ( preg_match("/^[a-zA-Z0-9-._]+$/u", $str) ) {
+         return TRUE;
+       }
+       $this->form_validation->set_message('username_format', trans('form_validation_regex_match'));
        return FALSE;
     }
 }

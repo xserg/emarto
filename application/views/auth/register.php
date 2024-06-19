@@ -36,7 +36,7 @@
                         </div-->
 
                         <div class="form-group">
-                            <input type="text" id="username" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>" pattern="[0-9]+" maxlength="<?php echo $this->username_maxlength; ?>"  required />
+                            <input type="text" id="username" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>"  maxlength="40"  required />
                         </div>
                         <div class="form-group">
                             <input type="text" name="first_name" class="form-control auth-form-input" placeholder="<?php echo trans("first_name"); ?>" value="<?php echo old("first_name"); ?>" maxlength="64" required>
