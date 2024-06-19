@@ -44,9 +44,20 @@ if ($has_methods == false):?>
                             $is_selected = 0;
                             if (in_array($method->id, $selected_shipping_method_ids)) {
                                 $is_selected = 1;
+                                //echo '<script> shipping_price(' . $method->cost . '); </script>';
                             } else {
+                                /*
                                 $is_selected = $method->is_selected;
+                                $ci =& get_instance();
+                                $ci->shipping_model->calculate_cart_shipping_total_cost();
+                                $selected_shipping_method_ids = [$method->id];
+                                $this->session->set_userdata('mds_selected_shipping_method_ids', [$method->id]);
+                                $this->session->set_userdata('mds_seller_shipping_costs', [$method->id => $method->cost]);
+                                $ci->shipping_model->calculate_cart_shipping_total_cost();
+                                */
+
                             }
+
                             if ($method->method_type == "free_shipping"):
                                 if ($method->is_free_shipping == 1):?>
                                     <div class="row-custom m-t-5">
