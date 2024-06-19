@@ -39,7 +39,7 @@
                             <tr class="tr-phrase">
                                 <td style="width: 50px;"><?php echo $item->id; ?></td>
                                 <td style="width: 40%;"><input type="text" class="form-control" value="<?php echo $item->label; ?>" <?php echo ($language->text_direction == "rtl") ? 'dir="rtl"' : ''; ?> readonly></td>
-                                <td style="width: 60%;"><input type="text" name="<?php echo $item->id; ?>" data-label="<?php echo $item->id; ?>" data-lang="<?php echo $item->lang_id; ?>" class="form-control input_translation" value="<?php echo $item->translation; ?>" <?php echo ($language->text_direction == "rtl") ? 'dir="rtl"' : ''; ?>></td>
+                                <td style="width: 60%;"><input type="text" name="<?php echo $item->id; ?>" data-label="<?php echo $item->id; ?>" data-lang="<?php echo $item->lang_id; ?>" class="form-control input_translation" value='<?php echo $item->translation; ?>' <?php echo ($language->text_direction == "rtl") ? 'dir="rtl"' : ''; ?>></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
