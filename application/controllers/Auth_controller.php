@@ -567,7 +567,7 @@ class Auth_controller extends Home_Core_Controller
         $this->form_validation->set_message('name_format', trans('form_validation_required'));
          return FALSE;
        }
-       if ( preg_match("/^[a-zA-Zа-яА-Я-.\' ]+$/u", $str) ) {
+       if ( preg_match("/^[a-zA-Z-.\' ]+$/u", $str) ) {
          return TRUE;
        }
        $this->form_validation->set_message('name_format', trans('form_validation_regex_match'));
