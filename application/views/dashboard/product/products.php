@@ -32,7 +32,7 @@
                             <?php endif; ?>
                             <th><?= $this->general_settings->classified_ads_system == 1 ? trans("stock") . "/" . trans("status") : trans("stock"); ?></th>
                             <th><?php echo trans('page_views'); ?></th>
-                            <th><?php echo trans('wishlist'); ?></th>
+                            <th><?php echo trans('favorited'); ?></th>
                             <th><?php echo trans('date'); ?></th>
                             <th class="max-width-120"><?php echo trans('options'); ?></th>
                         </tr>
