@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label"><?php echo trans("subject"); ?></label>
-                                <input type="text" name="subject" id="message_subject" value="<?php echo (!empty($subject)) ? html_escape($subject) : ''; ?>" class="form-control form-input" placeholder="<?php echo trans("subject"); ?>" required>
+                                <input type="text" name="subject" id="message_subject" value="<?php echo (!empty($subject)) ? html_escape($subject) : ''; ?>" class="form-control form-input" placeholder="<?php echo trans("subject"); ?>" maxlength="80" required>
                             </div>
                             <div class="form-group m-b-sm-0">
                                 <label class="control-label"><?php echo trans("message"); ?></label>
