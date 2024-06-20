@@ -79,7 +79,11 @@ class Shipping_model extends CI_Model
                             }
                             //add shipping cost
                             $array_shipping_cost[$method->id] = $method->cost;
-                            $array_shipping_name[$method->id] = ['type' => $method->method_type, 'name_array' => $shipping_method->name_array];
+                            $array_shipping_name[$method->id] = [
+                              'type' => $method->method_type,
+                              'name_array' => $shipping_method->name_array,
+                              'time' => $shipping_method->time
+                            ];
                             if ($set_session == true) {
                                 $this->session->set_userdata('mds_array_shipping_name', $array_shipping_name);
                                 $this->session->set_userdata('mds_array_shipping_cost', $array_shipping_cost);

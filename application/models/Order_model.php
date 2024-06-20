@@ -277,7 +277,8 @@ class Order_model extends CI_Model
                             //$method = $this->db->where('id', clean_number($seller_shipping_costs[$product->user_id]->shipping_method_id))->get('shipping_zone_methods')->row();
                             print_r($method);
                             if (!empty($method)) {
-                                $shipping_method = @parse_serialized_name_array($method['name_array'], $this->selected_lang->id);
+                                $shipping_method = @parse_serialized_name_array($method['name_array'], $this->selected_lang->id)
+                                . ' (' . $method['time'] . ' ' . trans('business2') . ' ' . trans('days3'). ')';
                             }
                         }
                         if (!empty($seller_shipping_costs[$product->user_id]->cost)) {
