@@ -223,7 +223,7 @@
                                     <label class="control-label"><?= trans("seo"); ?></label>
                                     <input type="text" name="seo_title_<?= $language->id; ?>" value="<?= !empty($product_details) ? $product_details->seo_title : ''; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("title"); ?>" maxlength="490">
                                     <input type="text" name="seo_description_<?= $language->id; ?>" value="<?= !empty($product_details) ? $product_details->seo_description : ''; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("description"); ?>" maxlength="490">
-                                    <input type="text" name="seo_keywords_<?= $language->id; ?>" value="<?= !empty($product_details) ? $product_details->seo_keywords : ''; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("keywords"); echo ' ('.trans("keywords-ex").')'?>" maxlength="490">
+                                    
                                 </div>
                             </div>
                         </div>

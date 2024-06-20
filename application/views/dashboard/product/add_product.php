@@ -148,7 +148,7 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label class="control-label"><?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)</label>
-                                    <input type="text" name="title_<?= $language->id; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)" 
+                                    <input type="text" name="title_<?= $language->id; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)"
                                     <?= $this->selected_lang->id == $language->id ? 'required id="from-text" ' : 'id="to-text_'.$language->id.'"'; ?> maxlength="80" data-lang=<?= $language->short_form ?>>
                                 </div>
                                 <div class="form-group">
@@ -167,7 +167,6 @@
                                     <label class="control-label"><?= trans("seo"); ?></label>
                                     <input type="text" name="seo_title_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("title"); ?>" maxlength="80">
                                     <input type="text" name="seo_description_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("description"); ?>" maxlength="490">
-                                    <input type="text" name="seo_keywords_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("keywords"); echo ' ('.trans("keywords-ex").')'?>" maxlength="490">
                                 </div>
                             </div>
                         </div>
