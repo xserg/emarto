@@ -285,7 +285,10 @@ class Shipping_model extends CI_Model
             $item->seller_id = $product->user_id;
             $item->shipping_class_id = $product->shipping_class_id;
             array_push($items, $item);
-            $shipping_methods = $this->get_seller_shipping_methods_array($items, $state_id, false);
+            //$shipping_methods = $this->get_seller_shipping_methods_array($items, $state_id, false);
+
+            $shipping_methods = $this->get_cart_shipping_methods($product->user_id, $state_id);
+
 
             $has_methods = false;
             if (!empty($shipping_methods)) {
@@ -297,16 +300,26 @@ class Shipping_model extends CI_Model
             }
             $response = "";
             if (!empty($shipping_methods)) {
-                foreach ($shipping_methods as $shipping_method) {
-                    if (!empty($shipping_method->methods)) {
-                        foreach ($shipping_method->methods as $method) {
+                foreach ($shipping_methods as $method) {
+                    //if (!empty($shipping_method->methods)) {
+                        //foreach ($shipping_method->methods as $method) {
+                          $method->name = @parse_serialized_name_array($method->name_array, $this->selected_lang->id);
+                          //print_r($method);
                             if ($method->method_type == "free_shipping") {
-                                $response .= "<p><strong class='method-name'>" . $method->name . "</strong><strong>&nbsp(" . trans("minimum_order_amount") . ":&nbsp;" . price_decimal($method->free_shipping_min_amount, $this->selected_currency->code, true) . ")</strong></p>";
+                                $response .= "<p><strong class='method-name'>" . trans("free_shipping") . " " .$method->name . " ("
+                                . $this->deliveryDate($product->shipping_delivery_time_id, $method->time)
+                                . ")</strong>";
+                                //. trans("minimum_order_amount") . ":&nbsp;" . price_decimal($method->free_shipping_min_amount, $this->selected_currency->code, true) . ")</strong></p>";
                             } else {
-                                $response .= "<p><strong class='method-name'>" . $method->name . "</strong><strong>:&nbsp;" . price_decimal($method->cost, $this->selected_currency->code, true) . "</strong></p>";
+                                $response .= "<p><strong class='method-name'>" . $method->name . " ("
+                                . $this->deliveryDate($product->shipping_delivery_time_id, $method->time)
+                                . ")</strong><strong>:&nbsp;"
+                                . price_decimal(get_price($method->cost, 'decimal'), $this->selected_currency->code, true)
+                                . "</strong></p>";
                             }
-                        }
-                    }
+                            //$response .= $this->deliveryDate($product->shipping_delivery_time_id, $method->time);
+                        //}
+                    //}
                 }
             }
             if (empty($response)) {
@@ -1046,6 +1059,10 @@ class Shipping_model extends CI_Model
         }
     }
 
+    /**
+     * days1 - время сборки заказа
+     * days2 - диапазон доставки
+     */
     public function deliveryDate($days1, $days2)
     {
       //echo $this->selected_lang->id;
