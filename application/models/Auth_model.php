@@ -332,7 +332,7 @@ class Auth_model extends CI_Model
                 $email_data = array(
                     'template_path' => "email/email_general",
                     'to' => $user->email,
-                    'subject' => trans("confirm_your_account"),
+                    'subject' => trans("confirm_your_account_subject"),
                     'email_content' => self::hello_user($user->first_name, $user->last_name) . '!<br><br>'
                      . trans("msg_confirmation_email"),
                     'email_link' => lang_base_url() . "confirm?token=" . $data['token'],
@@ -371,7 +371,7 @@ class Auth_model extends CI_Model
                 $email_data = array(
                     'email_type' => 'email_general',
                     'to' => $user->email,
-                    'subject' => trans("confirm_your_account"),
+                    'subject' => trans("confirm_your_account_subject"),
                     'email_content' =>  self::hello_user($user->first_name, $user->last_name)
                     . '<br><br>' . trans("msg_confirmation_email"),
                     'email_link' => lang_base_url() . "confirm?token=" . $data['token'],
