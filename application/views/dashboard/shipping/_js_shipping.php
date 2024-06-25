@@ -174,9 +174,9 @@
             }
 
             if (
-              ($('#flat_rate_cost_class_1').val() === '0') ||
-              ($('#flat_rate_cost_class_2').val() === '0') ||
-              ($('#flat_rate_cost_class_3').val() === '0')
+              ($('#flat_rate_cost_class_1').val() == 0 && $('input[name="status_1"]:checked').val() == 1) ||
+              ($('#flat_rate_cost_class_2').val() == 0 && $('input[name="status_2"]:checked').val() == 1) ||
+              ($('#flat_rate_cost_class_3').val() == 0 && $('input[name="status_3"]:checked').val() == 1)
             ) {
               showError(shipping_not_null);
               e.preventDefault();
