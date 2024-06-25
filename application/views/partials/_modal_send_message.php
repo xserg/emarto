@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-
+<script src="/assets/js/counter.js"></script>
 <div class="modal fade" id="messageModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-send-message" role="document">
         <div class="modal-content">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label"><?php echo trans("subject"); ?></label>
+                                <label class="control-label"><?php echo trans("subject"); ?>: <span id="counter">80</span></label>
                                 <input type="text" name="subject" id="message_subject" value="<?php echo (!empty($subject)) ? html_escape($subject) : ''; ?>" class="form-control form-input" placeholder="<?php echo trans("subject"); ?>" maxlength="80" required>
                             </div>
                             <div class="form-group m-b-sm-0">
@@ -57,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+                <script>count_chars('#message_subject', '#counter');</script>
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-md btn-custom"><i class="icon-send"></i>&nbsp;<?php echo trans("send"); ?></button>

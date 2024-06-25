@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-
+<script src="/assets/js/counter.js"></script>
 <div class="row">
     <div class="col-sm-12">
         <div class="wizard-product">
@@ -147,7 +147,7 @@
                         <div id="collapse_<?= $language->id; ?>" class="panel-collapse collapse <?= $this->selected_lang->id == $language->id ? 'in' : ''; ?>">
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="control-label"><?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)</label>
+                                    <label class="control-label"><?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>): <span id="counter_<?= $language->id; ?>">80</span></label>
                                     <input type="text" name="title_<?= $language->id; ?>" class="form-control form-input" placeholder="<?php echo trans("title"); ?> (<?php echo trans("max_chars"); ?>)"
                                     <?= $this->selected_lang->id == $language->id ? 'required id="from-text" ' : 'id="to-text_'.$language->id.'"'; ?> maxlength="80" data-lang=<?= $language->short_form ?>>
                                 </div>
@@ -171,6 +171,7 @@
                             </div>
                         </div>
                     </div>
+                    <script>count_chars('input[name="title_<?= $language->id; ?>"]', '#counter_<?= $language->id; ?>');</script>
                 <?php endforeach;
             endif; ?>
         </div>
