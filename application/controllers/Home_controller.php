@@ -320,7 +320,7 @@ class Home_controller extends Home_Core_Controller
                 $data['product_location_status'] = 0;
             }
 
-            $data["delivery_time"] = $this->shipping_model->get_shipping_delivery_time($data["product"]->shipping_delivery_time_id);
+            //$data["delivery_time"] = $this->shipping_model->get_shipping_delivery_time($data["product"]->shipping_delivery_time_id);
 
             $data['title'] = !empty($data['product_details']) ? $data['product_details']->title : '';
             $data['description'] = !empty($data['product_details']->seo_description) ? $data['product_details']->seo_description : $data['title'];
@@ -349,6 +349,7 @@ class Home_controller extends Home_Core_Controller
 
             //print_r($this->default_location);
             $data['shipping'] = $this->shipping_model->get_shipping_cost($this->default_location->state_id, $data["product"]->id);
+            $data["user_rating"] = calculate_user_rating($data["user"]->id);
 
             $this->load->view('partials/_header', $data);
             $this->load->view('product/details/product', $data);

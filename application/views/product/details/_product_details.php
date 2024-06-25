@@ -44,7 +44,7 @@
                 <?php endif; ?>
                 <?php if ($this->general_settings->reviews == 1): ?>
                     <div class="product-details-review">
-                        <?php $this->load->view('partials/_review_stars', ['review' => $product->rating]); ?>
+                        <?php $this->load->view('partials/_review_stars', ['review' => $user_rating->rating]); ?>
                         <span>(<?php echo $review_count; ?>)</span>
                     </div>
                 <?php endif; ?>
@@ -162,8 +162,8 @@ endif; ?>
                         </span>
                     </div>
                 </div>
-            <?php endif; 
-          
+            <?php endif;
+
             $buttton = get_product_form_data($product)->button;
             if ($product->is_sold != 1 && !empty($buttton) && !$ban):
               if (!$user->vacation_status) :
@@ -173,13 +173,13 @@ endif; ?>
                 </div>
                 <?php endif; ?>
             <div class=" button-container-wishlist">
-                <?php if ($this->product_model->is_product_in_wishlist($product->id) == 1): ?>                  
+                <?php if ($this->product_model->is_product_in_wishlist($product->id) == 1): ?>
                     <a href="javascript:void(0)" class="btn-wishlist btn-add-remove-wishlist" data-product-id="<?php echo $product->id; ?>" data-type="details"><i class="icon-heart"></i><span><?php echo trans("remove_from_wishlist"); ?></span></a>
                 <?php else: ?>
                     <a href="javascript:void(0)" class="btn-wishlist btn-add-remove-wishlist" data-product-id="<?php echo $product->id; ?>" data-type="details"><i class="icon-heart-o"></i><span><?php echo trans("add_to_wishlist"); ?></span></a>
                 <?php endif; ?>
             </div>
-            
+
             <?php endif; ?>
         </div>
 
