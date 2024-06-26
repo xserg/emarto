@@ -28,6 +28,7 @@
                             <?php if (!empty($promote_status)): ?>
                                 <th><?php echo trans('purchased_plan'); ?></th>
                             <?php endif; ?>
+                            <th><?php echo trans('status'); ?></th>
                             <th><?php echo trans('date'); ?></th>
                             <th class="max-width-120"><?php echo trans('options'); ?></th>
                         </tr>
@@ -128,4 +129,3 @@
 </div>
 
 <?php $this->load->view('dashboard/product/_modal_pricing'); ?>
-
