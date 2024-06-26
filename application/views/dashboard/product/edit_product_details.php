@@ -283,7 +283,7 @@
                             <?php endif; ?>
                             <div class="col-sm-12 col-md-6">
                                 <label><?= trans('handling_time'); ?></label>
-                                <select name="shipping_delivery_time_id" class="form-control custom-select">
+                                <select name="shipping_delivery_time_id" class="form-control custom-select" required>
                                     <option value=""><?= trans("select"); ?></option>
                                     <?php if (!empty($shipping_delivery_times)): ?>
                                         <?php foreach ($shipping_delivery_times as $id => $delivery_time): ?>
@@ -300,7 +300,7 @@
             <div class="col-sm-12 col-md-6">
               <?php if (!empty($shipping_zones)): ?>
               <label><?= trans("shipping_policy"); ?></label>
-                <select name="shipping_class_id" class="form-control form-input">
+                <select name="shipping_class_id" class="form-control form-input" required>
                   <option></option>
                   <?php foreach ($shipping_zones as $shipping_zone): ?>
                     <option value=<?= $shipping_zone->id ?> <?php if($product->shipping_class_id == $shipping_zone->id) echo ' selected'; ?>>
@@ -358,8 +358,8 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
               <label><?= trans("returns"); ?></label>
-                <select name="returns" class="form-control form-input">
-                  <option value=0></option>
+                <select name="returns" class="form-control form-input" required>
+                  <option></option>
                   <option value=1 <?php if($product->returns == 1) echo ' selected'; ?>><?php echo trans("returns_accepted"); ?></option>
                   <option value=2 <?php if($product->returns == 2) echo ' selected'; ?>><?php echo trans("returns_exchanges"); ?></option>
                   <option value=3 <?php if($product->returns == 3) echo ' selected'; ?>><?php echo trans("returns_not_accepted"); ?></option>
