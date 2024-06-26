@@ -45,7 +45,7 @@
                 <?php if ($this->general_settings->reviews == 1): ?>
                     <div class="product-details-review">
                         <?php $this->load->view('partials/_review_stars', ['review' => $user_rating->rating]); ?>
-                        <span>(<?php echo $review_count; ?>)</span>
+                        <span>(<?php echo $user_rating->count; ?>)</span>
                     </div>
                 <?php endif; ?>
                 <span><i class="icon-heart"></i><?php echo get_product_wishlist_count($product->id); ?></span>
