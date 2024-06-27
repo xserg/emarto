@@ -55,7 +55,7 @@
                                     <?php if ($shipping_status == 1 || $product_location_status == 1): ?>
                                         <li class="nav-item">
                                             <?php if ($shipping_status == 1 && $product_location_status != 1): ?>
-                                                <a class="nav-link" id="tab_shipping" data-toggle="tab" href="#tab_shipping_content" role="tab" aria-controls="tab_shipping" aria-selected="false"><?= trans("shipping"); ?></a>
+                                                <a class="nav-link" id="tab_shipping" data-toggle="tab" href="#tab_shipping_content" role="tab" aria-controls="tab_shipping" aria-selected="false"><?= trans("shipping_returns"); ?></a>
                                             <?php elseif ($shipping_status != 1 && $product_location_status == 1): ?>
                                                 <a class="nav-link" id="tab_shipping" data-toggle="tab" href="#tab_shipping_content" role="tab" aria-controls="tab_shipping" aria-selected="false" onclick="load_product_shop_location_map();"><?= trans("location"); ?></a>
                                             <?php else: ?>
