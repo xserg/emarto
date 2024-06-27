@@ -359,7 +359,12 @@ class Product_admin_model extends CI_Model
                 'reject_reason' => $this->input->post('reject_reason', true)
             );
             $this->db->where('id', $product->id);
-            return $this->db->update('products', $data);
+            $res = $this->db->update('products', $data);
+            if ($res) {
+              $this->reject_email($product->user_id);
+              return $res;
+            }
+            //return $this->db->update('products', $data);
         }
         return false;
     }
@@ -728,5 +733,20 @@ class Product_admin_model extends CI_Model
         }
         return 0;
     }
+
+    private function reject_email($user_id)
+    {
+        $this->load->model("auth_model");
+        $user = $this->auth_model->get_user($user_id);
+        $email_data['subject'] = trans('your_listing_rejected');
+        $email_data['email_content'] = nl2br(trans('your_listing_rejected_message'));
+        //self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('your_listing_removed_message'));
+        $this->load->model("email_model");
+        $email_data['to'] = $user->email;
+        $email_data['template_path'] = "email/email_general";
+        $this->email_model->send_email($email_data);
+        return;
+    }
+
 
 }
