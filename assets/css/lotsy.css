@@ -9182,7 +9182,7 @@ img {
 
 form label.error {
     color: #d43f3a;
-    /* display: none !important;*/
+    display: block;
 }
 
 form input.error {
