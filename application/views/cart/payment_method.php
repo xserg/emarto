@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox custom-control-validate-input">
-                                                    <input type="checkbox" class="custom-control-input" name="terms" id="checkbox_terms" required>
+                                                    <input type="checkbox" class="custom-control-input" name="terms" id="checkbox_terms">
                                                     <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp2"); ?>
                                                         <?php $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
                                                         $ci =& get_instance();
