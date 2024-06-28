@@ -329,7 +329,7 @@ class Product_model extends CI_Model
             $this->db->join('wishlist', 'products.id = wishlist.product_id');
         }
 
-        if ($this->auth_user->id) {
+        if (isset($this->auth_user->id)) {
             //$this->db->where('products.user_id != '.$this->auth_user->id);
             $this->db->join('cancel_account', 'products.user_id = cancel_account.user_id AND cancel_account.user_id != '.$this->auth_user->id, 'left');
 
