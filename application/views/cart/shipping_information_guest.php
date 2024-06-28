@@ -226,3 +226,31 @@
         </div>
     </div>
 </div>
+
+<?php
+$ci =& get_instance();
+if (isset($ci->currencies[$cart_items[0]->currency])) {
+    $currency = $ci->currencies[$cart_items[0]->currency];
+    $symbol = $currency->symbol;
+}
+
+?>
+
+<script>
+
+function shipping_price(price)
+{
+  const total_before_shipping = <?=$cart_total->total_before_shipping ?>;
+  const symbol = '<?=$symbol ?>';
+  //console.log(total_before_shipping, price, symbol);
+
+  if (price == 0) {
+    $("#shipping_price").text('<?=trans("free")?>');
+    $("#order_total").text(symbol + (total_before_shipping + '.00'));
+  } else {
+    $("#shipping_price").text(symbol + (price + '.00'));
+    $("#order_total").text(symbol + (total_before_shipping + price + '.00'));
+  }
+}
+
+</script>
