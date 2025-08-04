@@ -155,7 +155,6 @@
                                     <label class="control-label"><?php echo trans("description"); ?></label>
                                     <div class="row">
                                         <div class="col-sm-12 m-b-5">
-                                            <button type="button" id="btn_add_image_editor" class="btn btn-sm btn-info" data-editor-id="editor_<?= $language->id; ?>" data-toggle="modal" data-target="#fileManagerModal"><i class="icon-image"></i>&nbsp;&nbsp;<?php echo trans("add_image"); ?></button>
                                             <?= $this->selected_lang->id == $language->id ? '<button type="button" id="translate" class="btn btn-sm btn-info"><img src="/assets/img/translate.svg" alt="'.trans("translation").'"  style="cursor: pointer;"> '.trans("translation").'</button>' : '' ?>
 
                                         </div>
@@ -261,53 +260,5 @@
     </li>
 </script>
 
-<script>
-    var txt_processing = "<?php echo trans("txt_processing"); ?>";
-    $(function () {
-        $('#drag-and-drop-zone-file-manager').dmUploader({
-            url: '<?php echo base_url(); ?>upload-file-manager-images-post',
-            queue: true,
-            allowedTypes: 'image/*',
-            extFilter: ["jpg", "jpeg", "png"],
-            extraData: function (id) {
-                return {
-                    "file_id": id,
-                    "<?php echo $this->security->get_csrf_token_name(); ?>": $.cookie(csfr_cookie_name)
-                };
-            },
-            onNewFile: function (id, file) {
-                ui_multi_add_file(id, file, "file-manager");
-                if (typeof FileReader !== "undefined") {
-                    var reader = new FileReader();
-                    var img = $('#uploaderFile' + id).find('img');
-                    reader.onload = function (e) {
-                        img.attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            },
-            onBeforeUpload: function (id) {
-                $('#uploaderFile' + id + ' .dm-progress-waiting').hide();
-                ui_multi_update_file_progress(id, 0, '', true);
-                ui_multi_update_file_status(id, 'uploading', 'Uploading...');
-                $("#btn_reset_upload_image").show();
-            },
-            onUploadProgress: function (id, percent) {
-                ui_multi_update_file_progress(id, percent);
-            },
-            onUploadSuccess: function (id, data) {
-                document.getElementById("uploaderFile" + id).remove();
-                refresh_ck_images();
-                ui_multi_update_file_status(id, 'success', 'Upload Complete');
-                ui_multi_update_file_progress(id, 100, 'success', false);
-                $("#btn_reset_upload_image").hide();
-            }
-        });
-    });
-    $(document).on('click', '#btn_reset_upload_image', function () {
-        $("#drag-and-drop-zone-file-manager").dmUploader("reset");
-        $("#files-file-manager").empty();
-        $(this).hide();
-    });
-</script>
+
 <script src="/assets/js/translate.js"></script>
