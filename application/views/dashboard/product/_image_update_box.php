@@ -28,7 +28,7 @@
             endif; ?>
         </ul>
 
-        <div class="error-message error-message-file-upload"></div>
+        <div class="error-message-img-upload"></div>
 
     </div>
 </div>
@@ -50,6 +50,8 @@
 </script>
 
 <script>
+    var img_count = <?php echo sizeof($modesy_images); ?>;
+    var max_count = 24;
     $('#drag-and-drop-zone').dmUploader({
         url: '<?php echo base_url(); ?>upload-image-post',
         maxFileSize: <?php echo $this->general_settings->max_file_size_image; ?>,
@@ -73,6 +75,17 @@
         onComplete: function (id) {
         },
         onNewFile: function (id, file) {
+            img_count ++;
+            console.log(img_count);
+            if (img_count > max_count) {
+                img_count --;
+                $(".error-message-img-upload").show();
+                $(".error-message-img-upload").html("<?php echo trans('too_many_files') . ' ' . 'Too many files!'; ?>");
+                setTimeout(function () {
+                    $(".error-message-img-upload").empty();
+                },  4000);
+                return false;
+            }               
             ui_multi_add_file(id, file, "image");
             if (typeof FileReader !== "undefined") {
                 var reader = new FileReader();
@@ -129,11 +142,15 @@
             }, 4000)
         },
         onFileTypeError: function (file) {
+            $(".error-message-img-upload").html("<?php echo trans('invalid_file_type'); ?>");
+            setTimeout(function () {
+                $(".error-message-img-upload").empty();
+            }, 4000);            
         },
         onFileExtError: function (file) {
-            $(".error-message-file-upload").html("<?php echo trans('invalid_file_type'); ?>");
+            $(".error-message-img-upload").html("<?php echo trans('invalid_file_type'); ?>");
             setTimeout(function () {
-                $(".error-message-file-upload").empty();
+                $(".error-message-img-upload").empty();
             }, 4000);
         },
     });
