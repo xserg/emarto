@@ -77,7 +77,7 @@
                                         </button>
                                         <ul class="dropdown-menu options-dropdown">
                                             <li>
-                                                <a href="javascript:void(0)" onclick="delete_item('membership_controller/delete_user_post','<?php echo $user->id; ?>','<?php echo trans("confirm_user"); ?>');"><i class="fa fa-trash option-icon"></i><?php echo trans('approve'); ?></a>
+                                                <a href="javascript:void(0)" onclick="delete_item('membership_controller/delete_user_post','<?php echo $user->id; ?>','<?php echo trans("confirm_user"); ?>');"><i class="fa fa-check option-icon"></i><?php echo trans('approve'); ?></a>
                                             </li>
                                             <?php if ($user->status == 0): ?>
                                             <li>      
@@ -86,7 +86,7 @@
 
                                             <?php endif; ?>
                                             <li>      
-                                               <a href="javascript:void(0)" onclick="cancel_approve_user(<?php echo $user->cancel_id; ?>, 3);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('delete'); ?></a>
+                                               <a href="javascript:void(0)" onclick="cancel_approve_user(<?php echo $user->cancel_id; ?>, 3);"><i class="fa fa fa-trash  option-icon"></i><?php echo trans('delete'); ?></a>
                                             </li>
                                             <li>
                                                 <a href="<?php echo admin_url(); ?>edit-user/<?php echo $user->id; ?>"><i class="fa fa-edit option-icon"></i><?php echo trans('edit_user'); ?></a>
