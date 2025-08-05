@@ -157,6 +157,9 @@ $(document).on('click', '.btn-delete-product-img-session', function () {
         "file_id": file_id,
         "sys_lang_id": sys_lang_id
     };
+    if (img_count) {
+        img_count --;
+    }
     data[csfr_token_name] = $.cookie(csfr_cookie_name);
     $.ajax({
         type: "POST",

@@ -49,6 +49,8 @@
 </script>
 
 <script>
+    var img_count = <?php echo sizeof($modesy_images); ?>;
+    var max_count = 24;
     $(function () {
         $('#drag-and-drop-zone').dmUploader({
             url: '<?php echo base_url(); ?>upload-image-session-post',
@@ -69,6 +71,15 @@
                 this.removeClass('active');
             },
             onNewFile: function (id, file) {
+                img_count ++;
+                if (img_count > max_count) {
+                    img_count --;
+                    $(".error-message-img-upload").html("<?php echo trans('too_many_files') . ' ' . 'Too many files!'; ?>");
+                    setTimeout(function () {
+                        $(".error-message-img-upload").empty();
+                    },  4000);
+                    return false;
+                }
                 ui_multi_add_file(id, file, "image");
                 if (typeof FileReader !== "undefined") {
                     var reader = new FileReader();
