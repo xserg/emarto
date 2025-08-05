@@ -10589,3 +10589,11 @@ form select.error {
   background-image: url(/assets/img/multi.png);
   background-size: contain;
 }
+
+.fa.fa-twitter{
+font-family:sans-serif;
+}
+.fa.fa-twitter::before{
+content:"𝕏";
+font-size:1.2em;
+}
