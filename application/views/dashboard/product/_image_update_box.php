@@ -13,7 +13,7 @@
         <ul class="dm-uploaded-files" id="files-image">
             <?php if (!empty($modesy_images)):
                 foreach ($modesy_images as $modesy_image): ?>
-                    <li class="media">
+                    <li class="media" id="<?php echo $modesy_image->id; ?>">
                         <img src="<?php echo get_product_image_url($modesy_image, 'image_small'); ?>" alt="">
                         <a href="javascript:void(0)" class="btn-img-delete btn-delete-product-img" data-file-id="<?php echo $modesy_image->id; ?>">
                             <i class="icon-close"></i>
@@ -154,5 +154,32 @@
             }, 4000);
         },
     });
+
+    $(function() {
+        $("#files-image").sortable({
+            update: function(event, ui) {   
+                var newOrder = $(this).sortable('toArray');
+                            var data = {
+                                "product_id": <?php echo $product->id; ?>,
+                                'order': newOrder,
+                                "sys_lang_id": sys_lang_id
+                            };
+                            data[csfr_token_name] = $.cookie(csfr_cookie_name);
+                            $.ajax({
+                                type: "POST",
+                                url: base_url + "/file_controller/sort_images",
+                                data: data,
+                                success: function(response) {
+                                    //console.log("Order saved:", response);
+                                },
+                                error: function(xhr, status, error) {
+                                    //console.error("Error saving order:", error);
+                                }
+                            });
+            }
+        });
+        $("#files-image").disableSelection(); // Prevents text selection during drag
+    });
+
 </script>
 

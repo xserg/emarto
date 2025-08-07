@@ -176,8 +176,9 @@ class File_model extends CI_Model
         }
         if (!empty($modesy_images)) {
             usort($modesy_images, function ($a, $b) {
-                if ($a->file_time == $b->file_time) return 0;
-                return $a->file_time < $b->file_time ? 1 : -1;
+                //if ($a->file_time == $b->file_time) return 0;
+                //return $a->file_time < $b->file_time ? 1 : -1;
+                return $a->position <=> $b->position;
             });
         }
         return $modesy_images;
@@ -196,6 +197,7 @@ class File_model extends CI_Model
     {
         $this->db->where('product_id', $product_id);
         $this->db->order_by('images.is_main', 'DESC');
+        $this->db->order_by('images.position');
         $query = $this->db->get('images');
         return $query->result();
     }
@@ -274,7 +276,20 @@ class File_model extends CI_Model
         }
     }
 
+    public function sort_product_images($product_id, $order)
+    {
+        $images = $this->get_product_images($product_id);
 
+        $positions = array_flip($order);
+
+        if (!empty($images)) {
+            foreach ($images as $image) {
+                $this->db->where('images.id', $image->id);
+                //$query = $this->db->get('images');
+                $this->db->update('images', ['position' => $positions[$image->id]], ["id" => $image->id]);
+            }
+        }
+    }
 
     /*
     *-------------------------------------------------------------------------------------------------
