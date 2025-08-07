@@ -24,6 +24,31 @@ function delete_product(product_id, message) {
     });
 }
 
+function delete_product_images(product_id, message) {
+    swal({
+        text: message,
+        icon: "warning",
+        buttons: [sweetalert_cancel, sweetalert_ok],
+        dangerMode: true,
+    }).then(function (willDelete) {
+        if (willDelete) {
+            var data = {
+                "product_id": product_id
+            };
+            data[csfr_token_name] = $.cookie(csfr_cookie_name);
+            $.ajax({
+                method: "POST",
+                url: base_url + "file_controller/delete_all_images",
+                data: data
+            })
+                .done(function (response) {
+                    location.reload();
+                })
+
+        }
+    });
+}
+
 //delete quote request
 function delete_quote_request(id, message) {
     swal({
