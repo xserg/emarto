@@ -137,6 +137,22 @@ class File_controller extends Home_Core_Controller
         $this->file_model->delete_product_image($image_id);
     }
 
+   /**
+     * Delete All Images
+     */
+    public function delete_all_images()
+    {
+        $product_id = $this->input->post('product_id', true);
+        $this->file_model->delete_product_images($product_id);
+    }
+
+    public function sort_images()
+    {
+        $product_id = $this->input->post('product_id', true);
+        $order = $this->input->post('order', true);
+        $this->file_model->sort_product_images($product_id, $order);
+    }   
+
     /**
      * --------------------------------------------------------------------------
      * File Manager Image Upload
