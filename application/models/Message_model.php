@@ -3,6 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Message_model extends CI_Model
 {
+    public $support_id = 87;
+
     //add conversation
     public function add_conversation()
     {
@@ -210,6 +212,9 @@ class Message_model extends CI_Model
     {
         $id = clean_number($id);
         $conversation = $this->get_conversation($id);
+        if ($conversation->sender_id == $this->support_id) {
+            return;
+        }   
         if (!empty($conversation)) {
             $messages = $this->get_messages($conversation->id);
             if (!empty($messages)) {
@@ -236,6 +241,54 @@ class Message_model extends CI_Model
                 $this->db->delete('conversations');
             }
         }
+    }
+
+     //add conversation
+    public function add_support_conversation()
+    {
+        if ($this->support_id == $this->auth_user->id) {
+            return;
+        }
+        
+        if ($this->check_support_conversation()) {
+            return;
+        }
+
+        $data = array(
+            'sender_id' => $this->support_id,
+            'receiver_id' => $this->auth_user->id,
+            'subject' => 'Support',
+            'product_id' => 0,
+            'type' => $this->input->post('type', true),
+            'created_at' => date("Y-m-d H:i:s")
+        );
+ 
+        if ($this->support_id != $this->auth_user->id && $this->db->insert('conversations', $data)) {
+            $conversation_id = $this->db->insert_id();
+        }
+
+        $data = array(
+            'conversation_id' => $conversation_id,
+            'sender_id' => $this->support_id,
+            'receiver_id' => $this->auth_user->id,
+            'message' => 'You can ask question here',
+            'is_read' => 0,
+            'deleted_user_id' => 0,
+            'created_at' => date("Y-m-d H:i:s")
+        );
+        if ($conversation_id && !empty($data['message'])) {
+            return $this->db->insert('conversation_messages', $data);
+        }
+        return false;
+    }
+
+    public function check_support_conversation()
+    {
+        $this->db->select('*');
+        $this->db->where('sender_id', $this->support_id);
+        $this->db->where('receiver_id', $this->auth_user->id); 
+        $query = $this->db->get('conversations');
+        return $query->row();       
     }
 
 }

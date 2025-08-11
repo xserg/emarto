@@ -21,6 +21,8 @@ class Message_controller extends Home_Core_Controller
         $data['description'] = trans("messages") . " - " . $this->app_name;
         $data['keywords'] = trans("messages") . "," . $this->app_name;
 
+        $this->message_model->add_support_conversation();
+
         $data['conversation'] = $this->message_model->get_user_latest_conversation($this->auth_user->id);
         $data['user_session'] = get_usession();
         if (!empty($data['conversation'])) {
