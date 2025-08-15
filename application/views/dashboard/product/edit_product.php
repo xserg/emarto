@@ -33,7 +33,7 @@
                         <label class="control-label"><?php echo trans("images"); ?></label>
                         <div>Add up to 24 photos.</div>
                         <div class="text-center">                           
-                            <a href="javascript:void(0)" class="btn  btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_product_images(<?php echo $product->id; ?>,'Are you sure to delete all images?');">    
+                            <a href="javascript:void(0)" class="btn  btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_product_images(<?php echo $product->id; ?>,'Are you sure you want to delete all photos?');">    
                                 <button type="button" class="btn btn-md btn-secondary" name="submit" value="delete_all">Delete All</button>    
                             </a>
                         </div>
