@@ -146,6 +146,12 @@ class File_controller extends Home_Core_Controller
         $this->file_model->delete_product_images($product_id);
     }
 
+    public function delete_session_images()
+    {
+        $this->file_model->delete_session_images();
+    }
+
+
     public function sort_images()
     {
         $product_id = $this->input->post('product_id', true);
@@ -153,6 +159,11 @@ class File_controller extends Home_Core_Controller
         $this->file_model->sort_product_images($product_id, $order);
     }   
 
+    public function sort_session_images()
+    {
+        $order = $this->input->post('order', true);
+        $this->file_model->sort_session_images($order);
+    }   
     /**
      * --------------------------------------------------------------------------
      * File Manager Image Upload

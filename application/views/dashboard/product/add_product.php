@@ -28,8 +28,13 @@
                 <div class="row">
                     <div class="col-sm-12 m-b-30">
                         <label class="control-label"><?php echo trans("images"); ?></label>
-                        <div>Add up to 24 photos.</div>
-                        <br>
+                        <div><?php echo trans("add_up_to_24_photos"); ?></div>
+                        <div class="text-center">                           
+                            <a href="javascript:void(0)" class="btn  btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_session_images('<?php echo trans("confirm_delete_all_photo"); ?>');">    
+                                <button type="button" class="btn btn-md btn-secondary" name="submit" value="delete_all"><?php echo trans("delete_all"); ?></button>    
+                            </a>
+                        </div>
+                        <br>      
                         <?php $this->load->view("dashboard/product/_image_upload_box"); ?>
                     </div>
                 </div>

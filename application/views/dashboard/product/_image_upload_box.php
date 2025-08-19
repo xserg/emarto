@@ -14,9 +14,9 @@
         <ul class="dm-uploaded-files" id="files-image">
             <?php if (!empty($modesy_images)):
                 foreach ($modesy_images as $modesy_image):?>
-                    <li class="media" id="uploaderFile<?php echo $modesy_image->file_id; ?>">
+                    <li class="media" id="<?php echo $modesy_image->file_id; ?>">
                         <img src="<?php echo base_url(); ?>uploads/temp/<?php echo $modesy_image->img_small; ?>" alt="">
-                        <a href="javascript:void(0)" class="btn-img-delete btn-delete-product-img-session" data-file-id="<?php echo $modesy_image->file_id; ?>">
+                        <a href="javascript:void(0)" class="btn-img-delete btn-delete-product-img-session2" data-file-id="<?php echo $modesy_image->file_id; ?>">
                             <i class="icon-close"></i>
                         </a>xc
                         <?php if ($modesy_image->is_main == 1): ?>
@@ -51,6 +51,7 @@
 <script>
     var img_count = <?php echo sizeof($modesy_images); ?>;
     var max_count = 24;
+    var newOrder = [];
     $(function () {
         $('#drag-and-drop-zone').dmUploader({
             url: '<?php echo base_url(); ?>upload-image-session-post',
@@ -61,7 +62,8 @@
             extraData: function (id) {
                 return {
                     "file_id": id,
-                    "<?php echo $this->security->get_csrf_token_name(); ?>": $.cookie(csfr_cookie_name)
+                    "<?php echo $this->security->get_csrf_token_name(); ?>": $.cookie(csfr_cookie_name),
+                    "order": newOrder
                 };
             },
             onDragEnter: function () {
@@ -135,5 +137,79 @@
             },
         });
     });
+
+    $(function() {
+        $("#files-image").sortable({
+            update: function(event, ui) {
+                // This callback fires when the sorting order changes.
+                // You can get the new order of file IDs here.
+                newOrder = $(this).sortable('toArray');
+                console.log('New file order:', newOrder);
+                var data = {
+                                'order': newOrder,
+                            };
+                            data[csfr_token_name] = $.cookie(csfr_cookie_name);
+                            $.ajax({
+                                type: "POST",
+                                url: base_url + "/file_controller/sort_session_images",
+                                data: data,
+                                success: function(response) {
+                                    //console.log("Order saved:", response);
+                                },
+                                error: function(xhr, status, error) {
+                                    //console.error("Error saving order:", error);
+                                }
+                            });
+                
+            }
+        });
+        $("#files-image").disableSelection(); // Prevents text selection during drag
+    });
+
+    //delete product image session
+    $(document).on('click', '.btn-delete-product-img-session2', function () {
+        var file_id = $(this).attr('data-file-id');
+        var data = {
+            "file_id": file_id,
+            "sys_lang_id": sys_lang_id
+        };
+        if (img_count) {
+            img_count --;
+        }
+        data[csfr_token_name] = $.cookie(csfr_cookie_name);
+        $.ajax({
+            type: "POST",
+            url: base_url + "file_controller/delete_image_session",
+            data: data,
+            success: function () {
+                $('#' + file_id).remove();
+            }
+        });
+    });
+
+    function delete_session_images(message) {
+        swal({
+            text: message,
+            icon: "warning",
+            buttons: [sweetalert_cancel, sweetalert_ok],
+            dangerMode: true,
+        }).then(function (willDelete) {
+            if (willDelete) {
+                var data = {
+                    //"product_id": product_id
+                };
+                data[csfr_token_name] = $.cookie(csfr_cookie_name);
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "file_controller/delete_session_images",
+                    data: data
+                })
+                    .done(function (response) {
+                        location.reload();
+                    })
+
+            }
+        });
+    }
 </script>
 

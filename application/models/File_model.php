@@ -174,13 +174,15 @@ class File_model extends CI_Model
         if (!empty($this->session->userdata('modesy_product_images'))) {
             $modesy_images = $this->session->userdata('modesy_product_images');
         }
+        /*
         if (!empty($modesy_images)) {
             usort($modesy_images, function ($a, $b) {
-                //if ($a->file_time == $b->file_time) return 0;
-                //return $a->file_time < $b->file_time ? 1 : -1;
-                return $a->position <=> $b->position;
+                if ($a->file_time == $b->file_time) return 0;
+                return $a->file_time < $b->file_time ? 1 : -1;
+                //return $a->position <=> $b->position;
             });
         }
+        */    
         return $modesy_images;
     }
 
@@ -264,6 +266,16 @@ class File_model extends CI_Model
             $this->db->delete('images');
         }
     }
+    //delete session images
+    public function delete_session_images()
+    {
+        $images = $this->get_sess_product_images_array();
+        if (!empty($images)) {
+            foreach ($images as $image) {
+                $this->delete_image_session($image->file_id);
+            }
+        }
+    }
 
     //delete product images
     public function delete_product_images($product_id)
@@ -289,6 +301,24 @@ class File_model extends CI_Model
                 $this->db->update('images', ['position' => $positions[$image->id]], ["id" => $image->id]);
             }
         }
+    }
+
+    public function sort_session_images($order)
+    {
+        
+        $images = $this->get_sess_product_images_array();
+        $new_images = [];
+        $positions = array_flip($order);
+        if (!empty($images)) {
+            foreach ($images as $image) {
+                if (isset($positions[$image->file_id])) {
+                    $new_images[$positions[$image->file_id]] = $image;
+                }
+            }
+            ksort($new_images);
+            $this->set_sess_product_images_array($new_images);
+        }
+        return true;
     }
 
     /*
