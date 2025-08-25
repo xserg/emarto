@@ -20,7 +20,7 @@
     //select country
     $(document).on("change", "#select_countries", function () {
         get_states_by_country($(this).val(), "<?= trans("all_states"); ?>");
-        $("#form_group_states").show();
+        //$("#form_group_states").show();
     });
     //select region
     $(document).on("click", "#btn_select_region", function () {
@@ -263,7 +263,7 @@
 
             console.log(default_country);
             get_states_by_country(default_country, "<?= trans("all_states"); ?>");
-            $("#form_group_states").show();
+            //$("#form_group_states").show();
             $("#btn_select_region_container").show();
 
             $("#select_countries").val(default_country);
