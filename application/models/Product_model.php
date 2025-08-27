@@ -359,13 +359,13 @@ class Product_model extends CI_Model
         }
         //default location
         if (!empty($this->default_location->country_id)) {
-            $this->db->where('users.country_id', $this->default_location->country_id);
+            //$this->db->where('users.country_id', $this->default_location->country_id);
         }
         if (!empty($this->default_location->state_id)) {
             //$this->db->where('users.state_id', $this->default_location->state_id);
         }
         if (!empty($this->default_location->city_id)) {
-            $this->db->where('users.city_id', $this->default_location->city_id);
+            //$this->db->where('users.city_id', $this->default_location->city_id);
         }
         if ($compile_query == true) {
             return $this->db->get_compiled_select() . " ";
