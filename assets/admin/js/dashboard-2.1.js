@@ -184,6 +184,9 @@ $(document).on('click', '.btn-delete-product-img-session', function () {
     };
     if (img_count) {
         img_count --;
+        if (img_count == 0) {
+           $("#delete_all").hide();
+        }
     }
     data[csfr_token_name] = $.cookie(csfr_cookie_name);
     $.ajax({

@@ -29,7 +29,7 @@
                     <div class="col-sm-12 m-b-30">
                         <label class="control-label"><?php echo trans("images"); ?></label>
                         <div><?php echo trans("add_up_to_24_photos"); ?></div>
-                        <div class="text-center">                           
+                        <div class="text-center" id="delete_all">                           
                             <a href="javascript:void(0)" class="btn  btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_session_images('<?php echo trans("confirm_delete_all_photo"); ?>');">    
                                 <button type="button" class="btn btn-md btn-secondary" name="submit" value="delete_all"><?php echo trans("delete_all"); ?></button>    
                             </a>

@@ -52,6 +52,9 @@
     var img_count = <?php echo sizeof($modesy_images); ?>;
     var max_count = 24;
     var newOrder = [];
+    if (img_count == 0) {
+        $("#delete_all").hide();
+    }
     $(function () {
         $('#drag-and-drop-zone').dmUploader({
             url: '<?php echo base_url(); ?>upload-image-session-post',
@@ -74,6 +77,8 @@
             },
             onNewFile: function (id, file) {
                 img_count ++;
+                $("#delete_all").show();
+
                 if (img_count > max_count) {
                     img_count --;
                     $(".error-message-img-upload").html("<?php echo trans('too_many_files') . ' ' . 'Too many files!'; ?>");
@@ -175,6 +180,9 @@
         };
         if (img_count) {
             img_count --;
+        }
+        if (img_count == 0) {
+           $("#delete_all").hide();
         }
         data[csfr_token_name] = $.cookie(csfr_cookie_name);
         $.ajax({
