@@ -32,11 +32,7 @@
                     <div class="col-sm-12 m-b-30">
                         <label class="control-label"><?php echo trans("images"); ?></label>
                         <div><?php echo trans("add_up_to_24_photos"); ?></div>
-                        <div class="text-center">                           
-                            <a href="javascript:void(0)" class="btn  btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_product_images(<?php echo $product->id; ?>, '<?php echo trans("confirm_delete_all_photo"); ?>');">    
-                                <button type="button" class="btn btn-md btn-secondary" name="submit" value="delete_all"><?php echo trans("delete_all"); ?></button>    
-                            </a>
-                        </div>
+                        
                         <br>      
                         <?php $this->load->view("dashboard/product/_image_update_box"); ?>
                     </div>
