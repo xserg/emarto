@@ -51,6 +51,7 @@
 								<?php endif;
 							endforeach; ?>
 							<?php foreach ($read_conversations as $item):
+							//print_r($item);
 								$user_id = 0;
 								if ($item->receiver_id != $this->auth_user->id) {
 									$user_id = $item->receiver_id;
@@ -170,7 +171,11 @@
 
 						<div class="message-reply">
 							<!-- form start -->
-							<?php echo form_open_multipart('send-message-post', ['id' => 'form_validate']); ?>
+							<?php 
+							if ($conversation->sender_id == $support_id && $this->auth_user->id != $support_id) {
+								$disabled = 'disabled';
+							}
+							echo form_open_multipart('send-message-post', ['id' => 'form_validate']); ?>
 							<input type="hidden" name="conversation_id" value="<?php echo $conversation->id; ?>">
 							<?php if ($this->auth_user->id == $conversation->sender_id): ?>
 								<input type="hidden" name="receiver_id" value="<?php echo $conversation->receiver_id; ?>">
@@ -178,20 +183,20 @@
 								<input type="hidden" name="receiver_id" value="<?php echo $conversation->sender_id; ?>">
 							<?php endif; ?>
 							<div class="form-group m-b-10">
-								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" required></textarea>
+								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" required <?php echo $disabled; ?>></textarea>
 							</div>
 
 							<div class="row">
 									<div class="col-sm-12 m-b-30">
 
-												<input type="file" name="file" id="file" size="40"  />
+												<input type="file" name="file" id="file" size="40" <?php echo $disabled; ?>/>
 
 											<?php //$this->load->view("dashboard/product/_image_upload_box", ['modesy_images' => [1]]); ?>
 									</div>
 							</div>
 
 							<div class="form-group">
-								<button type="submit" class="btn btn-md btn-custom float-right"><i class="icon-send"></i> <?php echo trans("send"); ?></button>
+								<button type="submit" class="btn btn-md btn-custom float-right" <?php echo $disabled; ?>><i class="icon-send" ></i> <?php echo trans("send"); ?></button>
 							</div>
 							<?php echo form_close(); ?>
 							<!-- form end -->

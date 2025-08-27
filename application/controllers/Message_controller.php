@@ -21,10 +21,11 @@ class Message_controller extends Home_Core_Controller
         $data['description'] = trans("messages") . " - " . $this->app_name;
         $data['keywords'] = trans("messages") . "," . $this->app_name;
 
-        $this->message_model->add_support_conversation();
+        //$this->message_model->add_support_conversation();
 
         $data['conversation'] = $this->message_model->get_user_latest_conversation($this->auth_user->id);
         $data['user_session'] = get_usession();
+        $data['support_id'] = $this->message_model->support_id;
         if (!empty($data['conversation'])) {
             $data['unread_conversations'] = $this->message_model->get_unread_conversations($this->auth_user->id);
             $data['read_conversations'] = $this->message_model->get_read_conversations($this->auth_user->id);
