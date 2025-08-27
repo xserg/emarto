@@ -50,14 +50,14 @@ class Ajax_controller extends Home_Core_Controller
                     $response .= '<li><a href="javascript:void(0)" data-country="' . $country->id . '"><i class="icon-map-marker"></i>' . $country->name . '</a></li>';
                 }
             }
-            $states = $this->location_model->search_states($input_value);
+            //$states = $this->location_model->search_states($input_value);
             if (!empty($states)) {
                 $data['result'] = 1;
                 foreach ($states as $state) {
                     $response .= '<li><a href="javascript:void(0)" data-country="' . $state->country_id . '" data-state="' . $state->id . '"><i class="icon-map-marker"></i>' . $state->name . ', ' . $state->country_name . '</a></li>';
                 }
             }
-            $cities = $this->location_model->search_cities($input_value);
+            //$cities = $this->location_model->search_cities($input_value);
             if (!empty($cities)) {
                 $data['result'] = 1;
                 foreach ($cities as $city) {
