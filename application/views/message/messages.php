@@ -199,7 +199,7 @@
 
 								<?php 
 								if($this->auth_user->id == $support_id) {
-									echo "<br>Have a question or need help? Visit our <a href='/help-center'>Help Center.</a><br>
+									echo "<br>Have a question or need help? Visit our <a href='/help-center'><b>Help Center.</b></a><br>
 									Copyright © 2025 Emarto Ltd. All Rights Reserved.";
 								} ?>
 								</textarea>
