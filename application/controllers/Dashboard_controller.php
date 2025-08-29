@@ -85,6 +85,11 @@ class Dashboard_controller extends Home_Core_Controller
             $this->session->set_flashdata('error', trans("msg_error"));
             redirect($this->agent->referrer());
         }
+         //validate description_
+        if (empty(trim($this->input->post('description_' . $this->selected_lang->id, true)))) {
+            $this->session->set_flashdata('error', trans("msg_error_description"));
+            redirect($this->agent->referrer());
+        }
         //add product
         if ($this->product_model->add_product()) {
             //last id
