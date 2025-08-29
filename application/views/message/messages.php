@@ -136,7 +136,13 @@
 												</div>
 												<div class="user-message">
 													<div class="message-text">
-														<?php echo html_escape($item->message); ?>
+														<?php 
+														if($item->sender_id == $support_id) {
+															echo $item->message;
+														} else {
+															echo html_escape($item->message);
+														}
+														?>
 													</div>
 													<?php if ($item->image_path_thumb)
 													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
@@ -150,7 +156,13 @@
 											<div class="message-list-item-row-sent">
 												<div class="user-message">
 													<div class="message-text">
-														<?php echo html_escape($item->message); ?>
+														<?php 
+															if($item->sender_id == $support_id) {
+																echo $item->message;
+															} else {
+																echo html_escape($item->message);
+															}
+														?>
 													</div>
 													<?php if ($item->image_path_thumb)
 													echo '<a href="/'.$item->image_path.'" target=_blank ><img src="/' . $item->image_path_thumb .'" /></a>';
@@ -183,7 +195,14 @@
 								<input type="hidden" name="receiver_id" value="<?php echo $conversation->sender_id; ?>">
 							<?php endif; ?>
 							<div class="form-group m-b-10">
-								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" required <?php echo $disabled; ?>></textarea>
+								<textarea class="form-control form-textarea" name="message" placeholder="<?php echo trans('write_a_message'); ?>" required <?php echo $disabled; ?>>
+
+								<?php 
+								if($this->auth_user->id == $support_id) {
+									echo "<br>Have a question or need help? Visit our <a href='/help-center'>Help Center.</a><br>
+									Copyright © 2025 Emarto Ltd. All Rights Reserved.";
+								} ?>
+								</textarea>
 							</div>
 
 							<div class="row">

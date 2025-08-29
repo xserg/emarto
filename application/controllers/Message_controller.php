@@ -48,6 +48,7 @@ class Message_controller extends Home_Core_Controller
         $data['keywords'] = trans("messages") . "," . $this->app_name;
 
         $data['conversation'] = $this->message_model->get_user_conversation($id);
+        $data['support_id'] = $this->message_model->support_id;
         //check message
         if (empty($data['conversation'])) {
             redirect(generate_url("messages"));
