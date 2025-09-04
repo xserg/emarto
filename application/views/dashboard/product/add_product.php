@@ -166,8 +166,7 @@
 
                                         </div>
                                     </div>
-                                    <textarea name="description_<?= $language->id; ?>" id="editor_<?= $language->id; ?>" class="tinyMCEsmall text-editor" data-lang=<?= $language->short_form ?>>
-                                    </textarea>
+                                    <textarea name="description_<?= $language->id; ?>" id="editor_<?= $language->id; ?>" class="tinyMCEsmall text-editor" data-lang=<?= $language->short_form ?>></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"><?= trans("seo"); ?></label>
@@ -269,3 +268,26 @@
 
 
 <script src="/assets/js/translate.js"></script>
+
+<script>
+    var selected_lang = <?php echo $this->selected_lang->id ?? 1; ?>;
+    $("#form_validate").submit(function (event) {
+        //event.preventDefault();
+        var editorInstance = tinymce.get('editor_' + selected_lang);
+        body = editorInstance.getContent();
+        if (!body) {
+              event.preventDefault();
+              showError('<?php echo trans("msg_error_description"); ?>');
+              return;
+        }
+    });
+
+     function showError(error) {
+      swal({
+          text: error,
+          icon: "warning",
+          buttons: sweetalert_ok,
+          dangerMode: true,
+      });
+    }   
+</script>    
