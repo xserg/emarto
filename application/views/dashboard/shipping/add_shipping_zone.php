@@ -7,7 +7,7 @@
                         <h3 class="box-title"><?= trans('add_shipping_zone'); ?></h3>
                     </div>
                     <div class="right">
-                        <a href="<?php echo generate_dash_url("shipping_settings"); ?>" class="btn btn-success btn-add-new">
+                        <a href="<?php echo generate_dash_url("shipping_settings"); ?>?product_id=<?= $_GET['product_id'] ?>" class="btn btn-success btn-add-new">
                             <i class="fa fa-list-ul"></i>&nbsp;&nbsp;<?= trans('shipping_zones'); ?>
                         </a>
                     </div>
@@ -18,6 +18,7 @@
 
                     <?php echo form_open("add-shipping-zone-post", "id=shipping-zone"); ?>
                     <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
+                    <input type="hidden" name="product_id" value="<?= $_GET['product_id']; ?>">
                     <div class="form-group">
                       <label class="control-label"><?php echo trans("zone_name"); ?></label>
                       <select id="zone_name" class="form-control" name="zone_name" data-placeholder="<?= trans("zone_name"); ?>">

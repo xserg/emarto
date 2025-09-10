@@ -348,7 +348,7 @@
 
 
             <div class="left m-t-10">
-                <a href="<?= generate_dash_url("shipping-settings"); ?>" class="btn btn-success btn-add-new">
+                <a href="<?= generate_dash_url("shipping-settings"); ?>?product_id=<?= $product->id ?>" class="btn btn-success btn-add-new">
                     <i class="fa fa-plus"></i>&nbsp;&nbsp;<?= trans("shipping_zones"); ?>
                 </a>
             </div>

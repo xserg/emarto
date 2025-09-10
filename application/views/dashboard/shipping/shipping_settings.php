@@ -8,7 +8,12 @@
                     <h3 class="box-title"><?= trans("shipping_zones"); ?></h3>
                 </div>
                 <div class="right">
-                    <a href="<?= generate_dash_url("add_shipping_zone"); ?>" class="btn btn-success btn-add-new">
+                    <?php if ($_GET['product_id']) { ?>
+                    <a href="<?= generate_dash_url("product/product-details/").$_GET['product_id'] ?>" class="btn btn-success btn-add-new">
+                        <?= trans("back_to_listing"); ?>
+                    </a>
+                    <?php } ?>
+                    <a href="<?= generate_dash_url("add_shipping_zone"); ?>?product_id=<?= $_GET['product_id'] ?>" class="btn btn-success btn-add-new">
                         <i class="fa fa-plus"></i>&nbsp;&nbsp;<?= trans("add_shipping_zone"); ?>
                     </a>
                 </div>

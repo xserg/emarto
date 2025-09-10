@@ -19,6 +19,7 @@
                 <?php echo form_open("edit-shipping-zone-post", "id=shipping-zone"); ?>
                 <input type="hidden" name="zone_id" value="<?= $shipping_zone->id; ?>">
                 <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
+                <input type="hidden" name="product_id" value="<?= $_GET['product_id']; ?>">
                 <div class="form-group">
                     <label class="control-label"><?php echo trans("zone_name"); ?>: </label>
 
