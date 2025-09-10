@@ -1682,7 +1682,7 @@ class Dashboard_controller extends Home_Core_Controller
             $this->session->set_flashdata('error', trans("msg_error"));
         }
         //redirect($this->agent->referrer());
-        redirect(lang_base_url() . 'dashboard/shipping-settings');
+        redirect(lang_base_url() . 'dashboard/shipping-settings?product_id='.$this->input->post('product_id'));
     }
 
     /**
