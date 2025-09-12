@@ -348,7 +348,7 @@ class Home_controller extends Home_Core_Controller
             $data['ban'] = $this->black_list_model->check_ban($data["product"]->user_id, $this->auth_user->id);
 
             //print_r($this->default_location);
-            $data['shipping'] = $this->shipping_model->get_shipping_cost($this->default_location->state_id, $data["product"]->id);
+            $data['shipping'] = $this->shipping_model->get_shipping_cost($this->default_location->country_id, $data["product"]->id);
             $data["user_rating"] = calculate_user_rating($data["user"]->id);
 
             $this->load->view('partials/_header', $data);

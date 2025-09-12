@@ -287,7 +287,8 @@ class Shipping_model extends CI_Model
             array_push($items, $item);
             //$shipping_methods = $this->get_seller_shipping_methods_array($items, $state_id, false);
 
-            $shipping_methods = $this->get_cart_shipping_methods($product->user_id, $state_id);
+            //$shipping_methods = $this->get_cart_shipping_methods($product->user_id, $state_id);
+            $shipping_methods = $this->get_country_shipping_methods($product->user_id, $state_id);
 
 
             $has_methods = false;
@@ -1025,9 +1026,9 @@ class Shipping_model extends CI_Model
             $item->seller_id = $product->user_id;
             $item->shipping_class_id = $product->shipping_class_id;
             array_push($items, $item);
-            //$shipping_methods = $this->get_seller_shipping_methods_array($items, $state_id, false);
-
-            $shipping_methods = $this->get_cart_shipping_methods($product->user_id, $state_id);
+            
+            //$shipping_methods = $this->get_cart_shipping_methods($product->user_id, $state_id);
+            $shipping_methods = $this->get_country_shipping_methods($product->user_id, $state_id);
 
             $has_methods = false;
             if (!empty($shipping_methods)) {
@@ -1079,4 +1080,75 @@ class Shipping_model extends CI_Model
         //$date2 = date('M-d', strtotime($date.' + ' . ($days1 + $day_arr[1]) . ' days'));
         return $date1 . ' - ' . $date2;
     }
+
+    //get country shipping methods
+    public function get_country_shipping_methods($seller_id, $country_id)
+    {
+        $continent_code = "";
+
+        //get the state
+        //$state = get_state($state_id);
+        //get country
+        $country = get_country($country_id);
+        if (!empty($country)) {
+            if (!empty($country)) {
+                $continent_code = $country->continent_code;
+            }
+            //get shipping options by state
+            $zone_locations = array();
+            $zone_ids = array();
+
+            //get shipping options by country
+            if (empty($zone_locations) && (!empty($country_id))) {
+                $zone_locations = $this->db->where('country_id', clean_number($country_id))->where('state_id', 0)->where('user_id', clean_number($seller_id))->get('shipping_zone_locations')->result();
+            }
+            //get shipping options by continent
+            if (empty($zone_locations) && (!empty($continent_code))) {
+                $zone_locations = $this->db->where('continent_code', clean_str($continent_code))->where('country_id', 0)->where('state_id', 0)->where('user_id', clean_number($seller_id))->get('shipping_zone_locations')->result();
+            }
+            if (!empty($zone_locations)) {
+                foreach ($zone_locations as $location) {
+                    array_push($zone_ids, $location->zone_id);
+                }
+            }
+            //get shipping methods
+            if (!empty($zone_ids)) {
+                $methods = $this->db->where_in('zone_id', $zone_ids, FALSE)
+                ->where('user_id', clean_number($seller_id))
+                ->where('status', 1)
+                ->order_by("FIELD(method_type, 'free_shipping', 'local_pickup', 'flat_rate')")
+                ->get('shipping_zone_methods')->result();
+            }
+
+            $shipping_classes = $this->get_default_shipping_classes();
+            if ($methods) {
+                foreach($methods as $method) {
+
+                    $class_data = get_shipping_class_data($method->flat_rate_class_costs_array);
+                    foreach($class_data as $id => $class) {
+                        if ($class['status'] > 0) {
+                            $user_method = new stdClass();
+                            $user_method->id = $id;
+                            $user_method->zone_id = $method->zone_id;
+                            $user_method->user_id = $method->user_id;
+                            $user_method->name_array = $shipping_classes[$id-1]->name_array;
+                            $user_method->cost = $class['cost'];
+                            $user_method->time = $class['time'];
+                            $user_method->method_type = $class['status'] == 1 ? 'flat_rate' : 'free_shipping';
+                            $user_method->flat_rate_cost_calculation_type = $method->flat_rate_cost_calculation_type;
+                            $user_method->flat_rate_cost = $class['cost'];
+                            $user_method->status = $class['status'];
+                            $user_method->free_shipping = $method->free_shipping;
+                            $user_method->free_shipping_min_amount = 0;
+                            $ret[] =  $user_method;
+                        }
+                    }
+
+                }
+                return $ret;
+            }
+
+        }
+        return array();
+    }    
 }
