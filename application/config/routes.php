@@ -159,6 +159,7 @@ foreach ($languages as $language) {
         $route[$key . getr('dashboard', $rts) . '/' . getr('add_product', $rts)]['GET'] = 'dashboard_controller/add_product';
         $route[$key . getr('dashboard', $rts) . '/' . getr('product', $rts) . '/' . getr('product_details', $rts) . '/(:num)']['GET'] = 'dashboard_controller/edit_product_details/$1';
         $route[$key . getr('dashboard', $rts) . '/' . getr('edit_product', $rts) . '/(:num)']['GET'] = 'dashboard_controller/edit_product/$1';
+        $route[$key . getr('dashboard', $rts) . '/' . getr('copy_product', $rts) . '/(:num)']['GET'] = 'dashboard_controller/copy_product/$1';
 
         $route[$key . getr('dashboard', $rts) . '/' . getr('products', $rts)]['GET'] = 'dashboard_controller/products';
         $route[$key . getr('dashboard', $rts) . '/' . getr('pending_products', $rts)]['GET'] = 'dashboard_controller/pending_products';

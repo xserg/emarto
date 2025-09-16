@@ -68,6 +68,46 @@ class Dashboard_controller extends Home_Core_Controller
         $this->load->view('dashboard/includes/_footer');
     }
 
+     /**
+     * Copy Product
+     */
+    public function copy_product($id)
+    {
+   
+        $this->check_vendor_permission(true);
+        $this->is_cancel_account();
+        $data["product"] = $this->product_admin_model->get_product($id);
+        if (empty($data["product"])) {
+            redirect($this->agent->referrer());
+        }
+        if ($data["product"]->is_deleted == 1) {
+            if (!has_permission('products')) {
+                redirect($this->agent->referrer());
+                exit();
+            }
+        }
+        if ($data["product"]->user_id != $this->auth_user->id && !has_permission('products')) {
+            redirect($this->agent->referrer());
+            exit();
+        }
+
+        $data['title'] = trans("copy_product");
+        $data['description'] = $data['title'] . " - " . $this->app_name;
+        $data['keywords'] = $data['title'] . "," . $this->app_name;
+
+        $data['category'] = $this->category_model->get_category($data["product"]->category_id);
+        $data['parent_categories_array'] = $this->category_model->get_parent_categories_tree($data['category']);
+        $data['modesy_images'] = $this->file_model->get_sess_product_images_array();
+        //$data['modesy_images'] = $this->file_model->get_product_images($data["product"]->id);
+        //$data['all_categories'] = $this->category_model->get_categories_ordered_by_name();
+        $data["file_manager_images"] = $this->file_model->get_user_file_manager_images($this->auth_user->id);
+        $data["active_product_system_array"] = $this->get_activated_product_system();
+        $data['admin_settings'] = $this->product_admin_model->get_admin_settings();
+        $this->load->view('dashboard/includes/_header', $data);
+        $this->load->view('dashboard/product/copy_product', $data);
+        $this->load->view('dashboard/includes/_footer');
+    }
+
     /**
      * Add Product Post
      */

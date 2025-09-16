@@ -82,6 +82,8 @@
                                     <td style="width: 120px;">
                                         <div class="btn-group btn-group-option">
                                             <a href="<?php echo generate_dash_url("edit_product") . "/" . $item->id; ?>" class="btn btn-sm btn-default btn-edit" data-toggle="tooltip" title="<?= trans('edit'); ?>"><i class="fa fa-edit"></i></a>
+                                            <a href="<?php echo generate_dash_url("copy_product") . "/" . $item->id; ?>" class="btn btn-sm btn-default btn-edit" data-toggle="tooltip" title="<?= trans('copy_product'); ?>"><i class="fa fa-copy"></i></a>
+
                                             <a href="javascript:void(0)" class="btn btn-sm btn-default btn-delete" data-toggle="tooltip" title="<?= trans('delete'); ?>" onclick="delete_product(<?php echo $item->id; ?>,'<?php echo trans("confirm_product"); ?>');"><i class="fa fa-trash-o"></i></a>
                                         </div>
                                     </td>
