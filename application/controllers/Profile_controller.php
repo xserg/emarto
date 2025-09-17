@@ -51,15 +51,13 @@ class Profile_controller extends Home_Core_Controller
                 $data["parent_category"] = $this->category_model->get_category($data["category"]->parent_id);
             }
         }
-        $product_categories = $this->category_model->get_vendor_categories($data["category"], $data["user"]->id, true, true);
-        $data["categories"] = !empty($product_categories['categories']) ? $product_categories['categories'] : array();
-        $data["category_ids"] = !empty($product_categories['category_ids']) ? $product_categories['category_ids'] : array();
-        $data["subcategory_ids"] = !empty($product_categories['subcategory_ids']) ? $product_categories['subcategory_ids'] : array();
-
+        
+        $data['categories'] = $this->category_model->get_vendor_categories($data['category'], $data['user']->id, true, true);
         //set pagination
-        $data['num_rows'] = $this->product_model->get_profile_products_count($data["user"]->id, $data["subcategory_ids"]);
-        $pagination = $this->paginate(generate_profile_url($data["user"]->slug), $data['num_rows'], $this->product_per_page);
-        $data['products'] = $this->product_model->get_paginated_profile_products($data["user"]->id, $data["subcategory_ids"], $pagination['per_page'], $pagination['offset']);
+        $data['num_rows'] = $this->product_model->get_profile_products_count($data['user']->id, $data['category']);
+        $pagination = $this->paginate(generate_profile_url($data['user']->slug), $data['num_rows'], $this->product_per_page);
+        $data['products'] = $this->product_model->get_paginated_profile_products($data['user']->id, $data['category'], $pagination['per_page'], $pagination['offset']);
+
 
         $data['ban'] = $this->black_list_model->check_ban($data["user"]->id, $this->auth_user->id);
 
