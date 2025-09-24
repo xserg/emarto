@@ -709,6 +709,14 @@ class Ajax_controller extends Home_Core_Controller
                                     'template_path' => "email/email_new_order_seller"
                                 );
                                 $this->email_model->send_email($data);
+                                // Send message
+                                $this->load->model("message_model");
+                                $this->message_model->add_support_conversation(
+                                    $seller->id, 
+                                    trans("you_have_new_order"), 
+                                    //trans("you_have_new_order"), 
+                                    $this->load->view("message/new_order_seller", $data, TRUE)
+                                );
                             }
                         }
                     }

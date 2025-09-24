@@ -244,20 +244,20 @@ class Message_model extends CI_Model
     }
 
      //add conversation
-    public function add_support_conversation()
+    public function add_support_conversation($user_id, $subj, $message)
     {
+        if (!$user_id) {
+            return;
+        }
+
         if ($this->support_id == $this->auth_user->id) {
             return;
         }
         
-        if ($this->check_support_conversation()) {
-            return;
-        }
-
         $data = array(
             'sender_id' => $this->support_id,
-            'receiver_id' => $this->auth_user->id,
-            'subject' => 'Support',
+            'receiver_id' => $user_id,
+            'subject' => $subj,
             'product_id' => 0,
             'type' => $this->input->post('type', true),
             'created_at' => date("Y-m-d H:i:s")
@@ -270,8 +270,8 @@ class Message_model extends CI_Model
         $data = array(
             'conversation_id' => $conversation_id,
             'sender_id' => $this->support_id,
-            'receiver_id' => $this->auth_user->id,
-            'message' => 'You can ask question here',
+            'receiver_id' => $user_id,
+            'message' => $message,
             'is_read' => 0,
             'deleted_user_id' => 0,
             'created_at' => date("Y-m-d H:i:s")
