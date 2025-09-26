@@ -32,20 +32,18 @@
                         <!-- include message block -->
                         <?php $this->load->view('partials/_messages'); ?>
 
-                        <?php echo form_open_multipart("update-profile-post", ['id' => 'form_validate',  'class' => 'validate_phone']); ?>
+                        <?php echo form_open_multipart("update-profile-post", ['id' => 'form_validate',  'class' => 'validate_phone dropzone']); ?>
                         <div class="form-group">
-                            <p>
-                                <img src="<?php echo get_user_avatar($user); ?>" alt="<?php echo $user->username; ?>" class="form-avatar">
-                            </p>
-                            <p>
-                                <a class='btn btn-md btn-secondary btn-file-upload'>
-                                    <?php echo trans('select_image'); ?>
-                                    <input type="file" name="file" size="40" accept=".png, .jpg, .jpeg, .gif" onchange="$('#upload-file-info').html($(this).val().replace(/.*[\/\\]/, ''));">
-                                </a>
-                                <span class='badge badge-info' id="upload-file-info"></span>
-                            </p>
+                            <div>
+                                <div class="dz-image"><img src="<?php echo get_user_avatar($user); ?>" alt="<?php echo $user->username; ?>" class="avatar"></div>            
+                            </div>
+                            <div id="preview"></div>
+                            <div class="dz-message btn btn-md btn-custom"><?php echo trans('select_image'); ?></div>
                         </div>
 
+                        
+
+                        
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("email_address"); ?></label>
                             <?php if ($this->general_settings->email_verification == 1): ?>
@@ -143,7 +141,8 @@
     </div>
 </div>
 <!-- Wrapper End-->
-
+<script src="/assets/js/dropzone.min.js"></script>
+<link rel="stylesheet" href="/assets/css/dropzone.css" type="text/css" />
 <script src="/assets/js/intlTelInput.js"></script>
 <script>
   var input = document.querySelector("#phone");
@@ -171,4 +170,32 @@
     utilsScript: "/assets/js/utils.js",
   });
 
+    Dropzone.options.formValidate = { // camelized version of the `id`
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 9, // MB
+    autoProcessQueue: false,
+    uploadMultiple: false,
+    parallelUploads: 1,
+    maxFiles: 1,
+    previewsContainer: "#preview",
+    addRemoveLinks: true,
+    //previewTemplate: document.querySelector('#dzPreviewContainer').innerHTML,
+     init: function() {
+    var myDropzone = this;
+
+    
+    this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+      // Make sure that the form isn't actually being sent.
+      e.preventDefault();
+      e.stopPropagation();
+      myDropzone.processQueue();
+    });
+
+    this.on("queuecomplete", function () {
+        window.location.reload();
+        });
+
+    }
+    
+    }
 </script>

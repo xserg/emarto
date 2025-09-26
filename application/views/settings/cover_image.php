@@ -28,23 +28,23 @@
                         <!-- include message block -->
                         <?php $this->load->view('partials/_messages'); ?>
 
-                        <?php echo form_open_multipart("cover-image-post", ['id' => 'form_validate']); ?>
+                        <?php echo form_open_multipart("cover-image-post", ['id' => 'cover-dropzone', 'class' => 'dropzone']); ?>
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("cover_image"); ?>&nbsp;(1920x400)</label>
                             <?php if (!empty($this->auth_user->cover_image)): ?>
                             <img src="<?= base_url() . $this->auth_user->cover_image; ?>" class="img-fluid m-b-15">
                             <?php else: ?>
-                                <div class="edit-profile-cover-image">
+                                <div class="edit-profile-cover-image dropzone-previews" id="preview">
                                     <i class="icon-image"></i>
                                 </div>
                             <?php endif; ?>
                             <p class="m-0">
-                                <a class='btn btn-md btn-info btn-file-upload btn-file-upload-cover'>
-                                    <?php echo trans('select_image'); ?>
-                                    <input type="file" name="file" size="40" class="input-show-selected" data-id="upload-file-info" accept=".png, .jpg, .jpeg, .gif">
-                                </a>
+
+                                
                                 <?php if (!empty($this->auth_user->cover_image)): ?>
                                     <button type="submit" class="btn btn-md btn-secondary btn-file-upload btn-file-upload-cover" name="submit" value="delete_cover"><?= trans("delete"); ?></button>
+                                <?php else: ; ?>
+                                    <div class="dz-message btn btn-md btn-custom"><?php echo trans('select_image'); ?></div>
                                 <?php endif; ?>
                             </p>
                             <span class='badge badge-light' id="upload-file-info"></span>
@@ -80,4 +80,37 @@
     </div>
 </div>
 <!-- Wrapper End-->
+<?php if (empty($this->auth_user->cover_image)): ?>
+<script src="/assets/js/dropzone.min.js"></script>
+<link rel="stylesheet" href="/assets/css/dropzone_cover.css" type="text/css" />
 
+<script>
+    Dropzone.options.coverDropzone = { // camelized version of the `id`
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 9, // MB
+    autoProcessQueue: false,
+    uploadMultiple: false,
+    parallelUploads: 1,
+    maxFiles: 1,
+    previewsContainer: "#preview",
+    addRemoveLinks: true,
+    
+    init: function() {
+    var myDropzone = this;
+
+    // First change the button to actually tell Dropzone to process the queue.
+    this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+      // Make sure that the form isn't actually being sent.
+      e.preventDefault();
+      e.stopPropagation();
+      myDropzone.processQueue();
+    });
+
+    this.on("queuecomplete", function () {
+        window.location.reload();
+        });
+
+    }
+  };
+</script>
+<?php endif; ?>
