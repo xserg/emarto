@@ -104,6 +104,14 @@
                                         <?php echo trans("profile"); ?>
                                     </a>
                                 </li>
+                                <?php if (is_vendor()): ?>
+                                    <li>
+                                        <a href="<?php echo dashboard_url()."sales"; ?>">
+                                            <i class="icon-shopping-basket"></i>
+                                            <?php echo trans("sales"); ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                                 <?php if ($this->is_sale_active): ?>
                                     <li>
                                         <a href="<?php echo generate_url("orders"); ?>">
