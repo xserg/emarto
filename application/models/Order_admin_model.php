@@ -98,6 +98,15 @@ class Order_admin_model extends CI_Model
             );
             if ($all_complated == true) {
                 $data["status"] = 1;
+                // Send message
+                $this->load->model("message_model");
+                $this->message_model->add_support_conversation(
+                    $order_product->seller_id, 
+                    trans("completed_sales"), 
+                    trans("completed_sales") 
+                    . '<p class="p-order-number">' . trans("sale") . ' # ' . $order_id . '</p>' . date('Y-m-d H:i:s'), 
+                    
+                );
             }
             $this->db->where('id', $order_id);
             $this->db->update('orders', $data);
