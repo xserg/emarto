@@ -802,6 +802,13 @@ class Ajax_controller extends Home_Core_Controller
                             'order' => $order,
                             'order_product' => $order_product
                         );
+                        // Send message
+                        $this->load->model("message_model");
+                        $this->message_model->add_support_conversation(
+                            $order->buyer_id, 
+                            trans("your_order_shipped"), 
+                            $this->load->view("message/order_shipped", $data, TRUE)
+                        );
                         $this->email_model->send_email($data);
                     }
                 }
