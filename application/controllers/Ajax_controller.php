@@ -691,7 +691,14 @@ class Ajax_controller extends Home_Core_Controller
                     'template_path' => "email/email_new_order"
                 );
                 $this->email_model->send_email($data);
-
+                
+                $this->load->model("message_model");
+                                $this->message_model->add_support_conversation(
+                                    $order->buyer_id, 
+                                    trans("order_information"), 
+                                    $this->load->view("message/new_order", $data, TRUE)
+                                );
+                
                 //send to seller
                 if (!empty($order_products)) {
                     $seller_ids = array();
@@ -708,15 +715,17 @@ class Ajax_controller extends Home_Core_Controller
                                     'to' => $seller->email,
                                     'template_path' => "email/email_new_order_seller"
                                 );
-                                $this->email_model->send_email($data);
+                                
                                 // Send message
                                 $this->load->model("message_model");
                                 $this->message_model->add_support_conversation(
-                                    $seller->id, 
+                                    $order_product->seller_id, 
                                     trans("you_have_new_order"), 
                                     //trans("you_have_new_order"), 
                                     $this->load->view("message/new_order_seller", $data, TRUE)
                                 );
+
+                                $this->email_model->send_email($data);
                             }
                         }
                     }
