@@ -39,7 +39,8 @@
                                         if ($order->payment_status == 'payment_received'): ?>
                                             <a href="<?php echo lang_base_url(); ?>invoice/<?php echo $order->order_number; ?>" target="_blank" class="btn btn-md btn-info color-white float-right m-b-5 m-r-5"><i class="icon-text-o"></i>&nbsp;<?php echo trans('view_invoice'); ?></a>
                                         <?php else: ?>
-                                            <?php if ($order->payment_method != "Cash On Delivery" || ($order->payment_method == "Cash On Delivery" && date_difference_in_hours(date('Y-m-d H:i:s'), $order->created_at) <= 24)): ?>
+                                            <?php //if ($order->payment_method != "Cash On Delivery" || ($order->payment_method == "Cash On Delivery" && date_difference_in_hours(date('Y-m-d H:i:s'), $order->created_at) <= 24)): ?>
+                                            <?php if ($can_cancel): ?>    
                                                 <button type="button" class="btn btn-md btn-gray float-right m-b-5 m-r-5" onclick='cancel_order(<?= $order->id; ?>,"<?= trans("confirm_action"); ?>");'><i class="icon-times"></i>&nbsp;<?= trans("cancel_order"); ?></button>
                                             <?php endif;
                                         endif;

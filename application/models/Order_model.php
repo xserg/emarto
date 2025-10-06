@@ -1140,4 +1140,13 @@ class Order_model extends CI_Model
         }
         return false;
     }
+
+    public function checkOrderCanCancel($order_id)
+    {
+        $num = $this->db->where('order_id', $order_id)
+        ->where('order_status', '!=', 'awaiting_payment')
+        ->get('order_products')
+        ->num_rows();
+        return $num ? false : true;
+    }
 }
