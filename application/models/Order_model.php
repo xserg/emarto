@@ -1114,27 +1114,64 @@ class Order_model extends CI_Model
     }
 
     //cancel order
-    public function cancel_order($order_id)
+    public function cancel_order($order_id, $message = null)
     {
         $order = $this->get_order($order_id);
+
+
         if (!empty($order)) {
+            $this->load->model("message_model");
+            $data_order = [ 'status' => 2, 'updated_at' => date('Y-m-d H:i:s') ];   
             $update_order = false;
+
             if (is_admin()) {
                 $update_order = true;
-            } else {
-                if ($order->buyer_id == $this->auth_user->id) {
-                    if ($order->payment_method != "Cash On Delivery" || ($order->payment_method == "Cash On Delivery" && date_difference_in_hours(date('Y-m-d H:i:s'), $order->created_at) <= 24)) {
-                        $update_order = true;
+            }
+            
+            $order_products = $this->order_model->get_order_products($order_id);
+            $seller_ids = [];
+            foreach ($order_products as $order_product) {
+                if (!in_array($order_product->seller_id, $seller_ids)) {
+                    array_push($seller_ids, $order_product->seller_id);
+                }
+                if ($order_product->seller_id == $this->auth_user->id)  {
+                    $data_order['cancel_seller_message'] = $message;
+                    $update_order = true; 
+                    $this->message_model->add_support_conversation(
+                        $order->buyer_id, 
+                        trans("cancel_order"), 
+                        trans("cancel_order") . " " . $order_id . " " . $message,
+                        //$this->load->view("message/new_order", $data, TRUE)
+                    );              
+                }      
+            }
+            
+            if ($order->buyer_id == $this->auth_user->id) {
+                if ($order->payment_method != "Cash On Delivery" || ($order->payment_method == "Cash On Delivery" && date_difference_in_hours(date('Y-m-d H:i:s'), $order->created_at) <= 24)) {
+                    $update_order = true;
+                }
+                $data_order['cancel_user_message'] = $message;
+                if (!empty($seller_ids)) {
+                    foreach ($seller_ids as $seller_id) {
+                                $this->message_model->add_support_conversation(
+                                    $seller_id, 
+                                    trans("cancel_order"), 
+                                    trans("cancel_order") . " " . $order_id . " " . $message,
+                                    //$this->load->view("message/new_order", $data, TRUE)
+                                );
                     }
                 }
-            }
+            } 
+            
             if ($update_order == true) {
                 $data = array(
                     'order_status' => "cancelled",
                     'updated_at' => date('Y-m-d H:i:s')
                 );
+                
                 if ($this->db->where('order_id', $order_id)->update('order_products', $data)) {
-                    return $this->db->where('id', $order_id)->update('orders', ['status' => 2, 'updated_at' => date('Y-m-d H:i:s')]);
+                    return $this->db->where('id', $order_id)->update('orders', $data_order);
+  
                 }
             }
         }

@@ -19,15 +19,25 @@
 
                     <?php if ($order->status == 2): ?>
                         <label class="label label-danger"><?= trans("cancelled"); ?></label>
+                        
                     <?php else:
                         if ($order_status == 1): ?>
                             <label class="label label-default"><?= trans("completed"); ?></label>
                         <?php else: ?>
                             <label class="label label-success"><?= trans("order_processing"); ?></label>
+                             <button class="btn btn-contact-seller" data-toggle="modal" data-target="#cancelModal"><i class="icon-times"></i> <?php echo trans("cancel_order") ?></button>
+
                         <?php endif; ?>
                         <a href="<?php echo lang_base_url(); ?>invoice/<?php echo $order->order_number; ?>?np=seller" target="_blank" class="btn btn-sm btn-info btn-sale-options btn-view-invoice"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;<?php echo trans('view_invoice'); ?></a>
                     <?php endif; ?>
                 </div>
+                <?php if ($order->status == 2): ?>
+                <div class="line-detail">
+                            <span><?php echo trans("message"); ?></span>
+                            <?= $order->cancel_user_message;?>
+                            <?= $order->cancel_seller_message;?>
+                </div> 
+                <?php endif; ?>
                 <?php if ($order->status != 2): ?>
                     <div class="line-detail">
                         <span><?= trans("payment_status"); ?></span>
@@ -376,6 +386,8 @@
         </div>
     <?php endif;
 endforeach; ?>
+
+<?php $this->load->view("partials/_modal_cancel_order", ['subject' => html_escape($title), 'product_id' => $product->id]); ?>
 
 <script>
     $(document).on("change", "#select_order_status", function () {

@@ -41,7 +41,7 @@
                                         <?php else: ?>
                                             <?php //if ($order->payment_method != "Cash On Delivery" || ($order->payment_method == "Cash On Delivery" && date_difference_in_hours(date('Y-m-d H:i:s'), $order->created_at) <= 24)): ?>
                                             <?php if ($can_cancel): ?>    
-                                                <button type="button" class="btn btn-md btn-gray float-right m-b-5 m-r-5" onclick='cancel_order(<?= $order->id; ?>,"<?= trans("confirm_action"); ?>");'><i class="icon-times"></i>&nbsp;<?= trans("cancel_order"); ?></button>
+                                                <button class="btn btn-md btn-gray float-right m-b-5 m-r-5" data-toggle="modal" data-target="#cancelModal"><i class="icon-times"></i> <?php echo trans("cancel_order") ?></button>
                                             <?php endif;
                                         endif;
                                     endif; ?>
@@ -65,6 +65,15 @@
                                             <?php endif; ?>
                                         </div>
                                     </div>
+                                    <?php if ($order->status == 2): ?>
+                                        <div class="row order-row-item">
+                                            <div class="col-3"><span><?php echo trans("message"); ?></span></div>
+                                            <div class="col-9">
+                                            <?= $order->cancel_user_message;?>
+                                            <?= $order->cancel_seller_message;?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>    
                                     <?php if ($order->status != 2): ?>
                                         <div class="row order-row-item">
                                             <div class="col-3">
@@ -578,3 +587,4 @@
         </div>
     </div>
 <?php $this->load->view('partials/_modal_rate_product'); ?>
+<?php $this->load->view("partials/_modal_cancel_order", ['order_id' => $order->id]); ?>
