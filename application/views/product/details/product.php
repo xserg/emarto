@@ -159,24 +159,16 @@
                                                                                 <label class="control-label"><?php echo trans("select_your_location"); ?></label>
                                                                             </div>
                                                                             <div class="col-12 col-md-4 m-b-sm-15">
-                                                                                <select id="select_countries_product" name="country_id" class="select2 form-control" data-placeholder="<?= trans("country"); ?>" onchange="get_states(this.value,false,'product'); $('#product_shipping_cost_container').empty();">
+                                                                                <select id="select_countries_product" name="country_id" class="select2 form-control" data-placeholder="<?= trans("country"); ?>" 
+                                                                                onchange="get_product_shipping_cost(this.value, '<?= $product->id; ?>');">
+                                                                                <!--onchange="get_states(this.value,false,'product'); $('#product_shipping_cost_container').empty();"-->
                                                                                     <option></option>
                                                                                     <?php foreach ($this->countries as $item): ?>
                                                                                         <option value="<?= $item->id; ?>" <?= ($this->default_location->country_id == $item->id) ? ' selected' : ''; ?>><?= html_escape($item->name); ?></option>
                                                                                     <?php endforeach; ?>
                                                                                 </select>
                                                                             </div>
-                                                                            <div id="get_states_container_product" class="col-12 col-md-4">
-                                                                                <select id="select_states_product" name="state_id" class="select2 form-control" data-placeholder="<?= trans("state"); ?>" onchange="get_product_shipping_cost(this.value, '<?= $product->id; ?>');">
-                                                                                    <option></option>
-                                                                                    <?php $states = get_states_by_country($this->default_location->country_id);
-                                                                                    if (!empty($states)):
-                                                                                        foreach ($states as $item): ?>
-                                                                                            <option value="<?= $item->id; ?>" <?= $item->id == $this->default_location->state_id ? 'selected' : ''; ?>><?= html_escape($item->name); ?></option>
-                                                                                        <?php endforeach;
-                                                                                    endif; ?>
-                                                                                </select>
-                                                                            </div>
+                                    
                                                                         </div>
                                                                     </div>
                                                                     <div id="product_shipping_cost_container" class="product-shipping-methods"></div>

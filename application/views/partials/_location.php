@@ -13,7 +13,7 @@
                 endforeach; ?>
             </select>
         </div>
-        <div id="get_states_container" class="col-12 col-sm-4 m-b-15 <?php echo (!empty($state_id)) ? '' : 'display-none'; ?>">
+        <!--div id="get_states_container" class="col-12 col-sm-4 m-b-15 <?php echo (!empty($state_id)) ? '' : 'display-none'; ?>">
             <select id="select_states" name="state_id" class="select form-control" onchange="get_cities(this.value, '<?php echo $map; ?>');">
                 <option value=""><?php echo trans('state'); ?></option>
                 <?php if (!empty($states)):
@@ -40,6 +40,6 @@
                     endforeach;
                 endif; ?>
             </select>
-        </div>
+        </div-->
     </div>
 <?php endif; ?>

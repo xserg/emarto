@@ -1012,7 +1012,7 @@ class Shipping_model extends CI_Model
     }
 
     //get product shipping cost
-    public function get_shipping_cost($state_id, $product_id)
+    public function get_shipping_cost($country_id, $product_id)
     {
         $product = $this->product_model->get_product_by_id($product_id);
 
@@ -1028,7 +1028,7 @@ class Shipping_model extends CI_Model
             array_push($items, $item);
             
             //$shipping_methods = $this->get_cart_shipping_methods($product->user_id, $state_id);
-            $shipping_methods = $this->get_country_shipping_methods($product->user_id, $state_id);
+            $shipping_methods = $this->get_country_shipping_methods($product->user_id, $country_id);
 
             $has_methods = false;
             if (!empty($shipping_methods)) {
@@ -1041,6 +1041,7 @@ class Shipping_model extends CI_Model
             $response = [];
             //echo '<pre>';
             //print_r($shipping_methods);
+            //exit;
             //print_r($product);
             //echo $product->shipping_delivery_time_id;
             if (!empty($shipping_methods)) {
@@ -1086,9 +1087,6 @@ class Shipping_model extends CI_Model
     {
         $continent_code = "";
 
-        //get the state
-        //$state = get_state($state_id);
-        //get country
         $country = get_country($country_id);
         if (!empty($country)) {
             if (!empty($country)) {
@@ -1106,6 +1104,12 @@ class Shipping_model extends CI_Model
             if (empty($zone_locations) && (!empty($continent_code))) {
                 $zone_locations = $this->db->where('continent_code', clean_str($continent_code))->where('country_id', 0)->where('state_id', 0)->where('user_id', clean_number($seller_id))->get('shipping_zone_locations')->result();
             }
+
+            //Get Word wide 
+            if (empty($zone_locations)) {
+                $zone_locations = $this->db->where('continent_code', 'WW')->where('country_id', 0)->where('state_id', 0)->where('user_id', clean_number($seller_id))->get('shipping_zone_locations')->result();
+            }
+
             if (!empty($zone_locations)) {
                 foreach ($zone_locations as $location) {
                     array_push($zone_ids, $location->zone_id);
