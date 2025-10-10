@@ -12,7 +12,7 @@ if (!empty($shipping_methods)) {
 }
 
 if ($has_methods == false):?>
-    <p class="text-muted"><?= trans("no_delivery_is_made_to_address"); ?></p>
+    <p class="text-danger"><?= trans("no_delivery_is_made_to_address"); ?></p>
 <?php else: ?>
     <div class="row">
         <div class="col-12 m-t-30">
