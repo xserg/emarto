@@ -252,7 +252,7 @@ class Membership_controller extends Admin_Core_Controller
                     'email_type' => 'email_general',
                     'to' => $user->email,
                     'subject' => trans("shop_opening_request"),
-                    'email_content' => Auth_model::hello_user($user->first_name, $user->last_name) . '!<br><br>' . $email_content,
+                    'email_content' => Auth_model::hello_user($user->first_name, $user->last_name) . '<br><br>' . $email_content,
                     'email_link' => base_url(),
                     'email_button_text' => $email_button_text
                 );
