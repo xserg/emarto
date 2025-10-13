@@ -47,7 +47,7 @@
                                                             <div class="address-left">
                                                                 <div class="custom-control custom-radio">
                                                                     <input type="radio" class="custom-control-input" id="option_shipping_address_<?= $address->id; ?>" name="shipping_address_id" value="<?= $address->id; ?>"
-                                                                        <?= $selected_shipping_address_id == $address->id ? 'checked' : ''; ?> onchange="get_shipping_methods_by_location('<?= $address->state_id; ?>');" required>
+                                                                        <?= $selected_shipping_address_id == $address->id ? 'checked' : ''; ?> onchange="get_shipping_methods_by_location('<?= $address->country_id; ?>');" required>
                                                                     <label class="custom-control-label" for="option_shipping_address_<?= $address->id; ?>">
                                                                         <strong class="m-b-5"><?= html_escape($address->title); ?></strong>
                                                                         <p>

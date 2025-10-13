@@ -180,7 +180,7 @@ class Cart_controller extends Home_Core_Controller
                     }
                     $selected_address = $this->profile_model->get_shipping_address_by_id($data['selected_shipping_address_id']);
                     if (!empty($selected_address)) {
-                        $state_id = $selected_address->state_id;
+                        $state_id = $selected_address->country_id;
                     }
                 }
             }
