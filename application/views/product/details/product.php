@@ -12,7 +12,7 @@
                                     <li class="breadcrumb-item"><a href="<?php echo generate_category_url($item); ?>"><?php echo category_name($item); ?></a></li>
                                 <?php endforeach;
                             endif; ?>
-                            <li class="breadcrumb-item active"><?= html_escape($title); ?></li>
+                            
                         </ol>
                     </nav>
                 </div>
