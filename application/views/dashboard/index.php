@@ -204,7 +204,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-sm-12 col-xs-12" style="display: none;">
         <div class="box box-primary box-sm index-box">
             <div class="box-header with-border">
                 <h3 class="box-title"><?php echo trans("latest_comments"); ?></h3>
