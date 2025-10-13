@@ -164,7 +164,7 @@ class Cart_controller extends Home_Core_Controller
             $data['selected_billing_address_id'] = $first_id;
             $data['selected_same_address_for_billing'] = 1;
             if (!empty($data["shipping_addresses"][0]->state_id)) {
-                $state_id = $data["shipping_addresses"][0]->state_id;
+                $state_id = $data["shipping_addresses"][0]->country_id;
             }
             if (!empty($this->session->userdata('mds_cart_shipping'))) {
                 $selected_shipping = $this->session->userdata('mds_cart_shipping');
