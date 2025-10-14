@@ -42,12 +42,15 @@
                 <?php else: ?>
                     <input type="hidden" name="show_rss_feeds" value="<?= $this->auth_user->show_rss_feeds; ?>">
                 <?php endif; 
+                /*
                 foreach ($this->countries as $country) {
                    if ($country->id == 181) {
                       $this->countries = [$country];
                       break;
                    }
-                }     ?>
+                } 
+                */ 
+                ?>
                 <div class="form-group m-0">
                     <label><?= trans("shop_location"); ?></label>
                     <?php $this->load->view("partials/_location", ['countries' => $this->countries, 'country_id' => $this->auth_user->country_id, 'state_id' => $this->auth_user->state_id, 'city_id' => $this->auth_user->city_id, 'map' => false]); ?>
