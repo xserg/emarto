@@ -150,7 +150,7 @@ endif; ?>
     </div>
     <div class="row">
         <div class="col-12 product-add-to-cart-container">
-            <?php if ($product->is_sold != 1 && $product->listing_type != 'ordinary_listing' && $product->product_type != 'digital'): ?>
+            <?php if ($product->is_sold != 1 && $product->listing_type != 'ordinary_listing' && $product->product_type != 'digital' && $product->stock > 1): ?>
                 <div class="number-spinner">
                     <div class="input-group">
                         <span class="input-group-btn">
