@@ -316,7 +316,7 @@ class Shipping_model extends CI_Model
                                 . ")</strong>";
                                 //. trans("minimum_order_amount") . ":&nbsp;" . price_decimal($method->free_shipping_min_amount, $this->selected_currency->code, true) . ")</strong></p>";
                             } else {
-                                $response .= "<p><strong class='method-name'>" . $method->name . " ("
+                                $response .= "<p><strong class='method-name'>" . $method->name . " " . trans("shipping") ." ("
                                 . $this->deliveryDate($product->shipping_delivery_time_id, $method->time)
                                 . ")</strong><strong>:&nbsp;"
                                 . price_decimal(get_price($method->cost, 'decimal'), $this->selected_currency->code, true)
