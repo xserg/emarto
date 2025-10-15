@@ -198,6 +198,10 @@
                                                         <?php endif; ?>
                                                         </tbody>
                                                     </table>
+                                                    <div style='text-align: center; margin-bottom: 10px;'>
+                                                        <i class="icon-exclamation-circle"></i>
+                                                        <?php echo trans("customs_warning"); ?>
+                                                    </div>
                                                     <?php if ($product_location_status == 11): ?>
                                                         <div class="row">
                                                             <div class="col-12">
