@@ -83,7 +83,7 @@
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
-                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="text-align: right;margin-top: 40px;">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%; text-align: right;margin-top: 40px;">
                                 <tr>
                                     <td style="width: 70%"><?php echo trans("subtotal"); ?></td>
                                     <td style="width: 30%;padding-right: 15px;font-weight: 600;"><?php echo price_formatted($order->price_subtotal, $order->price_currency); ?></td>
