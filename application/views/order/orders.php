@@ -11,7 +11,6 @@
                     </ol>
                 </nav>
 
-                <h1 class="page-title"><?php echo $title; ?></h1>
             </div>
 
             <div class="col-sm-12 m-t-15 m-b-30">
