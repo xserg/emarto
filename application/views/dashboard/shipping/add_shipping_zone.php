@@ -90,10 +90,11 @@
                     </div-->
 
                     <div class="form-group text-right">
-                      <a href="<?php echo generate_dash_url("shipping_settings"); ?>" class="btn btn-success">
-                        <?= trans('cancel'); ?>
-                      </a>
+                      
                         <button id="zone_submit" type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("submit") ?></button>
+                        <a href="<?php echo generate_dash_url("shipping_settings"); ?>" class="btn btn-gray" style="background-color: #e6e6e6;">
+                        <?= trans('cancel'); ?>
+                        </a>
                     </div>
                     <?php echo form_close(); ?>
                 </div>
