@@ -13,6 +13,17 @@
 
                 <h1 class="page-title"><?php echo $title; ?></h1>
             </div>
+
+            <div class="col-sm-12 m-t-15 m-b-30">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-6">
+                        <h1 class="page-title m-b-5"><?php echo $title; ?></h1>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <a href="<?php echo generate_url("refund_requests"); ?>" class="btn btn-info color-white float-right m-b-5"><?= trans("refund_requests"); ?> </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
