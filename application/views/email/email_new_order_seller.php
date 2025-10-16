@@ -44,6 +44,42 @@
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="text-align: right;margin-top: 40px;">
+                                <tr>
+                                    <td style="width: 70%"><?php echo trans("subtotal"); ?></td>
+                                    <td style="width: 30%;padding-right: 15px;font-weight: 600;"><?php echo price_formatted($order->price_subtotal, $order->price_currency); ?></td>
+                                </tr>
+                                <?php if (!empty($order->price_vat)): ?>
+                                    <tr>
+                                        <td style="width: 70%"><?php echo trans("vat"); ?></td>
+                                        <td style="width: 30%;padding-right: 15px;font-weight: 600;"><?php echo price_formatted($order->price_vat, $order->price_currency); ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                                <tr>
+                                    <td style="width: 70%"><?php echo trans("shipping"); ?></td>
+                                    <td style="width: 30%;padding-right: 15px;font-weight: 600;"><?php echo price_formatted($order->price_shipping, $order->price_currency); ?></td>
+                                </tr>
+                                <?php if ($order->coupon_discount > 0): ?>
+                                    <tr>
+                                        <td style="width: 70%"><?php echo trans("coupon"); ?>&nbsp;&nbsp;[<?= html_escape($order->coupon_code); ?>]</td>
+                                        <td style="width: 30%;padding-right: 15px;font-weight: 600;">-<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                                <tr>
+                                    <?php $price_second_currency = "";
+                                    $transaction = $this->transaction_model->get_transaction_by_order_id($order->id);
+                                    if (!empty($transaction) && $transaction->currency != $order->price_currency):
+                                        $price_second_currency = price_currency_format($transaction->payment_amount, $transaction->currency);
+                                    endif; ?>
+                                    <td style="width: 70%;font-weight: bold"><?php echo trans("total"); ?></td>
+                                    <td style="width: 30%;padding-right: 15px;font-weight: 600;">
+                                        <?php echo price_formatted($order->price_total, $order->price_currency);
+                                        if (!empty($price_second_currency)):?>
+                                            <br><span style="font-weight: 400;white-space: nowrap;">(<?= trans("paid"); ?>:&nbsp;<?= $price_second_currency; ?>&nbsp;<?= $transaction->currency; ?>)</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            </table>
                             <p style='text-align: center;margin-top: 40px;'>
                                 <a href="<?php echo generate_dash_url("sale") . '/' . $order->order_number; ?>" style='font-size: 14px;text-decoration: none;padding: 14px 40px;background-color: #09b1ba;color: #ffffff !important; border-radius: 3px;'>
                                     <?php echo trans("see_order_details"); ?>
