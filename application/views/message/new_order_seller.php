@@ -1,10 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<?php //$this->load->view('email/_header', ['title' => trans("you_have_new_order")]); ?>
-<table role="presentation" class="main">
+<table role="presentation" class="main" style="width:720px;">
     <?php if (!empty($order)): ?>
         <tr>
             <td class="wrapper">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                     <tr>
                         <td>
                             <h1 style="text-decoration: none; font-size: 24px;line-height: 28px;font-weight: bold"><?php echo trans("you_have_new_order"); ?></h1>
