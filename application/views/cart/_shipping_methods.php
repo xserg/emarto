@@ -79,7 +79,7 @@ if ($has_methods == false):?>
                                         <input type="radio" class="custom-control-input" id="shipping_method_<?= $method->id; ?>"
                                         name="shipping_method_<?= $shipping_method->shop_id; ?>"
                                         value="<?= $method->id; ?>" <?= $is_selected == 1 ? 'checked' : ''; ?>
-                                        onclick="shipping_price(<?= $method->cost ?>);"
+                                        onclick="shipping_price('<?= price_decimal($method->cost, $this->selected_currency->code, true, false); ?>');"
                                         required>
                                         <label class="custom-control-label" for="shipping_method_<?= $method->id; ?>">
                                             <strong class="method-name"><?= $method->name; ?></strong>

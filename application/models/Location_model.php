@@ -509,11 +509,9 @@ class Location_model extends CI_Model
                   $location->city_id = 0; //$city[0]->id ?? 0;
               //}
               $this->session->set_userdata('mds_default_location', serialize($location));
-              if ($location->country_id == 181) {
-                $this->session->set_userdata('mds_selected_currency', 'RUB');
-              } else {
-                $this->session->set_userdata('mds_selected_currency', 'USD');
-              }
+              
+              $this->session->set_userdata('mds_selected_currency', 'USD');
+            
           }
         }
         return $location;

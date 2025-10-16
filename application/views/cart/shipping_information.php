@@ -375,14 +375,14 @@ function shipping_price(price)
 {
   const total_before_shipping = <?=$cart_total->total_before_shipping ?>;
   const symbol = '<?=$symbol ?>';
-  //console.log(total_before_shipping, price, symbol);
+  console.log(total_before_shipping, parseFloat(price), symbol);
 
   if (price == 0) {
     $("#shipping_price").text('<?=trans("free")?>');
     $("#order_total").text(symbol + (total_before_shipping + '.00'));
   } else {
-    $("#shipping_price").text(symbol + (price + '.00'));
-    $("#order_total").text(symbol + (total_before_shipping + price + '.00'));
+    $("#shipping_price").text(symbol + (price ));
+    $("#order_total").text(symbol + (total_before_shipping + Number(price.replace(/,/g, '')) ).toFixed(2));
   }
 }
 
