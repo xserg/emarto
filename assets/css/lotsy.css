@@ -10597,3 +10597,7 @@ font-family:sans-serif;
 content:"𝕏";
 font-size:1.2em;
 }
+
+.cc-nb-okagree, .cc-nb-reject, .cc-cp-foot-save {
+    background-color: #26C0BA !important;
+}
