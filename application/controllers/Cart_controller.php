@@ -199,7 +199,7 @@ class Cart_controller extends Home_Core_Controller
         }
         $data['selected_shipping_method_ids'] = array();
         if (!empty($this->session->userdata('mds_selected_shipping_method_ids'))) {
-            $data['selected_shipping_method_ids'] = $this->session->userdata('mds_selected_shipping_method_ids');
+            //$data['selected_shipping_method_ids'] = $this->session->userdata('mds_selected_shipping_method_ids');
         }
 
         //cart seller ids
