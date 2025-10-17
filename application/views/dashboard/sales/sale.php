@@ -33,7 +33,7 @@
                 </div>
                 <?php if ($order->status == 2): ?>
                 <div class="line-detail">
-                            <span><?php echo trans("message"); ?></span>
+                            <span><?php echo trans("cancellation_reason"); ?></span>
                             <?= $order->cancel_user_message;?>
                             <?= $order->cancel_seller_message;?>
                 </div> 

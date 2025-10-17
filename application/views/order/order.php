@@ -67,7 +67,7 @@
                                     </div>
                                     <?php if ($order->status == 2): ?>
                                         <div class="row order-row-item">
-                                            <div class="col-3"><span><?php echo trans($order->cancel_seller_message ? "buyer_message" : "message"); ?></span></div>
+                                            <div class="col-3"><span><?php echo trans("cancellation_reason"); ?></span></div>
                                             <div class="col-9">
                                             <?= $order->cancel_user_message;?>
                                             <?= $order->cancel_seller_message;?>
