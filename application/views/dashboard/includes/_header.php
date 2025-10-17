@@ -116,7 +116,7 @@
                         <img src="<?php echo get_user_avatar($this->auth_user); ?>" class="img-circle" alt="">
                     </div>
                     <div class="username" style="white-space: normal;">
-                        <p><?= trans("hi") . ", " . get_shop_name($this->auth_user); ?></p>
+                        <p><?= get_shop_name($this->auth_user); ?></p>
                     </div>
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
