@@ -333,7 +333,7 @@ class Auth_model extends CI_Model
                     'template_path' => "email/email_general",
                     'to' => $user->email,
                     'subject' => trans("confirm_your_account_subject"),
-                    'email_content' => self::hello_user($user->first_name, $user->last_name) . '!<br><br>'
+                    'email_content' => self::hello_user($user->first_name, $user->last_name) . '<br><br>'
                      . trans("msg_confirmation_email"),
                     'email_link' => lang_base_url() . "confirm?token=" . $data['token'],
                     'email_button_text' => trans("confirm_your_account")
@@ -763,12 +763,12 @@ class Auth_model extends CI_Model
               if ($type == 1) {
                 $data['banned'] = 1;
                 $email_data['subject'] = trans('ban_account_subject');
-                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('ban_account_message'));
+                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '<br><br>' . nl2br(trans('ban_account_message'));
               }
               if ($type == 2) {
                 $data['banned'] = 2;
                 $email_data['subject'] = trans('ban_permanent_subject');
-                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('ban_permanent_message'));
+                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '<br><br>' . nl2br(trans('ban_permanent_message'));
               }
               $email_data['email_link'] = lang_base_url() . "help-center/submit-request";
               $email_data['email_button_text'] = trans("contact_support");
@@ -776,7 +776,7 @@ class Auth_model extends CI_Model
             if ($user->banned > 0 && !$type) {
                 $data['banned'] = 0;
                 $email_data['subject'] = trans('unban_account_subject');
-                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('unban_account_message'));
+                $email_data['email_content'] = self::hello_user($user->first_name, $user->last_name) . '<br><br>' . nl2br(trans('unban_account_message'));
                 $email_data['email_link'] = lang_base_url() . 'signin';
                 $email_data['email_button_text'] = trans("login");
             }
