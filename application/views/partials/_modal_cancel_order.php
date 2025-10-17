@@ -29,7 +29,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     
-                    <button type="submit" class="btn btn-md btn-custom btn-green"><?php echo trans("yes"); ?></button>
+                    <button type="submit" class="btn btn-md btn-custom btn-success"><?php echo trans("yes"); ?></button>
                     <button type="button" class="btn btn-md btn-gray" data-dismiss="modal"><?php echo trans("no"); ?></button>
                 </div>
             </form>

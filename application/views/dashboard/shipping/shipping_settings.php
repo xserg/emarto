@@ -9,7 +9,7 @@
                 </div>
                 <div class="right">
                     <?php if ($_GET['product_id']) { ?>
-                    <a href="<?= generate_dash_url("product/product-details/").$_GET['product_id'] ?>" class="btn btn-success btn-add-new">
+                    <a href="<?= generate_dash_url("product/product-details/").$_GET['product_id'] ?>" class="btn btn-gray" style="background-color: #e6e6e6; color: black;">
                         <?= trans("back_to_listing"); ?>
                     </a>
                     <?php } ?>
