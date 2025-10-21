@@ -559,7 +559,7 @@ class Home_controller extends Home_Core_Controller
             'country_id' => $this->input->post('country_id', true),
             'state_id' => $this->input->post('state_id', true),
             'city_id' => $this->input->post('city_id', true),
-            'about_me' => $this->input->post('about_me', true),
+            'about_shop' => $this->input->post('about_shop', true),
             'vendor_documents' => "",
             'is_active_shop_request' => 1
         );
@@ -590,7 +590,7 @@ class Home_controller extends Home_Core_Controller
         $this->form_validation->set_rules('last_name', trans("last_name"),
           'required|min_length[3]|callback_name_format');
 
-        $this->form_validation->set_rules('about_me', trans("shop_description"), 'required');
+        $this->form_validation->set_rules('about_shop', trans("shop_description"), 'required');
 
 
         if ($this->form_validation->run() === false) {
