@@ -50,6 +50,16 @@
                    }
                 } 
                 */ 
+                $countries_f = [];
+                $onlyCountries = '';
+                foreach ($this->countries as $country) {
+                    if ($country->seller == 1) {
+                        $countries_f[] = $country;
+                        $onlyCountries .= ($onlyCountries ? '","' : '"').$country->iso;
+                    }
+                }
+                $onlyCountries .= '"';
+                $this->countries = $countries_f;                
                 ?>
                 <div class="form-group m-0">
                     <label><?= trans("shop_location"); ?></label>
