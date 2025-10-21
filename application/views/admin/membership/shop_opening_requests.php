@@ -43,7 +43,7 @@
                                     <p class="m-b-5"><?= trans("phone") ?>:&nbsp;<strong><?php echo html_escape($user->phone_number); ?></strong></p>
                                     <p class="m-b-5"><?= trans("location") ?>:&nbsp;<strong><?php echo get_location($user); ?></strong></p>
                                 </td>
-                                <td style="min-width: 300px !important; overflow-wrap: anywhere;"><?php echo html_escape($user->about_me); ?></td>
+                                <td style="min-width: 300px !important; overflow-wrap: anywhere;"><?php echo html_escape($user->about_shop);// . '<br>' . html_escape($user->about_me); ?></td>
                                 <td>
                                     <?php $files = unserialize_data($user->vendor_documents);
                                     if (!empty($files)):?>

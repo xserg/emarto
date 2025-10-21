@@ -79,7 +79,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label"><?php echo trans('location'); ?></label>
                                                         <?php
-                                                        $countries_f = []; 
+                                                        $countries_f = [];
                                                         $onlyCountries = '';
                                                         foreach ($this->countries as $country) {
                                                            if ($country->seller == 1) {
@@ -88,13 +88,13 @@
                                                            }
                                                         }
                                                         $onlyCountries .= '"';
-                                                        $this->countries = $countries_f;                              
+                                                        $this->countries = $countries_f;
                                                         $this->load->view(
-                                                          "partials/_location", 
-                                                          ['countries' => $this->countries, 
-                                                          'country_id' => $country_id, 
-                                                          'state_id' => $state_id, 
-                                                          'city_id' => $city_id, 
+                                                          "partials/_location",
+                                                          ['countries' => $this->countries,
+                                                          'country_id' => $country_id,
+                                                          'state_id' => $state_id,
+                                                          'city_id' => $city_id,
                                                           'map' => false]
                                                         );
                                                         ?>
@@ -117,8 +117,8 @@
                                                         </div>
                                                     <?php endif; ?>
                                                     <div class="form-group">
-                                                        <label class="control-label"><?php echo trans("shop_description"); ?></label>
-                                                        <textarea name="about_me" class="form-control form-textarea" placeholder="<?php echo trans("shop_description"); ?>" maxlength="150"><?= $this->auth_user->about_me; ?></textarea>
+                                                        <label class="control-label"><?php echo trans("about_shop"); ?></label>
+                                                        <textarea name="about_shop" class="form-control form-textarea" placeholder="<?php //echo trans("about_shop"); ?>" maxlength="1000"><?= $this->auth_user->about_shop; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,7 +126,7 @@
                                             <div class="form-group m-t-15">
                                                 <div class="custom-control custom-checkbox custom-control-validate-input">
                                                     <input type="checkbox" class="custom-control-input" name="terms_conditions" id="terms_conditions" value="1">
-                                                    <label for="terms_conditions" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>&nbsp;
+                                                    <label for="terms_conditions" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>
                                                       <?php $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
                                                       $ci =& get_instance();
                                                       $page_policy = $ci->page_model->get_page("privacy-policy", $this->selected_lang->id);
@@ -172,5 +172,5 @@
     utilsScript: "/assets/js/utils.js",
   });
   }
-  
+
 </script>
