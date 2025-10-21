@@ -1052,7 +1052,7 @@ class Shipping_model extends CI_Model
                 foreach ($shipping_methods as $method) {
                     $response['date'] = $this->deliveryDate($product->shipping_delivery_time_id, $method->time);
                             if ($method->method_type == "free_shipping") {
-                                $response['price'] = "free_shipping";
+                                $response['price'] = "Free";
                                   } else {
                                 //$response .= "<p><strong class='method-name'>" . $method->name . "</strong><strong>:&nbsp;" . price_decimal($method->cost, $this->selected_currency->code, true) . "</strong></p>";
                                 $response['price'] = price_decimal(get_price($method->cost, 'decimal'), $this->selected_currency->code, true);
