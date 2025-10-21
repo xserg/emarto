@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<table role="presentation" class="main">
+<table role="presentation" class="main" style="width:720px;">
     <?php if (!empty($order)): ?>
         <tr>
             <td class="wrapper">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="width:720px;">
                     <tr>
                         <td>
                             <h1 style="text-decoration: none; font-size: 24px;line-height: 28px;font-weight: bold"><?php echo trans("your_order_shipped"); ?></h1>
@@ -21,7 +21,7 @@
                                 <p>
                                 <h2 style="margin-bottom: 10px; font-size: 16px;font-weight: 600;"><?php echo trans("shipping"); ?></h2>
                                 <?= trans("tracking_code"); ?>:&nbsp;<?= $order_product->shipping_tracking_number; ?><br>
-                                <?= trans("tracking_url"); ?>:&nbsp;<?= $order_product->shipping_tracking_url; ?><br>
+                                <?= trans("shipping_slug"); ?>:&nbsp;<?= $order_product->shipping_slug; ?><br>
                                 </p>
                             <?php endif; ?>
                             <h3 style="margin-bottom: 10px;font-size: 16px;font-weight: 600;border-bottom: 1px solid #d1d1d1;padding-bottom: 5px; margin-top: 45px;"><?php echo trans("shipped_product"); ?></h3>
