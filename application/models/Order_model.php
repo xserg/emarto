@@ -1134,30 +1134,53 @@ class Order_model extends CI_Model
                 if (!in_array($order_product->seller_id, $seller_ids)) {
                     array_push($seller_ids, $order_product->seller_id);
                 }
+                // Seller cancel message to buyer
                 if ($order_product->seller_id == $this->auth_user->id)  {
+                    $this->load->model("email_model");
+                    $buyer = get_user($order->buyer_id);
                     $data_order['cancel_seller_message'] = $message;
                     $update_order = true; 
+                    $email_data = array(
+                        'subject' => trans("order_cancelled"),
+                        'message' => trans("cancellation_reason") . ': ' . $message,
+                        'order' => $order,
+                        'order_products' => $order_products,
+                        'to' => $buyer->email,
+                        'template_path' => "email/email_order"
+                    );
+                    $this->email_model->send_email($email_data);
                     $this->message_model->add_support_conversation(
                         $order->buyer_id, 
-                        trans("cancel_order"), 
-                        trans("cancel_order") . " " . $order_id . " " . $message,
-                        //$this->load->view("message/new_order", $data, TRUE)
+                        trans("order_cancelled"), 
+                        $this->load->view("message/order", $email_data, TRUE)
                     );              
                 }      
             }
-            
+
+            // Buyer cancel mess to seller
             if ($order->buyer_id == $this->auth_user->id) {
                 if ($order->payment_method != "Cash On Delivery" || ($order->payment_method == "Cash On Delivery" && date_difference_in_hours(date('Y-m-d H:i:s'), $order->created_at) <= 24)) {
                     $update_order = true;
                 }
-                $data_order['cancel_user_message'] = $message;
+                $data_order['cancel_user_message'] = $message;         
+
                 if (!empty($seller_ids)) {
                     foreach ($seller_ids as $seller_id) {
+                        
+                                $seller = get_user($seller_id);
+                                $email_data = array(
+                                    'subject' => trans("order_cancelled"),
+                                    'message' => trans("cancellation_reason") . ': ' . $message,
+                                    'order' => $order,
+                                    'order_products' => $order_products,
+                                    'to' => $seller->email,
+                                    'template_path' => "email/email_order"
+                                );
+
                                 $this->message_model->add_support_conversation(
                                     $seller_id, 
-                                    trans("cancel_order"), 
-                                    trans("cancel_order") . " " . $order_id . " " . $message,
-                                    //$this->load->view("message/new_order", $data, TRUE)
+                                    trans("order_cancelled"), 
+                                    $this->load->view("message/order", $email_data, TRUE)
                                 );
                     }
                 }
