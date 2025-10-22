@@ -84,6 +84,7 @@ class Order_admin_model extends CI_Model
     public function update_order_status_if_completed($order_id)
     {
         $order_id = clean_number($order_id);
+        $order = get_order($order_id);
         $all_complated = true;
         $order_products = $this->get_order_products($order_id);
         if (!empty($order_products)) {
@@ -98,14 +99,25 @@ class Order_admin_model extends CI_Model
             );
             if ($all_complated == true) {
                 $data["status"] = 1;
+                $seller = get_user($order_product->seller_id);
+                
+                // Email
+                $this->load->model("email_model");
+                $data = array(
+                    'subject' => trans("sale_completed"),
+                    'order' => $order,
+                    'order_products' => $order_products,
+                    'to' => $seller->email,
+                    'template_path' => "email/email_completed_order_seller"
+                );
+                $this->email_model->send_email($data);
+                
                 // Send message
                 $this->load->model("message_model");
                 $this->message_model->add_support_conversation(
                     $order_product->seller_id, 
-                    trans("completed_sales"), 
-                    trans("completed_sales") 
-                    . '<p class="p-order-number">' . trans("sale") . ' # ' . $order_id . '</p>' . date('Y-m-d H:i:s'), 
-                    
+                    trans("sale_completed"), 
+                    $this->load->view("message/completed_order_seller", $data, TRUE)
                 );
             }
             $this->db->where('id', $order_id);

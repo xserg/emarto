@@ -577,6 +577,7 @@ class Ajax_controller extends Home_Core_Controller
         $state_id = $this->input->post('state_id', true);
         $product_id = $this->input->post('product_id', true);
         $this->shipping_model->get_product_shipping_cost($state_id, $product_id);
+        
     }
 
     /*
@@ -721,7 +722,6 @@ class Ajax_controller extends Home_Core_Controller
                                 $this->message_model->add_support_conversation(
                                     $order_product->seller_id, 
                                     trans("you_have_new_order"), 
-                                    //trans("you_have_new_order"), 
                                     $this->load->view("message/new_order_seller", $data, TRUE)
                                 );
 
