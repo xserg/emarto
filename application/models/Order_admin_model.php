@@ -103,21 +103,21 @@ class Order_admin_model extends CI_Model
                 
                 // Email
                 $this->load->model("email_model");
-                $data = array(
+                $email_data = array(
                     'subject' => trans("sale_completed"),
                     'order' => $order,
                     'order_products' => $order_products,
                     'to' => $seller->email,
                     'template_path' => "email/email_completed_order_seller"
                 );
-                $this->email_model->send_email($data);
+                $this->email_model->send_email($email_data);
                 
                 // Send message
                 $this->load->model("message_model");
                 $this->message_model->add_support_conversation(
                     $order_product->seller_id, 
                     trans("sale_completed"), 
-                    $this->load->view("message/completed_order_seller", $data, TRUE)
+                    $this->load->view("message/completed_order_seller", $email_data, TRUE)
                 );
             }
             $this->db->where('id', $order_id);
