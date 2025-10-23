@@ -172,6 +172,7 @@
                                     <label class="control-label"><?= trans("seo"); ?></label>
                                     <input type="text" name="seo_title_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("title"); ?>" maxlength="80">
                                     <input type="text" name="seo_description_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("description"); ?>" maxlength="490">
+                                    <input type="text" name="seo_keywords_<?= $language->id; ?>" class="form-control form-input m-b-5" placeholder="<?php echo trans("keywords"); echo ' ('.trans("keywords-ex").')'?>" maxlength="490">
                                 </div>
                             </div>
                         </div>
