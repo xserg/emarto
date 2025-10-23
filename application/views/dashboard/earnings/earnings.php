@@ -55,7 +55,7 @@
                         <tr role="row">
                             <th scope="col"><?php echo trans("order"); ?></th>
                             <th scope="col"><?php echo trans("total"); ?></th>
-                            <th scope="col"><?php echo trans("commission_rate"); ?></th>
+                            <th scope="col"><?php echo trans("commission"); ?></th>
                             <th scope="col"><?php echo trans("discount_coupon"); ?></th>
                             <th scope="col"><?php echo trans("shipping_cost"); ?></th>
                             <th scope="col"><?php echo trans("earned_amount"); ?></th>

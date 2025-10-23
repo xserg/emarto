@@ -23,7 +23,7 @@
 							<th><?php echo trans('order'); ?></th>
 							<th><?php echo trans('user'); ?></th>
 							<th><?php echo trans('price'); ?></th>
-							<th><?php echo trans('commission_rate'); ?></th>
+							<th><?php echo trans('commission'); ?></th>
 							<th><?php echo trans('shipping_cost'); ?></th>
 							<th><?php echo trans('earned_amount'); ?></th>
 							<th><?php echo trans('date'); ?></th>
