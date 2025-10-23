@@ -57,6 +57,22 @@
                     <span><?= trans("updated"); ?></span>
                     <?= time_ago($order->updated_at); ?>
                 </div>
+
+                <div class="line-detail">
+                    <span><?= trans("buyer"); ?></span>
+                    <?php 
+                    if($order->buyer_id) {
+                        $user = get_user($order->buyer_id);
+                    }
+                    if (!empty($user)):
+                    ?>
+                        <a href="<?= generate_profile_url($user->slug); ?>" target="_blank" class="link-black font-600">
+                            <?= html_escape($user->username); ?>
+                        </a>
+                    <?php else: ?>
+                       Guest 
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
         <?php $shipping = get_order_shipping($order->id);
