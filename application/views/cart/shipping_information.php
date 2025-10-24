@@ -379,7 +379,7 @@ function shipping_price(price)
 
   if (price == 0) {
     $("#shipping_price").text('<?=trans("free")?>');
-    $("#order_total").text(symbol + (total_before_shipping + '.00'));
+    $("#order_total").text(symbol + (total_before_shipping).toFixed(2));
   } else {
     $("#shipping_price").text(symbol + (price ));
     $("#order_total").text(symbol + (total_before_shipping + Number(price.replace(/,/g, '')) ).toFixed(2));
