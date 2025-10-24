@@ -298,10 +298,10 @@
         <!-- Shipping zone-->
         <div class="row">
             <div class="col-sm-12 col-md-6">
-              <?php if (!empty($shipping_zones)): ?>
               <label><?= trans("shipping_policy"); ?></label>
                 <select name="shipping_class_id" class="form-control form-input" required>
                   <option></option>
+                  <?php if (!empty($shipping_zones)): ?>
                   <?php foreach ($shipping_zones as $shipping_zone): ?>
                     <option value=<?= $shipping_zone->id ?> <?php if($product->shipping_class_id == $shipping_zone->id) echo ' selected'; ?>>
                       <?= @parse_serialized_name_array($shipping_zone->name_array, $this->selected_lang->id);  ?>,
@@ -341,8 +341,9 @@
                       ?>
                     </option>
                   <?php endforeach; ?>
+                <?php endif; ?>
                 </select>
-              <?php endif; ?>
+             
           </div>
         </div>
 
