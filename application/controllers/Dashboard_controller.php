@@ -1935,10 +1935,7 @@ class Dashboard_controller extends Home_Core_Controller
           exit();
         }
         //$this->check_vendor_permission();
-        if ($this->general_settings->product_comments != 1) {
-            redirect(dashboard_url());
-            exit();
-        }
+        
         $data['title'] = trans("black_list");
         $data['description'] = trans("black_list") . " - " . $this->app_name;
         $data['keywords'] = trans("black_list") . "," . $this->app_name;
@@ -1984,6 +1981,7 @@ class Dashboard_controller extends Home_Core_Controller
         //$this->check_vendor_permission();
         if ($this->black_list_model->add_black_list()) {
             $this->session->set_flashdata('success', trans("blacklist_added"));
+            redirect('/dashboard/black_list');
         } else {
             $this->session->set_flashdata('error', trans("msg_error"));
         }

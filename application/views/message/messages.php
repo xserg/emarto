@@ -79,7 +79,9 @@
 									</div>
 								<?php endif;
 							endforeach; ?>
+						<?php if (is_vendor()): ?>	
 						<a href="/dashboard/black_list"><b><?php echo trans("black_list"); ?></b></a>
+						<?php endif; ?>
 						</div>
 					</div>
 				</div>
