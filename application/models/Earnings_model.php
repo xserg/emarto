@@ -141,10 +141,12 @@ class Earnings_model extends CI_Model
         if (!empty($order_product)) {
             $price = $order_product->product_total_price;
             $shipping = $order_product->seller_shipping_cost;
-            $earned = $price - ((($price + $shipping) * $order_product->commission_rate) / 100);
+            $earned = $price - ((($price + $shipping) * $order_product->commission_rate) / 100);       
             $order = get_order($order_product->order_id);
             if (!empty($order) && !empty($order->coupon_discount_rate) && $order->coupon_seller_id == $order_product->seller_id) {
-                $earned = $earned - (($order_product->product_total_price * $order->coupon_discount_rate) / 100);
+                $coupon_discount = $price * $order->coupon_discount_rate / 100;          
+                //$earned = $earned - (($order_product->product_total_price * $order->coupon_discount_rate) / 100);
+                $earned = ($price - $coupon_discount) - (($price - $coupon_discount + $shipping) * $order_product->commission_rate / 100);
             }
             return $earned;
         }
