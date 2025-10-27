@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     <?php endif; ?>
-                    <div class="col-sm-12 m-t-30">
+                    <!--div class="col-sm-12 m-t-30">
                         <p class="calculated-price">
                             <strong><?php echo trans("calculated_price"); ?> (<?= $this->default_currency->symbol; ?>):&nbsp;&nbsp;</strong>
                             <b id="calculated_amount" class="earned-price">
@@ -86,7 +86,7 @@
                             <?php endif; ?>
                             <small> (<?php echo trans("commission_rate"); ?>:&nbsp;&nbsp;<?php echo $this->general_settings->commission_rate; ?>%)</small>
                         </p>
-                    </div>
+                    </div-->
                 </div>
             </div>
             <?php if ($product->product_type == 'digital'): ?>
