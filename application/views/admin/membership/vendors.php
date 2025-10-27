@@ -106,7 +106,7 @@
                                                 <li>
                                                     <?php if ($user->banned == 0): ?>
                                                         <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 1);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user'); ?></a>
-                                                        <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 2);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user_permanet'); ?></a>
+                                                        <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>, 2);"><i class="fa fa-stop option-icon"></i><?php echo trans('ban_user_permanet'); ?></a>
                                                     <?php else: ?>
                                                         <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-circle option-icon"></i><?php echo trans('remove_user_ban'); ?></a>
                                                     <?php endif; ?>
