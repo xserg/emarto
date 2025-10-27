@@ -426,3 +426,8 @@
 <?php if ($this->general_settings->facebook_comment_status == 1):
     echo $this->general_settings->facebook_comment;
 endif; ?>
+<script>
+$(document).ready(function(){
+  $("#select_countries_product").trigger('change');
+});
+</script>
