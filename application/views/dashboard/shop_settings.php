@@ -42,14 +42,7 @@
                 <?php else: ?>
                     <input type="hidden" name="show_rss_feeds" value="<?= $this->auth_user->show_rss_feeds; ?>">
                 <?php endif; 
-                /*
-                foreach ($this->countries as $country) {
-                   if ($country->id == 181) {
-                      $this->countries = [$country];
-                      break;
-                   }
-                } 
-                */ 
+               
                 $countries_f = [];
                 $onlyCountries = '';
                 foreach ($this->countries as $country) {
@@ -75,7 +68,23 @@
                         </div>
                     </div>
                 </div>
-          
+ 
+                <div class="form-group">
+                    <label><?= trans("currency"); ?></label>
+                    <div class="row">
+                        <div class="col-12 col-sm-4 m-b-15">
+                            <select id="select_currency" name="currency" class="select form-control" >
+                                
+                                <?php foreach ($currencies as $currency):
+                                if ($currency->status == 1): ?>
+                                        <option value="<?php echo $currency->code; ?>" <?php echo ($currency->code == $this->auth_user->currency) ? 'selected' : ''; ?>><?php echo html_escape($currency->name); ?></option>
+                                    <?php endif;
+                                endforeach; ?>
+                            </select>
+                        </div>
+                    </div>   
+                </div>
+                
                   <input type="hidden" name="sys_lang_id" value="<?= $this->selected_lang->id; ?>">
                 <div class="form-group text-right">
                     <button type="submit" name="submit" value="update" class="btn btn-md btn-success"><?php echo trans("save_changes") ?></button>

@@ -9,9 +9,15 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 m-b-sm-15">
                         <label class="font-600"><?php echo trans("price"); ?></label>
+                        <?php 
+                        if ($this->auth_user->currency) {
+                            $currency = get_currency_by_code($this->auth_user->currency);
+                        } else {
+                            $currency = $this->default_currency;
+                        } ?>
                         <div class="input-group">
-                            <span class="input-group-addon"><?= $this->default_currency->symbol; ?></span>
-                            <input type="hidden" name="currency" value="<?= $this->default_currency->code; ?>">
+                            <span class="input-group-addon"><?= $currency->symbol; ?></span>
+                            <input type="hidden" name="currency" value="<?= $currency->code; ?>">
                             <input type="text" name="price" id="product_price_input" aria-describedby="basic-addon1" class="form-control form-input price-input validate-price-input" value="<?php echo ($product->price != 0) ? get_price($product->price, 'input') : ''; ?>" placeholder="<?php echo $this->input_initial_price; ?>" onpaste="return false;" maxlength="32" <?= $product->is_free_product != 1 ? 'required' : ''; ?>>
                         </div>
                     </div>
@@ -22,7 +28,7 @@
                                 <div id="discount_input_container" class="<?php echo ($product->discount_rate == 0) ? 'display-none' : ''; ?>">
                                     <div class="input-group">
                                         <span class="input-group-addon">%</span>
-                                        <input type="hidden" name="currency" value="<?php echo $this->payment_settings->default_currency; ?>">
+                                        <input type="hidden" name="currency" value="<?php echo $currency->code; ?>">
                                         <input type="number" name="discount_rate" id="input_discount_rate" aria-describedby="basic-addon-discount" class="form-control form-input" value="<?php echo $product->discount_rate; ?>" min="0" max="99">
                                     </div>
                                 </div>
@@ -43,7 +49,7 @@
                                     <div id="vat_input_container" class="<?php echo ($product->vat_rate == 0) ? 'display-none' : ''; ?>">
                                         <div class="input-group">
                                             <span class="input-group-addon">%</span>
-                                            <input type="hidden" name="currency" value="<?php echo $this->payment_settings->default_currency; ?>">
+                                            <input type="hidden" name="currency" value="<?php echo $currency->code; ?>">
                                             <input type="number" name="vat_rate" id="input_vat_rate" aria-describedby="basic-addon-vat" class="form-control form-input" value="<?php echo $product->vat_rate; ?>" min="0" max="100" step="0.01">
                                         </div>
                                     </div>

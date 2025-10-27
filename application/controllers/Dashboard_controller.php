@@ -1596,6 +1596,7 @@ class Dashboard_controller extends Home_Core_Controller
         $data['lang_settings'] = lang_settings();
         $data["states"] = array();
         $data["cities"] = array();
+        $data['currencies'] = $this->currency_model->get_currencies();
         if (!empty($this->auth_user->country_id)) {
             $data["states"] = $this->location_model->get_states_by_country($this->auth_user->country_id);
         }

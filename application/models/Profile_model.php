@@ -120,7 +120,8 @@ class Profile_model extends CI_Model
             'state_id' => $this->input->post('state_id', true),
             'city_id' => $this->input->post('city_id', true),
             'address' => $this->input->post('address', true),
-            'zip_code' => $this->input->post('zip_code', true)
+            'zip_code' => $this->input->post('zip_code', true),
+            'currency' => $this->input->post('currency', true),
         );
 
         $data["country_id"] = !empty($data["country_id"]) ? $data["country_id"] : 0;
