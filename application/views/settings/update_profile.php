@@ -72,8 +72,31 @@
 
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("last_name"); ?></label>
-                            <input type="text" name="last_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->last_name); ?>" placeholder="<?php echo trans("last_name"); ?>" maxlength="250" required disabled>
+                            <input type="text" name="last_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->last_name); ?>" placeholder="<?php //echo trans("last_name"); ?>" maxlength="250" required disabled>
                         </div>
+
+                        <?php if (is_vendor()): ?>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("legal_name"); ?></label>
+                                <input type="text" name="legal_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->legal_name); ?>" placeholder="<?php //echo trans("legal_name"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("role"); ?></label>
+                                <input type="text" name="role" class="form-control form-input" value="<?php echo html_escape($this->auth_user->role); ?>" placeholder="<?php //echo trans("role"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("business_number"); ?></label>
+                                <input type="text" name="business_number" class="form-control form-input" value="<?php echo html_escape($this->auth_user->business_number); ?>" placeholder="<?php //echo trans("business_number"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("business_address"); ?></label>
+                                <input type="text" name="business_address" class="form-control form-input" value="<?php echo html_escape($this->auth_user->business_address); ?>" placeholder="<?php //echo trans("business_address"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("taxpayer_number"); ?></label>
+                                <input type="text" name="taxpayer_number" class="form-control form-input" value="<?php echo html_escape($this->auth_user->taxpayer_number); ?>" placeholder="<?php //echo trans("taxpayer_number"); ?>" maxlength="250">
+                            </div>
+                         <?php endif; ?>
 
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("phone_number"); ?></label><br>
@@ -174,8 +197,10 @@
     paramName: "file", // The name that will be used to transfer the file
     maxFilesize: 9, // MB
     autoProcessQueue: false,
+   
+    parallelUploads: 100,
     uploadMultiple: false,
-    parallelUploads: 1,
+    //parallelUploads: 1,
     maxFiles: 1,
     previewsContainer: "#preview",
     addRemoveLinks: true,
@@ -186,13 +211,13 @@
     
     this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
       // Make sure that the form isn't actually being sent.
-      e.preventDefault();
+      //e.preventDefault();
       e.stopPropagation();
       myDropzone.processQueue();
     });
 
     this.on("queuecomplete", function () {
-        window.location.reload();
+        //window.location.reload();
         });
 
     }

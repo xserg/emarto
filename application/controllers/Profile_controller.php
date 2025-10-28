@@ -274,6 +274,12 @@ class Profile_controller extends Home_Core_Controller
             if (is_vendor()) {
               $data['vacation_text'] = $this->input->post('vacation_text', true);
               $data['vacation_status'] = $this->input->post('vacation_status', true);
+            
+              $data['legal_name'] = $this->input->post('legal_name', true);
+              $data['role'] = $this->input->post('role', true);
+              $data['business_number'] = $this->input->post('business_number', true);
+              $data['business_address'] = $this->input->post('business_address', true);
+              $data['taxpayer_number'] = $this->input->post('taxpayer_number', true);
             }
 
             //is email unique
