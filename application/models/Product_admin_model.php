@@ -437,8 +437,13 @@ class Product_admin_model extends CI_Model
         $this->load->model("auth_model");
         $user = $this->auth_model->get_user($user_id);
         $email_data['subject'] = trans('your_listing_removed');
-        $email_data['email_content'] = nl2br(trans('your_listing_removed_message'));
-        //self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('your_listing_removed_message'));
+        $email_data['email_content'] = 
+        Auth_model::hello_user($user->first_name, $user->last_name) . '<br><br>' . nl2br(trans('your_listing_removed_message'))
+         . '<p style="text-align: center;margin-top: 40px;">
+              <a href="' . dashboard_url() . '" style="font-size: 14px;text-decoration: none;padding: 14px 40px;background-color: #09b1ba;color: #ffffff !important; border-radius: 3px;">'
+              . trans("dashboard")
+              . '</a>
+           </p>';
         $this->load->model("email_model");
         $email_data['to'] = $user->email;
         $email_data['template_path'] = "email/email_general";
@@ -739,8 +744,16 @@ class Product_admin_model extends CI_Model
         $this->load->model("auth_model");
         $user = $this->auth_model->get_user($user_id);
         $email_data['subject'] = trans('your_listing_rejected');
-        $email_data['email_content'] = nl2br(trans('your_listing_rejected_message'));
-        //self::hello_user($user->first_name, $user->last_name) . '!<br><br>' . nl2br(trans('your_listing_removed_message'));
+        $email_data['email_content'] = 
+        Auth_model::hello_user($user->first_name, $user->last_name) . '<br><br>' . nl2br(trans('your_listing_removed_message'))
+        
+        . '<p style="text-align: center;margin-top: 40px;">
+              <a href="' . dashboard_url() . '" style="font-size: 14px;text-decoration: none;padding: 14px 40px;background-color: #09b1ba;color: #ffffff !important; border-radius: 3px;">'
+              . trans("dashboard")
+              . '</a>
+           </p>';
+        
+        //nl2br(trans('your_listing_rejected_message'));
         $this->load->model("email_model");
         $email_data['to'] = $user->email;
         $email_data['template_path'] = "email/email_general";
