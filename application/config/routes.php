@@ -92,6 +92,7 @@ foreach ($languages as $language) {
         $route[$key . getr('followers', $rts) . '/(:any)']['GET'] = 'profile_controller/followers/$1';
         $route[$key . getr('following', $rts) . '/(:any)']['GET'] = 'profile_controller/following/$1';
         $route[$key . getr('reviews', $rts) . '/(:any)']['GET'] = 'profile_controller/reviews/$1';
+        $route[$key . getr('shop_policies', $rts) . '/(:any)']['GET'] = 'profile_controller/shop_policies/$1';
         /*settings*/
         $route[$key . getr('settings', $rts)]['GET'] = 'profile_controller/update_profile';
         $route[$key . getr('settings', $rts) . '/' . getr('update_profile', $rts)]['GET'] = 'profile_controller/update_profile';
@@ -193,6 +194,7 @@ foreach ($languages as $language) {
         $route[$key . getr('dashboard', $rts) . '/' . getr('refund_requests', $rts) . '/(:num)']['GET'] = 'dashboard_controller/refund/$1';
         $route[$key . getr('dashboard', $rts) . '/' . getr('black_list', $rts)]['GET'] = 'dashboard_controller/black_list';
         $route[$key . getr('dashboard', $rts) . '/' . getr('add_black_list', $rts)]['GET'] = 'dashboard_controller/add_black_list';
+        $route[$key . getr('dashboard', $rts) . '/' . getr('shop_policies', $rts)]['GET'] = 'dashboard_controller/shop_policies';
         //support
         $route[$key . getr('help_center', $rts)]['GET'] = 'support_controller/help_center';
         $route[$key . getr('help_center', $rts) . '/' . getr('tickets', $rts)]['GET'] = 'support_controller/tickets';

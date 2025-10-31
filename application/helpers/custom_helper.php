@@ -169,6 +169,15 @@ if (!function_exists('is_vendor')) {
     }
 }
 
+//get vendor pages
+if (!function_exists('getVendorPages')) {
+    function getVendorPages($user_id)
+    {
+        $ci =& get_instance();
+        return $ci->page_model->get_shop_policy_by_user_id($user_id);
+    }
+}
+
 //get logged user
 if (!function_exists('user')) {
     function user()
@@ -279,7 +288,7 @@ if (!function_exists('trans')) {
         if (!empty($ci->language_translations[$string])) {
             return $ci->language_translations[$string];
         }
-        return "";
+        return "".$string;
     }
 }
 

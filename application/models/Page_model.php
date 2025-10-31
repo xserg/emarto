@@ -159,4 +159,39 @@ class Page_model extends CI_Model
         }
         return false;
     }
+
+    public function get_shop_policy_by_user_id($id)
+    {
+        $id = clean_number($id);
+        $this->db->where('user_id', $id);
+        $query = $this->db->get('pages_vendor');
+        return $query->row();
+    }
+
+      //edit vendor pages
+    public function edit_vendor_pages($userId)
+    {
+        $pages = $this->get_shop_policy_by_user_id($userId);
+        if (!empty($pages)) {
+            $data = [
+                'content_shop_policies' => $this->input->post('content_shop_policies'),
+                'status_shop_policies' => $this->input->post('status_shop_policies') == 1 ? 1 : 0,
+            ];
+            $this->db->where('id', $pages->id);
+            return $this->db->update('pages_vendor', $data);
+        }
+        return false;
+    }
+
+    public function add_vendor_pages($userId)
+    {
+        $data = [
+            'user_id' => clean_number($userId),
+            'content_shop_policies' => '',
+            'status_shop_policies' => 0
+        ];
+        if (empty($this->get_shop_policy_by_user_id($userId))) {
+            return $this->db->insert('pages_vendor', $data);
+        }
+    }
 }

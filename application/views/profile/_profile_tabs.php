@@ -36,5 +36,13 @@
     <li class="nav-item">
         <a class="nav-link <?php echo ($active_tab == 'buy_requests') ? 'active' : ''; ?>" href="<?php echo generate_url("buy_requests"); ?>"><?php echo trans("buy_requests"); ?><span class="count">(<?php $ci =& get_instance(); echo $ci->buy_model->get_user_buy_count($user->id); ?>)</span></a>
     </li>
-  <?php endif; ?>
+  <?php endif; 
+  $vendorPages = getVendorPages($user->id);
+    if (!empty($vendorPages)):
+        if ($vendorPages->status_shop_policies == 1):?>
+            <li class="nav-item">
+                <a class="nav-link <?= $activeTab == 'shop_policies' ? 'active' : ''; ?>" href="<?= generate_url('shop_policies') . '/' . $user->slug; ?>"><?= trans("shop_policies"); ?></a>
+            </li>
+        <?php endif;
+    endif; ?>
 </ul>

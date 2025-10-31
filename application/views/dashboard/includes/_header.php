@@ -255,12 +255,20 @@
                             <?php endif; ?>
                         <?php endif; ?>
                         <li class="header"><?php echo trans("settings"); ?></li>
+                    
                         <li class="nav-shop-settings">
                             <a href="<?= generate_dash_url("shop_settings"); ?>">
                                 <i class="fa fa-cog"></i>
                                 <span><?php echo trans("shop_settings"); ?></span>
                             </a>
                         </li>
+                        
+                        <li class="nav-shop-policies">
+                            <a href="<?= generate_dash_url('shop_policies'); ?>">
+                                <i class="fa fa-file-text"></i>
+                                <span><?= trans("shop_policies"); ?></span></a>
+                        </li>
+
                         <?php if ($this->is_sale_active && $this->general_settings->physical_products_system == 1): ?>
                             <li class="nav-shipping-settings">
                                 <a href="<?= generate_dash_url("shipping_settings"); ?>">

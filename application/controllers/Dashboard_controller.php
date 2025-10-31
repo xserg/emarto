@@ -2015,4 +2015,40 @@ class Dashboard_controller extends Home_Core_Controller
         }
         return;
     }
+
+    /**
+     * Shop Policies
+     */
+    public function shop_policies()
+    {
+        //$data = $this->setMetaData(trans("shop_policies"));
+       //$pageModel = new PageModel();
+        $data['pages'] = $this->page_model->get_shop_policy_by_user_id($this->auth_user->id);
+        
+        //$data['pages'] = $pageModel->getVendorPagesByUserId($this->userId);
+        if (empty($data['pages'])) {
+            $this->page_model->add_vendor_pages($this->auth_user->id);
+            $data['pages'] = $this->page_model->get_shop_policy_by_user_id($this->auth_user->id);
+        }
+
+        if (empty($data['pages'])) {
+            return redirect(dashboard_url());
+        }
+        $this->load->view('dashboard/includes/_header', $data);
+        $this->load->view('dashboard/shop_policies', $data);
+        $this->load->view('dashboard/includes/_footer');
+    }
+
+    /**
+     * Shop Policies Post
+     */
+    public function shop_policies_post()
+    {
+        if ($this->page_model->edit_vendor_pages($this->auth_user->id)) {
+            $this->session->set_flashdata('success', trans("msg_updated"));
+        } else {
+            $this->session->set_flashdata('error', trans("msg_error"));
+        }
+        return redirect($this->agent->referrer());
+    }    
 }

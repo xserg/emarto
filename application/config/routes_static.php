@@ -107,6 +107,7 @@ $route['add-shipping-address-post']['POST'] = 'profile_controller/add_shipping_a
 $route['edit-shipping-address-post']['POST'] = 'profile_controller/edit_shipping_address_post';
 
 $route['shop-settings-post']['POST'] = 'dashboard_controller/shop_settings_post';
+$route['shop-policies-post']['POST'] = 'dashboard_controller/shop_policies_post';
 $route['add-shipping-zone-post']['POST'] = 'dashboard_controller/add_shipping_zone_post';
 $route['edit-shipping-zone-post']['POST'] = 'dashboard_controller/edit_shipping_zone_post';
 
