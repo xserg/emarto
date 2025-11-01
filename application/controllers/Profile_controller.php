@@ -637,4 +637,39 @@ class Profile_controller extends Home_Core_Controller
 
     }
 
+    function shop_policies($slug)
+    {
+        $data['activeTab'] = "shop_policies";
+        $slug = clean_slug($slug);
+        $data["user"] = $this->auth_model->get_user_by_slug($slug);
+
+    
+
+        if (!is_vendor($data["user"])) {
+            redirect(lang_base_url());
+            exit();
+        }
+
+        $data['pages'] = $this->page_model->get_shop_policy_by_user_id($data['user']->id);
+        if (empty($data['pages']) || $data['pages']->status_shop_policies != 1) {
+            redirect(lang_base_url());
+        }
+
+        $data['title'] = get_shop_name($data["user"]) . " " . trans("shop_policies");
+        $data['description'] = $data["user"]->username . " " . trans("shop_policies") . " - " . $this->app_name;
+        $data['keywords'] = $data["user"]->username . " " . trans("shop_policies") . "," . $this->app_name;
+        $data["active_tab"] = "shop_policies";
+        $data['user_session'] = get_usession();
+        $data["user_rating"] = calculate_user_rating($data["user"]->id);
+
+        //set pagination
+        //$pagination = $this->paginate(generate_url("shop_policies") . "/" . $data["user"]->slug, $this->review_model->get_vendor_reviews_count($data["user"]->id), 10);
+        //$data['reviews'] = $this->review_model->get_paginated_vendor_reviews($data["user"]->id, $pagination['per_page'], $pagination['offset']);
+
+
+        $this->load->view('partials/_header', $data);
+        $this->load->view('profile/shop_policies', $data);
+        $this->load->view('partials/_footer');        
+    }
+
 }
