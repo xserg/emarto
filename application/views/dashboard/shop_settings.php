@@ -70,14 +70,15 @@
                 </div>
  
                 <div class="form-group">
-                    <label><?= trans("currency"); ?></label>
+                    <label><?= trans("shop"); ?> <?= trans("currency"); ?></label>
                     <div class="row">
-                        <div class="col-12 col-sm-4 m-b-15">
-                            <select id="select_currency" name="currency" class="select form-control" >
+                        <div class="col-12 col-sm-6 m-b-15">
+                            <select id="select_currency" name="currency" class="select form-control" <?php echo $this->auth_user->currency ? 'disabled' : ''; ?>>
                                 
                                 <?php foreach ($currencies as $currency):
                                 if ($currency->status == 1): ?>
-                                        <option value="<?php echo $currency->code; ?>" <?php echo ($currency->code == $this->auth_user->currency) ? 'selected' : ''; ?>><?php echo html_escape($currency->name); ?></option>
+                                        <option value="<?php echo $currency->code; ?>" <?php echo ($currency->code == $this->auth_user->currency) ? 'selected' : ''; ?>>
+                                            <?php echo html_escape($currency->name) . ' (' . $currency->code . ') ' . html_escape($currency->symbol); ?></option>
                                     <?php endif;
                                 endforeach; ?>
                             </select>
