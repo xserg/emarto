@@ -21,6 +21,11 @@
               </div>
                 <?php
                 $class_data = get_shipping_class_data($method->flat_rate_class_costs_array);
+        
+                if ($this->auth_user->currency) {
+                    $this->default_currency = get_currency_by_code($this->auth_user->currency);
+                } 
+
                 foreach ($shipping_classes as $shipping_class):
                     $class_cost = get_shipping_class_cost_by_method($method->flat_rate_class_costs_array, $shipping_class->id);
                     if (!empty($class_cost)):
