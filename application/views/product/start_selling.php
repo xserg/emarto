@@ -156,6 +156,14 @@
         </div>
     </div>
 </div>
+<?php  
+$country = $this->location_model->get_country($this->default_location->country_id, $lang); 
+if (stristr($onlyCountries, $country->iso)) {
+    $initialCountry = 'initialCountry: "' . $country->iso . '",';
+} else {
+    $initialCountry = '';
+}
+?>
 <link rel="stylesheet" href="/assets/css/intlTelInput.css">
 <script src="/assets/js/intlTelInput.js"></script>
 <script>
@@ -166,11 +174,12 @@
     nationalMode: true,
     onlyCountries: [<?php echo $onlyCountries; ?>],
     placeholderNumberType: "MOBILE",
-    // preferredCountries: ['cn', 'jp'],
-    initialCountry: "ru",
+    preferredCountries: [],
     separateDialCode: true,
     utilsScript: "/assets/js/utils.js",
+    <?php echo $initialCountry; ?>
   });
   }
 
 </script>
+
