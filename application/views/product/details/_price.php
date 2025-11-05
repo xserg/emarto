@@ -13,17 +13,17 @@
                 if (!empty($discount_rate)): ?>
                     <strong class="lbl-price">
                         <b class="discount-original-price">
-                            <?= price_formatted($price, $product->currency, true); ?>
+                            <?= price_formatted($price, $product->currency, false); ?>
                             <span class="price-line"></span>
                         </b>
-                        <?= price_formatted(calculate_product_price($price, $discount_rate), $product->currency, true); ?>
+                        <?= price_formatted(calculate_product_price($price, $discount_rate), $product->currency, false); ?>
                     </strong>
                     <div class="discount-rate">
                         -<?= discount_rate_format($discount_rate); ?>
                     </div>
                 <?php else: ?>
                     <strong class="lbl-price">
-                        <?= price_formatted($price, $product->currency, true); ?>
+                        <?= price_formatted($price, $product->currency, false); ?>
                     </strong>
                 <?php endif;
             elseif ($product->listing_type == 'ordinary_listing'):
