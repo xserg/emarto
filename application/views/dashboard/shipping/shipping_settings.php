@@ -1,5 +1,8 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-
+<?php defined('BASEPATH') or exit('No direct script access allowed'); 
+                if ($this->auth_user->currency) {
+                    $this->default_currency = get_currency_by_code($this->auth_user->currency);
+                } 
+?>                
 <div class="row">
     <div class="col-sm-12">
         <div class="box">
