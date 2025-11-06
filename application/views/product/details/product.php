@@ -78,6 +78,15 @@
                                             <a class="nav-link" id="tab_facebook_comments" data-toggle="tab" href="#tab_facebook_comments_content" role="tab" aria-controls="facebook_comments" aria-selected="false"><?php echo trans("facebook_comments"); ?></a>
                                         </li>
                                     <?php endif; ?>
+                                     <?php 
+                                        $vendorPages = getVendorPages($user->id);
+                                            if (!empty($vendorPages)):
+                                                if ($vendorPages->status_shop_policies == 1):?>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link <?= $activeTab == 'shop_policies' ? 'active' : ''; ?>" href="<?= generate_url('shop_policies') . '/' . $user->slug; ?>"><?= trans("shop_policies"); ?></a>
+                                                    </li>
+                                                <?php endif;
+                                            endif; ?>
                                 </ul>
 
                                 <div id="accordion" class="tab-content">
