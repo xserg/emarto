@@ -164,6 +164,11 @@
     </div>
 </div>
 <!-- Wrapper End-->
+ <?php  
+$country = $this->location_model->get_country($this->default_location->country_id, $lang); 
+$initialCountry = 'initialCountry: "' . $country->iso . '",';
+
+?>
 <script src="/assets/js/dropzone.min.js"></script>
 <link rel="stylesheet" href="/assets/css/dropzone.css" type="text/css" />
 <script src="/assets/js/intlTelInput.js"></script>
@@ -182,15 +187,12 @@
     //     callback(countryCode);
     //   });
     // },
-    // hiddenInput: "full_number",
-    initialCountry: "ru",
-    // localizedCountries: { 'de': 'Deutschland' },
+    placeholderNumberType: "MOBILE",
+    preferredCountries: [],
     nationalMode: true,
-    // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-    //placeholderNumberType: "MOBILE",
-    // preferredCountries: ['cn', 'jp'],
     separateDialCode: true,
     utilsScript: "/assets/js/utils.js",
+    <?php echo $initialCountry; ?>
   });
 
     Dropzone.options.formValidate = { // camelized version of the `id`
