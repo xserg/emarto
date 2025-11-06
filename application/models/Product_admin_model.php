@@ -743,7 +743,7 @@ class Product_admin_model extends CI_Model
         $user = $this->auth_model->get_user($user_id);
         $email_data['subject'] = trans('your_listing_rejected');
         $email_data['email_content'] = 
-        Auth_model::hello_user($user->first_name, $user->last_name) . '<br><br>' . nl2br(trans('your_listing_removed_message'));
+        Auth_model::hello_user($user->first_name, $user->last_name) . '<br><br>' . nl2br(trans('your_listing_rejected_message'));
         $email_data['email_link'] =  dashboard_url();
         $email_data['email_button_text'] = trans("dashboard");   
         $email_data['to'] = $user->email;
