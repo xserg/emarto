@@ -28,6 +28,15 @@
                                 </tr>
                                 <?php foreach ($order_products as $item): ?>
                                     <tr>
+                                        <td>
+                                            <div class="left">
+                                                <div class="img-table">
+                                                    <a href="<?php echo generate_product_url_by_slug($item->product_slug); ?>" target="_blank">
+                                                        <img src="<?php echo get_product_image($item->product_id, 'image_small'); ?>" data-src="" alt="" class="img-thumbnail"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td style="width: 40%; padding: 15px 0; border-bottom: 1px solid #ddd;"><?php echo $item->product_title; ?></td>
                                         <td style="padding: 10px 2px; border-bottom: 1px solid #ddd;"><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></td>
                                         <td style="padding: 10px 2px; border-bottom: 1px solid #ddd;"><?php echo $item->product_quantity; ?></td>

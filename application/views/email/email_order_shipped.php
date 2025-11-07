@@ -28,6 +28,7 @@
                             <h3 style="margin-bottom: 10px;font-size: 16px;font-weight: 600;border-bottom: 1px solid #d1d1d1;padding-bottom: 5px; margin-top: 45px;"><?php echo trans("shipped_product"); ?></h3>
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="text-align: left" class="table-products">
                                 <tr>
+                                    <th style="padding: 10px 0; border-bottom: 2px solid #ddd;"> </th>
                                     <th style="padding: 10px 0; border-bottom: 2px solid #ddd;"><?php echo trans("product"); ?></th>
                                     <th style="padding: 10px 0; border-bottom: 2px solid #ddd;"><?php echo trans("unit_price"); ?></th>
                                     <th style="padding: 10px 0; border-bottom: 2px solid #ddd;"><?php echo trans("quantity"); ?></th>
@@ -36,6 +37,15 @@
                                 </tr>
                                 <?php if (!empty($order_product)): ?>
                                     <tr>
+                                        <td>
+                                            <div class="left">
+                                                <div class="img-table">
+                                                    <a href="<?php echo generate_product_url_by_slug($item->product_slug); ?>" target="_blank">
+                                                        <img src="<?php echo get_product_image($item->product_id, 'image_small'); ?>" data-src="" alt="" class="img-thumbnail"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td style="width: 40%; padding: 15px 0; border-bottom: 1px solid #ddd;"><?php echo $order_product->product_title; ?></td>
                                         <td style="padding: 10px 2px; border-bottom: 1px solid #ddd;"><?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?></td>
                                         <td style="padding: 10px 2px; border-bottom: 1px solid #ddd;"><?php echo $order_product->product_quantity; ?></td>
