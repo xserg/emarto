@@ -40,7 +40,7 @@
                                             <div class="left">
                                                 <div class="img-table">
                                                     <a href="<?php echo generate_product_url_by_slug($order_product->product_slug); ?>" target="_blank">
-                                                        <img src="<?php echo get_product_image($order_product->id, 'image_small'); ?>" data-src="" alt="" class="img-thumbnail"/>
+                                                        <img src="<?php echo get_product_image($order_product->product_id, 'image_small'); ?>" data-src="" alt="" class="img-thumbnail"/>
                                                     </a>
                                                 </div>
                                             </div>
