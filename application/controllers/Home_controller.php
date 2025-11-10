@@ -553,6 +553,13 @@ class Home_controller extends Home_Core_Controller
 
         $data = array(
             'shop_name' => remove_special_characters($this->input->post('shop_name', true)),
+
+            'legal_name' => $this->input->post('legal_name', true),
+            'role' => $this->input->post('role', true),
+            'business_number' => $this->input->post('business_number', true),
+            'business_address' => $this->input->post('business_address', true),
+            'taxpayer_number' => $this->input->post('taxpayer_number', true),
+
             'first_name' => $this->input->post('first_name', true),
             'last_name' => $this->input->post('last_name', true),
             'phone_number' => $this->input->post('phone_number', true),
@@ -561,7 +568,7 @@ class Home_controller extends Home_Core_Controller
             'city_id' => $this->input->post('city_id', true),
             'about_shop' => $this->input->post('about_shop', true),
             'vendor_documents' => "",
-            'is_active_shop_request' => 1
+            'is_active_shop_request' => 1,
         );
 
         if (!$_POST) {
@@ -614,6 +621,9 @@ class Home_controller extends Home_Core_Controller
         //validate uploaded files
         if ($this->general_settings->request_documents_vendors == 1) {
             $files_valid = true;
+            //echo '<pre>';
+            //print_r($_FILES);
+
             if (!empty($_FILES['file'])) {
                 for ($i = 0; $i < count($_FILES['file']['name']); $i++) {
                     if ($_FILES['file']['size'][$i] > 5242880) {

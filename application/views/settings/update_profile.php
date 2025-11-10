@@ -75,7 +75,7 @@
                             <input type="text" name="last_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->last_name); ?>" placeholder="<?php //echo trans("last_name"); ?>" maxlength="250" required disabled>
                         </div>
 
-                        <?php //if (is_vendor()): ?>
+                        <?php if (is_vendor()): ?>
                             <div class="form-group">
                                 <label class="control-label"><?php echo trans("legal_name"); ?></label>
                                 <input type="text" name="legal_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->legal_name); ?>" placeholder="<?php //echo trans("legal_name"); ?>" maxlength="250">
@@ -96,7 +96,7 @@
                                 <label class="control-label"><?php echo trans("taxpayer_number"); ?></label>
                                 <input type="text" name="taxpayer_number" class="form-control form-input" value="<?php echo html_escape($this->auth_user->taxpayer_number); ?>" placeholder="<?php //echo trans("taxpayer_number"); ?>" maxlength="250">
                             </div>
-                         <?php //endif; ?>
+                         <?php endif; ?>
 
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("phone_number"); ?></label><br>

@@ -57,7 +57,27 @@
                                                         <label class="control-label"><?php echo trans("shop_name"); ?></label>
                                                         <input type="text" name="shop_name" class="form-control form-input" value="<?php echo $this->auth_user->username; ?>" placeholder="<?php echo trans("shop_name"); ?>" maxlength="<?php echo $this->username_maxlength; ?>">
                                                     </div>
-
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("legal_name"); ?></label>
+                                <input type="text" name="legal_name" class="form-control form-input" value="<?php echo html_escape($this->auth_user->legal_name); ?>" placeholder="<?php //echo trans("legal_name"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("role"); ?></label>
+                                <input type="text" name="role" class="form-control form-input" value="<?php echo html_escape($this->auth_user->role); ?>" placeholder="<?php //echo trans("role"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("business_number"); ?></label>
+                                <input type="text" name="business_number" class="form-control form-input" value="<?php echo html_escape($this->auth_user->business_number); ?>" placeholder="<?php //echo trans("business_number"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("business_address"); ?></label>
+                                <input type="text" name="business_address" class="form-control form-input" value="<?php echo html_escape($this->auth_user->business_address); ?>" placeholder="<?php //echo trans("business_address"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("taxpayer_number"); ?></label>
+                                <input type="text" name="taxpayer_number" class="form-control form-input" value="<?php echo html_escape($this->auth_user->taxpayer_number); ?>" placeholder="<?php //echo trans("taxpayer_number"); ?>" maxlength="250">
+                            </div>
+                         
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-12 col-sm-4 m-b-15">
