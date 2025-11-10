@@ -42,6 +42,13 @@
                                     <p class="m-b-5"><?= trans("email") ?>:&nbsp;<strong><?php echo html_escape($user->email); ?></strong></p>
                                     <p class="m-b-5"><?= trans("phone") ?>:&nbsp;<strong><?php echo html_escape($user->phone_number); ?></strong></p>
                                     <p class="m-b-5"><?= trans("location") ?>:&nbsp;<strong><?php echo get_location($user); ?></strong></p>
+
+                                    <p class="m-b-5"><?= trans("legal_name") ?>:&nbsp;<strong><?php echo html_escape($user->legal_name); ?></strong></p>
+                                    <p class="m-b-5"><?= trans("role") ?>:&nbsp;<strong><?php echo html_escape($user->role); ?></strong></p>
+<p class="m-b-5"><?= trans("business_number") ?>:&nbsp;<strong><?php echo html_escape($user->business_number); ?></strong></p>
+<p class="m-b-5"><?= trans("business_address") ?>:&nbsp;<strong><?php echo html_escape($user->business_address); ?></strong></p>
+<p class="m-b-5"><?= trans("taxpayer_number") ?>:&nbsp;<strong><?php echo html_escape($user->taxpayer_number); ?></strong></p>
+
                                 </td>
                                 <td style="min-width: 300px !important; overflow-wrap: anywhere;"><?php echo html_escape($user->about_shop);// . '<br>' . html_escape($user->about_me); ?></td>
                                 <td>
