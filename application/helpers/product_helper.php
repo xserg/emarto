@@ -358,11 +358,22 @@ if (!function_exists('price_decimal')) {
         //convert currency
         if ($ci->payment_settings->currency_converter == 1 && $convert_currency == true) {
             $rate = 1;
+            if ($ci->selected_currency->code != $currency_code) {
+                    $rate1 = $ci->currencies[$currency_code]->exchange_rate;
+                    $rate2 = $ci->selected_currency->exchange_rate; 
+                    $currency_code = $ci->selected_currency->code;
+                    $price = $price / ($rate1 / $rate2);
+            } else {
+                    $currency_code = $ci->selected_currency->code;
+                    $price = $price * $rate;
+            }
+            /*
             if (isset($ci->selected_currency) && isset($ci->selected_currency->exchange_rate)) {
                 $rate = $ci->selected_currency->exchange_rate;
                 $price = $price * $rate;
                 $currency_code = $ci->selected_currency->code;
             }
+            */    
         }
 
         $dec_point = '.';

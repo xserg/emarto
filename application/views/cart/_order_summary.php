@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="list-item">
                                     <label><?php echo trans("price"); ?>:</label>
-                                    <strong class="lbl-price"><?= price_decimal($cart_item->total_price, $cart_item->currency); ?></strong>
+                                    <strong class="lbl-price"><?= price_decimal($cart_item->total_price, $cart_item->currency, true); ?></strong>
                                 </div>
                                 <?php if (!empty($cart_item->product_vat)): ?>
                                     <div class="list-item">
@@ -57,11 +57,6 @@
         <div class="row-custom m-t-30 m-b-10">
             <strong><?php echo trans("subtotal"); ?><span class="float-right"><?= price_decimal($cart_total->subtotal, $cart_total->currency); ?></span></strong>
         </div>
-        <?php if (!empty($cart_total->vat)): ?>
-            <div class="row-custom m-b-10">
-                <strong><?php echo trans("vat"); ?><span class="float-right"><?= price_decimal($cart_total->vat, $cart_total->currency); ?></span></strong>
-            </div>
-        <?php endif; ?>
         <?php //if (!empty($show_shipping_cost) && !empty($cart_total->shipping_cost)): ?>
             <div class="row-custom m-b-10">
                 <strong><?php echo trans("shipping"); ?>
@@ -78,6 +73,13 @@
                 </strong>
             </div>
         <?php //endif; ?>
+        
+        <?php if (!empty($cart_total->vat)): ?>
+            <div class="row-custom m-b-10">
+                <strong><?php echo trans("vat"); ?><span class="float-right"><?= price_decimal($cart_total->vat, $cart_total->currency); ?></span></strong>
+            </div>
+        <?php endif; ?>
+        
         <?php if ($cart_total->coupon_discount > 0): ?>
             <div class="row-custom m-b-15">
                 <strong><?php echo trans("coupon"); ?>&nbsp;&nbsp;[<?= get_cart_discount_coupon(); ?>]&nbsp;&nbsp;<a href="javascript:void(0)" class="font-weight-normal" onclick="remove_cart_discount_coupon();">[<?= trans("remove"); ?>]</a><span class="float-right">-&nbsp;<?= price_decimal($cart_total->coupon_discount, $cart_total->currency); ?></span></strong>

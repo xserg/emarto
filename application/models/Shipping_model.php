@@ -80,9 +80,12 @@ class Shipping_model extends CI_Model
                             }
                             if (!empty($method->cost)) {
                                 $method->cost = number_format($method->cost, 2, ".", "");
+                                $method->currency = $seller->currency;
                             }
+
                             //add shipping cost
                             $array_shipping_cost[$method->id] = $method->cost;
+                            $array_shipping_currency[$method->id] = $seller->currency;
                             $array_shipping_name[$method->id] = [
                               'type' => $method->method_type,
                               'name_array' => $shipping_method->name_array,
@@ -91,6 +94,7 @@ class Shipping_model extends CI_Model
                             if ($set_session == true) {
                                 $this->session->set_userdata('mds_array_shipping_name', $array_shipping_name);
                                 $this->session->set_userdata('mds_array_shipping_cost', $array_shipping_cost);
+                                $this->session->set_userdata('mds_array_shipping_currency', $array_shipping_currency);
                                 $this->session->set_userdata('mds_array_cart_seller_ids', $seller_ids);
                             }
                             array_push($item->methods, $method);
@@ -258,6 +262,9 @@ class Shipping_model extends CI_Model
                         }
                         if ($shipping_method->flat_rate_cost_calculation_type == "each_product") {
                             $total_cost += $cost * $cart_item->quantity;
+                            if ($cart_item->product_vat) {
+                                $total_cost += $total_cost *  $cart_item->product_vat / 100; 
+                            }
                         } elseif ($shipping_method->flat_rate_cost_calculation_type == "each_different_product") {
                             $total_cost += $cost;
                         } elseif ($shipping_method->flat_rate_cost_calculation_type == "cart_total") {

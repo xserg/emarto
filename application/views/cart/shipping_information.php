@@ -367,6 +367,9 @@ if (isset($ci->currencies[$cart_items[0]->currency])) {
     $symbol = $currency->symbol;
 }
 
+    $currency = $this->selected_currency;
+    $symbol = $currency->symbol;
+
 ?>
 
 <script>

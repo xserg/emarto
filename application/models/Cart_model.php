@@ -301,7 +301,7 @@ class Cart_model extends CI_Model
                         if ($this->payment_settings->currency_converter == 1) {
                             $base_currency = $this->selected_currency;
                             if (!empty($base_currency)) {
-                                $object->price_calculated = convert_currency_by_exchange_rate($object->price_calculated, $base_currency->exchange_rate);
+                                //$object->price_calculated = convert_currency_by_exchange_rate($object->price_calculated, $base_currency->exchange_rate);
                             }
                         }
                         $item = new stdClass();
@@ -323,12 +323,14 @@ class Cart_model extends CI_Model
                         $item->shipping_class_id = $product->shipping_class_id;
                         $item->is_stock_available = $object->is_stock_available;
                         array_push($new_cart, $item);
+                        
                     }
                 }
             }
-        }
+        } 
 
         //convert currency
+        /*
         if ($this->payment_settings->currency_converter == 1 && !empty($base_currency)) {
             if (!empty($new_cart)) {
                 foreach ($new_cart as $item) {
@@ -336,7 +338,7 @@ class Cart_model extends CI_Model
                 }
             }
         }
-
+        */
         $this->session->set_userdata('mds_shopping_cart', $new_cart);
         return $new_cart;
     }
@@ -364,7 +366,8 @@ class Cart_model extends CI_Model
                 if ($item->purchase_type == 'bidding') {
                     $cart_total->subtotal += $item->total_price;
                 } else {
-                    $cart_total->subtotal += $item->total_price;
+                    $cart_total->subtotal += price_decimal($item->total_price, $item->currency, true, false);
+                    //$cart_total->subtotal += $item->total_price;
                     $cart_total->vat += $item->product_vat;
                 }
                 if ($item->is_stock_available != 1) {
