@@ -55,7 +55,7 @@
 
 
                   <div class="col-md-3 col-sm-2" style="padding-left: 0;">
-                     <select name="time_<?= $shipping_class->id; ?>" class="form-control form-input">
+                     <select name="time_<?= $shipping_class->id; ?>" class="form-control form-input" <?php //if($class_data[$shipping_class->id]['status'] == 0) echo ' disabled'; ?>>
                        <option></option>
                        <?php foreach ($shipping_delivery_time_ranges[$shipping_class->id] as $delivery_time): ?>
                          <option value=<?=$delivery_time?> <?php if($class_data[$shipping_class->id]['time'] == $delivery_time) echo ' selected'; ?>><?= $delivery_time . ' ' . trans('business2') . ' ' . trans('days3') ?></option>

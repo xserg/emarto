@@ -232,6 +232,21 @@
         $("#flat_rate_cost_class_3").val('0.00').removeAttr("disabled");
     });
 
+    // set disable 
+    
+     $(document).on("click", "#status_1_2", function () {
+        $("#flat_rate_cost_class_1").val('').attr('disabled', 'disabled');
+        $('[name="time_1"]').val('').attr('disabled', 'disabled');
+    });
+    $(document).on("click", "#status_2_2", function () {
+        $("#flat_rate_cost_class_2").val('').attr('disabled', 'disabled');
+        $('[name="time_2"]').val('').attr('disabled', 'disabled');
+    });
+    $(document).on("click", "#status_3_2", function () {
+        $("#flat_rate_cost_class_3").val('').attr('disabled', 'disabled');
+        $('[name="time_3"]').val('').attr('disabled', 'disabled');
+    });
+
     $(document).on("change", "#zone_name", function (e) {
         if ($('#zone_name').val() == 'domestic') {
           $("#selected_regions_container").empty();
