@@ -50,12 +50,12 @@
 
                   <div class="col-md-2 col-sm-2" style="padding-left: 0;">
                     <input type="text" name="flat_rate_cost_class_<?= $shipping_class->id; ?>" class="form-control form-input price-input" value="<?= $class_cost; ?>"
-                           placeholder="0.00" maxlength="19" id="flat_rate_cost_class_<?= $shipping_class->id; ?>">
+                           placeholder="0.00" maxlength="19" id="flat_rate_cost_class_<?= $shipping_class->id; ?>" <?php if($class_data[$shipping_class->id]['status'] == 0) echo ' disabled'; ?>>
                   </div>
 
 
                   <div class="col-md-3 col-sm-2" style="padding-left: 0;">
-                     <select name="time_<?= $shipping_class->id; ?>" class="form-control form-input" <?php //if($class_data[$shipping_class->id]['status'] == 0) echo ' disabled'; ?>>
+                     <select name="time_<?= $shipping_class->id; ?>" class="form-control form-input" <?php if($class_data[$shipping_class->id]['status'] == 0) echo ' disabled'; ?>>
                        <option></option>
                        <?php foreach ($shipping_delivery_time_ranges[$shipping_class->id] as $delivery_time): ?>
                          <option value=<?=$delivery_time?> <?php if($class_data[$shipping_class->id]['time'] == $delivery_time) echo ' selected'; ?>><?= $delivery_time . ' ' . trans('business2') . ' ' . trans('days3') ?></option>

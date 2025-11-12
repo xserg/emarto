@@ -210,6 +210,25 @@
         });
     });
 
+
+    for ( let i = 1; i <= 3; i++ ) {
+        console.log(i);
+        $(document).on("click", "#status_" + i + "_1", function () {
+            $('#flat_rate_cost_class_' + i + '').val('0.00').removeAttr("disabled");
+            $('[name="time_' + i + '"]').val('').removeAttr("disabled");
+        });        
+        $(document).on("click", "#status_" + i + "_2", function () {
+            $('#flat_rate_cost_class_' + i + '').val('').attr('disabled', 'disabled');
+            $('[name="time_' + i + '"]').val('').attr('disabled', 'disabled');
+        });
+        $(document).on("click", "#status_" + i + "_3", function () {
+            $('#flat_rate_cost_class_' + i + '').val('0.00').attr('disabled', 'disabled');
+            $('[name="time_' + i + '"]').val('').removeAttr("disabled");
+        });
+
+    }
+
+    /*
     //set economy 0 for free
 
     $(document).on("click", "#status_1_3", function () {
@@ -237,6 +256,7 @@
 
     // set disable 
     
+    
      $(document).on("click", "#status_1_2", function () {
         $("#flat_rate_cost_class_1").val('').attr('disabled', 'disabled');
         $('[name="time_1"]').val('').attr('disabled', 'disabled');
@@ -249,6 +269,7 @@
         $("#flat_rate_cost_class_3").val('').attr('disabled', 'disabled');
         $('[name="time_3"]').val('').attr('disabled', 'disabled');
     });
+    */
 
     $(document).on("change", "#zone_name", function (e) {
         if ($('#zone_name').val() == 'domestic') {
