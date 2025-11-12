@@ -224,12 +224,15 @@
 
     $(document).on("click", "#status_1_1", function () {
         $("#flat_rate_cost_class_1").val('0.00').removeAttr("disabled");
+        $('[name="time_1"]').val('').removeAttr("disabled");
     });
     $(document).on("click", "#status_2_1", function () {
         $("#flat_rate_cost_class_2").val('0.00').removeAttr("disabled");
+        $('[name="time_2"]').val('').removeAttr("disabled");
     });
     $(document).on("click", "#status_3_1", function () {
         $("#flat_rate_cost_class_3").val('0.00').removeAttr("disabled");
+        $('[name="time_3"]').val('').removeAttr("disabled");
     });
 
     // set disable 
