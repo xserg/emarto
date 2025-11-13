@@ -1,5 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!-- Wrapper -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/file-uploader/css/jquery.dm-uploader.min.css"/>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/file-uploader/css/styles.css"/>
+<script src="<?php echo base_url(); ?>assets/vendor/file-uploader/js/jquery.dm-uploader.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/vendor/file-uploader/js/ui.js"></script>
+<script>
+    var base_url = "<?= base_url(); ?>";
+    var sys_lang_id = "<?= $this->selected_lang->id; ?>";
+    var csfr_token_name = "<?= $this->security->get_csrf_token_name(); ?>";
+    var csfr_cookie_name = "<?= $this->config->item('csrf_cookie_name'); ?>";
+</script>
+
 <div id="wrapper">
     <div class="container">
         <div class="row">
@@ -120,21 +131,19 @@
                                                         ?>
                                                     </div>
                                                     <?php if ($this->general_settings->request_documents_vendors == 1): ?>
+                                                        
                                                         <div class="form-group">
+                                                            
                                                             <label class="control-label">
                                                                 <?php echo trans("required_files"); ?>
                                                                 <?php if (!empty($this->general_settings->explanation_documents_vendors)): ?>
                                                                     <span class="text-muted font-weight-normal">(<?= $this->general_settings->explanation_documents_vendors; ?>)</span>
                                                                 <?php endif; ?>
                                                             </label>
-                                                            <div class="m-b-15">
-                                                                <a class='btn btn-md btn-info btn-file-upload'>
-                                                                    <?php echo trans('select_file'); ?>
-                                                                    <input type="file" name="file[]" size="40" id="input_vendor_files" multiple>
-                                                                </a>
-                                                                <div id="container_vendor_files"></div>
-                                                            </div>
+
+                                                            <?php $this->load->view("product/_image_upload_box", ['modesy_images' => []]); ?>
                                                         </div>
+
                                                     <?php endif; ?>
                                                     <div class="form-group">
                                                         <label class="control-label"><?php echo trans("about_shop"); ?></label>

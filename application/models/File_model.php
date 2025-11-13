@@ -939,4 +939,37 @@ class File_model extends CI_Model
         }
       }
     }
+
+
+      //upload vendor image
+    public function vendor_documents_upload()
+    {
+        $modesy_images = $this->get_sess_product_images_array();
+        $array_files = array();
+        if (!empty($modesy_images)) {
+            foreach ($modesy_images as $modesy_image) {
+                if (!empty($modesy_image)) {
+                    
+                    $directory = $this->upload_model->create_upload_directory('support');                
+                        //move default image
+                        copy(FCPATH . "uploads/temp/" . $modesy_image->img_default, FCPATH . "uploads/support/" . $directory . $modesy_image->img_default);
+                        delete_file_from_server("uploads/temp/" . $modesy_image->img_default);
+                        //move big image
+                        //copy(FCPATH . "uploads/temp/" . $modesy_image->img_big, FCPATH . "uploads/support/" . $directory . $modesy_image->img_big);
+                        delete_file_from_server("uploads/temp/" . $modesy_image->img_big);
+                        //move small image
+                        //copy(FCPATH . "uploads/temp/" . $modesy_image->img_small, FCPATH . "uploads/support/" . $directory . $modesy_image->img_small);
+                        delete_file_from_server("uploads/temp/" . $modesy_image->img_small);
+                        $item = [
+                            'name' => $modesy_image->img_default,
+                            'path' => "uploads/support/" . $directory . $modesy_image->img_default,
+                        ];
+                        array_push($array_files, $item);     
+        
+                }
+            }
+          }
+          $this->unset_sess_product_images_array();
+          return $array_files;
+    }
 }

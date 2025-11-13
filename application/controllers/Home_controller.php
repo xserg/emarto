@@ -619,24 +619,8 @@ class Home_controller extends Home_Core_Controller
         }
 
         //validate uploaded files
-        if ($this->general_settings->request_documents_vendors == 1) {
-            $files_valid = true;
-            //echo '<pre>';
-            //print_r($_FILES);
-
-            if (!empty($_FILES['file'])) {
-                for ($i = 0; $i < count($_FILES['file']['name']); $i++) {
-                    if ($_FILES['file']['size'][$i] > 5242880) {
-                        $files_valid = false;
-                    }
-                }
-            }
-            if ($files_valid == false) {
-                $this->session->set_flashdata('error', trans("file_too_large") . " 5MB");
-                redirect($this->agent->referrer());
-                exit();
-            }
-            $vendor_docs = $this->upload_model->vendor_documents_upload();
+        if ($this->general_settings->request_documents_vendors == 1) { 
+            $vendor_docs = $this->file_model->vendor_documents_upload();
             if (!empty($vendor_docs)) {
                 $data['vendor_documents'] = serialize($vendor_docs);
             }

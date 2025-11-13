@@ -56,7 +56,7 @@
                                     if (!empty($files)):?>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="ticket-attachments">
+                                                <div class="ticket-attachments">AAAA
                                                     <?php foreach ($files as $file):
                                                         echo form_open('support_controller/download_attachment'); ?>
                                                         <input type="hidden" name="name" value="<?= $file['name']; ?>">
@@ -64,8 +64,11 @@
                                                         <p class="font-600 text-info">
                                                             <button type="submit" class="button-link"><i class="fa fa-file"></i>&nbsp;&nbsp;<span><?= html_escape($file['name']); ?></span></button>
                                                         </p>
-                                                        <?php echo form_close();
-                                                    endforeach; ?>
+                                                        <?php echo form_close(); ?>
+                                                        <a href="/<?php echo $file['path']; ?>" target="_blank">
+                                                            <img width="200px" src="/<?php echo $file['path']; ?>" data-src="" alt="" class="lazyload img-responsive post-image"/>
+                                                        </a>
+                                                   <?php endforeach; ?>
                                                 </div>
                                             </div>
                                         </div>
