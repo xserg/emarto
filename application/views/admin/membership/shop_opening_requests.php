@@ -56,7 +56,7 @@
                                     if (!empty($files)):?>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="ticket-attachments">AAAA
+                                                <div class="ticket-attachments">
                                                     <?php foreach ($files as $file):
                                                         echo form_open('support_controller/download_attachment'); ?>
                                                         <input type="hidden" name="name" value="<?= $file['name']; ?>">
