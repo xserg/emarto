@@ -496,8 +496,8 @@ class Shipping_model extends CI_Model
                     'method_type' => $this->input->post('method_type', true),
                     'flat_rate_cost_calculation_type' => $this->input->post('flat_rate_cost_calculation_type', true),
                     'flat_rate_cost' => $this->input->post('flat_rate_cost', true),
-                    'local_pickup_cost' => $this->input->post('local_pickup_cost_' . $option_unique_id, true),
-                    'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount_' . $option_unique_id, true),
+                    //'local_pickup_cost' => $this->input->post('local_pickup_cost_' . $option_unique_id, true),
+                    //'free_shipping_min_amount' => $this->input->post('free_shipping_min_amount_' . $option_unique_id, true),
                     'status' => 1
                     //'status' => $this->input->post('status', true)
                     //'status' => $this->input->post('status_' . $option_unique_id, true)
@@ -1060,10 +1060,8 @@ class Shipping_model extends CI_Model
                     $response['date'] = $this->deliveryDate($product->shipping_delivery_time_id, $method->time);
                             if ($method->method_type == "free_shipping") {
                                 $response['price'] = "FREE";
-                                  } else {
-                                //$response .= "<p><strong class='method-name'>" . $method->name . "</strong><strong>:&nbsp;" . price_decimal($method->cost, $this->selected_currency->code, true) . "</strong></p>";
-                                $response['price'] = price_decimal(get_price($method->cost, 'decimal'), $this->selected_currency->code, true);
-                                //$response['price'] = $method->cost . ' ' . $this->selected_currency->code;
+                                  } else {                               
+                                $response['price'] = price_decimal(get_price($method->cost, 'decimal'), $product->currency, true);
                             }
                     break;
                 }
