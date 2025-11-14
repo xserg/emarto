@@ -322,13 +322,16 @@
                           endforeach;
                       endif;
                       */
+                    if ($this->auth_user->currency) {
+                        $this->default_currency = get_currency_by_code($this->auth_user->currency);
+                    } 
                       $methods = get_shipping_payment_methods_by_zone($shipping_zone->id, 1);
                       $i = 0;
                       if (!empty($methods)):
                           foreach ($methods as $method): ?>
                               <span class="pull-left">
                                 <?= @parse_serialized_name_array($method->name_array, $this->selected_lang->id)
-                                . ' (' . $method->time . ' ' . trans('business2') . ' ' . trans('days3') . ')&nbsp;'
+                                . ' (' . $method->time . ' ' . trans('business2') . ' ' . trans('days3') . ')&nbsp;'                        
                                 . $this->default_currency->symbol . ' '
                                 . number_format(get_price($method->cost, "input"), 2, ".", "")
                                 . ($method->status == 2 ? ' ' . trans('free_shipping') : '');
