@@ -77,6 +77,13 @@ class Profile_model extends CI_Model
                 'phone_number' => $this->input->post('phone_number', true),
                 'shop_name' => $this->input->post('shop_name', true),
                 'about_me' => $this->input->post('about_me', true),
+
+                'legal_name' => $this->input->post('legal_name', true),
+                'role' => $this->input->post('role', true),
+                'business_number' => $this->input->post('business_number', true),
+                'business_address' => $this->input->post('business_address', true),
+                'taxpayer_number' => $this->input->post('taxpayer_number', true),
+
                 'country_id' => $this->input->post('country_id', true),
                 'state_id' => $this->input->post('state_id', true),
                 'city_id' => $this->input->post('city_id', true),

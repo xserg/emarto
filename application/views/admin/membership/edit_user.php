@@ -89,6 +89,28 @@
                            name="shop_name" placeholder="<?php echo trans('shop_name'); ?>"
                            value="<?php echo html_escape($user->shop_name); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
                 </div>
+<!-- business fields -->
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("legal_name"); ?></label>
+                                <input type="text" name="legal_name" class="form-control form-input" value="<?php echo html_escape($user->legal_name); ?>" placeholder="<?php //echo trans("legal_name"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("role"); ?></label>
+                                <input type="text" name="role" class="form-control form-input" value="<?php echo html_escape($user->role); ?>" placeholder="<?php //echo trans("role"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("business_number"); ?></label>
+                                <input type="text" name="business_number" class="form-control form-input" value="<?php echo html_escape($user->business_number); ?>" placeholder="<?php //echo trans("business_number"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("business_address"); ?></label>
+                                <input type="text" name="business_address" class="form-control form-input" value="<?php echo html_escape($user->business_address); ?>" placeholder="<?php //echo trans("business_address"); ?>" maxlength="250">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><?php echo trans("taxpayer_number"); ?></label>
+                                <input type="text" name="taxpayer_number" class="form-control form-input" value="<?php echo html_escape($user->taxpayer_number); ?>" placeholder="<?php //echo trans("taxpayer_number"); ?>" maxlength="250">
+                            </div>
+
                 <div class="form-group">
                     <label class="control-label"><?php echo trans('shop_description'); ?></label>
                     <textarea class="form-control text-area"

@@ -167,3 +167,8 @@
         </div>
     <?php endif; ?>
 </div>
+<script>
+    $(window).on("load", function () {
+        $('#select_countries').attr('disabled', 'disabled');
+    });        
+</script>
