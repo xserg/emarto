@@ -49,8 +49,8 @@
                                             <a href="<?php echo generate_profile_url($shop->slug); ?>">
                                                 <p class="username"><?php echo get_shop_name($shop); ?></p>
                                             </a>
-                                            <p class="text-muted m-b-10"><?php echo trans("products") . ": " . $shop->num_products; ?></p>
-
+                                            <p class="text-muted m-b-10"><?php echo trans("products") . ": " . $shop->num_products; ?>,&nbsp;
+                                            <?= trans("sales"); ?>:&nbsp;<?= $shop->number_of_sales ?></p>
                                             <?php if ($this->auth_check): ?>
                                                 <?php if ($shop->id != $this->auth_user->id): ?>
                                                     <?php echo form_open('follow-unfollow-user-post', ['class' => 'form-inline']); ?>
