@@ -68,7 +68,7 @@
                                 </tr>
                                 <?php foreach ($order_products as $item): ?>
                                     <tr>
-                                        <td>
+                                        <td style="padding: 15px 0; border-bottom: 1px solid #ddd;">
                                             <div class="left">
                                                 <div class="img-table">
                                                     <a href="<?php echo generate_product_url_by_slug($item->product_slug); ?>" target="_blank">
