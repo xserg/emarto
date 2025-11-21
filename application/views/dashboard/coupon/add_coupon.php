@@ -64,7 +64,11 @@ function print_sub_categories($categories, $category_ids, $selected_categories, 
                 </div>
 
                 <div class="box-body">
-                    <?php echo form_open("add-coupon-post"); ?>
+                    <?php 
+                    if ($this->auth_user->currency) {
+                        $this->default_currency = get_currency_by_code($this->auth_user->currency);
+                    } 
+                    echo form_open("add-coupon-post"); ?>
                     <div class="form-group">
                         <label class="control-label"><?php echo trans("coupon_code"); ?>&nbsp;&nbsp;<small>(<?= trans("exp_special_characters"); ?>)</small></label>
                         <div class="position-relative">
