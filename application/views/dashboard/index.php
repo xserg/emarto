@@ -2,7 +2,12 @@
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/chart.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/analyser.js"></script>
-<?php $this->load->view('dashboard/includes/_messages'); ?>
+<?php $this->load->view('dashboard/includes/_messages'); 
+if ($this->auth_user->currency) {
+    $this->default_currency = get_currency_by_code($this->auth_user->currency);
+    //$this->payment_settings->default_currency = $this->auth_user->currency;
+} 
+?>
 <div class="row m-b-30">
     <div class="col-sm-12">
         <div class="small-boxes-dashboard">
@@ -19,7 +24,8 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 p-0">
                     <div class="small-box-dashboard">
-                        <h3 class="total"><?= price_formatted($this->auth_user->balance, $this->payment_settings->default_currency); ?></h3>
+
+                        <h3 class="total"><?= price_formatted($this->auth_user->balance, $this->auth_user->currency, true); ?></h3>
                         <span class="text-muted"><?= trans("balance"); ?></span>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>
