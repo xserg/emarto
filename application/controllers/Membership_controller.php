@@ -141,7 +141,7 @@ class Membership_controller extends Admin_Core_Controller
                 exit();
             }
         }
-
+        $data['currencies'] = $this->currency_model->get_currencies();
         $data["countries"] = $this->location_model->get_countries();
         $data["states"] = $this->location_model->get_states_by_country($data['user']->country_id);
         $data["cities"] = $this->location_model->get_cities_by_state($data['user']->state_id);
