@@ -112,6 +112,23 @@
                             </div>
 
                 <div class="form-group">
+                    <label><?= trans("shop"); ?> <?= trans("currency"); ?></label>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 m-b-15">
+                            <select id="select_currency" name="currency" class="select form-control">
+                                
+                                <?php foreach ($currencies as $currency):
+                                if ($currency->status == 1): ?>
+                                        <option value="<?php echo $currency->code; ?>" <?php echo ($currency->code == $user->currency) ? 'selected' : ''; ?>>
+                                            <?php echo html_escape($currency->name) . ' (' . $currency->code . ') ' . html_escape($currency->symbol); ?></option>
+                                    <?php endif;
+                                endforeach; ?>
+                            </select>
+                        </div>
+                    </div>   
+                </div>
+
+                <div class="form-group">
                     <label class="control-label"><?php echo trans('shop_description'); ?></label>
                     <textarea class="form-control text-area"
                               name="about_me" placeholder="<?php echo trans('shop_description'); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>><?php echo html_escape($user->about_me); ?></textarea>

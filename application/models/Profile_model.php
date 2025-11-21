@@ -83,7 +83,8 @@ class Profile_model extends CI_Model
                 'business_number' => $this->input->post('business_number', true),
                 'business_address' => $this->input->post('business_address', true),
                 'taxpayer_number' => $this->input->post('taxpayer_number', true),
-
+                'currency' => $this->input->post('currency', true),
+                
                 'country_id' => $this->input->post('country_id', true),
                 'state_id' => $this->input->post('state_id', true),
                 'city_id' => $this->input->post('city_id', true),
