@@ -1,5 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 
+<?php
+if ($this->auth_user->currency) {
+    $this->default_currency = get_currency_by_code($this->auth_user->currency);
+} 
+?>
+
 <div class="row">
     <div class="col-sm-10">
         <div class="box">
@@ -61,20 +67,20 @@
                         <div class="minimum-payout-container">
                             <h2 class="title"><?php echo trans("min_poyout_amounts"); ?></h2>
                             <?php if ($this->payment_settings->payout_paypal_enabled): ?>
-                                <p><b>PayPal</b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_paypal, $this->payment_settings->default_currency) ?></strong></p>
+                                <p><b>PayPal</b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_paypal, $this->default_currency->code) ?></strong></p>
                             <?php endif; ?>
                             <?php if ($this->payment_settings->payout_bitcoin_enabled): ?>
-                                <p><b><?= trans("bitcoin"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_bitcoin, $this->payment_settings->default_currency) ?></strong></p>
+                                <p><b><?= trans("bitcoin"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_bitcoin, $this->default_currency->code) ?></strong></p>
                             <?php endif; ?>
                             <?php if ($this->payment_settings->payout_iban_enabled): ?>
-                                <p><b><?php echo trans("iban"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_iban, $this->payment_settings->default_currency) ?></strong></p>
+                                <p><b><?php echo trans("iban"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_iban, $this->default_currency->code) ?></strong></p>
                             <?php endif; ?>
                             <?php if ($this->payment_settings->payout_swift_enabled): ?>
-                                <p><b><?php echo trans("swift"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_swift, $this->payment_settings->default_currency) ?></strong></p>
+                                <p><b><?php echo trans("swift"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_swift, $this->default_currency->code) ?></strong></p>
                             <?php endif; ?>
                             <hr>
                             <?php if ($this->auth_check): ?>
-                                <p><b><?php echo trans("your_balance"); ?>:</b><strong><?php echo price_formatted($this->auth_user->balance, $this->payment_settings->default_currency) ?></strong></p>
+                                <p><b><?php echo trans("your_balance"); ?>:</b><strong><?php echo price_formatted($this->auth_user->balance, $this->default_currency->code) ?></strong></p>
                             <?php endif; ?>
                         </div>
                     </div>
