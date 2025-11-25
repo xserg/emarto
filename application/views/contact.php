@@ -25,7 +25,7 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="contact-leave-message"><?php echo trans("leave_message"); ?></h2>
+                            <h2 class="contact-leave-message"><?php //echo trans("leave_message"); ?></h2>
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@
 
                             <div class="col-sm-12 contact-social">
                                 <!--Include social media links-->
-                                <?php $this->load->view('partials/_social_links', ['show_rss' => null]); ?>
+                                <?php //$this->load->view('partials/_social_links', ['show_rss' => null]); ?>
                             </div>
 
 
@@ -123,13 +123,14 @@
                 </div>
             </div>
         </div>
+        <script>
+            var iframe = document.getElementById("contact_iframe");
+            iframe.src = iframe.src;
+        </script>
     <?php endif; ?>
 </div>
 <!-- Wrapper End-->
-<script>
-    var iframe = document.getElementById("contact_iframe");
-    iframe.src = iframe.src;
-</script>
+
 <style>
     #footer {
         margin-top: 0;
