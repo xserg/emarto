@@ -25,7 +25,7 @@ if ($this->auth_user->currency) {
                 <div class="col-lg-3 col-md-6 col-sm-12 p-0">
                     <div class="small-box-dashboard">
 
-                        <h3 class="total"><?= price_formatted($this->auth_user->balance, $this->auth_user->currency); ?></h3>
+                        <h3 class="total"><?= price_formatted($this->auth_user->balance, $this->default_currency->code); ?></h3>
                         <span class="text-muted"><?= trans("balance"); ?></span>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>
