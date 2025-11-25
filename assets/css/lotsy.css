@@ -10601,3 +10601,10 @@ font-size:1.2em;
 .cc-nb-okagree, .cc-nb-reject, .cc-cp-foot-save {
     background-color: #26C0BA !important;
 }
+
+.img-table img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
