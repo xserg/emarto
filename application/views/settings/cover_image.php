@@ -81,7 +81,7 @@
 </div>
 <!-- Wrapper End-->
 <?php if (empty($this->auth_user->cover_image)): ?>
-<script src="/assets/js/dropzone.min.js"></script>
+<script src="/assets/js/dropzone_cover.min.js"></script>
 <link rel="stylesheet" href="/assets/css/dropzone_cover.css" type="text/css" />
 
 <script>
