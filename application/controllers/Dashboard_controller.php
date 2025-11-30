@@ -7,6 +7,9 @@ class Dashboard_controller extends Home_Core_Controller
     {
         parent::__construct();
         $this->per_page = 15;
+        if ($this->auth_user->currency) {
+            $this->default_currency = get_currency_by_code($this->auth_user->currency);
+        } 
     }
 
     /**
@@ -1346,6 +1349,8 @@ class Dashboard_controller extends Home_Core_Controller
                 $this->session->set_flashdata('msg_payout', "iban");
             } elseif ($this->payment_settings->payout_swift_enabled) {
                 $this->session->set_flashdata('msg_payout', "swift");
+            } elseif ($this->payment_settings->payout_payoneer_enabled) {
+                $this->session->set_flashdata('msg_payout', "payoneer");
             }
         }
 
@@ -1413,6 +1418,22 @@ class Dashboard_controller extends Home_Core_Controller
             $this->session->set_flashdata('success', trans("msg_updated"));
         } else {
             $this->session->set_flashdata('msg_payout', "swift");
+            $this->session->set_flashdata('error', trans("msg_error"));
+        }
+        redirect($this->agent->referrer());
+    }
+
+    /**
+     * Set payoneer Payout Account Post
+     */
+    public function set_payoneer_payout_account_post()
+    {
+        $this->check_vendor_permission();
+        if ($this->earnings_model->set_payoneer_payout_account($this->auth_user->id)) {
+            $this->session->set_flashdata('msg_payout', "payoneer");
+            $this->session->set_flashdata('success', trans("msg_updated"));
+        } else {
+            $this->session->set_flashdata('msg_payout', "payoneer");
             $this->session->set_flashdata('error', trans("msg_error"));
         }
         redirect($this->agent->referrer());

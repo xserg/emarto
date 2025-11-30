@@ -44,6 +44,7 @@ $route['set-paypal-payout-account-post']['POST'] = 'dashboard_controller/set_pay
 $route['set-bitcoin-payout-account-post']['POST'] = 'dashboard_controller/set_bitcoin_payout_account_post';
 $route['set-iban-payout-account-post']['POST'] = 'dashboard_controller/set_iban_payout_account_post';
 $route['set-swift-payout-account-post']['POST'] = 'dashboard_controller/set_swift_payout_account_post';
+$route['set-payoneer-payout-account-post']['POST'] = 'dashboard_controller/set_payoneer_payout_account_post';
 //message
 $route['send-message-post']['POST'] = 'message_controller/send_message';
 //file

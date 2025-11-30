@@ -270,6 +270,18 @@ class Earnings_admin_model extends CI_Model
         return $this->db->update('payment_settings', $data);
     }
 
+ //update payoneer payout settings
+    public function update_payoneer_payout_settings()
+    {
+        $data = array(
+            'payout_payoneer_enabled' => $this->input->post('payout_payoneer_enabled', true),
+            'min_payout_payoneer' => $this->input->post('min_payout_payoneer', true)
+        );
+        $data["min_payout_payoneer"] = get_price($data["min_payout_payoneer"], 'database');
+        $this->db->where('id', 1);
+        return $this->db->update('payment_settings', $data);
+    }
+
     //delete payout
     public function delete_payout($id)
     {

@@ -34,6 +34,11 @@
                         <li class="<?= $active_tab == 'swift' ? 'active' : ''; ?>">
                             <a data-toggle="pill" href="#tab_swift"><?= trans("swift"); ?></a>
                         </li>
+                    <?php endif; 
+                    if ($this->payment_settings->payout_payoneer_enabled): $show_all_tabs = true; ?>
+                        <li class="<?= $active_tab == 'payoneer' ? 'active' : ''; ?>">
+                            <a data-toggle="pill" href="#tab_payoneer"><?= trans("payoneer"); ?></a>
+                        </li>
                     <?php endif; ?>
                 </ul>
                 <?php $active_tab_content = 'paypal'; ?>
@@ -185,6 +190,40 @@
                                 <label><?php echo trans("swift_code"); ?>*</label>
                                 <input type="text" name="swift_code" class="form-control form-input" value="<?php echo html_escape($user_payout->swift_code); ?>" required>
                             </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-md btn-success"><?php echo trans("save_changes"); ?></button>
+                            </div>
+                            <?php echo form_close(); ?>
+                        </div>
+                        <!-- Payoneer -->
+                        <div class="tab-pane <?php echo ($active_tab == 'payoneer') ? 'active' : 'fade'; ?>" id="tab_payoneer">
+                            <?php if ($active_tab == "payoneer"):
+                                $this->load->view('dashboard/includes/_messages');
+                            endif; ?>
+                            <?php echo form_open('set-payoneer-payout-account-post', ['id' => 'form_validate_payout_5']); ?>
+                            <div class="form-group">
+                                <label><?php echo trans("full_name"); ?>*</label>
+                                <input type="text" name="payoneer_full_name" class="form-control form-input" value="<?php echo html_escape($user_payout->payoneer_full_name); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label><?php echo trans("payoneer_email"); ?>*</label>
+                                <input type="text" name="payoneer_email" class="form-control form-input" value="<?php echo html_escape($user_payout->payoneer_email); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 m-b-sm-15">
+                                        <label><?php echo trans("country"); ?>*</label>
+                                        <select name="payoneer_country_id" class="form-control custom-select" required>
+                                            <option value="" selected><?php echo trans("select_country"); ?></option>
+                                            <?php foreach ($this->countries as $item): ?>
+                                                <option value="<?php echo $item->id; ?>" <?php echo ($user_payout->payoneer_country_id == $item->id) ? 'selected' : ''; ?>><?php echo html_escape($item->name); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <button type="submit" class="btn btn-md btn-success"><?php echo trans("save_changes"); ?></button>
                             </div>

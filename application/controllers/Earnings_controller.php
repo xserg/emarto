@@ -241,6 +241,22 @@ class Earnings_controller extends Admin_Core_Controller
         redirect($this->agent->referrer());
     }
 
+   /**
+     * Payout payoneer Settings Post
+     */
+    public function payout_payoneer_settings_post()
+    {
+        check_permission('payouts');
+        if ($this->earnings_admin_model->update_payoneer_payout_settings()) {
+            $this->session->set_flashdata('msg_payoneer', 1);
+            $this->session->set_flashdata('success', trans("msg_updated"));
+        } else {
+            $this->session->set_flashdata('msg_payoneer', 1);
+            $this->session->set_flashdata('error', trans("msg_error"));
+        }
+        redirect($this->agent->referrer());
+    }
+
     /**
      * Complete Payout Request Post
      */

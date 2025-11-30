@@ -286,6 +286,18 @@ class Earnings_model extends CI_Model
         return $this->db->update('users_payout_accounts', $data);
     }
 
+    public function set_payoneer_payout_account($user_id)
+    {
+        $user_id = clean_number($user_id);
+        $data = array(
+            'payoneer_full_name' => $this->input->post('payoneer_full_name', true),
+            'payoneer_country_id' => $this->input->post('payoneer_country_id', true),
+            'payoneer_email' => $this->input->post('payoneer_email', true),
+        );
+        $this->db->where('user_id', $user_id);
+        return $this->db->update('users_payout_accounts', $data);
+    }    
+
     //get paginated payouts
     public function get_paginated_payouts($user_id, $per_page, $offset)
     {
