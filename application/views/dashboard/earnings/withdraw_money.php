@@ -32,7 +32,9 @@ if ($this->auth_user->currency) {
                                     $min_value = $this->payment_settings->min_payout_iban;
                                 } elseif ($this->payment_settings->payout_swift_enabled) {
                                     $min_value = $this->payment_settings->min_payout_swift;
-                                } ?>
+                                } elseif ($this->payment_settings->payout_payoneer_enabled) {
+                                    $min_value = $this->payment_settings->min_payoneer_swift;
+                                }?>
 
                                 <div class="input-group">
                                     <span class="input-group-addon"><?= $this->default_currency->symbol; ?></span>
@@ -54,6 +56,9 @@ if ($this->auth_user->currency) {
                                     <?php endif; ?>
                                     <?php if ($this->payment_settings->payout_swift_enabled): ?>
                                         <option value="swift"><?php echo trans("swift"); ?></option>
+                                    <?php endif; ?>
+                                    <?php if ($this->payment_settings->payout_payoneer_enabled): ?>
+                                        <option value="payoneer"><?php echo trans("payoneer"); ?></option>
                                     <?php endif; ?>
                                 </select>
                             </div>
@@ -77,6 +82,9 @@ if ($this->auth_user->currency) {
                             <?php endif; ?>
                             <?php if ($this->payment_settings->payout_swift_enabled): ?>
                                 <p><b><?php echo trans("swift"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_swift, $this->default_currency->code) ?></strong></p>
+                            <?php endif; ?>
+                            <?php if ($this->payment_settings->payout_payoneer_enabled): ?>
+                                <p><b><?php echo trans("payoneer"); ?></b>:<strong><?php echo price_formatted($this->payment_settings->min_payout_payoneer, $this->default_currency->code) ?></strong></p>
                             <?php endif; ?>
                             <hr>
                             <?php if ($this->auth_check): ?>
