@@ -250,6 +250,8 @@ class Support_model extends CI_Model
             if(auth_check()){
                 $user_id = user()->id;
             }
+            $ticket = $this->get_ticket($ticket_id);
+     
         }
         $data = [
             'ticket_id' => $ticket_id,
@@ -297,11 +299,23 @@ class Support_model extends CI_Model
             $data['attachments'] = serialize($arrayFiles);
         }
         if ($this->db->insert('support_subtickets ', $data)) {
+            if (!$is_support_reply) {
+                $user = get_user($user_id);
+            } else {
+                $user = get_user($ticket->user_id); 
+            }
+            if (!empty($user)) {
+                $to = $user->email;
+            } else {
+                $to = $this->input->post('email', true);
+            }
+
             if ($is_support_reply == 1) {
                 $this->db->where('id', clean_number($ticket_id))->update('support_tickets ', ['status' => 2]);
             } else {
                 $this->db->where('id', clean_number($ticket_id))->update('support_tickets ', ['status' => 1]);
             }
+            $this->send_email_ticket($to, $ticket_id, $is_support_reply, $user);
             $this->session->unset_userdata('ticket_attachments');
         }
         return true;
@@ -379,6 +393,24 @@ class Support_model extends CI_Model
             return $this->db->where('id', $ticket->id)->delete('support_tickets');
         }
         return false;
+    }
+
+        //send email general
+    public function send_email_ticket($email, $ticket_id, $is_support_reply = false, $user)
+    {
+        $this->load->model("email_model");
+        $data = array(
+            'template_path' => "email/email_general",
+            'to' => $email,
+            'subject' =>  trans($is_support_reply ? 'ticket_replied' : 'ticket_submission_confirmed'),
+            //'hello' => Auth_model::hello_user($user->first_name, $user->last_name),
+            'email_content' => Auth_model::hello_user($user->first_name, $user->last_name) . '<br>' 
+            . trans($is_support_reply ? 'ticket_replied_text' : 'ticket_submission_text'),
+            
+            'email_link' => generate_url("help-center/ticket/" . $ticket_id),
+            'email_button_text' => trans('ticket'),
+        );
+        $this->email_model->send_email($data);
     }
 
 }
