@@ -122,7 +122,7 @@
                                     <?php if (!is_vendor()): ?>
                                     <li>
                                         <a href="<?php echo generate_url("buy_requests"); ?>">
-                                          <i class="fa fa-binoculars"></i>
+                                          <i class="fa fa-edit"></i>
                                           <?php echo trans("buy_requests"); ?></a>
                                     </li>
                                     <?php endif; ?>
