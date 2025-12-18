@@ -107,7 +107,7 @@
                                 <?php if (is_vendor()): ?>
                                     <li>
                                         <a href="<?php echo dashboard_url()."sales"; ?>">
-                                            <i class="icon-shopping-basket"></i>
+                                            <i class="fa fa-edit"></i>
                                             <?php echo trans("sales"); ?>
                                         </a>
                                     </li>
