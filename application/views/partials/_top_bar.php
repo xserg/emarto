@@ -115,7 +115,7 @@
                                 <?php if ($this->is_sale_active): ?>
                                     <li>
                                         <a href="<?php echo generate_url("orders"); ?>">
-                                            <i class="icon-shopping-basket"></i>
+                                            <i class="fa fa-tag"></i>
                                             <?php echo trans("orders"); ?>
                                         </a>
                                     </li>
