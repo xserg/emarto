@@ -124,15 +124,22 @@ class Profile_model extends CI_Model
             'shop_name' => $shop_name,
             'about_me' => $this->input->post('about_me', true),
             'show_rss_feeds' => $this->input->post('show_rss_feeds', true),
-            'country_id' => $this->input->post('country_id', true),
+            //'country_id' => $this->input->post('country_id', true),
             'state_id' => $this->input->post('state_id', true),
             'city_id' => $this->input->post('city_id', true),
             'address' => $this->input->post('address', true),
             'zip_code' => $this->input->post('zip_code', true),
-            'currency' => $this->input->post('currency', true),
+            //'currency' => $this->input->post('currency', true),
         );
 
-        $data["country_id"] = !empty($data["country_id"]) ? $data["country_id"] : 0;
+        //$data["country_id"] = !empty($data["country_id"]) ? $data["country_id"] : 0;
+        if (!empty($this->input->post('country_id'))) {
+            $data["country_id"] = $this->input->post('country_id', true);
+        }
+        if (!empty($this->input->post('currency'))) {
+            $data["currency"] = $this->input->post('currency');
+        }
+
         $data["state_id"] = !empty($data["state_id"]) ? $data["state_id"] : 0;
         $data["city_id"] = !empty($data["city_id"]) ? $data["city_id"] : 0;
         $data["address"] = !empty($data["address"]) ? $data["address"] : "";

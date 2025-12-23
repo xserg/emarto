@@ -167,8 +167,10 @@
         </div>
     <?php endif; ?>
 </div>
+<?php if ($this->auth_user->country_id): ?>
 <script>
     $(window).on("load", function () {
         $('#select_countries').attr('disabled', 'disabled');
     });        
 </script>
+<?php endif; ?>
