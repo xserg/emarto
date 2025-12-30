@@ -207,7 +207,7 @@
   min-height: 150px;
   border: 0;
   background: white;
-  padding: 20px 20px;
+  
 }
 .dropzone.dz-clickable {
   cursor: pointer;
@@ -331,10 +331,10 @@
   filter: blur(8px);
 }
 .dz-preview .dz-image {
-  border-radius: 20px;
-  overflow: hidden;
-  width: 120px;
-  height: 120px;
+  border-radius: 3px;
+  
+  width: 160px;
+  height: 160px;
   position: relative;
   display: block;
   z-index: 10;
@@ -397,6 +397,7 @@
   animation: pulse 6s ease infinite;
 }
 .dropzone .dz-preview .dz-progress {
+  display: none;
   opacity: 1;
   z-index: 1000;
   pointer-events: none;

@@ -6638,7 +6638,7 @@ img {
     padding: 0 !important;
 }
 
-.form-group-avatar img {
+.avatar {
     width: 160px;
     height: 160px;
     border-radius: 3px;

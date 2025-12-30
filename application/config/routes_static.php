@@ -121,6 +121,7 @@ $route['edit-shipping-delivery-time-post']['POST'] = 'dashboard_controller/edit_
 $route['social-media-post']['POST'] = 'profile_controller/social_media_post';
 $route['update-profile-post']['POST'] = 'profile_controller/update_profile_post';
 $route['cover-image-post']['POST'] = 'profile_controller/cover_image_post';
+$route['update-avatar-post']['POST'] = 'profile_controller/update_avatar_post';
 //order
 $route['update-order-product-status-post']['POST'] = 'dashboard_controller/update_order_product_status_post';
 $route['bank-transfer-payment-report-post']['POST'] = 'order_controller/bank_transfer_payment_report_post';

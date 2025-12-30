@@ -32,18 +32,39 @@
                         <!-- include message block -->
                         <?php $this->load->view('partials/_messages'); ?>
 
-                        <?php echo form_open_multipart("update-profile-post", ['id' => 'form_validate',  'class' => 'validate_phone dropzone']); ?>
+                        <?php echo form_open_multipart("update-avatar-post", ['id' => "form_avatar",  'class' => "dropzone"]); ?>
                         <div class="form-group">
                             <div>
-                                <div class="dz-image"><img src="<?php echo get_user_avatar($user); ?>" alt="<?php echo $user->username; ?>" class="avatar"></div>            
+                               
+                                     <?php if (!empty($this->auth_user->avatar)): ?>
+                                    <img src="<?php echo get_user_avatar($user); ?>" alt="<?php echo $user->username; ?>" class="avatar m-b-15">
+                                    
+                                     <?php else: ?>
+                                        <div id="preview">          
+                                        </div>
+
+                                    <?php endif; ?>
+                                          
+                            
+                                
+                                <p class="m-20">
+
+                                
+                                <?php if (!empty($this->auth_user->avatar)): ?>
+                                    <button type="submit" class="btn btn-md btn-secondary btn-file-upload btn-file-upload-cover" name="submit" value="delete_avatar"><?= trans("delete"); ?></button>
+                                <?php else: ; ?>
+                                    <div class="dz-message btn btn-md btn-custom"><?php echo trans('select_image'); ?></div>
+                                     <button type="submit" name="submit" value="update" class="btn btn-md btn-custom"><?php echo trans("save") ?></button>
+
+                                <?php endif; ?>
+                            </p>
+                            
                             </div>
-                            <div id="preview"></div>
-                            <div class="dz-message btn btn-md btn-custom"><?php echo trans('select_image'); ?></div>
                         </div>
 
-                        
+                        <?php echo form_close(); ?>
 
-                        
+                        <?php echo form_open_multipart("update-profile-post", ['id' => 'form_validate',  'class' => 'validate_phone']); ?>
                         <div class="form-group">
                             <label class="control-label"><?php echo trans("email_address"); ?></label>
                             <?php if ($this->general_settings->email_verification == 1): ?>
@@ -195,14 +216,14 @@ $initialCountry = 'initialCountry: "' . $country->iso . '",';
     <?php echo $initialCountry; ?>
   });
 
-    Dropzone.options.formValidate = { // camelized version of the `id`
+    Dropzone.options.formAvatar = { // camelized version of the `id`
     paramName: "file", // The name that will be used to transfer the file
     maxFilesize: 9, // MB
     autoProcessQueue: false,
-   
+    //clickable: false,
     parallelUploads: 100,
     uploadMultiple: false,
-    //parallelUploads: 1,
+    parallelUploads: 1,
     maxFiles: 1,
     previewsContainer: "#preview",
     addRemoveLinks: true,
@@ -219,7 +240,7 @@ $initialCountry = 'initialCountry: "' . $country->iso . '",';
     });
 
     this.on("queuecomplete", function () {
-        //window.location.reload();
+        window.location.reload();
         });
 
     }

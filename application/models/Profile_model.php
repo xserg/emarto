@@ -63,6 +63,28 @@ class Profile_model extends CI_Model
         }
     }
 
+   //update user image
+    public function update_avatar()
+    {
+        $submit = $this->input->post("submit", true);
+        if ($submit == "delete_avatar") {
+            $data["avatar"] = "";
+            @delete_file_from_server($this->auth_user->avatar);
+            return $this->db->where('id', $this->auth_user->id)->update('users', $data);
+        } else {
+            $this->load->model('upload_model');
+            $temp_path = $this->upload_model->upload_temp_image('file');
+            print_r($temp_path);
+            if (!empty($temp_path)) {
+                //delete old avatar
+                delete_file_from_server($this->auth_user->avatar);
+                $data["avatar"] = $this->upload_model->avatar_upload($temp_path);
+                $this->upload_model->delete_temp_image($temp_path);
+                return $this->db->where('id', $this->auth_user->id)->update('users', $data);
+            }         
+        }
+    }
+
     //edit user
     public function edit_user($id)
     {

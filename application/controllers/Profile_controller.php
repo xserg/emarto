@@ -360,6 +360,20 @@ class Profile_controller extends Home_Core_Controller
     }
 
 
+   public function update_avatar_post()
+    {
+        //check user
+        if (!$this->auth_check) {
+            redirect(lang_base_url());
+        }
+        if ($this->profile_model->update_avatar()) {
+            $this->session->set_flashdata('success', trans("msg_updated"));
+        } else {
+            $this->session->set_flashdata('error', trans("msg_error"));
+        }
+        redirect($this->agent->referrer());
+    }
+
     /**
      * Shipping Address
      */
